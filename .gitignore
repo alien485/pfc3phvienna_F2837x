@@ -1,4 +1,5 @@
 # CCS build output
+/FLASH/
 Debug/
 Release/
 
