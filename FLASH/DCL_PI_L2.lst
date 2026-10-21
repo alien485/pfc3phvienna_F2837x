@@ -1,0 +1,143 @@
+TMS320C2000 Assembler PC v25.11.1 Wed Oct 21 20:14:38 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+../DCL_PI_L2.asm                                                     PAGE    1
+
+       1              ; DCL_PI_L2.asm - Parallel PI controller
+       2              ;
+       3              ;;#############################################################################
+       4              ;;!
+       5              ;;! Copyright: Copyright (C) 2023 Texas Instruments Incorporated -
+       6              ;;!     All rights reserved not granted herein.
+       7              ;;!     Limited License.
+       8              ;;!
+       9              ;;! Texas Instruments Incorporated grants a world-wide, royalty-free,
+      10              ;;! non-exclusive license under copyrights and patents it now or hereafter
+      11              ;;! owns or controls to make, have made, use, import, offer to sell and sell
+      12              ;;! ("Utilize") this software subject to the terms herein. With respect to the
+      13              ;;! foregoing patent license, such license is granted solely to the extent that
+      14              ;;! any such patent is necessary to Utilize the software alone. The patent
+      15              ;;! license shall not apply to any combinations which include this software,
+      16              ;;! other than combinations with devices manufactured by or for TI 
+      17              ;;! ("TI Devices").
+      18              ;;! No hardware patent is licensed hereunder.
+      19              ;;!
+      20              ;;! Redistributions must preserve existing copyright notices and reproduce this
+      21              ;;! license (including the above copyright notice and the disclaimer and
+      22              ;;! (if applicable) source code license limitations below) in the documentation
+      23              ;;!  and/or other materials provided with the distribution.
+      24              ;;!
+      25              ;;! Redistribution and use in binary form, without modification, are permitted
+      26              ;;! provided that the following conditions are met:
+      27              ;;!
+      28              ;;! * No reverse engineering, decompilation, or disassembly of this software is 
+      29              ;;! permitted with respect to any software provided in binary form.
+      30              ;;! * Any redistribution and use are licensed by TI for use only 
+      31              ;;!   with TI Devices.
+      32              ;;! * Nothing shall obligate TI to provide you with source code for the 
+      33              ;;!   software licensed and provided to you in object code.
+      34              ;;!
+      35              ;;! If software source code is provided to you, modification and redistribution
+      36              ;;! of the source code are permitted provided that the following conditions 
+      37              ;;! are met:
+      38              ;;!
+      39              ;;! * any redistribution and use of the source code, including any resulting
+      40              ;;!   derivative works, are licensed by TI for use only with TI Devices.
+      41              ;;! * any redistribution and use of any object code compiled from the source
+      42              ;;!   code and any resulting derivative works, are licensed by TI for use 
+      43              ;;!   only with TI Devices.
+      44              ;;!
+      45              ;;! Neither the name of Texas Instruments Incorporated nor the names of its
+      46              ;;! suppliers may be used to endorse or promote products derived from this 
+      47              ;;! software without specific prior written permission.
+      48              ;;#############################################################################
+      49              
+      50              
+      51                        .if $defined(__TI_EABI__)
+      52                              .if __TI_EABI__
+      53                              .asg    DCL_runPI_L2, _DCL_runPI_L2
+      54                              .endif
+      55                    .endif
+TMS320C2000 Assembler PC v25.11.1 Wed Oct 21 20:14:38 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+../DCL_PI_L2.asm                                                     PAGE    2
+
+      56              
+      57                              .global _DCL_runPI_L2
+      58                              .def    __cla_DCL_runPI_L2_sp
+      59              
+      60        0005  SIZEOF_LFRAME   .set    5
+      61        0000  LFRAME_MR3              .set    0
+      62              
+      63 00000000       __cla_DCL_runPI_L2_sp   .usect ".scratchpad:Cla1Prog:_DCL_runPI_L2", SIZEOF_LFRAME, 0, 1
+      64                              .asg     __cla_DCL_runPI_L2_sp, LFRAME
+      65              
+      66 00000000                       .sect   "Cla1Prog:_DCL_runPI_L2"
+      67              
+      68                              .align  2
+      69              
+      70              ; C prototype:
+      71              ; float DCL_runPI_L2(DCL_PI_CLA *p, float32_t rk, float32_t yk)
+      72              ; argument 1 = *p : 32-bit PI structure address [MAR0]
+      73              ; argument 2 = rk : 32-bit floating-point reference [MR0]
+      74              ; argument 3 = yk : 32-bit floating-point feedback [MR1]
+      75              ; return = uk : 32-bit floating-point [MR0]
+      76              
+      77 00000000       _DCL_runPI_L2:
+      78              ;               MDEBUGSTOP
+      79 00000000 8080                  MSETFLG         RNDF32=1                                        ; round to nearest even
+         00000001 79C0 
+      80 00000002 0000!                 MMOV32          @LFRAME + LFRAME_MR3, MR3       ; save MR3
+         00000003 74F0 
+      81 00000004 0010                  MSUBF32         MR0, MR0, MR1                           ; MR0 = v1
+         00000005 7C40 
+      82 00000006 0002                  MMOV32          MR1, *MAR0[2]++                         ; MR1 = Kpa
+         00000007 73D1 
+      83 00000008 0008                  MMPYF32         MR2, MR0, MR1                           ; MR2 = v2
+         00000009 0491 
+      84              ||              MMOV32          MR1, *MAR0[8]++                         ; MR1 = Kia
+      85 0000000a FFFA                  MMPYF32         MR3, MR0, MR1                           ; MR3 = v3
+         0000000b 04C1 
+      86              ||              MMOV32          MR0, *MAR0[-6]++                        ; MR0 = i6
+      87 0000000c 0000                  MMPYF32         MR1, MR0, MR3                           ; MR1 = v8
+         0000000d 0C41 
+      88              ||              MMOV32          MR0, *MAR0                                      ; MR0 = i10
+      89 0000000e 0013                  MADDF32         MR3, MR0, MR1                           ; MR3 = v4
+         0000000f 7C20 
+      90 00000010 0002                  MMOV32          *MAR0[2]++, MR3                         ; save i10
+         00000011 74F1 
+      91 00000012 0002                  MADDF32         MR0, MR2, MR3                           ; MR0 = v5
+         00000013 1E11 
+      92              ||              MMOV32          MR1, *MAR0[2]++                         ; MR1 = Umaxa
+      93 00000014 0000                  MMOVF32         MR2, #0.0f                                      ; MR1 = 0.0f
+         00000015 7842 
+      94 00000016 3F80                  MMOVF32         MR3, #1.0f                                      ; MR2 = 1.0f
+         00000017 7843 
+      95 00000018 0004                  MMINF32         MR0, MR1                                        ; MR0 = sat+
+         00000019 7D40 
+      96 0000001a 002B                  MMOV32          MR3, MR2, GT                            ; MR3 = v6
+         0000001b 7AC0 
+TMS320C2000 Assembler PC v25.11.1 Wed Oct 21 20:14:38 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+../DCL_PI_L2.asm                                                     PAGE    3
+
+      97 0000001c 0002                  MMOV32          MR1, *MAR0[2]++                         ; MR1 = Umina
+         0000001d 73D1 
+      98 0000001e 0004                  MMAXF32         MR0, MR1                                        ; MR0 = sat-
+         0000001f 7D20 
+      99 00000020 0000                  MRCNDD          UNC                                                     ; return call
+         00000021 79AE 
+     100 00000022 004B                  MMOV32          MR3, MR2, LT                            ; MR3 = v6
+         00000023 7AC0 
+     101 00000024 0000                  MMOV32          *MAR0, MR3                                      ; save i6
+         00000025 74F1 
+     102 00000026 0000!                 MMOV32          MR3, @LFRAME + LFRAME_MR3       ; restore MR3
+         00000027 73F0 
+     103              
+     104                              .unasg  LFRAME
+     105              
+     106              ; end of file
+
+No Assembly Errors, No Assembly Warnings

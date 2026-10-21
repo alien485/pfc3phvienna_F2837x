@@ -1,0 +1,35 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "F2837xD" --part "F2837xD_176PTP" --package "F2837xD_176PTP" --context "CPU1" --product "powerSUITE@4.01.00.00"
+ * @v2CliArgs --device "TMS320F28379D" --package "176PTP" --context "CPU1" --product "powerSUITE@4.01.00.00"
+ * @versions {"tool":"1.21.0+3721"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const TIDM_1000 = scripting.addModule("/devkits/TIDM_1000/TIDM_1000");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+TIDM_1000.INCR_BUILD    = 4;
+TIDM_1000.ControlISRCore = 1;
+TIDM_1000.Fsw_Fctrl_Ratio = 1;
+TIDM_1000.Fsw           = 50;
+TIDM_1000.Vout          = 180;
+TIDM_1000.Vin           = 100.008614; // Line RMS = sqrt(3) * 57.74 V phase RMS.
+TIDM_1000.P_Rated       = 2400;
+TIDM_1000.Pout          = 324;
+TIDM_1000.Li            = 3;
+TIDM_1000.Ri            = 0.2;
+TIDM_1000.Cf            = 220;
+TIDM_1000.Rcf           = 0.73;
+TIDM_1000.Vout_SenseMax = 717.79;
+TIDM_1000.Vin_SenseMax  = 454;
+TIDM_1000.I_SenseMax    = 12;
+TIDM_1000.I_TripLevel   = 4;
+TIDM_1000.Rfltr         = 68;
+TIDM_1000.Cfltr         = 0.1;
+TIDM_1000.Tuning        = 3;

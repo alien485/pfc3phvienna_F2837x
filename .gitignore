@@ -1,0 +1,25 @@
+# CCS build output
+Debug/
+Release/
+
+# Compiler generated files
+*.obj
+*.o
+*.out
+*.map
+*.d
+*.pp
+*.hex
+*.bin
+
+# CCS workspace metadata
+.metadata/
+
+# Temporary files
+*.bak
+*.tmp
+*.log
+
+# Operating system
+Thumbs.db
+.DS_Store
