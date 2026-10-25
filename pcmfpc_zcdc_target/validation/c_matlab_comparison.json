@@ -1,0 +1,888 @@
+{
+  "input_rows": 1017,
+  "input_sha256": "a5dc58fcd1baa87b8d01b9986016166d8199b824ddc5b407e001748daf6e3146",
+  "output_sha256": "1b36cc21ad339fb13bc08a113bb1211a2c806c8dc52be2689fc2367e4fd9ba91",
+  "reference": "MATLAB original mode7; explicit interval test copy checked against original at equal durations",
+  "scope": "open-loop same-state numerical replay, not closed-loop or TI execution",
+  "runs": {
+    "double_bisection32": {
+      "angle_input": "original oracle input, including unwrapped theta",
+      "status_nonzero_rows": [],
+      "numeric_errors": {
+        "first_dq_A": {
+          "max_abs": 2.221348105457821e-12,
+          "rms": 6.512321847187213e-13
+        },
+        "first_np_V": {
+          "max_abs": 1.2612133559741778e-13,
+          "rms": 4.3104687229793184e-14
+        },
+        "gi_A2": {
+          "max_abs": 2.1923574067272966e-12,
+          "rms": 3.7258130616146826e-13
+        },
+        "gu_V2": {
+          "max_abs": 4.945377440890297e-12,
+          "rms": 6.546416458104893e-13
+        },
+        "gz_rad2": {
+          "max_abs": 1.3997691894473974e-12,
+          "rms": 1.8212771843101304e-14
+        },
+        "candidate_dq_A": {
+          "max_abs": 2.422471945262572e-12,
+          "rms": 6.178940056176154e-13
+        },
+        "candidate_np_V": {
+          "max_abs": 1.6342482922482304e-13,
+          "rms": 4.34468979247421e-14
+        }
+      },
+      "discrete_differences": {
+        "selected_id": 0,
+        "pc_off_id": 0,
+        "hw_state": 0,
+        "valid": 0,
+        "requested": 0,
+        "active": 0,
+        "current_count": 0,
+        "intersection_count": 0,
+        "prefix": 0,
+        "intersection_mask": 0,
+        "current_mask": 0
+      },
+      "order_i_different_rows": 0,
+      "order_u_different_rows": 0,
+      "selected_different_rows_1based": [],
+      "report_envelopes": {
+        "candidate_dq_A": 1e-09,
+        "candidate_np_V": 1e-09,
+        "gi_A2": 1e-08,
+        "gu_V2": 1e-07
+      },
+      "within_report_envelopes": {
+        "candidate_dq_A": true,
+        "candidate_np_V": true,
+        "gi_A2": true,
+        "gu_V2": true
+      },
+      "terminal_events": [
+        {
+          "row_1based": 435,
+          "label": "published_terminal_change",
+          "status": 0,
+          "reference_ids": [
+            5,
+            2
+          ],
+          "c_ids": [
+            5,
+            2
+          ],
+          "reference_active": 1,
+          "c_active": 1,
+          "reference_selected_gz": 2.76050747271271e-05,
+          "c_selected_gz": 2.760507472393874e-05,
+          "candidate_gz_reference": [
+            2.78308064349569e-05,
+            2.76050747271271e-05,
+            2.78308064468713e-05,
+            0.00108518598943676,
+            2.78308064495357e-05,
+            0.000521871381725331,
+            2.7830806442205e-05,
+            2.36856493702049e-05
+          ],
+          "candidate_gz_c": [
+            2.783080643143553e-05,
+            2.760507472393874e-05,
+            2.7830806443346522e-05,
+            0.0010851859894166892,
+            2.7830806446011986e-05,
+            0.0005218713817392859,
+            2.7830806438675515e-05,
+            2.3685649367220865e-05
+          ]
+        }
+      ],
+      "by_label": {
+        "flat_blocking": {
+          "n": 16,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 1.3894049351476637e-25
+        },
+        "published_terminal_change": {
+          "n": 1,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 1.7807630370292316e-12
+        },
+        "published_trajectory": {
+          "n": 500,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 2.422471945262572e-12
+        },
+        "synthetic_boundary": {
+          "n": 500,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 6.894484982922222e-14
+        }
+      }
+    },
+    "double_piecewise": {
+      "angle_input": "original oracle input, including unwrapped theta",
+      "status_nonzero_rows": [],
+      "numeric_errors": {
+        "first_dq_A": {
+          "max_abs": 3.605253595662106e-11,
+          "rms": 4.3136151355659725e-12
+        },
+        "first_np_V": {
+          "max_abs": 1.6080470288670767e-12,
+          "rms": 3.5441517877250623e-13
+        },
+        "gi_A2": {
+          "max_abs": 6.558398268907695e-11,
+          "rms": 6.104543790253314e-12
+        },
+        "gu_V2": {
+          "max_abs": 1.971329766092822e-10,
+          "rms": 1.7105888397936328e-11
+        },
+        "gz_rad2": {
+          "max_abs": 9.86960440108936,
+          "rms": 0.6649296881590259
+        },
+        "candidate_dq_A": {
+          "max_abs": 4.951280878351394e-11,
+          "rms": 7.345652813715807e-12
+        },
+        "candidate_np_V": {
+          "max_abs": 5.63447631985913e-12,
+          "rms": 8.584956512714218e-13
+        }
+      },
+      "discrete_differences": {
+        "selected_id": 18,
+        "pc_off_id": 18,
+        "hw_state": 18,
+        "valid": 0,
+        "requested": 0,
+        "active": 1,
+        "current_count": 0,
+        "intersection_count": 13,
+        "prefix": 176,
+        "intersection_mask": 18,
+        "current_mask": 16
+      },
+      "order_i_different_rows": 34,
+      "order_u_different_rows": 560,
+      "selected_different_rows_1based": [
+        612,
+        621,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007,
+        1008,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017
+      ],
+      "report_envelopes": {
+        "candidate_dq_A": 1e-09,
+        "candidate_np_V": 1e-09,
+        "gi_A2": 1e-08,
+        "gu_V2": 1e-07
+      },
+      "within_report_envelopes": {
+        "candidate_dq_A": true,
+        "candidate_np_V": true,
+        "gi_A2": true,
+        "gu_V2": true
+      },
+      "terminal_events": [
+        {
+          "row_1based": 435,
+          "label": "published_terminal_change",
+          "status": 0,
+          "reference_ids": [
+            5,
+            2
+          ],
+          "c_ids": [
+            5,
+            2
+          ],
+          "reference_active": 1,
+          "c_active": 1,
+          "reference_selected_gz": 2.76050747271271e-05,
+          "c_selected_gz": 2.7605074678959615e-05,
+          "candidate_gz_reference": [
+            2.78308064349569e-05,
+            2.76050747271271e-05,
+            2.78308064468713e-05,
+            0.00108518598943676,
+            2.78308064495357e-05,
+            0.000521871381725331,
+            2.7830806442205e-05,
+            2.36856493702049e-05
+          ],
+          "candidate_gz_c": [
+            2.7830806458038343e-05,
+            2.7605074678959615e-05,
+            2.7830806458039166e-05,
+            0.0010851859891486354,
+            2.783080645803968e-05,
+            0.0005218713819253574,
+            2.7830806458038363e-05,
+            2.368564932939422e-05
+          ]
+        }
+      ],
+      "by_label": {
+        "flat_blocking": {
+          "n": 16,
+          "selected_different": 16,
+          "pcoff_different": 16,
+          "active_different": 1,
+          "max_candidate_dq_A": 3.25564354778615e-11
+        },
+        "published_terminal_change": {
+          "n": 1,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 2.2318164677459507e-11
+        },
+        "published_trajectory": {
+          "n": 500,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 3.369170220590689e-11
+        },
+        "synthetic_boundary": {
+          "n": 500,
+          "selected_different": 2,
+          "pcoff_different": 2,
+          "active_different": 0,
+          "max_candidate_dq_A": 4.951280878351394e-11
+        }
+      }
+    },
+    "float_bisection32": {
+      "angle_input": "original oracle input, including unwrapped theta",
+      "status_nonzero_rows": [],
+      "numeric_errors": {
+        "first_dq_A": {
+          "max_abs": 0.00024393805704342464,
+          "rms": 4.153059501762262e-05
+        },
+        "first_np_V": {
+          "max_abs": 7.499138128114202e-06,
+          "rms": 3.1047457805833577e-06
+        },
+        "gi_A2": {
+          "max_abs": 0.00025989974563400686,
+          "rms": 2.7971702613873153e-05
+        },
+        "gu_V2": {
+          "max_abs": 0.0006604984878890718,
+          "rms": 9.548064498367788e-05
+        },
+        "gz_rad2": {
+          "max_abs": 9.704517696282267,
+          "rms": 0.26647331671820645
+        },
+        "candidate_dq_A": {
+          "max_abs": 0.0003743526859598459,
+          "rms": 4.685686150363646e-05
+        },
+        "candidate_np_V": {
+          "max_abs": 1.818500701834813e-05,
+          "rms": 5.658823223496693e-06
+        }
+      },
+      "discrete_differences": {
+        "selected_id": 17,
+        "pc_off_id": 14,
+        "hw_state": 17,
+        "valid": 0,
+        "requested": 0,
+        "active": 0,
+        "current_count": 0,
+        "intersection_count": 13,
+        "prefix": 178,
+        "intersection_mask": 18,
+        "current_mask": 16
+      },
+      "order_i_different_rows": 35,
+      "order_u_different_rows": 559,
+      "selected_different_rows_1based": [
+        435,
+        612,
+        621,
+        1002,
+        1003,
+        1004,
+        1005,
+        1007,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017
+      ],
+      "report_envelopes": {
+        "candidate_dq_A": 0.0005,
+        "candidate_np_V": 5e-05,
+        "gi_A2": 0.001,
+        "gu_V2": 0.001
+      },
+      "within_report_envelopes": {
+        "candidate_dq_A": true,
+        "candidate_np_V": true,
+        "gi_A2": true,
+        "gu_V2": true
+      },
+      "terminal_events": [
+        {
+          "row_1based": 435,
+          "label": "published_terminal_change",
+          "status": 0,
+          "reference_ids": [
+            5,
+            2
+          ],
+          "c_ids": [
+            5,
+            5
+          ],
+          "reference_active": 1,
+          "c_active": 1,
+          "reference_selected_gz": 2.76050747271271e-05,
+          "c_selected_gz": 2.7548199796001427e-05,
+          "candidate_gz_reference": [
+            2.78308064349569e-05,
+            2.76050747271271e-05,
+            2.78308064468713e-05,
+            0.00108518598943676,
+            2.78308064495357e-05,
+            0.000521871381725331,
+            2.7830806442205e-05,
+            2.36856493702049e-05
+          ],
+          "candidate_gz_c": [
+            2.754849811026361e-05,
+            2.7553625841392204e-05,
+            2.7547823265194893e-05,
+            0.0010848133824765682,
+            2.7548199796001427e-05,
+            0.0005221295286901295,
+            2.7547823265194893e-05,
+            2.3622753360541537e-05
+          ]
+        }
+      ],
+      "by_label": {
+        "flat_blocking": {
+          "n": 16,
+          "selected_different": 14,
+          "pcoff_different": 12,
+          "active_different": 0,
+          "max_candidate_dq_A": 3.358020755925875e-15
+        },
+        "published_terminal_change": {
+          "n": 1,
+          "selected_different": 1,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 0.00014311907480731717
+        },
+        "published_trajectory": {
+          "n": 500,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 0.0003743526859598459
+        },
+        "synthetic_boundary": {
+          "n": 500,
+          "selected_different": 2,
+          "pcoff_different": 2,
+          "active_different": 0,
+          "max_candidate_dq_A": 5.9791883586512995e-06
+        }
+      }
+    },
+    "float_piecewise": {
+      "angle_input": "original oracle input, including unwrapped theta",
+      "status_nonzero_rows": [],
+      "numeric_errors": {
+        "first_dq_A": {
+          "max_abs": 0.00024393805704342464,
+          "rms": 4.1529533239391514e-05
+        },
+        "first_np_V": {
+          "max_abs": 7.506588708711126e-06,
+          "rms": 3.104976681927653e-06
+        },
+        "gi_A2": {
+          "max_abs": 0.0002588864666728252,
+          "rms": 2.79217376681312e-05
+        },
+        "gu_V2": {
+          "max_abs": 0.0006604984878890718,
+          "rms": 9.554038081003388e-05
+        },
+        "gz_rad2": {
+          "max_abs": 9.86960440108936,
+          "rms": 0.6553328714676915
+        },
+        "candidate_dq_A": {
+          "max_abs": 0.000374829523118049,
+          "rms": 4.685693110221079e-05
+        },
+        "candidate_np_V": {
+          "max_abs": 1.818500701834813e-05,
+          "rms": 5.659328315683058e-06
+        }
+      },
+      "discrete_differences": {
+        "selected_id": 19,
+        "pc_off_id": 18,
+        "hw_state": 19,
+        "valid": 0,
+        "requested": 0,
+        "active": 1,
+        "current_count": 0,
+        "intersection_count": 13,
+        "prefix": 182,
+        "intersection_mask": 18,
+        "current_mask": 16
+      },
+      "order_i_different_rows": 33,
+      "order_u_different_rows": 572,
+      "selected_different_rows_1based": [
+        435,
+        612,
+        621,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007,
+        1008,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017
+      ],
+      "report_envelopes": {
+        "candidate_dq_A": 0.0005,
+        "candidate_np_V": 5e-05,
+        "gi_A2": 0.001,
+        "gu_V2": 0.001
+      },
+      "within_report_envelopes": {
+        "candidate_dq_A": true,
+        "candidate_np_V": true,
+        "gi_A2": true,
+        "gu_V2": true
+      },
+      "terminal_events": [
+        {
+          "row_1based": 435,
+          "label": "published_terminal_change",
+          "status": 0,
+          "reference_ids": [
+            5,
+            2
+          ],
+          "c_ids": [
+            5,
+            5
+          ],
+          "reference_active": 1,
+          "c_active": 1,
+          "reference_selected_gz": 2.76050747271271e-05,
+          "c_selected_gz": 2.7548188882065006e-05,
+          "candidate_gz_reference": [
+            2.78308064349569e-05,
+            2.76050747271271e-05,
+            2.78308064468713e-05,
+            0.00108518598943676,
+            2.78308064495357e-05,
+            0.000521871381725331,
+            2.7830806442205e-05,
+            2.36856493702049e-05
+          ],
+          "candidate_gz_c": [
+            2.754849811026361e-05,
+            2.7553625841392204e-05,
+            2.7547814170247875e-05,
+            0.0010848164092749357,
+            2.7548188882065006e-05,
+            0.0005221295286901295,
+            2.7547817808226682e-05,
+            2.3624490495421924e-05
+          ]
+        }
+      ],
+      "by_label": {
+        "flat_blocking": {
+          "n": 16,
+          "selected_different": 16,
+          "pcoff_different": 16,
+          "active_different": 1,
+          "max_candidate_dq_A": 3.25564354778615e-11
+        },
+        "published_terminal_change": {
+          "n": 1,
+          "selected_different": 1,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 0.00014311907480731717
+        },
+        "published_trajectory": {
+          "n": 500,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 0.000374829523118049
+        },
+        "synthetic_boundary": {
+          "n": 500,
+          "selected_different": 2,
+          "pcoff_different": 2,
+          "active_different": 0,
+          "max_candidate_dq_A": 5.3270777762293164e-06
+        }
+      }
+    },
+    "float_bisection32_wrapped_angle_input": {
+      "angle_input": "theta normalized modulo 2*pi in double BEFORE float conversion; models the bounded PLL phase contract",
+      "status_nonzero_rows": [],
+      "numeric_errors": {
+        "first_dq_A": {
+          "max_abs": 3.846607928514878e-06,
+          "rms": 5.180747774571886e-07
+        },
+        "first_np_V": {
+          "max_abs": 7.3373178680006396e-06,
+          "rms": 3.0584936291603265e-06
+        },
+        "gi_A2": {
+          "max_abs": 7.556912797923587e-05,
+          "rms": 4.178108484071967e-06
+        },
+        "gu_V2": {
+          "max_abs": 0.0006604984878890718,
+          "rms": 9.553849956424524e-05
+        },
+        "gz_rad2": {
+          "max_abs": 9.704517696282267,
+          "rms": 0.28471379713769907
+        },
+        "candidate_dq_A": {
+          "max_abs": 5.9791883586512995e-06,
+          "rms": 7.473331744814302e-07
+        },
+        "candidate_np_V": {
+          "max_abs": 1.4769893752486496e-05,
+          "rms": 5.493350929934827e-06
+        }
+      },
+      "discrete_differences": {
+        "selected_id": 16,
+        "pc_off_id": 14,
+        "hw_state": 16,
+        "valid": 0,
+        "requested": 0,
+        "active": 0,
+        "current_count": 0,
+        "intersection_count": 13,
+        "prefix": 177,
+        "intersection_mask": 18,
+        "current_mask": 16
+      },
+      "order_i_different_rows": 37,
+      "order_u_different_rows": 567,
+      "selected_different_rows_1based": [
+        612,
+        621,
+        1002,
+        1003,
+        1004,
+        1005,
+        1007,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017
+      ],
+      "report_envelopes": {
+        "candidate_dq_A": 2e-05,
+        "candidate_np_V": 5e-05,
+        "gi_A2": 0.001,
+        "gu_V2": 0.001
+      },
+      "within_report_envelopes": {
+        "candidate_dq_A": true,
+        "candidate_np_V": true,
+        "gi_A2": true,
+        "gu_V2": true
+      },
+      "terminal_events": [
+        {
+          "row_1based": 435,
+          "label": "published_terminal_change",
+          "status": 0,
+          "reference_ids": [
+            5,
+            2
+          ],
+          "c_ids": [
+            5,
+            2
+          ],
+          "reference_active": 1,
+          "c_active": 1,
+          "reference_selected_gz": 2.76050747271271e-05,
+          "c_selected_gz": 2.7603879061643966e-05,
+          "candidate_gz_reference": [
+            2.78308064349569e-05,
+            2.76050747271271e-05,
+            2.78308064468713e-05,
+            0.00108518598943676,
+            2.78308064495357e-05,
+            0.000521871381725331,
+            2.7830806442205e-05,
+            2.36856493702049e-05
+          ],
+          "candidate_gz_c": [
+            2.78325369436061e-05,
+            2.7603879061643966e-05,
+            2.7832487830892205e-05,
+            0.001085178810171783,
+            2.7832835257868282e-05,
+            0.0005218713195063174,
+            2.783255149552133e-05,
+            2.3685481210122816e-05
+          ]
+        }
+      ],
+      "by_label": {
+        "flat_blocking": {
+          "n": 16,
+          "selected_different": 14,
+          "pcoff_different": 12,
+          "active_different": 0,
+          "max_candidate_dq_A": 3.358020755925875e-15
+        },
+        "published_terminal_change": {
+          "n": 1,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 1.2895549064140255e-06
+        },
+        "published_trajectory": {
+          "n": 500,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 4.257322425260668e-06
+        },
+        "synthetic_boundary": {
+          "n": 500,
+          "selected_different": 2,
+          "pcoff_different": 2,
+          "active_different": 0,
+          "max_candidate_dq_A": 5.9791883586512995e-06
+        }
+      }
+    },
+    "float_piecewise_wrapped_angle_input": {
+      "angle_input": "theta normalized modulo 2*pi in double BEFORE float conversion; models the bounded PLL phase contract",
+      "status_nonzero_rows": [],
+      "numeric_errors": {
+        "first_dq_A": {
+          "max_abs": 2.701690378081878e-06,
+          "rms": 4.994384577450482e-07
+        },
+        "first_np_V": {
+          "max_abs": 7.3373178680006396e-06,
+          "rms": 3.058402788691878e-06
+        },
+        "gi_A2": {
+          "max_abs": 7.164465331754855e-05,
+          "rms": 3.816029820225691e-06
+        },
+        "gu_V2": {
+          "max_abs": 0.0006604984878890718,
+          "rms": 9.555656250202168e-05
+        },
+        "gz_rad2": {
+          "max_abs": 9.86960440108936,
+          "rms": 0.662109675145867
+        },
+        "candidate_dq_A": {
+          "max_abs": 5.3270777762293164e-06,
+          "rms": 7.226046828355795e-07
+        },
+        "candidate_np_V": {
+          "max_abs": 1.4769893752486496e-05,
+          "rms": 5.493965611709579e-06
+        }
+      },
+      "discrete_differences": {
+        "selected_id": 18,
+        "pc_off_id": 18,
+        "hw_state": 18,
+        "valid": 0,
+        "requested": 0,
+        "active": 1,
+        "current_count": 0,
+        "intersection_count": 13,
+        "prefix": 184,
+        "intersection_mask": 18,
+        "current_mask": 17
+      },
+      "order_i_different_rows": 35,
+      "order_u_different_rows": 579,
+      "selected_different_rows_1based": [
+        612,
+        621,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007,
+        1008,
+        1009,
+        1010,
+        1011,
+        1012,
+        1013,
+        1014,
+        1015,
+        1016,
+        1017
+      ],
+      "report_envelopes": {
+        "candidate_dq_A": 2e-05,
+        "candidate_np_V": 5e-05,
+        "gi_A2": 0.001,
+        "gu_V2": 0.001
+      },
+      "within_report_envelopes": {
+        "candidate_dq_A": true,
+        "candidate_np_V": true,
+        "gi_A2": true,
+        "gu_V2": true
+      },
+      "terminal_events": [
+        {
+          "row_1based": 435,
+          "label": "published_terminal_change",
+          "status": 0,
+          "reference_ids": [
+            5,
+            2
+          ],
+          "c_ids": [
+            5,
+            2
+          ],
+          "reference_active": 1,
+          "c_active": 1,
+          "reference_selected_gz": 2.76050747271271e-05,
+          "c_selected_gz": 2.760646748356521e-05,
+          "candidate_gz_reference": [
+            2.78308064349569e-05,
+            2.76050747271271e-05,
+            2.78308064468713e-05,
+            0.00108518598943676,
+            2.78308064495357e-05,
+            0.000521871381725331,
+            2.7830806442205e-05,
+            2.36856493702049e-05
+          ],
+          "candidate_gz_c": [
+            2.78325369436061e-05,
+            2.760646748356521e-05,
+            2.783296804409474e-05,
+            0.0010851818369701505,
+            2.7832835257868282e-05,
+            0.0005218649166636169,
+            2.783208037726581e-05,
+            2.3686783606535755e-05
+          ]
+        }
+      ],
+      "by_label": {
+        "flat_blocking": {
+          "n": 16,
+          "selected_different": 16,
+          "pcoff_different": 16,
+          "active_different": 1,
+          "max_candidate_dq_A": 3.25564354778615e-11
+        },
+        "published_terminal_change": {
+          "n": 1,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 1.8519617634993324e-06
+        },
+        "published_trajectory": {
+          "n": 500,
+          "selected_different": 0,
+          "pcoff_different": 0,
+          "active_different": 0,
+          "max_candidate_dq_A": 4.02453460157659e-06
+        },
+        "synthetic_boundary": {
+          "n": 500,
+          "selected_different": 2,
+          "pcoff_different": 2,
+          "active_different": 0,
+          "max_candidate_dq_A": 5.3270777762293164e-06
+        }
+      }
+    }
+  }
+}

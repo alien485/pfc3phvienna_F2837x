@@ -1,0 +1,17 @@
+# SysConfig generates the settings header alongside the solution sources.
+.DEFAULT_GOAL := all
+override GEN_MISC_FILES := \
+../vienna_settings.h \
+./syscfg/Kit.json \
+./syscfg/board.h \
+./syscfg/board.cmd.genlibs \
+./syscfg/board.json \
+./syscfg/pinmux.csv \
+./syscfg/c2000ware_libraries.cmd.genlibs \
+./syscfg/c2000ware_libraries.h \
+./syscfg/clocktree.h
+../vienna_settings.h: syscfg/board.opt
+vienna.obj vienna_hal.obj vienna_main.obj vienna_clatask.obj: ../vienna_settings.h ../vienna_user_settings.h ../vienna.h ../vienna_hal.h ../vienna_fcs_mpc.h
+
+# New fixed-size controller headers are real build dependencies.
+vienna.obj vienna_main.obj vienna_pcmfpc_runtime.obj vienna_pcmfpc_zcdc.obj vienna_pcmfpc_observer.obj vienna_pcmfpc_fast.obj: ../vienna_pcmfpc_runtime.h ../vienna_pcmfpc_zcdc.h ../vienna_pcmfpc_observer.h ../vienna_grid_sync.h ../vienna_pcmfpc_fast.h

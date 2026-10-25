@@ -1,0 +1,6 @@
+balanced_50Hz_phase_rms_rad=1.08233027e-05 max_rad=2.04575744e-05 final_hz=49.9991722
+55Hz_3pct_negative_sequence_noise_ADC_quantization_phase_rms_rad=0.00551169102 locked_fraction=1
+reverse_sequence_brownout_out_of_band_invalid_reset=PASS frequency_fault_samples=23210
+deltaU_vs_independent_cumulative_double_oracle max_i_A=9.98109619e-07 max_f_A_s=0.00887037572
+analytic_rotation_vs_20000_midpoint_integral error_V_s=[2.23083589e-10,2.10332511e-12]
+two_executed_gate_segments_all_states_zero_blocking_sequence_reset_both_roots=PASS

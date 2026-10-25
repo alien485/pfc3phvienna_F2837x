@@ -1,0 +1,609 @@
+{
+  "schema": "ti_pcmfpc_static_resource_timing_audit_v1",
+  "generated_local": "2026-10-25T13:49:55.607198",
+  "scope": "Read-only static audit. No DSP measurement. Snapshot predates new fast TU build.",
+  "project": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target",
+  "address_unit_bits": 16,
+  "toolchain": "TI CGT25.11.1.LTS C28x EABI fpu32 TMU0 O2 relaxed/reassoc",
+  "linked_line": ">> Linked Sun Oct 25 13:37:52 2026",
+  "link_errors": 0,
+  "artifacts": [
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_pcmfpc_zcdc_F2837x.map",
+      "sha256": "dd4e6e59e9d9a1ba45d300cb5b330a894057fe26e6792022e609b4b2fd615af0",
+      "bytes": 81465,
+      "mtime_local": "2026-10-25T13:37:52.552142"
+    },
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_pcmfpc_zcdc_F2837x_linkInfo.xml",
+      "sha256": "de046155c96ddc7f75a3343f17194b6c8745c875879c0afcc175563ecc52e4b6",
+      "bytes": 390815,
+      "mtime_local": "2026-10-25T13:37:52.549142"
+    },
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_pcmfpc_zcdc_F2837x.out",
+      "sha256": "397db67c14456197ebbd1af17655431c92731d0e37771c7c7e3b620103ee6bc0",
+      "bytes": 218380,
+      "mtime_local": "2026-10-25T13:37:52.588981"
+    },
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_pcmfpc_zcdc.asm",
+      "sha256": "fd68f7ce2c506eab0f6b04eb26016602d17230aa7df630cd2345eda7d6abe091",
+      "bytes": 409237,
+      "mtime_local": "2026-10-25T13:37:51.331377"
+    },
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_pcmfpc_runtime.asm",
+      "sha256": "5c61de5347698b733c277a4283769ab90851242cc11e05b1fd598afb98e40c89",
+      "bytes": 383911,
+      "mtime_local": "2026-10-25T13:37:50.910599"
+    },
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_pcmfpc_observer.asm",
+      "sha256": "1cf523a1d66acd6de18c5f01d813f106cb57454fa44677495132fb8d3fd151c8",
+      "bytes": 246598,
+      "mtime_local": "2026-10-25T13:37:50.728587"
+    },
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_grid_sync.asm",
+      "sha256": "c0edd85e317fc45130af9910d6285e04460e8aea1fa25aefd8c4ea30ca889695",
+      "bytes": 173488,
+      "mtime_local": "2026-10-25T13:37:50.663954"
+    },
+    {
+      "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\FLASH\\vienna_main.asm",
+      "sha256": "1e516c43928448cdf2d958aea242ce73209d0f26fec13c5af1b1070c01fd6895",
+      "bytes": 512255,
+      "mtime_local": "2026-10-25T13:37:51.179846"
+    }
+  ],
+  "memory": [
+    {
+      "name": "RAMM0",
+      "origin_word": 290,
+      "capacity_words": 734,
+      "used_words": 0,
+      "unused_words": 734
+    },
+    {
+      "name": "RAMLS2LS3LS4LS5",
+      "origin_word": 36864,
+      "capacity_words": 8192,
+      "used_words": 1987,
+      "unused_words": 6205
+    },
+    {
+      "name": "RAMD0",
+      "origin_word": 45056,
+      "capacity_words": 2048,
+      "used_words": 0,
+      "unused_words": 2048
+    },
+    {
+      "name": "RAMGS0GS1",
+      "origin_word": 49152,
+      "capacity_words": 8192,
+      "used_words": 2791,
+      "unused_words": 5401
+    },
+    {
+      "name": "RAMGS12GS15",
+      "origin_word": 98304,
+      "capacity_words": 16384,
+      "used_words": 5997,
+      "unused_words": 10387
+    },
+    {
+      "name": "RAMM1",
+      "origin_word": 1024,
+      "capacity_words": 1024,
+      "used_words": 922,
+      "unused_words": 102
+    },
+    {
+      "name": "RAMLS0LS1",
+      "origin_word": 32768,
+      "capacity_words": 4096,
+      "used_words": 460,
+      "unused_words": 3636
+    },
+    {
+      "name": "RAMD1",
+      "origin_word": 47104,
+      "capacity_words": 2048,
+      "used_words": 0,
+      "unused_words": 2048
+    },
+    {
+      "name": "RAMGS2",
+      "origin_word": 57344,
+      "capacity_words": 4096,
+      "used_words": 0,
+      "unused_words": 4096
+    },
+    {
+      "name": "RAMGS3",
+      "origin_word": 61440,
+      "capacity_words": 4096,
+      "used_words": 2750,
+      "unused_words": 1346
+    },
+    {
+      "name": "RAMGS4GS5",
+      "origin_word": 65536,
+      "capacity_words": 8192,
+      "used_words": 6912,
+      "unused_words": 1280
+    },
+    {
+      "name": "RAMGS6GS11",
+      "origin_word": 73728,
+      "capacity_words": 24576,
+      "used_words": 24000,
+      "unused_words": 576
+    }
+  ],
+  "pcmfpc_code": {
+    "load_word": 688128,
+    "run_word": 98304,
+    "length_words": 5997,
+    "copy": "Device_init _FLASH memcpy(&PCCodeRunStart,&PCCodeLoadStart,(size_t)&PCCodeLoadSize)",
+    "verified": true
+  },
+  "trace": {
+    "capacity": 128,
+    "record_words": 54,
+    "section_words": 6912,
+    "sample_hz": 50000,
+    "coverage_seconds": 0.00256,
+    "default_arm": false
+  },
+  "wave": {
+    "capacity": 2000,
+    "record_words": 12,
+    "section_words": 24000,
+    "sample_hz": 10000,
+    "coverage_seconds": 0.2,
+    "pre_filter": "five-sample mean at50kHz",
+    "remaining_bank_words": 576,
+    "default_arm": false
+  },
+  "stack": {
+    "allocation_words": 896,
+    "allocation_bytes": 1792,
+    "known_core_chain_words": 390,
+    "known_shadow_chain_words": 400,
+    "known_reconstruct_chain_words": 376,
+    "full_program_upper_bound_proven": false,
+    "excluded": "background live stack, automatic interrupt frame/alignment, possible nesting, all library paths"
+  },
+  "functions": [
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "pc_finite",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "pc_config_valid",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": [
+        "pc_finite"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "PC_abc_to_dq",
+      "compiler_local_frame_words": 8,
+      "compiler_max_frame_words": 10,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "PC_dq_to_abc",
+      "compiler_local_frame_words": 6,
+      "compiler_max_frame_words": 8,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "pc_projection",
+      "compiler_local_frame_words": 8,
+      "compiler_max_frame_words": 10,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "pc_root",
+      "compiler_local_frame_words": 62,
+      "compiler_max_frame_words": 64,
+      "calls": [
+        "pc_finite",
+        "pc_projection"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "PC_predict_interval",
+      "compiler_local_frame_words": 56,
+      "compiler_max_frame_words": 58,
+      "calls": [
+        "PC_abc_to_dq",
+        "PC_dq_to_abc",
+        "pc_config_valid",
+        "pc_finite",
+        "pc_root"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "PC_id_to_hw",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "pc_less",
+      "compiler_local_frame_words": 4,
+      "compiler_max_frame_words": 6,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "pc_rank",
+      "compiler_local_frame_words": 20,
+      "compiler_max_frame_words": 22,
+      "calls": [
+        "pc_less"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "pc_angle_cost",
+      "compiler_local_frame_words": 6,
+      "compiler_max_frame_words": 8,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "PC_run",
+      "compiler_local_frame_words": 82,
+      "compiler_max_frame_words": 84,
+      "calls": [
+        "PC_abc_to_dq",
+        "PC_dq_to_abc",
+        "PC_id_to_hw",
+        "PC_predict_interval",
+        "memset",
+        "pc_angle_cost",
+        "pc_config_valid",
+        "pc_finite",
+        "pc_rank"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "PC_hw_to_id",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_zcdc.asm",
+      "function": "PC_default_config",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_submitted",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_reset_control",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": [
+        "VO_reset"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "pc_fault",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": [
+        "VIENNA_PCMFPC_reset_control"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "pc_elapsed",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_select",
+      "compiler_local_frame_words": 6,
+      "compiler_max_frame_words": 8,
+      "calls": [
+        "PC_run",
+        "pc_elapsed",
+        "pc_fault"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_sample",
+      "compiler_local_frame_words": 30,
+      "compiler_max_frame_words": 32,
+      "calls": [
+        "PC_abc_to_dq",
+        "VG_reset",
+        "VG_run",
+        "VIENNA_PCMFPC_reset_control",
+        "VO_reconstruct",
+        "VO_reset",
+        "VO_update_delta",
+        "pc_fault"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_post",
+      "compiler_local_frame_words": 16,
+      "compiler_max_frame_words": 18,
+      "calls": [
+        "PC_run",
+        "pc_elapsed",
+        "pc_fault"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_outer",
+      "compiler_local_frame_words": 6,
+      "compiler_max_frame_words": 8,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_make_refs",
+      "compiler_local_frame_words": 14,
+      "compiler_max_frame_words": 16,
+      "calls": [
+        "PC_dq_to_abc"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_init",
+      "compiler_local_frame_words": 4,
+      "compiler_max_frame_words": 6,
+      "calls": [
+        "PC_default_config",
+        "VG_configure",
+        "VG_reset",
+        "VO_configure",
+        "VO_reset"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_runtime.asm",
+      "function": "VIENNA_PCMFPC_can_start",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_observer.asm",
+      "function": "vo_finite",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_observer.asm",
+      "function": "VO_reset",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_observer.asm",
+      "function": "vo_fail",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": [
+        "VO_reset"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_observer.asm",
+      "function": "VO_update_delta",
+      "compiler_local_frame_words": 34,
+      "compiler_max_frame_words": 36,
+      "calls": [
+        "vo_fail",
+        "vo_finite"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_observer.asm",
+      "function": "VO_integrate_pole_segment",
+      "compiler_local_frame_words": 14,
+      "compiler_max_frame_words": 16,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_pcmfpc_observer.asm",
+      "function": "VO_reconstruct",
+      "compiler_local_frame_words": 144,
+      "compiler_max_frame_words": 146,
+      "calls": [
+        "PC_predict_interval",
+        "VO_integrate_pole_segment",
+        "vo_finite"
+      ]
+    },
+    {
+      "object_asm": "vienna_pcmfpc_observer.asm",
+      "function": "VO_configure",
+      "compiler_local_frame_words": 10,
+      "compiler_max_frame_words": 12,
+      "calls": [
+        "expf",
+        "vo_finite"
+      ]
+    },
+    {
+      "object_asm": "vienna_grid_sync.asm",
+      "function": "vg_finite",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_grid_sync.asm",
+      "function": "VG_reset",
+      "compiler_local_frame_words": 0,
+      "compiler_max_frame_words": 2,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_grid_sync.asm",
+      "function": "vg_wrap",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_grid_sync.asm",
+      "function": "vg_limit",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_grid_sync.asm",
+      "function": "VG_run",
+      "compiler_local_frame_words": 14,
+      "compiler_max_frame_words": 16,
+      "calls": [
+        "VG_reset",
+        "vg_finite",
+        "vg_limit",
+        "vg_wrap"
+      ]
+    },
+    {
+      "object_asm": "vienna_grid_sync.asm",
+      "function": "VG_configure",
+      "compiler_local_frame_words": 2,
+      "compiler_max_frame_words": 4,
+      "calls": [
+        "vg_finite"
+      ]
+    },
+    {
+      "object_asm": "vienna_main.asm",
+      "function": "ISR2",
+      "compiler_local_frame_words": 20,
+      "compiler_max_frame_words": 22,
+      "calls": []
+    },
+    {
+      "object_asm": "vienna_main.asm",
+      "function": "ISR1",
+      "compiler_local_frame_words": 64,
+      "compiler_max_frame_words": 66,
+      "calls": [
+        "VIENNA_PCMFPC_can_start",
+        "VIENNA_PCMFPC_make_refs",
+        "VIENNA_PCMFPC_outer",
+        "VIENNA_PCMFPC_post",
+        "VIENNA_PCMFPC_reset_control",
+        "VIENNA_PCMFPC_sample",
+        "VIENNA_PCMFPC_select",
+        "VIENNA_PCMFPC_submitted"
+      ]
+    }
+  ],
+  "linked_float64_detected": false,
+  "float64_evidence": "MAP/linkInfo has only __c28xabi_divf; generated discarded 64-bit-integer compare helpers are not linked double arithmetic.",
+  "flash_realtime_hotspots": [
+    {
+      "function": "memset",
+      "address_word": 538849,
+      "caller": "PC_run",
+      "count_words": 998,
+      "actual_loop": [
+        "SUBB ACC,#1",
+        "MOV *XAR6++,AR5",
+        "SB -2,NEQ"
+      ],
+      "minimum_issue_cycles": 2994
+    }
+  ],
+  "timing": {
+    "cpu_hz": 200000000,
+    "nominal_write_budget_cycles": 1628,
+    "nominal_write_budget_us": 8.14,
+    "write_guard_tbclk_ticks": 40,
+    "whole_period_cycles": 4000,
+    "whole_period_us": 20,
+    "proof_type": "minimum serial instruction issue work, not WCET or average timing",
+    "reference_pc_run_roots": 18,
+    "midpoint_projection_calls": 576,
+    "total_projection_calls": 630,
+    "phases_per_projection": 3,
+    "conservative_serial_alu_issues_per_phase": 6,
+    "projection_midpoint_lower_cycles": 10368,
+    "projection_all_lower_cycles": 11340,
+    "pc_run_memset_lower_cycles": 2994,
+    "interval_clear_lower_cycles": 828,
+    "combined_disjoint_lower_cycles": 15162,
+    "combined_disjoint_lower_us": 75.81,
+    "observer_additional_roots_when_history_valid": 4,
+    "reference_32_bisection_write_budget_satisfied": false,
+    "reference_32_bisection_whole_period_satisfied": false,
+    "dsp_wcet_measured": false
+  },
+  "later_fast_work": {
+    "source_files": [
+      "vienna_pcmfpc_fast.c",
+      "vienna_pcmfpc_fast.h"
+    ],
+    "root_method": 1,
+    "full_output_memset_removed": true,
+    "shared_angle_plans": true,
+    "detailed_substep_unavailable_marker": 65535,
+    "host_replay": "pending independent agent at time of this audit",
+    "ccs_build": "not part of this snapshot",
+    "timing_pass_claimed": false
+  },
+  "user_authorized_target_config": {
+    "processor": "F28379D",
+    "line_rms_V": 100,
+    "frequency_Hz": 50,
+    "vdc_V": 170,
+    "load_ohm": 50,
+    "phase_L_H": 0.003,
+    "half_bus_C_F": 0.00044,
+    "instant_oc_A": 7,
+    "peak_reference_limit_A": 5.5,
+    "filtered_total_ov_V": 204,
+    "hardware_release_default": false,
+    "thermal_saturation_verified": false
+  }
+}

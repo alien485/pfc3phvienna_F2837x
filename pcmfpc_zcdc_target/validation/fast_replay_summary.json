@@ -1,0 +1,10 @@
+{
+"cases":31750,"valid":31739,"invalid":11,"status_difference":0,"selected_difference":0,"pcoff_difference":0,"active_difference":0,
+"rank_i_difference":0,"rank_u_difference":0,"set_difference":0,"discrete_diagnostic_difference":0,"blocked_difference":0,"interval_integral_numeric_difference_rows":0,
+"max_gi_error_A2":0,"max_gu_error_V2":0,"max_gz_error_rad2":0,"max_dq_error_A":0,"max_np_error_V":0,"max_interval_integral_error_V_s":0,"max_zcdc_diag_numeric_error":0,
+"bisection32_vs_piecewise_reference":{"status_difference":0,"selected_difference":2198,"pcoff_difference":2195,"active_difference":70},
+"full_interval":{"calls":46675,"status_difference":0,"numeric_difference_rows":0,"discrete_difference_rows":0,"max_numeric_error_mixed_SI":0},
+"availability_flag_errors":0,"unavailable_marker_errors":0,"max_budget_limit_error_A":0,"max_voltage_margin_error_V":0,
+"extreme_derived_numeric_guard":{"readable_reference_status":0,"fast_status":6,"guard_failure":0,"reference_margin_finite":0},
+"fast_unsafe_error_outputs":0,"fast_terminal_gate_events":10,"reference_terminal_gate_events":10
+}

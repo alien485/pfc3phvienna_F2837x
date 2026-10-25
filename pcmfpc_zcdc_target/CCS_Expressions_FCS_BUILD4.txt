@@ -1,0 +1,43 @@
+VIENNA_clearTrip
+VIENNA_closeGiLoop
+VIENNA_closeGvLoop
+VIENNA_closeGsLoop
+VIENNA_vBusRef_pu
+VIENNA_vBusRefSlewed_pu
+VIENNA_guiVbus_Volts
+VIENNA_guiVbusPM_Volts
+VIENNA_guiVbusMN_Volts
+VIENNA_vBusMeas_pu
+VIENNA_vBusPMMeas_pu
+VIENNA_vBusMNMeas_pu
+VIENNA_vBusDiff_pu
+VIENNA_vRmsMeasAvg_pu
+VIENNA_guiVrms1_Volts
+VIENNA_guiVrms2_Volts
+VIENNA_guiVrms3_Volts
+VIENNA_guiIrms1_Amps
+VIENNA_guiIrms2_Amps
+VIENNA_guiIrms3_Amps
+VIENNA_guiPF1
+VIENNA_guiPF2
+VIENNA_guiPF3
+VIENNA_guiACFreq_Hz
+VIENNA_boardStatus
+VIENNA_buildInfo
+VIENNA_fcsDeadlineMissCount
+VIENNA_fcsIsrCycles
+VIENNA_fcsIsrCyclesMax
+VIENNA_fcsSwitchState
+VIENNA_fcsOffReady
+VIENNA_iLRef_pu
+VIENNA_iL1Ref_pu
+VIENNA_iL2Ref_pu
+VIENNA_iL3Ref_pu
+VIENNA_iL1Meas_pu
+VIENNA_iL2Meas_pu
+VIENNA_iL3Meas_pu
+VIENNA_gv_out
+VIENNA_guiVbusTripLimit_Volts
+*(volatile unsigned int *)0x4093
+*(volatile unsigned int *)0x4193
+*(volatile unsigned int *)0x4293

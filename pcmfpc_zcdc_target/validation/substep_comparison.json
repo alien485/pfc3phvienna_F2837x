@@ -1,0 +1,699 @@
+{
+  "samples": 1017,
+  "substeps_per_sample": 18,
+  "scalar_fields_per_substep": 19,
+  "total_substeps_per_variant": 18306,
+  "runs": {
+    "double_bisection32": {
+      "status_nonzero_rows": [],
+      "angle_error_circular": false,
+      "field_errors": {
+        "old_abc_A": {
+          "max_abs": 4.973799150320701e-14,
+          "rms": 2.8456649586501423e-15,
+          "worst_row_1based": 656,
+          "worst_substep_1based": 10,
+          "label": "synthetic_boundary"
+        },
+        "free_abc_A": {
+          "max_abs": 5.3290705182007514e-14,
+          "rms": 2.9929603505222188e-15,
+          "worst_row_1based": 626,
+          "worst_substep_1based": 8,
+          "label": "synthetic_boundary"
+        },
+        "next_abc_A": {
+          "max_abs": 5.1514348342607263e-14,
+          "rms": 2.87720930472317e-15,
+          "worst_row_1based": 626,
+          "worst_substep_1based": 6,
+          "label": "synthetic_boundary"
+        },
+        "pole_abc_V": {
+          "max_abs": 1.858957432432362e-12,
+          "rms": 7.603914953881567e-14,
+          "worst_row_1based": 940,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "mu_V": {
+          "max_abs": 5.684341886080802e-14,
+          "rms": 2.275351116385939e-14,
+          "worst_row_1based": 739,
+          "worst_substep_1based": 8,
+          "label": "synthetic_boundary"
+        },
+        "np_before_V": {
+          "max_abs": 6.039613253960852e-14,
+          "rms": 1.4452725197029165e-14,
+          "worst_row_1based": 547,
+          "worst_substep_1based": 3,
+          "label": "synthetic_boundary"
+        },
+        "theta_end_rad": {
+          "max_abs": 4.547473508864641e-13,
+          "rms": 2.0346237740796748e-13,
+          "worst_row_1based": 2,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        },
+        "up_before_V": {
+          "max_abs": 5.684341886080802e-14,
+          "rms": 2.6555558634354985e-14,
+          "worst_row_1based": 3,
+          "worst_substep_1based": 10,
+          "label": "published_trajectory"
+        },
+        "low_before_V": {
+          "max_abs": 2.7000623958883807e-13,
+          "rms": 2.6270081924067814e-14,
+          "worst_row_1based": 858,
+          "worst_substep_1based": 10,
+          "label": "synthetic_boundary"
+        },
+        "reserved_zero": {
+          "max_abs": 0.0,
+          "rms": 0.0,
+          "worst_row_1based": 1,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        }
+      },
+      "pole_alpha_beta_max_abs_V": 1.0160761121369433e-12,
+      "KCL_max_abs_A": 2.278798816313099e-10,
+      "flat_all_off_substeps": 169,
+      "mu_max_abs_V_excluding_flat": 5.684341886080802e-14,
+      "nonunique_mu_changed_substeps": 0,
+      "by_label": {
+        "flat_blocking": {
+          "rows": 16,
+          "old_current_max_A": 5.169878828456423e-26,
+          "free_current_max_A": 5.492996255234949e-26,
+          "next_current_max_A": 5.816113682013476e-26,
+          "midpoint_max_V": 1.241027482799157e-14,
+          "pole_ab_max_V": 5.2106467289142945e-14
+        },
+        "published_terminal_change": {
+          "rows": 1,
+          "old_current_max_A": 6.217248937900877e-15,
+          "free_current_max_A": 6.217248937900877e-15,
+          "next_current_max_A": 6.217248937900877e-15,
+          "midpoint_max_V": 1.4252488078625447e-14,
+          "pole_ab_max_V": 3.5627056860221273e-13
+        },
+        "published_trajectory": {
+          "rows": 500,
+          "old_current_max_A": 1.1546319456101628e-14,
+          "free_current_max_A": 1.1546319456101628e-14,
+          "next_current_max_A": 1.1546319456101628e-14,
+          "midpoint_max_V": 1.4516166046973922e-14,
+          "pole_ab_max_V": 8.526512829121202e-13
+        },
+        "synthetic_boundary": {
+          "rows": 500,
+          "old_current_max_A": 4.973799150320701e-14,
+          "free_current_max_A": 5.3290705182007514e-14,
+          "next_current_max_A": 5.1514348342607263e-14,
+          "midpoint_max_V": 6.039613253960852e-14,
+          "pole_ab_max_V": 1.0160761121369433e-12
+        }
+      }
+    },
+    "double_piecewise": {
+      "status_nonzero_rows": [],
+      "angle_error_circular": false,
+      "field_errors": {
+        "old_abc_A": {
+          "max_abs": 4.9773851706902425e-11,
+          "rms": 5.525437456235839e-12,
+          "worst_row_1based": 916,
+          "worst_substep_1based": 4,
+          "label": "synthetic_boundary"
+        },
+        "free_abc_A": {
+          "max_abs": 4.97734908844194e-11,
+          "rms": 5.525446794696741e-12,
+          "worst_row_1based": 916,
+          "worst_substep_1based": 4,
+          "label": "synthetic_boundary"
+        },
+        "next_abc_A": {
+          "max_abs": 9.335093115181436e-11,
+          "rms": 2.9217353242984726e-11,
+          "worst_row_1based": 702,
+          "worst_substep_1based": 16,
+          "label": "synthetic_boundary"
+        },
+        "pole_abc_V": {
+          "max_abs": 169.99999998460729,
+          "rms": 8.938266627187579,
+          "worst_row_1based": 1008,
+          "worst_substep_1based": 3,
+          "label": "flat_blocking"
+        },
+        "mu_V": {
+          "max_abs": 169.9999999802094,
+          "rms": 8.938266627248225,
+          "worst_row_1based": 1002,
+          "worst_substep_1based": 1,
+          "label": "flat_blocking"
+        },
+        "np_before_V": {
+          "max_abs": 3.38573613589688e-12,
+          "rms": 4.681674735516761e-13,
+          "worst_row_1based": 1016,
+          "worst_substep_1based": 18,
+          "label": "flat_blocking"
+        },
+        "theta_end_rad": {
+          "max_abs": 4.547473508864641e-13,
+          "rms": 2.0346237740796748e-13,
+          "worst_row_1based": 2,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        },
+        "up_before_V": {
+          "max_abs": 1.7053025658242404e-12,
+          "rms": 2.3550206290261424e-13,
+          "worst_row_1based": 1016,
+          "worst_substep_1based": 18,
+          "label": "flat_blocking"
+        },
+        "low_before_V": {
+          "max_abs": 1.7053025658242404e-12,
+          "rms": 2.351355293270131e-13,
+          "worst_row_1based": 1016,
+          "worst_substep_1based": 18,
+          "label": "flat_blocking"
+        },
+        "reserved_zero": {
+          "max_abs": 0.0,
+          "rms": 0.0,
+          "worst_row_1based": 1,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        }
+      },
+      "pole_alpha_beta_max_abs_V": 2.5847967322079057e-08,
+      "KCL_max_abs_A": 3.552713678800501e-15,
+      "flat_all_off_substeps": 169,
+      "mu_max_abs_V_excluding_flat": 2.9696017644909034e-08,
+      "nonunique_mu_changed_substeps": 159,
+      "by_label": {
+        "flat_blocking": {
+          "rows": 16,
+          "old_current_max_A": 4.39791215790643e-11,
+          "free_current_max_A": 4.39789045509768e-11,
+          "next_current_max_A": 8.06282137168768e-11,
+          "midpoint_max_V": 3.38573613589688e-12,
+          "pole_ab_max_V": 2.1990145820736532e-08
+        },
+        "published_terminal_change": {
+          "rows": 1,
+          "old_current_max_A": 2.31321628518799e-11,
+          "free_current_max_A": 2.313127510714108e-11,
+          "next_current_max_A": 6.475406322259403e-11,
+          "midpoint_max_V": 4.791445018526019e-13,
+          "pole_ab_max_V": 1.33501565358074e-08
+        },
+        "published_trajectory": {
+          "rows": 500,
+          "old_current_max_A": 3.1503411858369024e-11,
+          "free_current_max_A": 3.1503226242957094e-11,
+          "next_current_max_A": 7.182707206787597e-11,
+          "midpoint_max_V": 1.4884204979637161e-12,
+          "pole_ab_max_V": 2.394684628370669e-08
+        },
+        "synthetic_boundary": {
+          "rows": 500,
+          "old_current_max_A": 4.9773851706902425e-11,
+          "free_current_max_A": 4.97734908844194e-11,
+          "next_current_max_A": 9.335093115181436e-11,
+          "midpoint_max_V": 3.218758592993254e-12,
+          "pole_ab_max_V": 2.5847967322079057e-08
+        }
+      }
+    },
+    "float_bisection32": {
+      "status_nonzero_rows": [],
+      "angle_error_circular": false,
+      "field_errors": {
+        "old_abc_A": {
+          "max_abs": 0.00018131960374911937,
+          "rms": 6.209125819423338e-05,
+          "worst_row_1based": 418,
+          "worst_substep_1based": 8,
+          "label": "published_trajectory"
+        },
+        "free_abc_A": {
+          "max_abs": 0.0002468776602496947,
+          "rms": 8.876784041503543e-05,
+          "worst_row_1based": 243,
+          "worst_substep_1based": 14,
+          "label": "published_trajectory"
+        },
+        "next_abc_A": {
+          "max_abs": 0.00024700402300911403,
+          "rms": 8.775983800925664e-05,
+          "worst_row_1based": 243,
+          "worst_substep_1based": 14,
+          "label": "published_trajectory"
+        },
+        "pole_abc_V": {
+          "max_abs": 0.1477793704365098,
+          "rms": 0.0064837736285935236,
+          "worst_row_1based": 418,
+          "worst_substep_1based": 14,
+          "label": "published_trajectory"
+        },
+        "mu_V": {
+          "max_abs": 0.049362096699592684,
+          "rms": 0.0037432627286869283,
+          "worst_row_1based": 243,
+          "worst_substep_1based": 12,
+          "label": "published_trajectory"
+        },
+        "np_before_V": {
+          "max_abs": 1.6190441656058208e-05,
+          "rms": 4.335723026052201e-06,
+          "worst_row_1based": 420,
+          "worst_substep_1based": 8,
+          "label": "published_trajectory"
+        },
+        "theta_end_rad": {
+          "max_abs": 7.037317720914871e-05,
+          "rms": 2.6524940009750068e-05,
+          "worst_row_1based": 498,
+          "worst_substep_1based": 4,
+          "label": "published_trajectory"
+        },
+        "up_before_V": {
+          "max_abs": 1.5098003743219124e-05,
+          "rms": 4.414061364750909e-06,
+          "worst_row_1based": 776,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "low_before_V": {
+          "max_abs": 1.5013343315217753e-05,
+          "rms": 4.425251971952248e-06,
+          "worst_row_1based": 489,
+          "worst_substep_1based": 6,
+          "label": "published_trajectory"
+        },
+        "reserved_zero": {
+          "max_abs": 0.0,
+          "rms": 0.0,
+          "worst_row_1based": 1,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        }
+      },
+      "pole_alpha_beta_max_abs_V": 0.08533183537854683,
+      "KCL_max_abs_A": 2.86102294921875e-06,
+      "flat_all_off_substeps": 106,
+      "mu_max_abs_V_excluding_flat": 0.049362096699592684,
+      "nonunique_mu_changed_substeps": 106,
+      "by_label": {
+        "flat_blocking": {
+          "rows": 16,
+          "old_current_max_A": 1.2640351727982758e-15,
+          "free_current_max_A": 1.2659513156716975e-15,
+          "next_current_max_A": 1.3193714304435278e-10,
+          "midpoint_max_V": 4.753645581650027e-12,
+          "pole_ab_max_V": 4.397999002018575e-09
+        },
+        "published_terminal_change": {
+          "rows": 1,
+          "old_current_max_A": 5.272157187574667e-05,
+          "free_current_max_A": 0.00010898888707710792,
+          "next_current_max_A": 0.00010875044305027606,
+          "midpoint_max_V": 5.568036921949071e-07,
+          "pole_ab_max_V": 0.034618212922602254
+        },
+        "published_trajectory": {
+          "rows": 500,
+          "old_current_max_A": 0.00018131960374911937,
+          "free_current_max_A": 0.0002468776602496947,
+          "next_current_max_A": 0.00024700402300911403,
+          "midpoint_max_V": 1.6190441656058208e-05,
+          "pole_ab_max_V": 0.08533183537854683
+        },
+        "synthetic_boundary": {
+          "rows": 500,
+          "old_current_max_A": 5.23661497675576e-06,
+          "free_current_max_A": 6.28429436222433e-06,
+          "next_current_max_A": 6.571655993603542e-06,
+          "midpoint_max_V": 1.4374125493432643e-05,
+          "pole_ab_max_V": 0.001154667918450869
+        }
+      }
+    },
+    "float_piecewise": {
+      "status_nonzero_rows": [],
+      "angle_error_circular": false,
+      "field_errors": {
+        "old_abc_A": {
+          "max_abs": 0.00018131960374911937,
+          "rms": 6.206119733541488e-05,
+          "worst_row_1based": 418,
+          "worst_substep_1based": 8,
+          "label": "published_trajectory"
+        },
+        "free_abc_A": {
+          "max_abs": 0.0002466963260450289,
+          "rms": 8.873508015533077e-05,
+          "worst_row_1based": 418,
+          "worst_substep_1based": 14,
+          "label": "published_trajectory"
+        },
+        "next_abc_A": {
+          "max_abs": 0.0002465891873010273,
+          "rms": 8.772706744643149e-05,
+          "worst_row_1based": 243,
+          "worst_substep_1based": 18,
+          "label": "published_trajectory"
+        },
+        "pole_abc_V": {
+          "max_abs": 169.9999999846073,
+          "rms": 8.974653791954854,
+          "worst_row_1based": 1008,
+          "worst_substep_1based": 3,
+          "label": "flat_blocking"
+        },
+        "mu_V": {
+          "max_abs": 169.9999999802094,
+          "rms": 8.974652234007001,
+          "worst_row_1based": 1002,
+          "worst_substep_1based": 1,
+          "label": "flat_blocking"
+        },
+        "np_before_V": {
+          "max_abs": 1.6190441656058208e-05,
+          "rms": 4.336001232913511e-06,
+          "worst_row_1based": 420,
+          "worst_substep_1based": 8,
+          "label": "published_trajectory"
+        },
+        "theta_end_rad": {
+          "max_abs": 7.037317720914871e-05,
+          "rms": 2.6524940009750068e-05,
+          "worst_row_1based": 498,
+          "worst_substep_1based": 4,
+          "label": "published_trajectory"
+        },
+        "up_before_V": {
+          "max_abs": 1.5098003743219124e-05,
+          "rms": 4.414061364750909e-06,
+          "worst_row_1based": 776,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "low_before_V": {
+          "max_abs": 1.5013343315217753e-05,
+          "rms": 4.425251971952248e-06,
+          "worst_row_1based": 489,
+          "worst_substep_1based": 6,
+          "label": "published_trajectory"
+        },
+        "reserved_zero": {
+          "max_abs": 0.0,
+          "rms": 0.0,
+          "worst_row_1based": 1,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        }
+      },
+      "pole_alpha_beta_max_abs_V": 0.08546581879078019,
+      "KCL_max_abs_A": 1.6689300537109375e-06,
+      "flat_all_off_substeps": 169,
+      "mu_max_abs_V_excluding_flat": 0.049356424735300664,
+      "nonunique_mu_changed_substeps": 169,
+      "by_label": {
+        "flat_blocking": {
+          "rows": 16,
+          "old_current_max_A": 4.39791215790643e-11,
+          "free_current_max_A": 4.39789045509768e-11,
+          "next_current_max_A": 8.06282137168768e-11,
+          "midpoint_max_V": 3.38573613589688e-12,
+          "pole_ab_max_V": 2.1990145820736532e-08
+        },
+        "published_terminal_change": {
+          "rows": 1,
+          "old_current_max_A": 5.294235369299183e-05,
+          "free_current_max_A": 0.00010922730565620948,
+          "next_current_max_A": 0.00010926546443403842,
+          "midpoint_max_V": 5.568036921949071e-07,
+          "pole_ab_max_V": 0.034770179660633005
+        },
+        "published_trajectory": {
+          "rows": 500,
+          "old_current_max_A": 0.00018131960374911937,
+          "free_current_max_A": 0.0002466963260450289,
+          "next_current_max_A": 0.0002465891873010273,
+          "midpoint_max_V": 1.6190441656058208e-05,
+          "pole_ab_max_V": 0.08546581879078019
+        },
+        "synthetic_boundary": {
+          "rows": 500,
+          "old_current_max_A": 4.922376101390569e-06,
+          "free_current_max_A": 5.249241912697045e-06,
+          "next_current_max_A": 5.166950846735574e-06,
+          "midpoint_max_V": 1.4374125493432643e-05,
+          "pole_ab_max_V": 0.001059300486810244
+        }
+      }
+    },
+    "float_bisection32_wrapped_angle_input": {
+      "status_nonzero_rows": [],
+      "angle_error_circular": true,
+      "field_errors": {
+        "old_abc_A": {
+          "max_abs": 4.809185618626088e-06,
+          "rms": 6.139197779948094e-07,
+          "worst_row_1based": 657,
+          "worst_substep_1based": 14,
+          "label": "synthetic_boundary"
+        },
+        "free_abc_A": {
+          "max_abs": 5.371751907290445e-06,
+          "rms": 6.483847603741599e-07,
+          "worst_row_1based": 657,
+          "worst_substep_1based": 8,
+          "label": "synthetic_boundary"
+        },
+        "next_abc_A": {
+          "max_abs": 5.636486633875393e-06,
+          "rms": 6.607498057154019e-07,
+          "worst_row_1based": 657,
+          "worst_substep_1based": 4,
+          "label": "synthetic_boundary"
+        },
+        "pole_abc_V": {
+          "max_abs": 0.0016058273688059899,
+          "rms": 4.001734631179353e-05,
+          "worst_row_1based": 783,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "mu_V": {
+          "max_abs": 0.00053755278388401,
+          "rms": 4.4352664954492536e-05,
+          "worst_row_1based": 783,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "np_before_V": {
+          "max_abs": 1.4374125493432643e-05,
+          "rms": 4.312424618072276e-06,
+          "worst_row_1based": 803,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "theta_end_rad": {
+          "max_abs": 3.2285302298262764e-07,
+          "rms": 8.976700532137967e-08,
+          "worst_row_1based": 971,
+          "worst_substep_1based": 4,
+          "label": "synthetic_boundary"
+        },
+        "up_before_V": {
+          "max_abs": 1.5098003743219124e-05,
+          "rms": 4.4152712172637745e-06,
+          "worst_row_1based": 776,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "low_before_V": {
+          "max_abs": 1.4219612481269905e-05,
+          "rms": 4.40947891273569e-06,
+          "worst_row_1based": 428,
+          "worst_substep_1based": 12,
+          "label": "published_trajectory"
+        },
+        "reserved_zero": {
+          "max_abs": 0.0,
+          "rms": 0.0,
+          "worst_row_1based": 1,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        }
+      },
+      "pole_alpha_beta_max_abs_V": 0.0009231688374597979,
+      "KCL_max_abs_A": 2.86102294921875e-06,
+      "flat_all_off_substeps": 111,
+      "mu_max_abs_V_excluding_flat": 0.00053755278388401,
+      "nonunique_mu_changed_substeps": 111,
+      "by_label": {
+        "flat_blocking": {
+          "rows": 16,
+          "old_current_max_A": 1.2640351727982758e-15,
+          "free_current_max_A": 1.2659513156716975e-15,
+          "next_current_max_A": 1.3193714304435278e-10,
+          "midpoint_max_V": 4.753645581650027e-12,
+          "pole_ab_max_V": 4.397999002018575e-09
+        },
+        "published_terminal_change": {
+          "rows": 1,
+          "old_current_max_A": 2.0010697561190227e-06,
+          "free_current_max_A": 1.8227032807516252e-06,
+          "next_current_max_A": 2.101703482360051e-06,
+          "midpoint_max_V": 5.753384437201525e-07,
+          "pole_ab_max_V": 0.000316561393418624
+        },
+        "published_trajectory": {
+          "rows": 500,
+          "old_current_max_A": 3.6113627670530946e-06,
+          "free_current_max_A": 3.6554596736237954e-06,
+          "next_current_max_A": 3.802408344633079e-06,
+          "midpoint_max_V": 1.4332704115403716e-05,
+          "pole_ab_max_V": 0.0005475935841872115
+        },
+        "synthetic_boundary": {
+          "rows": 500,
+          "old_current_max_A": 4.809185618626088e-06,
+          "free_current_max_A": 5.371751907290445e-06,
+          "next_current_max_A": 5.636486633875393e-06,
+          "midpoint_max_V": 1.4374125493432643e-05,
+          "pole_ab_max_V": 0.0009231688374597979
+        }
+      }
+    },
+    "float_piecewise_wrapped_angle_input": {
+      "status_nonzero_rows": [],
+      "angle_error_circular": true,
+      "field_errors": {
+        "old_abc_A": {
+          "max_abs": 4.306385973151805e-06,
+          "rms": 5.989946002229035e-07,
+          "worst_row_1based": 519,
+          "worst_substep_1based": 8,
+          "label": "synthetic_boundary"
+        },
+        "free_abc_A": {
+          "max_abs": 5.160005342119689e-06,
+          "rms": 6.331775757373743e-07,
+          "worst_row_1based": 519,
+          "worst_substep_1based": 8,
+          "label": "synthetic_boundary"
+        },
+        "next_abc_A": {
+          "max_abs": 5.057969068467116e-06,
+          "rms": 6.380189685966063e-07,
+          "worst_row_1based": 519,
+          "worst_substep_1based": 8,
+          "label": "synthetic_boundary"
+        },
+        "pole_abc_V": {
+          "max_abs": 169.9999999846073,
+          "rms": 9.056771981333457,
+          "worst_row_1based": 1008,
+          "worst_substep_1based": 3,
+          "label": "flat_blocking"
+        },
+        "mu_V": {
+          "max_abs": 169.9999999802094,
+          "rms": 9.056771986715434,
+          "worst_row_1based": 1002,
+          "worst_substep_1based": 1,
+          "label": "flat_blocking"
+        },
+        "np_before_V": {
+          "max_abs": 1.4374125493432643e-05,
+          "rms": 4.312567136113641e-06,
+          "worst_row_1based": 803,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "theta_end_rad": {
+          "max_abs": 3.2285302298262764e-07,
+          "rms": 8.976700532137967e-08,
+          "worst_row_1based": 971,
+          "worst_substep_1based": 4,
+          "label": "synthetic_boundary"
+        },
+        "up_before_V": {
+          "max_abs": 1.5098003743219124e-05,
+          "rms": 4.4152712172637745e-06,
+          "worst_row_1based": 776,
+          "worst_substep_1based": 12,
+          "label": "synthetic_boundary"
+        },
+        "low_before_V": {
+          "max_abs": 1.4219612481269905e-05,
+          "rms": 4.40947891273569e-06,
+          "worst_row_1based": 428,
+          "worst_substep_1based": 12,
+          "label": "published_trajectory"
+        },
+        "reserved_zero": {
+          "max_abs": 0.0,
+          "rms": 0.0,
+          "worst_row_1based": 1,
+          "worst_substep_1based": 1,
+          "label": "published_trajectory"
+        }
+      },
+      "pole_alpha_beta_max_abs_V": 0.00089233500655439,
+      "KCL_max_abs_A": 1.6689300537109375e-06,
+      "flat_all_off_substeps": 169,
+      "mu_max_abs_V_excluding_flat": 0.00048414702216525995,
+      "nonunique_mu_changed_substeps": 169,
+      "by_label": {
+        "flat_blocking": {
+          "rows": 16,
+          "old_current_max_A": 4.39791215790643e-11,
+          "free_current_max_A": 4.39789045509768e-11,
+          "next_current_max_A": 8.06282137168768e-11,
+          "midpoint_max_V": 3.38573613589688e-12,
+          "pole_ab_max_V": 2.1990145820736532e-08
+        },
+        "published_terminal_change": {
+          "rows": 1,
+          "old_current_max_A": 2.0010697561190227e-06,
+          "free_current_max_A": 1.899509217473394e-06,
+          "next_current_max_A": 2.101703482360051e-06,
+          "midpoint_max_V": 5.753384437201525e-07,
+          "pole_ab_max_V": 0.00014511851784249075
+        },
+        "published_trajectory": {
+          "rows": 500,
+          "old_current_max_A": 3.1651040668378982e-06,
+          "free_current_max_A": 3.174536387540172e-06,
+          "next_current_max_A": 3.1745691977391743e-06,
+          "midpoint_max_V": 1.4332704115403716e-05,
+          "pole_ab_max_V": 0.0005669510448527149
+        },
+        "synthetic_boundary": {
+          "rows": 500,
+          "old_current_max_A": 4.306385973151805e-06,
+          "free_current_max_A": 5.160005342119689e-06,
+          "next_current_max_A": 5.057969068467116e-06,
+          "midpoint_max_V": 1.4374125493432643e-05,
+          "pole_ab_max_V": 0.00089233500655439
+        }
+      }
+    }
+  },
+  "limitations": "Open-loop numeric trace only. Flat all-OFF projection can have multiple mu roots; pole common mode can differ while alpha/beta/current do not."
+}

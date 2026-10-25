@@ -1,0 +1,35 @@
+# CCS build output
+/FLASH/
+Debug/
+Release/
+
+# Compiler generated files
+*.obj
+*.o
+*.out
+*.map
+*.d
+*.pp
+*.hex
+*.bin
+
+# CCS workspace metadata
+.metadata/
+
+# Temporary files
+*.bak
+*.tmp
+*.log
+
+# Operating system
+Thumbs.db
+.DS_Store
+
+# Host test binaries and generated replay helpers
+/tests/*_build/
+/tests/build/
+/tests/ti_mode7_reference.m
+/tests/*.exe
+/tests/*.dll
+/tests/*.exp
+/tests/*.lib

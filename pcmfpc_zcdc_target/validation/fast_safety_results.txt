@@ -1,0 +1,7 @@
+edge=R_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0
+edge=L_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0
+edge=omega_float_max fast_status=3 reference_status=3 finite_public_success=-1 margin=0 gate=0
+edge=delta_i_float_max fast_status=0 reference_status=0 finite_public_success=1 margin=48.1042366 gate=0
+edge=duration_float_max fast_status=6 reference_status=6 finite_public_success=-1 margin=0 gate=0
+edge=C_float_min fast_status=4 reference_status=4 finite_public_success=-1 margin=0 gate=0
+fast_safety_checks=73 PASS; nonfinite_public_success_edges=0

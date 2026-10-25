@@ -1,0 +1,4 @@
+checks=84059 samples=12000 scalar_bytes=4
+piecewise_vs_bisection max_dq_A=3.81469726562e-06 max_np_V=1.52587890625e-05 max_gi_A2=6.103515625e-05 max_gu_V2=0.00146484375
+selection_difference=2 pcoff_difference=0 active_difference=0 first_blocked_difference=0
+max_model_integral_identity_A=2.24629965828e-06 max_first_KCL_A=9.53674316406e-07 sizeof_PC_Output_host=1996

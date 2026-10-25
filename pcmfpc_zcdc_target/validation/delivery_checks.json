@@ -1,0 +1,32 @@
+{
+  "scope": "source fingerprints, branch isolation, CCS metadata and watch syntax/symbols; no GUI/hardware test",
+  "branch": "new_mpc",
+  "head": "1c93fcd53644baa0716826c66007696b512cb46d",
+  "main_unchanged": true,
+  "parent_changed_files": [
+    ".cproject"
+  ],
+  "unchanged_reference_files": [
+    "TI_PCMFPC_ZCDC_移植任务提示词.md",
+    "VIENNA_PCMFPC_ZCDC.slx",
+    "pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m",
+    "pcmfpc_zcdc/vienna_eso_dq_measured.m",
+    "pcmfpc_zcdc/configure_outerloop_features.m",
+    "output/paper_aligned_validation/paper_aligned_delivery_20261025.json"
+  ],
+  "watch_expression_count": 65,
+  "watch_gui_import_tested": false,
+  "compiled_artifacts": {
+    "vienna_pcmfpc_zcdc_F2837x.map": "e1240cdc5a18ac67f91f1a0a4f925f24948def5c3eb3741e1e666c5ec2d291b2",
+    "vienna_pcmfpc_zcdc_F2837x.out": "fb386048985a2865ebdd3258f7a348cf7d7f92b8f1c878bbda21b683fceb1b83"
+  },
+  "reference_hashes": {
+    "TI_PCMFPC_ZCDC_移植任务提示词.md": "c68910eac2b47a97602089d7b8fb742b87e619d48ff0200a3d617d0292517417",
+    "VIENNA_PCMFPC_ZCDC.slx": "2debe8f696875023b735139cdc63954f75a4531faffac62388a98eb17d5d38a8",
+    "pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m": "a77ea4dea3267d82d444efbf4a7437a39e15b7c48928931f40d6476e67503f4a",
+    "pcmfpc_zcdc/vienna_eso_dq_measured.m": "e35d80c3078c3d2cbf7b796da3d7d513b214b4d18412277574439c4e6883a84a",
+    "pcmfpc_zcdc/configure_outerloop_features.m": "8482a368cab3470a9738bb0eaa0094ae289d428ee611fcb97e2432d2c7220c2c",
+    "output/paper_aligned_validation/paper_aligned_delivery_20261025.json": "26be0f4fea9f5730de0f68573a9f2f1b3135cbc154217d165df3e2d4acb35502"
+  },
+  "checks": "PASS"
+}

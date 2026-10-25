@@ -1,0 +1,6 @@
+{
+  "metric_differences": {},
+  "original_trace_rows": 13000,
+  "regression_trace_rows": 13000,
+  "differing_common_trace_rows": 0
+}

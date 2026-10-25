@@ -1,0 +1,2 @@
+runtime_host_checks=122 real_PLL_ESO_core_with_stub_timer_and_trip=PASS
+No target execution: next sample assumes one ZERO crossed; analog ADC, ISR latency, AQ and hardware trip paths require bench tests.

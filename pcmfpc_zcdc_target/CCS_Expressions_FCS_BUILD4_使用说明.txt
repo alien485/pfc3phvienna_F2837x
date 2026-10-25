@@ -1,0 +1,90 @@
+﻿CCS Expressions 导入及操作说明 — 当前 BUILD 4 FCS-MPC
+
+一、文件与适用范围
+导入文件：CCS_Expressions_FCS_BUILD4.txt
+适用于当前 Vienna_MPC/pfc3phvienna_F2837x 的 CPU1/C28x 固件。
+按 CCS 12.x 的 Expressions 文本导入方式准备，一行一个表达式。
+导入文件为 ASCII、Windows CRLF，无注释、无赋值、无函数调用。
+导入仅添加观察行，不会自动启动、清故障或改变目标值。
+本次只新增这两份 TXT，不修改原始源码、调试脚本、构建产物或保护设置。
+
+二、在 CCS 中导入
+1. 选择 CPU1 调试上下文，加载当前工程的 FLASH/pfc3phvienna_F2837x.out。
+2. 菜单 View -> Expressions，打开表达式窗口。
+3. 在 Expressions 窗口内右键 -> Import，选 CCS_Expressions_FCS_BUILD4.txt。
+   不要用工程 File -> Import，也不要将本文件当 JavaScript 脚本运行。
+4. 使用实时模式和 Continuous Refresh 观察运行中的变量。
+   不要为了修改 Value 而带主功率暂停 CPU；刷新间隔可先保持 CCS 默认值。
+5. 若旧版本变量仍在窗口中，可仅移除旧观察行后重新导入，避免重复。
+6. 文件已按现有 MAP 核对变量符号；尚未连接实际 CCS 调试会话验证导入。
+   如果提示符号不可用，先核对 CPU1 上下文和所加载 OUT 文件。
+
+三、当前工况与启动前只读核对
+交流源：三相平衡正弦，57.74 V相RMS（约100 V线RMS），按标称60 Hz。
+负载：100 ohm，接直流P与N之间；180 V时实际消耗324 W、输出1.8 A。
+目标总母线180 V，均压后上下各约90 V。
+VIENNA_vBusRef_pu：初始化完成后约0.3964758，等于180/454。
+VIENNA_guiVbusTripLimit_Volts：当前默认216 V，只核对，不在本次操作中调整。
+VIENNA_vRmsMeasAvg_pu：输入稳定后约0.12718，等于57.74/454。
+零偏校准必须在交流源输出关闭、实际零电流时完成；不要带AC重新加载或复位。
+当前BUILD4为三相三线，交流中性点不接直流中点M，PE保持原设计接线。
+
+四、正常启动：只修改第一行的 Value
+确认初始化完成、测量正确、输入稳定及保护检查通过后，CPU保持运行：
+找到 VIENNA_clearTrip，在 Value 列输入1，回车，仅请求一次。
+不要把“VIENNA_clearTrip = 1”作为新增表达式保存或连续刷新。
+不要先手工把closeGiLoop、closeGvLoop、closeGsLoop全部写成1。
+程序先提交全OFF，跨过一次ZERO后再清Trip并自动开启三个闭环。
+clearTrip自动回0并不一定代表启动成功；还需看三环、Trip状态和实际门极。
+RMS或半母线未就绪时启动请求会被撤销，不要反复清故障。
+
+五、正常停止
+CPU保持运行，在 VIENNA_closeGiLoop 的 Value 列输入0，回车。
+确认三环关闭和实际门极OFF，再关闭、隔离交流输入，放电并测量残压。
+之后再Halt、退出或重新加载。门极OFF不会切断整流二极管充电通路。
+异常电流、过压或失衡时使用实际电源的停机措施，不依赖CCS写变量紧急保护。
+
+六、观察行说明
+VIENNA_vBusRef_pu：总母线目标，电压基准454 V；本次保持180 V默认值。
+VIENNA_vBusRefSlewed_pu：程序生成的平滑目标，只读。
+VIENNA_guiVbus*_Volts：单位V，经过慢速滤波，变化有滞后。
+VIENNA_vBus*Meas_pu：采样后的反馈，乘454换算V；软件更新值不是高速示波波形。
+VIENNA_vBusDiff_pu：上半母线减下半母线，乘454换算V。
+VIENNA_guiVrms1/2/3_Volts：三相电压有效值，单位V。
+VIENNA_guiIrms1/2/3_Amps：三相电流有效值，单位A。
+VIENNA_guiPF1/2/3：功率因数，更新较慢，刚启动为0不能单独判定故障。
+VIENNA_guiACFreq_Hz：测得工频，单位Hz，更新较慢。
+VIENNA_iL1/2/3Ref_pu、VIENNA_iL1/2/3Meas_pu：各相参考和测量，乘12换算A。
+VIENNA_iLRef_pu、VIENNA_gv_out：外环内部量，由程序更新，本次只观察。
+VIENNA_fcsSwitchState：0..7，bit0/1/2对应A/B/C相；1表示该相开关ON。
+VIENNA_fcsOffReady：程序内部全OFF握手标志，只读。
+VIENNA_fcsIsrCycles、VIENNA_fcsIsrCyclesMax：控制主体计时，除200得到us。
+该计时不包括全部中断开销，不能只凭总时间小于20us认定命令及时提交。
+VIENNA_fcsDeadlineMissCount：命令写入错时累计，正常应保持0；增加时保留现场并停机排查。
+
+末三行分别读取 ePWM1/2/3 的 TZFLG：
+*(volatile unsigned int *)0x4093
+*(volatile unsigned int *)0x4193
+*(volatile unsigned int *)0x4293
+来自F2837xD driverlib：EPWM1/2/3_BASE=0x4000/0x4100/0x4200，TZFLG偏移0x93。
+可右键 Number Format -> Hex 查看。它们仅供观察，禁止直接改Value清故障。
+未使用旧脚本的EPwm1Regs.TZFLG等结构体名，因当前driverlib工程MAP中没有这些符号。
+初始OST为程序预期；正常启控后出现新Trip应停止实验，不反复清Trip。
+常用位：0x0002=CBC；0x0004=OST；0x0008=DCAEVT1；0x0020=DCBEVT1。
+
+VIENNA_boardStatus 常见枚举：
+0=Idle，1=NoFault，2/3/4=三相过流，5=一般过流，6=过压，7=母线不平衡，8=EmulatorStopTrip。
+仅看NoFault不能证明所有Trip已解除，需同时核对TZFLG和错时计数。
+VIENNA_buildInfo 当前C28x BUILD4枚举值为3，界面也可能显示枚举名称。
+
+七、保护与操作边界
+保留4 A瞬时CMPSS过流、3.6 A参考峰值上限及216 V滤波软件总母线过压。
+交流源建议的每相2.5 A RMS限流与4 A瞬时保护含义不同，不在此文件中设置。
+216 V判断使用慢速滤波，不能作为瞬时钳位；上下半母线同时用独立测量核对。
+本次只需操作clearTrip和closeGiLoop；其余保护、反馈、计数和内部状态保持只读。
+不要写guiPowerStageStart/Stop来启停，本工程控制路径没有读取它们。
+
+参考：
+工程现有 setupdebugenv_fcs_build4_guide.js、vienna.h、vienna_user_settings.h 和 FLASH/*.map。
+TI CCS12 Expressions说明：
+https://software-dl.ti.com/ccs/esd/documents/users_guide_legacy/ccs_debug-main.html
