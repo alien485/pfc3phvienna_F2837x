@@ -1,0 +1,1135 @@
+{
+  "scope": "Mandatory reviewed code region, one cycle minimum per issue group; predicates/loop counts relaxed; no WCET",
+  "asm": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\build_pass3\\vienna_pcmfpc_fast.asm",
+  "goal_line": 4968,
+  "function": "pf_root",
+  "start_line": 3962,
+  "goal_instruction_not_charged": {
+    "line": 4968,
+    "op": "MOVB",
+    "args": "AL,#0",
+    "text": "MOVB      AL,#0                 ; [CPU_ALU] |275|"
+  },
+  "minimum_groups": 182,
+  "reviewed_region_multiplicity": 18,
+  "total_region_minimum_cycles": 3276,
+  "total_region_minimum_us_at_200MHz": 16.38,
+  "parsed_internal_labels": 54,
+  "path_opcode_counts": {
+    "MOVL": 29,
+    "MOV32": 43,
+    "ADDB": 1,
+    "NEGF32": 3,
+    "MOV": 22,
+    "B": 21,
+    "ZERO": 2,
+    "MOVB": 11,
+    "MOVW": 6,
+    "TBIT": 9,
+    "LSR": 2,
+    "ADDF32": 10,
+    "ANDB": 3,
+    "AND": 3,
+    "CMPL": 3,
+    "CMPF32": 5,
+    "MOVST0": 4,
+    "CMP": 2,
+    "MPYF32": 3
+  },
+  "path_MOVL_XAR0_immediate_groups": 0,
+  "path_FP_indexed_groups": 0,
+  "path": [
+    {
+      "line": 3962,
+      "op": "MOVL",
+      "args": "*SP++,XAR1",
+      "text": "MOVL      *SP++,XAR1            ; [CPU_ALU]"
+    },
+    {
+      "line": 3965,
+      "op": "MOVL",
+      "args": "*SP++,XAR2",
+      "text": "MOVL      *SP++,XAR2            ; [CPU_ALU]"
+    },
+    {
+      "line": 3968,
+      "op": "MOVL",
+      "args": "*SP++,XAR3",
+      "text": "MOVL      *SP++,XAR3            ; [CPU_ALU]"
+    },
+    {
+      "line": 3971,
+      "op": "MOV32",
+      "args": "*SP++,R4H",
+      "text": "MOV32     *SP++,R4H             ; [CPU_FPU]"
+    },
+    {
+      "line": 3974,
+      "op": "MOV32",
+      "args": "*SP++,R5H",
+      "text": "MOV32     *SP++,R5H             ; [CPU_FPU]"
+    },
+    {
+      "line": 3977,
+      "op": "MOV32",
+      "args": "*SP++,R6H",
+      "text": "MOV32     *SP++,R6H             ; [CPU_FPU]"
+    },
+    {
+      "line": 3980,
+      "op": "MOV32",
+      "args": "*SP++,R7H",
+      "text": "MOV32     *SP++,R7H             ; [CPU_FPU]"
+    },
+    {
+      "line": 3983,
+      "op": "ADDB",
+      "args": "SP,#20",
+      "text": "ADDB      SP,#20                ; [CPU_ARAU]"
+    },
+    {
+      "line": 3985,
+      "op": "MOV32",
+      "args": "R3H,R2H",
+      "text": "MOV32     R3H,R2H               ; [CPU_FPU] |212|"
+    },
+    {
+      "line": 3987,
+      "op": "NEGF32",
+      "args": "R3H,R3H",
+      "text": "NEGF32    R3H,R3H               ; [CPU_FPU] |214|"
+    },
+    {
+      "line": 3989,
+      "op": "MOVL",
+      "args": "XT,*-SP[46]",
+      "text": "MOVL      XT,*-SP[46]           ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 3990,
+      "op": "MOV",
+      "args": "*-SP[11],AL",
+      "text": "MOV       *-SP[11],AL           ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 3991,
+      "op": "MOVL",
+      "args": "XAR6,*-SP[44]",
+      "text": "MOVL      XAR6,*-SP[44]         ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 3992,
+      "op": "MOVL",
+      "args": "XAR3,*-SP[40]",
+      "text": "MOVL      XAR3,*-SP[40]         ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 3993,
+      "op": "MOVL",
+      "args": "XAR2,*-SP[38]",
+      "text": "MOVL      XAR2,*-SP[38]         ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 3994,
+      "op": "MOVL",
+      "args": "ACC,XT",
+      "text": "MOVL      ACC,XT                ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 3996,
+      "op": "MOV32",
+      "args": "*-SP[14],R3H",
+      "text": "MOV32     *-SP[14],R3H          ; [CPU_FPU] |214|"
+    },
+    {
+      "line": 3998,
+      "op": "MOVL",
+      "args": "*-SP[20],XAR6",
+      "text": "MOVL      *-SP[20],XAR6         ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 3999,
+      "op": "MOVL",
+      "args": "XAR6,*-SP[42]",
+      "text": "MOVL      XAR6,*-SP[42]         ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 4000,
+      "op": "MOV32",
+      "args": "*-SP[16],R2H",
+      "text": "MOV32     *-SP[16],R2H          ; [CPU_FPU] |212|"
+    },
+    {
+      "line": 4002,
+      "op": "MOVL",
+      "args": "XAR7,#||pf_root_work||",
+      "text": "MOVL      XAR7,#||pf_root_work|| ; [CPU_ARAU] |214|"
+    },
+    {
+      "line": 4004,
+      "op": "MOV32",
+      "args": "*+XAR7[2],R1H",
+      "text": "MOV32     *+XAR7[2],R1H         ; [CPU_FPU] |214|"
+    },
+    {
+      "line": 4006,
+      "op": "MOVL",
+      "args": "*-SP[18],XAR6",
+      "text": "MOVL      *-SP[18],XAR6         ; [CPU_ALU] |212|"
+    },
+    {
+      "line": 4008,
+      "op": "MOV32",
+      "args": "*+XAR7[0],R3H",
+      "text": "MOV32     *+XAR7[0],R3H         ; [CPU_FPU] |214|"
+    },
+    {
+      "line": 4010,
+      "op": "B",
+      "args": "||$C$L37||,NEQ",
+      "text": "B         ||$C$L37||,NEQ        ; [CPU_ALU] |215|"
+    },
+    {
+      "line": 4204,
+      "op": "ZERO",
+      "args": "R3H",
+      "text": "ZERO      R3H                   ; [CPU_FPU] |217|"
+    },
+    {
+      "line": 4206,
+      "op": "MOVB",
+      "args": "XAR0,#52",
+      "text": "MOVB      XAR0,#52              ; [CPU_ALU] |216|"
+    },
+    {
+      "line": 4208,
+      "op": "MOVL",
+      "args": "XAR6,XT",
+      "text": "MOVL      XAR6,XT               ; [CPU_ALU] |217|"
+    },
+    {
+      "line": 4209,
+      "op": "MOVW",
+      "args": "DP,#||pf_root_work||+4",
+      "text": "MOVW      DP,#||pf_root_work||+4 ; [CPU_ARAU]"
+    },
+    {
+      "line": 4210,
+      "op": "ZERO",
+      "args": "R4H",
+      "text": "ZERO      R4H                   ; [CPU_FPU] |217|"
+    },
+    {
+      "line": 4212,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+6,R3H",
+      "text": "MOV32     @||pf_root_work||+6,R3H ; [CPU_FPU] |217|"
+    },
+    {
+      "line": 4214,
+      "op": "MOVL",
+      "args": "XAR6,*+XAR6[AR0]",
+      "text": "MOVL      XAR6,*+XAR6[AR0]      ; [CPU_ALU] |216|"
+    },
+    {
+      "line": 4216,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+4,R4H",
+      "text": "MOV32     @||pf_root_work||+4,R4H ; [CPU_FPU] |217|"
+    },
+    {
+      "line": 4218,
+      "op": "MOV",
+      "args": "AL,*-SP[11]",
+      "text": "MOV       AL,*-SP[11]           ; [CPU_ALU] |216|"
+    },
+    {
+      "line": 4220,
+      "op": "TBIT",
+      "args": "AL,#0",
+      "text": "TBIT      AL,#0                 ; [CPU_ALU] |218|"
+    },
+    {
+      "line": 4222,
+      "op": "MOVL",
+      "args": "@||pf_root_work||+8,XAR6",
+      "text": "MOVL      @||pf_root_work||+8,XAR6 ; [CPU_FPU] |216|"
+    },
+    {
+      "line": 4224,
+      "op": "B",
+      "args": "||$C$L38||,NTC",
+      "text": "B         ||$C$L38||,NTC        ; [CPU_ALU] |218|"
+    },
+    {
+      "line": 4230,
+      "op": "MOVB",
+      "args": "XAR0,#18",
+      "text": "MOVB      XAR0,#18              ; [CPU_ALU] |218|"
+    },
+    {
+      "line": 4232,
+      "op": "MOVL",
+      "args": "XAR6,XT",
+      "text": "MOVL      XAR6,XT               ; [CPU_ALU] |218|"
+    },
+    {
+      "line": 4233,
+      "op": "MOV",
+      "args": "AH,*-SP[11]",
+      "text": "MOV       AH,*-SP[11]           ; [CPU_ALU]"
+    },
+    {
+      "line": 4235,
+      "op": "LSR",
+      "args": "AH,1",
+      "text": "LSR       AH,1                  ; [CPU_ALU] |219|"
+    },
+    {
+      "line": 4237,
+      "op": "MOV32",
+      "args": "R3H,*+XAR6[AR0]",
+      "text": "MOV32     R3H,*+XAR6[AR0]       ; [CPU_FPU] |218|"
+    },
+    {
+      "line": 4239,
+      "op": "TBIT",
+      "args": "AL,#1",
+      "text": "TBIT      AL,#1                 ; [CPU_ALU] |219|"
+    },
+    {
+      "line": 4241,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R4H",
+      "text": "ADDF32    R3H,R3H,R4H           ; [CPU_FPU] |218|"
+    },
+    {
+      "line": 4243,
+      "op": "MOV",
+      "args": "*-SP[9],AH",
+      "text": "MOV       *-SP[9],AH            ; [CPU_FPU] |219|"
+    },
+    {
+      "line": 4245,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+4,R3H",
+      "text": "MOV32     @||pf_root_work||+4,R3H ; [CPU_FPU] |218|"
+    },
+    {
+      "line": 4247,
+      "op": "B",
+      "args": "||$C$L40||,NTC",
+      "text": "B         ||$C$L40||,NTC        ; [CPU_ALU] |219|"
+    },
+    {
+      "line": 4253,
+      "op": "MOVB",
+      "args": "XAR0,#20",
+      "text": "MOVB      XAR0,#20              ; [CPU_ALU] |219|"
+    },
+    {
+      "line": 4255,
+      "op": "MOV",
+      "args": "AH,*-SP[11]",
+      "text": "MOV       AH,*-SP[11]           ; [CPU_ALU]"
+    },
+    {
+      "line": 4256,
+      "op": "MOV32",
+      "args": "R3H,*+XAR6[AR0]",
+      "text": "MOV32     R3H,*+XAR6[AR0]       ; [CPU_FPU] |219|"
+    },
+    {
+      "line": 4257,
+      "op": "MOV32",
+      "args": "R4H,@||pf_root_work||+4",
+      "text": "MOV32     R4H,@||pf_root_work||+4 ; [CPU_FPU] |219|"
+    },
+    {
+      "line": 4259,
+      "op": "LSR",
+      "args": "AH,2",
+      "text": "LSR       AH,2                  ; [CPU_ALU] |220|"
+    },
+    {
+      "line": 4261,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R4H",
+      "text": "ADDF32    R3H,R3H,R4H           ; [CPU_FPU] |219|"
+    },
+    {
+      "line": 4263,
+      "op": "TBIT",
+      "args": "AL,#2",
+      "text": "TBIT      AL,#2                 ; [CPU_ALU] |220|"
+    },
+    {
+      "line": 4264,
+      "op": "MOV",
+      "args": "*-SP[10],AH",
+      "text": "MOV       *-SP[10],AH           ; [CPU_FPU] |220|"
+    },
+    {
+      "line": 4266,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+4,R3H",
+      "text": "MOV32     @||pf_root_work||+4,R3H ; [CPU_FPU] |219|"
+    },
+    {
+      "line": 4268,
+      "op": "B",
+      "args": "||$C$L42||,NTC",
+      "text": "B         ||$C$L42||,NTC        ; [CPU_ALU] |220|"
+    },
+    {
+      "line": 4274,
+      "op": "MOVB",
+      "args": "XAR0,#22",
+      "text": "MOVB      XAR0,#22              ; [CPU_ALU] |220|"
+    },
+    {
+      "line": 4276,
+      "op": "MOV32",
+      "args": "R3H,*+XAR6[AR0]",
+      "text": "MOV32     R3H,*+XAR6[AR0]       ; [CPU_FPU] |220|"
+    },
+    {
+      "line": 4277,
+      "op": "MOV32",
+      "args": "R4H,@||pf_root_work||+4",
+      "text": "MOV32     R4H,@||pf_root_work||+4 ; [CPU_FPU] |220|"
+    },
+    {
+      "line": 4278,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R4H",
+      "text": "ADDF32    R3H,R3H,R4H           ; [CPU_FPU] |220|"
+    },
+    {
+      "line": 4280,
+      "op": "TBIT",
+      "args": "AL,#0",
+      "text": "TBIT      AL,#0                 ; [CPU_ALU] |221|"
+    },
+    {
+      "line": 4282,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+4,R3H",
+      "text": "MOV32     @||pf_root_work||+4,R3H ; [CPU_FPU] |220|"
+    },
+    {
+      "line": 4284,
+      "op": "B",
+      "args": "||$C$L44||,NTC",
+      "text": "B         ||$C$L44||,NTC        ; [CPU_ALU] |221|"
+    },
+    {
+      "line": 4290,
+      "op": "MOVB",
+      "args": "XAR0,#30",
+      "text": "MOVB      XAR0,#30              ; [CPU_ALU] |221|"
+    },
+    {
+      "line": 4292,
+      "op": "MOV32",
+      "args": "R3H,*+XAR6[AR0]",
+      "text": "MOV32     R3H,*+XAR6[AR0]       ; [CPU_FPU] |221|"
+    },
+    {
+      "line": 4293,
+      "op": "MOV32",
+      "args": "R4H,@||pf_root_work||+6",
+      "text": "MOV32     R4H,@||pf_root_work||+6 ; [CPU_FPU] |221|"
+    },
+    {
+      "line": 4294,
+      "op": "MOV",
+      "args": "AH,*-SP[9]",
+      "text": "MOV       AH,*-SP[9]            ; [CPU_ALU] |221|"
+    },
+    {
+      "line": 4295,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R4H",
+      "text": "ADDF32    R3H,R3H,R4H           ; [CPU_FPU] |221|"
+    },
+    {
+      "line": 4297,
+      "op": "TBIT",
+      "args": "AH,#0",
+      "text": "TBIT      AH,#0                 ; [CPU_ALU] |222|"
+    },
+    {
+      "line": 4299,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+6,R3H",
+      "text": "MOV32     @||pf_root_work||+6,R3H ; [CPU_FPU] |221|"
+    },
+    {
+      "line": 4301,
+      "op": "B",
+      "args": "||$C$L46||,NTC",
+      "text": "B         ||$C$L46||,NTC        ; [CPU_ALU] |222|"
+    },
+    {
+      "line": 4307,
+      "op": "MOVB",
+      "args": "XAR0,#32",
+      "text": "MOVB      XAR0,#32              ; [CPU_ALU] |222|"
+    },
+    {
+      "line": 4309,
+      "op": "MOV32",
+      "args": "R3H,*+XAR6[AR0]",
+      "text": "MOV32     R3H,*+XAR6[AR0]       ; [CPU_FPU] |222|"
+    },
+    {
+      "line": 4310,
+      "op": "MOV32",
+      "args": "R4H,@||pf_root_work||+6",
+      "text": "MOV32     R4H,@||pf_root_work||+6 ; [CPU_FPU] |222|"
+    },
+    {
+      "line": 4311,
+      "op": "MOV",
+      "args": "AH,*-SP[10]",
+      "text": "MOV       AH,*-SP[10]           ; [CPU_ALU] |222|"
+    },
+    {
+      "line": 4312,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R4H",
+      "text": "ADDF32    R3H,R3H,R4H           ; [CPU_FPU] |222|"
+    },
+    {
+      "line": 4314,
+      "op": "TBIT",
+      "args": "AH,#0",
+      "text": "TBIT      AH,#0                 ; [CPU_ALU] |223|"
+    },
+    {
+      "line": 4316,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+6,R3H",
+      "text": "MOV32     @||pf_root_work||+6,R3H ; [CPU_FPU] |222|"
+    },
+    {
+      "line": 4318,
+      "op": "B",
+      "args": "||$C$L48||,NTC",
+      "text": "B         ||$C$L48||,NTC        ; [CPU_ALU] |223|"
+    },
+    {
+      "line": 4324,
+      "op": "MOVB",
+      "args": "XAR0,#34",
+      "text": "MOVB      XAR0,#34              ; [CPU_ALU] |223|"
+    },
+    {
+      "line": 4326,
+      "op": "MOV32",
+      "args": "R3H,*+XAR6[AR0]",
+      "text": "MOV32     R3H,*+XAR6[AR0]       ; [CPU_FPU] |223|"
+    },
+    {
+      "line": 4327,
+      "op": "MOV32",
+      "args": "R4H,@||pf_root_work||+6",
+      "text": "MOV32     R4H,@||pf_root_work||+6 ; [CPU_FPU] |223|"
+    },
+    {
+      "line": 4328,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R4H",
+      "text": "ADDF32    R3H,R3H,R4H           ; [CPU_FPU] |223|"
+    },
+    {
+      "line": 4330,
+      "op": "MOVW",
+      "args": "DP,#||pf_root_work||+6",
+      "text": "MOVW      DP,#||pf_root_work||+6 ; [CPU_ARAU]"
+    },
+    {
+      "line": 4331,
+      "op": "MOV32",
+      "args": "@||pf_root_work||+6,R3H",
+      "text": "MOV32     @||pf_root_work||+6,R3H ; [CPU_FPU] |223|"
+    },
+    {
+      "line": 4333,
+      "op": "MOV",
+      "args": "PL,#0",
+      "text": "MOV       PL,#0                 ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4334,
+      "op": "MOV",
+      "args": "PH,#32640",
+      "text": "MOV       PH,#32640             ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4336,
+      "op": "MOV32",
+      "args": "R5H,@||pf_root_work||+4",
+      "text": "MOV32     R5H,@||pf_root_work||+4 ; [CPU_FPU] |63|"
+    },
+    {
+      "line": 4337,
+      "op": "MOV32",
+      "args": "*-SP[4],R5H",
+      "text": "MOV32     *-SP[4],R5H           ; [CPU_FPU] |63|"
+    },
+    {
+      "line": 4339,
+      "op": "MOVL",
+      "args": "ACC,*-SP[4]",
+      "text": "MOVL      ACC,*-SP[4]           ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4340,
+      "op": "ANDB",
+      "args": "AL,#0",
+      "text": "ANDB      AL,#0                 ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4341,
+      "op": "AND",
+      "args": "AH,#32640",
+      "text": "AND       AH,#32640             ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4342,
+      "op": "CMPL",
+      "args": "ACC,P",
+      "text": "CMPL      ACC,P                 ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4343,
+      "op": "B",
+      "args": "||$C$L79||,EQ",
+      "text": "B         ||$C$L79||,EQ         ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4346,
+      "op": "MOV32",
+      "args": "R4H,@||pf_root_work||+6",
+      "text": "MOV32     R4H,@||pf_root_work||+6 ; [CPU_FPU] |63|"
+    },
+    {
+      "line": 4347,
+      "op": "MOV32",
+      "args": "*-SP[6],R4H",
+      "text": "MOV32     *-SP[6],R4H           ; [CPU_FPU] |63|"
+    },
+    {
+      "line": 4349,
+      "op": "MOVL",
+      "args": "ACC,*-SP[6]",
+      "text": "MOVL      ACC,*-SP[6]           ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4350,
+      "op": "ANDB",
+      "args": "AL,#0",
+      "text": "ANDB      AL,#0                 ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4351,
+      "op": "AND",
+      "args": "AH,#32640",
+      "text": "AND       AH,#32640             ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4352,
+      "op": "CMPL",
+      "args": "ACC,P",
+      "text": "CMPL      ACC,P                 ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4353,
+      "op": "B",
+      "args": "||$C$L79||,EQ",
+      "text": "B         ||$C$L79||,EQ         ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4355,
+      "op": "MOV32",
+      "args": "R3H,@||pf_root_work||+8",
+      "text": "MOV32     R3H,@||pf_root_work||+8 ; [CPU_FPU] |230|"
+    },
+    {
+      "line": 4356,
+      "op": "CMPF32",
+      "args": "R5H,R3H",
+      "text": "CMPF32    R5H,R3H               ; [CPU_FPU] |230|"
+    },
+    {
+      "line": 4357,
+      "op": "MOVST0",
+      "args": "ZF, NF",
+      "text": "MOVST0    ZF, NF                ; [CPU_FPU] |230|"
+    },
+    {
+      "line": 4358,
+      "op": "B",
+      "args": "||$C$L79||,GT",
+      "text": "B         ||$C$L79||,GT         ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4360,
+      "op": "NEGF32",
+      "args": "R3H,R3H",
+      "text": "NEGF32    R3H,R3H               ; [CPU_FPU] |230|"
+    },
+    {
+      "line": 4361,
+      "op": "CMPF32",
+      "args": "R4H,R3H",
+      "text": "CMPF32    R4H,R3H               ; [CPU_FPU] |230|"
+    },
+    {
+      "line": 4362,
+      "op": "MOVST0",
+      "args": "ZF, NF",
+      "text": "MOVST0    ZF, NF                ; [CPU_FPU] |230|"
+    },
+    {
+      "line": 4363,
+      "op": "B",
+      "args": "||$C$L79||,LT",
+      "text": "B         ||$C$L79||,LT         ; [CPU_ALU] |230|"
+    },
+    {
+      "line": 4366,
+      "op": "MOVB",
+      "args": "XAR1,#51",
+      "text": "MOVB      XAR1,#51              ; [CPU_ALU] |233|"
+    },
+    {
+      "line": 4367,
+      "op": "MOVL",
+      "args": "XAR6,#||pf_root_work||",
+      "text": "MOVL      XAR6,#||pf_root_work|| ; [CPU_ARAU] |233|"
+    },
+    {
+      "line": 4369,
+      "op": "MOVB",
+      "args": "XAR0,#52",
+      "text": "MOVB      XAR0,#52              ; [CPU_ALU] |233|"
+    },
+    {
+      "line": 4370,
+      "op": "MOVL",
+      "args": "ACC,XT",
+      "text": "MOVL      ACC,XT                ; [CPU_ALU] |233|"
+    },
+    {
+      "line": 4372,
+      "op": "MOV",
+      "args": "*+XAR3[0],#0",
+      "text": "MOV       *+XAR3[0],#0          ; [CPU_ALU] |232|"
+    },
+    {
+      "line": 4374,
+      "op": "MOV",
+      "args": "*+XAR6[AR1],#0",
+      "text": "MOV       *+XAR6[AR1],#0        ; [CPU_ALU] |233|"
+    },
+    {
+      "line": 4376,
+      "op": "MOV",
+      "args": "*+XAR6[AR0],#0",
+      "text": "MOV       *+XAR6[AR0],#0        ; [CPU_ALU] |233|"
+    },
+    {
+      "line": 4378,
+      "op": "B",
+      "args": "||$C$L59||,NEQ",
+      "text": "B         ||$C$L59||,NEQ        ; [CPU_ALU] |234|"
+    },
+    {
+      "line": 4561,
+      "op": "MOVL",
+      "args": "XAR6,XT",
+      "text": "MOVL      XAR6,XT               ; [CPU_ALU]"
+    },
+    {
+      "line": 4562,
+      "op": "MOVW",
+      "args": "DP,#||pf_root_work||+48",
+      "text": "MOVW      DP,#||pf_root_work||+48 ; [CPU_ARAU]"
+    },
+    {
+      "line": 4563,
+      "op": "MOVB",
+      "args": "XAR0,#62",
+      "text": "MOVB      XAR0,#62              ; [CPU_ALU]"
+    },
+    {
+      "line": 4565,
+      "op": "MOV",
+      "args": "@||pf_root_work||+48,#0",
+      "text": "MOV       @||pf_root_work||+48,#0 ; [CPU_ALU] |235|"
+    },
+    {
+      "line": 4566,
+      "op": "MOV",
+      "args": "AH,*+XAR6[AR0]",
+      "text": "MOV       AH,*+XAR6[AR0]        ; [CPU_ALU]"
+    },
+    {
+      "line": 4567,
+      "op": "CMP",
+      "args": "AH,PL",
+      "text": "CMP       AH,PL                 ; [CPU_ALU]"
+    },
+    {
+      "line": 4568,
+      "op": "B",
+      "args": "||$C$L62||,LOS",
+      "text": "B         ||$C$L62||,LOS        ; [CPU_ALU]"
+    },
+    {
+      "line": 4604,
+      "op": "MOVW",
+      "args": "DP,#||pf_root_work||+4",
+      "text": "MOVW      DP,#||pf_root_work||+4 ; [CPU_ARAU]"
+    },
+    {
+      "line": 4606,
+      "op": "MOVL",
+      "args": "XAR6,@||pf_root_work||+4",
+      "text": "MOVL      XAR6,@||pf_root_work||+4 ; [CPU_ALU] |253|"
+    },
+    {
+      "line": 4607,
+      "op": "MOVW",
+      "args": "DP,#||pf_root_work||+16",
+      "text": "MOVW      DP,#||pf_root_work||+16 ; [CPU_ARAU]"
+    },
+    {
+      "line": 4609,
+      "op": "MOVL",
+      "args": "P,@||pf_root_work||+16",
+      "text": "MOVL      P,@||pf_root_work||+16 ; [CPU_ALU] |253|"
+    },
+    {
+      "line": 4611,
+      "op": "MOVL",
+      "args": "@||pf_root_work||+34,XAR6",
+      "text": "MOVL      @||pf_root_work||+34,XAR6 ; [CPU_ALU] |253|"
+    },
+    {
+      "line": 4613,
+      "op": "MOVL",
+      "args": "@||pf_root_work||+32,P",
+      "text": "MOVL      @||pf_root_work||+32,P ; [CPU_ALU] |253|"
+    },
+    {
+      "line": 4615,
+      "op": "MOV32",
+      "args": "R3H,@||pf_root_work||+34",
+      "text": "MOV32     R3H,@||pf_root_work||+34 ; [CPU_FPU] |254|"
+    },
+    {
+      "line": 4616,
+      "op": "CMPF32",
+      "args": "R3H,#0",
+      "text": "CMPF32    R3H,#0                ; [CPU_FPU] |254|"
+    },
+    {
+      "line": 4617,
+      "op": "MOVST0",
+      "args": "ZF, NF",
+      "text": "MOVST0    ZF, NF                ; [CPU_FPU] |254|"
+    },
+    {
+      "line": 4618,
+      "op": "B",
+      "args": "||$C$L63||,NEQ",
+      "text": "B         ||$C$L63||,NEQ        ; [CPU_ALU] |254|"
+    },
+    {
+      "line": 4632,
+      "op": "MOV",
+      "args": "AH,@||pf_root_work||+51",
+      "text": "MOV       AH,@||pf_root_work||+51 ; [CPU_ALU] |255|"
+    },
+    {
+      "line": 4634,
+      "op": "MOVB",
+      "args": "@||pf_root_work||+48,#1,UNC",
+      "text": "MOVB      @||pf_root_work||+48,#1,UNC ; [CPU_ALU] |255|"
+    },
+    {
+      "line": 4636,
+      "op": "CMP",
+      "args": "AH,@||pf_root_work||+48",
+      "text": "CMP       AH,@||pf_root_work||+48 ; [CPU_ALU] |255|"
+    },
+    {
+      "line": 4637,
+      "op": "B",
+      "args": "||$C$L72||,LOS",
+      "text": "B         ||$C$L72||,LOS        ; [CPU_ALU] |255|"
+    },
+    {
+      "line": 4826,
+      "op": "MOV",
+      "args": "AH,@||pf_root_work||+52",
+      "text": "MOV       AH,@||pf_root_work||+52 ; [CPU_ALU] |266|"
+    },
+    {
+      "line": 4827,
+      "op": "B",
+      "args": "||$C$L75||,NEQ",
+      "text": "B         ||$C$L75||,NEQ        ; [CPU_ALU] |266|"
+    },
+    {
+      "line": 4861,
+      "op": "MOV",
+      "args": "AL,*-SP[11]",
+      "text": "MOV       AL,*-SP[11]           ; [CPU_ALU] |197|"
+    },
+    {
+      "line": 4864,
+      "op": "MPYF32",
+      "args": "R1H,R1H,R0H",
+      "text": "MPYF32    R1H,R1H,R0H           ; [CPU_FPU] |194|"
+    },
+    {
+      "line": 4869,
+      "op": "MPYF32",
+      "args": "R2H,R2H,R0H",
+      "text": "MPYF32    R2H,R2H,R0H           ; [CPU_FPU] |194|"
+    },
+    {
+      "line": 4872,
+      "op": "MPYF32",
+      "args": "R4H,R0H,R4H",
+      "text": "MPYF32    R4H,R0H,R4H           ; [CPU_FPU] |194|"
+    },
+    {
+      "line": 4876,
+      "op": "TBIT",
+      "args": "AL,#0",
+      "text": "TBIT      AL,#0                 ; [CPU_ALU] |197|"
+    },
+    {
+      "line": 4878,
+      "op": "MOV32",
+      "args": "R0H,R2H",
+      "text": "MOV32     R0H,R2H               ; [CPU_FPU] |194|"
+    },
+    {
+      "line": 4880,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R4H",
+      "text": "ADDF32    R3H,R3H,R4H           ; [CPU_FPU] |197|"
+    },
+    {
+      "line": 4882,
+      "op": "B",
+      "args": "||$C$L76||,TC",
+      "text": "B         ||$C$L76||,TC         ; [CPU_ALU] |197|"
+    },
+    {
+      "line": 4890,
+      "op": "MOVL",
+      "args": "XAR5,*-SP[18]",
+      "text": "MOVL      XAR5,*-SP[18]         ; [CPU_ALU] |197|"
+    },
+    {
+      "line": 4891,
+      "op": "MOV32",
+      "args": "*+XAR5[0],R3H",
+      "text": "MOV32     *+XAR5[0],R3H         ; [CPU_FPU] |197|"
+    },
+    {
+      "line": 4893,
+      "op": "MOV",
+      "args": "AL,*-SP[9]",
+      "text": "MOV       AL,*-SP[9]            ; [CPU_ALU] |198|"
+    },
+    {
+      "line": 4894,
+      "op": "MOV32",
+      "args": "R2H,*+XAR4[2]",
+      "text": "MOV32     R2H,*+XAR4[2]         ; [CPU_FPU] |198|"
+    },
+    {
+      "line": 4896,
+      "op": "TBIT",
+      "args": "AL,#0",
+      "text": "TBIT      AL,#0                 ; [CPU_ALU] |198|"
+    },
+    {
+      "line": 4898,
+      "op": "ADDF32",
+      "args": "R2H,R2H,R4H",
+      "text": "ADDF32    R2H,R2H,R4H           ; [CPU_FPU] |198|"
+    },
+    {
+      "line": 4900,
+      "op": "B",
+      "args": "||$C$L77||,TC",
+      "text": "B         ||$C$L77||,TC         ; [CPU_ALU] |198|"
+    },
+    {
+      "line": 4909,
+      "op": "MOV32",
+      "args": "*+XAR5[2],R2H",
+      "text": "MOV32     *+XAR5[2],R2H         ; [CPU_FPU] |198|"
+    },
+    {
+      "line": 4911,
+      "op": "MOV",
+      "args": "AL,*-SP[10]",
+      "text": "MOV       AL,*-SP[10]           ; [CPU_ALU] |199|"
+    },
+    {
+      "line": 4914,
+      "op": "MOV32",
+      "args": "R5H,*+XAR4[4]",
+      "text": "MOV32     R5H,*+XAR4[4]         ; [CPU_FPU] |199|"
+    },
+    {
+      "line": 4918,
+      "op": "TBIT",
+      "args": "AL,#0",
+      "text": "TBIT      AL,#0                 ; [CPU_ALU] |199|"
+    },
+    {
+      "line": 4920,
+      "op": "ADDF32",
+      "args": "R2H,R4H,R5H",
+      "text": "ADDF32    R2H,R4H,R5H           ; [CPU_FPU] |199|"
+    },
+    {
+      "line": 4922,
+      "op": "B",
+      "args": "||$C$L78||,TC",
+      "text": "B         ||$C$L78||,TC         ; [CPU_ALU] |199|"
+    },
+    {
+      "line": 4932,
+      "op": "ADDF32",
+      "args": "R3H,R3H,R2H",
+      "text": "ADDF32    R3H,R3H,R2H           ; [CPU_FPU] |199|"
+    },
+    {
+      "line": 4934,
+      "op": "MOVL",
+      "args": "XAR4,*-SP[18]",
+      "text": "MOVL      XAR4,*-SP[18]         ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4935,
+      "op": "MOV",
+      "args": "PL,#0",
+      "text": "MOV       PL,#0                 ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4936,
+      "op": "MOV",
+      "args": "PH,#32640",
+      "text": "MOV       PH,#32640             ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4938,
+      "op": "MOV32",
+      "args": "*-SP[8],R3H",
+      "text": "MOV32     *-SP[8],R3H           ; [CPU_FPU] |63|"
+    },
+    {
+      "line": 4940,
+      "op": "MOVL",
+      "args": "ACC,*-SP[8]",
+      "text": "MOVL      ACC,*-SP[8]           ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4942,
+      "op": "MOV32",
+      "args": "*+XAR4[4],R2H",
+      "text": "MOV32     *+XAR4[4],R2H         ; [CPU_FPU] |199|"
+    },
+    {
+      "line": 4943,
+      "op": "MOVL",
+      "args": "XAR4,*-SP[20]",
+      "text": "MOVL      XAR4,*-SP[20]         ; [CPU_ALU] |199|"
+    },
+    {
+      "line": 4945,
+      "op": "ANDB",
+      "args": "AL,#0",
+      "text": "ANDB      AL,#0                 ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4946,
+      "op": "AND",
+      "args": "AH,#32640",
+      "text": "AND       AH,#32640             ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4947,
+      "op": "CMPL",
+      "args": "ACC,P",
+      "text": "CMPL      ACC,P                 ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4949,
+      "op": "MOV32",
+      "args": "*+XAR4[0],R3H",
+      "text": "MOV32     *+XAR4[0],R3H         ; [CPU_FPU] |273|"
+    },
+    {
+      "line": 4951,
+      "op": "B",
+      "args": "||$C$L79||,EQ",
+      "text": "B         ||$C$L79||,EQ         ; [CPU_ALU] |274|"
+    },
+    {
+      "line": 4953,
+      "op": "CMPF32",
+      "args": "R3H,#0",
+      "text": "CMPF32    R3H,#0                ; [CPU_FPU] |274|"
+    },
+    {
+      "line": 4954,
+      "op": "MOVW",
+      "args": "DP,#||pf_root_work||+8",
+      "text": "MOVW      DP,#||pf_root_work||+8 ; [CPU_ARAU]"
+    },
+    {
+      "line": 4955,
+      "op": "NEGF32",
+      "args": "R3H,R3H,LT",
+      "text": "NEGF32    R3H,R3H,LT            ; [CPU_FPU] |274|"
+    },
+    {
+      "line": 4956,
+      "op": "MOV32",
+      "args": "R0H,@||pf_root_work||+8",
+      "text": "MOV32     R0H,@||pf_root_work||+8 ; [CPU_FPU] |274|"
+    },
+    {
+      "line": 4957,
+      "op": "CMPF32",
+      "args": "R3H,R0H",
+      "text": "CMPF32    R3H,R0H               ; [CPU_FPU] |274|"
+    },
+    {
+      "line": 4958,
+      "op": "MOVST0",
+      "args": "ZF, NF",
+      "text": "MOVST0    ZF, NF                ; [CPU_FPU] |274|"
+    },
+    {
+      "line": 4959,
+      "op": "B",
+      "args": "||$C$L80||,LEQ",
+      "text": "B         ||$C$L80||,LEQ        ; [CPU_ALU] |274|"
+    }
+  ]
+}

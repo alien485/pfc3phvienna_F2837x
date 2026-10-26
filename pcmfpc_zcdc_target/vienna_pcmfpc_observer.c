@@ -2,13 +2,13 @@
 #include "vienna_pcmfpc_fast.h"
 
 #ifdef __TI_COMPILER_VERSION__
-#pragma CODE_SECTION(vo_finite,"pcmfpc_code")
 #pragma CODE_SECTION(VO_configure,"pcmfpc_code")
 #pragma CODE_SECTION(VO_reset,"pcmfpc_code")
 #pragma CODE_SECTION(vo_fail,"pcmfpc_code")
 #pragma CODE_SECTION(VO_update_delta,"pcmfpc_code")
 #pragma CODE_SECTION(VO_integrate_pole_segment,"pcmfpc_code")
 #pragma CODE_SECTION(VO_reconstruct,"pcmfpc_code")
+#pragma FUNC_ALWAYS_INLINE(vo_finite)
 #endif
 #include <math.h>
 #include <stddef.h>

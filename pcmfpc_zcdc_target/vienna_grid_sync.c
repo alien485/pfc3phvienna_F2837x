@@ -1,12 +1,12 @@
 #include "vienna_grid_sync.h"
 
 #ifdef __TI_COMPILER_VERSION__
-#pragma CODE_SECTION(vg_finite,"pcmfpc_code")
-#pragma CODE_SECTION(vg_wrap,"pcmfpc_code")
-#pragma CODE_SECTION(vg_limit,"pcmfpc_code")
 #pragma CODE_SECTION(VG_configure,"pcmfpc_code")
 #pragma CODE_SECTION(VG_reset,"pcmfpc_code")
 #pragma CODE_SECTION(VG_run,"pcmfpc_code")
+#pragma FUNC_ALWAYS_INLINE(vg_finite)
+#pragma FUNC_ALWAYS_INLINE(vg_wrap)
+#pragma FUNC_ALWAYS_INLINE(vg_limit)
 #endif
 #include <math.h>
 #include <stddef.h>

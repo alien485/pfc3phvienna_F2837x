@@ -2,21 +2,26 @@
 
 唯一 CCS 项目名：`vienna_pcmfpc_zcdc_F2837x`。工作分支：`new_mpc`。
 本目录是独立目标；父目录原 FCS 工程保留对照，父 `.cproject` 仅增加本目录排除项。
-原 MATLAB/SLX 没有修改。基线为父仓库 `1c93fcd`，完整指纹在根项目
+本次移植没有写原MATLAB/SLX。参考此前另有诊断赋值兼容更新，已独立核对1353组
+六输出全同，当前与历史指纹分开记录于`validation/REFERENCE_COMPATIBILITY.md`。
+父FCS基线为`1c93fcd`，用户首版移植提交为`44f0ec5`；完整历史指纹在根项目
 `output/ti_pcmfpc_zcdc_port/baseline_manifest.json`。
 
 **默认 `VIENNA_pcmHardwareRelease=0`，任何模式都不能由 clearTrip 启机。**
 默认模式0为原 FCS 内核；模式1/2分别为模式7末级OFF/ON。共同使用新PLL、
 同一SI外环和5.5A峰值参考，故模式0并非父目录固件的逐位等价运行。
-32轮参考求根和可选快速分段根均保留。默认32轮；汇编已证明参考路径超时，
-快速路径仅变换下界也有10.44us，超过8.14us窗口；不能放行新闭环。
+32轮参考求根和快速分段根均保留，默认32轮。当前实时优化见`RT_OPTIMIZATION.md`；
+第四轮CONTROL已采用lambda活动集根，FULL/ESO保留原根；存在浮点选态差异，
+不能作为原验证版的逐位替代。当前保守下界4860cycle/24.30us仍超过20us周期，
+不能放行新闭环。数学、差异及构建证据见`validation/RT4_REPORT.md`。
 
 ## 文件与实际调用链
 
 - `vienna_pcmfpc_zcdc.h/.c`：SI纯C核心，独立双排序、0.02A范数预算、
   自适应交集、共享触发与严格相角末级。MATLAB ID和HAL位序显式转换。
 - `vienna_pcmfpc_fast.h/.c`：显式root_method=1路径，分段求根、公共角度节点、
-  逐项初始化必要输出；不生成完整候选子步轨迹。非可重入，仅由CPU1 ISR1顺序调用。
+  逐项初始化必要输出；CONTROL窄内核和分离静态工作区减少大帧寻址。
+  候选子步与pole积分不可用标志明确，ESO的FULL路径保留；仅由CPU1 ISR1顺序调用。
 - `vienna_grid_sync.h/.c`：有界采样时刻角的归一化SRF PLL；并非仿真PLL原样复制。
 - `vienna_pcmfpc_observer.h/.c`：显式上一完整区间DeltaU ESO；
   **当前输入来源为模型重构，不是实测极点积分**。
@@ -65,3 +70,4 @@ CCS12选择本目录 `.project`，项目名必须为 `vienna_pcmfpc_zcdc_F2837x`
 
 分级台架流程和采集解释见 `PORT_GUIDE.md`，采样/执行关系见 `TIMING.md`。
 本轮完成状态、不利结果及下一步见 `DELIVERY.md`；概要证据在 `validation/`。
+用户提交44f0ec5之后的三轮实现、实际fast闭环回归及最新构建见`RT_OPTIMIZATION.md`。

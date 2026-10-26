@@ -17,8 +17,10 @@ expAdd("VIENNA_pcmMeasuredDQ_A", getNatural());
 expAdd("VIENNA_pcmReferenceSaturation", getNatural());
 expAdd("VIENNA_pcmOutputSource", getNatural());
 expAdd("VIENNA_pcmOutputDetailValid", getNatural());
+expAdd("VIENNA_pcmOutputIntegralValid", getNatural());
 expAdd("PC_fast_output_substeps_available", getNatural());
 expAdd("PC_fast_output_summaries_available", getNatural());
+expAdd("PC_fast_output_integrals_available", getNatural());
 expAdd("VIENNA_pcmFault", getNatural());
 expAdd("VIENNA_pcmCoreStatus", getNatural());
 expAdd("VIENNA_vBusRef_pu", getNatural());
@@ -63,6 +65,5 @@ expAdd("VIENNA_pcmWaveArm", getNatural());
 expAdd("VIENNA_pcmWaveCount", getNatural());
 expAdd("VIENNA_pcmRecords", getNatural());
 expAdd("VIENNA_pcmWave", getNatural());
-expAdd("*(volatile unsigned int *)0x4093", getHex());
-expAdd("*(volatile unsigned int *)0x4193", getHex());
-expAdd("*(volatile unsigned int *)0x4293", getHex());
+// Trip flags: inspect 0x4093 / 0x4193 / 0x4293 in Memory Browser, Data page,
+// 16-bit Hex. Some CCS expression evaluators reject volatile pointer casts.

@@ -12,7 +12,7 @@ from collections import Counter
 TESTS = Path(__file__).resolve().parent
 TARGET = TESTS.parent
 ROOT = Path(__file__).resolve().parents[5]
-OUT = ROOT / "output/ti_pcmfpc_zcdc_port/fast_replay"
+OUT = ROOT / "output/ti_pcmfpc_zcdc_port/rt_optimization/round2/fast_replay"
 SOURCE_OUT = ROOT / "output/ti_pcmfpc_zcdc_port"
 BUILD = TESTS / "observer_build"
 CLANG = Path(r"D:/MATLAB2023b/install/toolbox/sldrt/clang/win64/clang.exe")
@@ -153,6 +153,24 @@ def main():
                 terminal_rows.append(row)
     manifest["results_by_label"] = by_label
     manifest["published_terminal_change_rows"] = terminal_rows
+    rare_event_ok = bool(terminal_rows) and all(
+        row["reference_pcoff"] == row["fast_pcoff"] == "5" and
+        row["reference_selected"] == row["fast_selected"] == "2" and
+        row["reference_active"] == row["fast_active"] == "1" for row in terminal_rows)
+    manifest["published_terminal_change_5_to_2_preserved"] = rare_event_ok
+    # A genuine pre-edit run of the committed old fast source is retained.
+    # Compare all common per-case control results, not an implementation copy.
+    baseline = SOURCE_OUT / "rt_optimization/baseline_44f0ec5/replay_outputs.csv"
+    if baseline.is_file():
+        with baseline.open(newline="") as a, (OUT / "replay_outputs.csv").open(newline="") as b:
+            old_rows, new_rows = list(csv.DictReader(a)), list(csv.DictReader(b))
+        row_count_equal = len(old_rows) == len(new_rows)
+        differing = [j + 1 for j, (old, new) in enumerate(zip(old_rows, new_rows)) if old != new]
+        manifest["committed_fast_control_regression"] = {
+            "commit": "44f0ec5", "baseline": str(baseline), "old_rows": len(old_rows),
+            "new_rows": len(new_rows), "differing_rows": differing,
+            "all_common_control_results_identical": row_count_equal and not differing,
+            "scope": "Control replay CSV only. Removed fast-run integrals are unavailable diagnostics, not zero physical values."}
     with (OUT / "replay_differences.csv").open(newline="") as stream:
         diffs = list(csv.DictReader(stream))
     near_tie, budget_boundary, other = 0, 0, 0
@@ -172,11 +190,16 @@ def main():
               f"{summary['cases']} cases, including {description['base_cases']} base cases plus directed ULP budget boundaries and invalid-input/config checks.",
               "", "Readable reference and optimized implementation both use float32 piecewise roots and identical inputs. Bisection32 is an additional comparator.", "",
               f"Fast/reference: selected differences {summary['selected_difference']}; PC-OFF differences {summary['pcoff_difference']}; active differences {summary['active_difference']}; current/midpoint ordering differences {summary['rank_i_difference']}/{summary['rank_u_difference']}; set differences {summary['set_difference']}; status differences {summary['status_difference']}.",
-              f"Maximum numeric differences: gi {summary['max_gi_error_A2']:.12g} A²; gu {summary['max_gu_error_V2']:.12g} V²; gz {summary['max_gz_error_rad2']:.12g} rad²; dq {summary['max_dq_error_A']:.12g} A; midpoint {summary['max_np_error_V']:.12g} V; interval integral {summary['max_interval_integral_error_V_s']:.12g} V·s.",
+              f"Maximum numeric differences: gi {summary['max_gi_error_A2']:.12g} A²; gu {summary['max_gu_error_V2']:.12g} V²; gz {summary['max_gz_error_rad2']:.12g} rad²; dq {summary['max_dq_error_A']:.12g} A; midpoint {summary['max_np_error_V']:.12g} V.",
               f"FULL_SUBSTEPS direct interval calls: {summary['full_interval']['calls']}; status/numeric/discrete differences {summary['full_interval']['status_difference']}/{summary['full_interval']['numeric_difference_rows']}/{summary['full_interval']['discrete_difference_rows']}.",
+              f"SUMMARY direct interval calls: {summary['summary_interval']['calls']}; status/numeric/discrete differences {summary['summary_interval']['status_difference']}/{summary['summary_interval']['numeric_difference_rows']}/{summary['summary_interval']['discrete_difference_rows']}; physical integral max difference {summary['max_interval_integral_error_V_s']:.12g} V·s.",
+              f"CONTROL_ONLY direct interval calls: {summary['control_interval']['calls']}; status/numeric/discrete differences {summary['control_interval']['status_difference']}/{summary['control_interval']['numeric_difference_rows']}/{summary['control_interval']['discrete_difference_rows']}; unavailable integral placeholder errors {summary['control_interval']['integral_unavailable_errors']}.",
               f"Availability flag errors: {summary['availability_flag_errors']}; unavailable-substep marker errors: {summary['unavailable_marker_errors']}; unsafe invalid-input outputs: {summary['fast_unsafe_error_outputs']}.",
               f"Deliberate safety extension: finite but impossible R=L=FLT_MAX produces readable-reference status{summary['extreme_derived_numeric_guard']['readable_reference_status']} with a nonfinite voltage margin; optimized status{summary['extreme_derived_numeric_guard']['fast_status']} safely rejects derived overflow. This case is listed separately from normal-domain equivalence.",
-              "", "Detailed substeps from PC_run_fast are intentionally unavailable. Direct PC_fast_predict_interval(FULL_SUBSTEPS) is independently compared against the original interval predictor, including projected poles/rotation and every named substep field.",
+              "", "PC_run_fast uses CONTROL_ONLY: detailed substeps and pole integrals are intentionally unavailable. The integral fields are zero placeholders with an explicit invalid flag; zero does not mean a physically zero integral. All costs/decisions and remaining interval state/blocked summaries are compared exactly.",
+              "Direct PC_fast_predict_interval(SUMMARY/FULL_SUBSTEPS) retains real model pole integrals. FULL compares every named substep field including projected poles/rotation; CONTROL_ONLY compares predicted states/blocked flags and requires unavailable-integral placeholders.",
+              f"Published rare terminal event PC-OFF5 -> selected2 preserved: {rare_event_ok}.",
+              f"Committed44f0ec5 control-output regression: {manifest.get('committed_fast_control_regression', {})}.",
               "Original oracle angles are wrapped in double before float32 conversion. Original oracle CSVs are not modified.",
               "TI-derived rows reuse controller-state traces but reconstruct ideal grid eabc; they do not claim exact captured ISR input replay.",
               f"Separate bisection32 vs piecewise comparison: selected differences{summary['bisection32_vs_piecewise_reference']['selected_difference']}, PC-OFF differences{summary['bisection32_vs_piecewise_reference']['pcoff_difference']}, active differences{summary['bisection32_vs_piecewise_reference']['active_difference']}. Strong exact-tie and one-ULP budget stress cases are deliberately included. These are pre-existing root-method differences, not optimized-versus-readable-piecewise differences; all per-label counts and per-row IDs are retained.",
@@ -186,7 +209,15 @@ def main():
     (OUT / "REPORT.md").write_text("\n".join(report) + "\n", encoding="utf-8")
     if result.returncode:
         raise RuntimeError(f"Replay returned {result.returncode}; evidence retained in {OUT}")
+    if not rare_event_ok or not manifest.get("committed_fast_control_regression", {}).get("all_common_control_results_identical", True):
+        raise RuntimeError(f"Rare event or committed-control regression failed; evidence retained in {OUT}")
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, help="Separate evidence directory for this optimization pass")
+    arguments = parser.parse_args()
+    if arguments.output is not None:
+        OUT = arguments.output.resolve()
     main()

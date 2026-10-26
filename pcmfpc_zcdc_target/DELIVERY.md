@@ -1,4 +1,14 @@
-# 本轮移植交付与实际验证状态
+# 移植交付与实际验证状态
+
+当前版本在用户已提交的44f0ec5基础上完成第四轮lambda活动集实验实现。
+最新真实构建为2026-10-26 09:26:31，0errors/1warning；OUT52971695...。
+数学/安全检查通过，原1017参考输入选态不变；扩展31750回放有1887选态差，
+10对宿主闭环轨迹也改变，严格等价FAIL，不能称为原验证版的逐位替代。
+当前保守工作量下界4860cycle/24.30us，仍不满足4000cycle周期及1628cycle名义写前窗口。
+最新实现与64项观察变量见`RT_OPTIMIZATION.md`，完整结果见`validation/RT4_REPORT.md`。
+
+**以下是首次移植（44f0ec5）的历史交付记录。旧10.44us等数值不是当前构建耗时；
+最新结论以RT_OPTIMIZATION及validation/RT4_REPORT.md为准。**
 
 2026-10-25，分支new_mpc；基线1c93fcd。唯一CCS项目为本目录的
 `vienna_pcmfpc_zcdc_F2837x`，产物`FLASH/vienna_pcmfpc_zcdc_F2837x.out`。

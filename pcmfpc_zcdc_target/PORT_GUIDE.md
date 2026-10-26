@@ -21,6 +21,8 @@ F28379D型号已确认；20MHz晶振controlCARD、采样极性、L饱和与热�
 仅停机时设置`VIENNA_pcmModeRequest`：0旧FCS内核、1模式7末级OFF、2末级ON。
 `VIENNA_pcmRootMethod`：0=32轮参考，1=独立快速分段实现；只在停机采纳，运行中改变会故障关断。
 `VIENNA_pcmHardwareRelease`默认0是台架资格锁；当前交付没有满足实际时限放行条件。
+当前快核心静态下界已超20us；全OFF单次benchmark可能同时数值完成和触发PERIOD，
+不得把该故障当作需要关闭守护的误报。最新构建与后续方向见RT_OPTIMIZATION.md。
 不得为了看PWM直接改该锁、AQ寄存器或绕过RMS/PLL/Trip守护。
 在后续资格确认完成的固件/配置上，启动仍只请求一次`VIENNA_clearTrip=1`，
 保留跨ZERO全OFF握手；三个closeLoop由程序管理，脚本不会自动启机。
@@ -31,7 +33,8 @@ CPU1加载新.out后，CCS12 `View -> Scripting Console`，用打开按钮加载
 `setupdebugenv_pcmfpc_zcdc.js`；或Expressions右键Import导入同名TXT。
 脚本只替换观察表，没有任何目标赋值/清Trip/启动动作。
 新增mode、PLL/ESO、输入来源、实际/待生效状态、ID、gi/gu/gz、交集与时限变量均可展开。
-原VIENNA_fcsDeadlineMissCount与三相TZFLG直接地址仍可观察。
+原VIENNA_fcsDeadlineMissCount仍在观察表。三相TZFLG改用Memory Browser的Data页、
+16-bit Hex查看0x4093/0x4193/0x4293，避免当前CCS不接受的volatile指针cast；只读不写。
 BenchRequest是独立全OFF数值计时请求，不是启动请求；条件和状态见TIMING.md。
 ShadowEnable只用于原FCS运行时的并行诊断，不能拿它代替全OFF计时入口，
 其额外计算也可能超周期；当前没有通过带功率时限验收。

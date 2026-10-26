@@ -1,0 +1,32 @@
+{
+  "scope": "Conservative instruction-issue work lower bound; not execution time, speedup, WCET or hardware test",
+  "success_only": true,
+  "interval_count": 9,
+  "substeps_per_interval": 2,
+  "region_multiplicity": 18,
+  "control_substep_minimum_groups": 191,
+  "lambda_success_minimum_groups": 79,
+  "combined_minimum_cycles": 4860,
+  "conditional_us_at_200MHz": 24.3,
+  "period_budget_cycles": 4000,
+  "nominal_write_window_cycles": 1628,
+  "nominal_window_caveat": "40 TBCLK guard margin and submission overhead further reduce this window",
+  "period_budget_proven_failed": true,
+  "nominal_write_budget_proven_failed": true,
+  "nonoverlap": "Caller CFG charges each LCR as one group without callee body; separate lambda-root CFG charges only callee groups. Calls to lambda_plan are charged only as one instruction, with body excluded.",
+  "multiplicity_evidence": "PC_run_fast first interval once and eight candidate intervals, each pf_control_interval step<2. All successful runs complete all nine intervals and 18 roots.",
+  "excluded_work": [
+    "interval setup/exit",
+    "PC_run input, plans, seed, costs, ranks and terminal objective",
+    "lambda_plan callee body",
+    "PLL/ESO/ADC/protection/AQ writes/records",
+    "hardware ISR entry/exit"
+  ],
+  "different_old_bound_not_speedup": "Previous 6408 bound covered different relaxed minimum paths; subtracting bounds does not establish runtime improvement.",
+  "artifacts": [
+    "control_substep_bound.json",
+    "lambda_success_bound.json",
+    "independent_cfg_check.json"
+  ],
+  "asm_sha256": "c843c5223d636ad18c6fcde93ce8669f55c25dbbc4778eb951b21ec4f8d4cd1a"
+}

@@ -33,6 +33,27 @@ if ($projectName -ne $expectedName) {
     throw "Refusing to build unexpected project '$projectName'; expected '$expectedName'."
 }
 
+# A successful C build does not validate a debugger target configuration.
+# Resolve its installed database references without opening a debug session.
+$targetDatabase = Join-Path $CcsRoot 'ccs_base\common\targetdb'
+$targetConfiguration = Join-Path $targetProject 'targetConfigs\TMS320F28379D.ccxml'
+[xml]$targetConfigurationXml = Get-Content -LiteralPath $targetConfiguration -Raw
+foreach ($targetReference in $targetConfigurationXml.SelectNodes('//instance[@href]')) {
+    $installedReference = Join-Path $targetDatabase ([string]$targetReference.href)
+    if (-not (Test-Path -LiteralPath $installedReference -PathType Leaf)) {
+        throw "Target configuration refers to a missing CCS database file: $installedReference"
+    }
+    if ([IO.Path]::GetFileName([string]$targetReference.href) -ne [string]$targetReference.xml) {
+        throw "Target configuration href/xml names disagree: $($targetReference.href)"
+    }
+}
+[xml]$deviceDefinition = Get-Content -LiteralPath (Join-Path $targetDatabase 'devices\f28379d.xml') -Raw
+if ([string]$deviceDefinition.device.partnum -ne 'TMS320F28379D' -or
+    [string]$targetConfigurationXml.SelectSingleNode('//platform/device').partnum -ne 'TMS320F28379D') {
+    throw 'Target configuration and installed device definition must both select TMS320F28379D.'
+}
+Write-Output 'F28379D target configuration references verified; no debugger session opened.'
+
 # Only create directories. No clean, rebuild, file removal, checkout or hardware action.
 [void][IO.Directory]::CreateDirectory($evidenceRoot)
 [void][IO.Directory]::CreateDirectory($ccsWorkspace)

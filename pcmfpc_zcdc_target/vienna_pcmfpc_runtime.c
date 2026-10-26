@@ -14,11 +14,11 @@
 #pragma CODE_SECTION(VIENNA_PCMFPC_submitted,"pcmfpc_code")
 #pragma CODE_SECTION(VIENNA_PCMFPC_outer,"pcmfpc_code")
 #pragma CODE_SECTION(VIENNA_PCMFPC_post,"pcmfpc_code")
-#pragma CODE_SECTION(pc_elapsed,"pcmfpc_code")
 #pragma CODE_SECTION(pc_fault,"pcmfpc_code")
-#pragma CODE_SECTION(pc_finite,"pcmfpc_code")
-#pragma CODE_SECTION(pc_run_selected,"pcmfpc_code")
 #pragma CODE_SECTION(pc_benchmark,"pcmfpc_code")
+#pragma FUNC_ALWAYS_INLINE(pc_finite)
+#pragma FUNC_ALWAYS_INLINE(pc_elapsed)
+#pragma FUNC_ALWAYS_INLINE(pc_run_selected)
 #pragma DATA_SECTION(VIENNA_pcmRecords,"pcmfpc_trace")
 #pragma DATA_SECTION(VIENNA_pcmWave,"pcmfpc_wave")
 #endif
@@ -31,6 +31,7 @@ volatile uint16_t VIENNA_pcmRootMethodActive=PC_ROOT_BISECTION32,VIENNA_pcmInput
 volatile uint16_t VIENNA_pcmInputFaultMask=0U,VIENNA_pcmReferenceSaturation=0U;
 volatile float VIENNA_pcmMeasuredDQ_A[2];
 volatile uint16_t VIENNA_pcmOutputSource=0U,VIENNA_pcmOutputDetailValid=0U;
+volatile uint16_t VIENNA_pcmOutputIntegralValid=0U;
 volatile uint16_t VIENNA_pcmBenchRequest=0U,VIENNA_pcmBenchStatus=0U;
 volatile uint16_t VIENNA_pcmBenchSelectedId=0U,VIENNA_pcmBenchHWState=0U;
 volatile uint32_t VIENNA_pcmBenchCycles,VIENNA_pcmBenchCyclesMax,VIENNA_pcmBenchCount;
@@ -75,8 +76,10 @@ static uint16_t pc_run_selected(const PC_Config *cfg,const PC_Input *in,PC_Outpu
     uint16_t status;
     if(cfg->root_method==PC_ROOT_PIECEWISE){
         status=PC_run_fast(cfg,in,out);VIENNA_pcmOutputDetailValid=0U;
+        VIENNA_pcmOutputIntegralValid=(status==PC_OK && PC_fast_output_integrals_available);
     }else{
         status=PC_run(cfg,in,out);VIENNA_pcmOutputDetailValid=(status==PC_OK);
+        VIENNA_pcmOutputIntegralValid=(status==PC_OK);
     }
     return status;
 }
@@ -149,6 +152,7 @@ void VIENNA_PCMFPC_init(void)
     VIENNA_pcmModeRequest=VIENNA_PC_OLD_FCS;VIENNA_pcmModeActive=VIENNA_PC_OLD_FCS;
     VIENNA_pcmHardwareRelease=0U;VIENNA_pcmShadowEnable=0U;
     VIENNA_pcmOutputSource=0U;VIENNA_pcmOutputDetailValid=0U;
+    VIENNA_pcmOutputIntegralValid=0U;
     VIENNA_pcmBenchRequest=0U;VIENNA_pcmBenchStatus=0U;
     VIENNA_pcmBenchCycles=0U;VIENNA_pcmBenchCyclesMax=0U;VIENNA_pcmBenchCount=0U;
     VIENNA_pcmBenchSelectedId=0U;VIENNA_pcmBenchHWState=0U;
@@ -166,6 +170,7 @@ void VIENNA_PCMFPC_reset_control(void)
     /* A normal stopped controller must still allow the PLL to acquire lock.
      * Do not label an ON gate as OFF before the next ZERO actually occurs. */
     VO_reset(&VIENNA_pcmObserver);history_valid=0U;
+    VIENNA_pcmOutputDetailValid=0U;VIENNA_pcmOutputIntegralValid=0U;
     outer_integral=0.0f;outer_filtered=VIENNA_vBusMeas_pu*VIENNA_V_MAX_SENSE_VOLTS;
     VIENNA_pcmIdRef_A=0.0f;VIENNA_pcmIqRef_A=0.0f;
     VIENNA_pcmReferenceSaturation=0U;
@@ -176,6 +181,7 @@ void VIENNA_PCMFPC_sample(uint16_t trip)
     uint16_t j,active;
     VIENNA_pcmTick++;
     VIENNA_pcmOutputSource=0U;VIENNA_pcmOutputDetailValid=0U;
+    VIENNA_pcmOutputIntegralValid=0U;
     for(j=0U;j<3U;j++){
         VIENNA_pcmInput.iabc_A[j]=0.0f;VIENNA_pcmInput.eabc_V[j]=0.0f;
     }

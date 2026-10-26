@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-26",
+  "source": "user-provided CCS Expressions screenshots",
+  "result": "NUMERIC_PASS_REALTIME_BUDGET_FAIL",
+  "agent_operated_hardware": false,
+  "observed": {
+    "BenchStatus": 1,
+    "CoreStatus": 0,
+    "BenchCount": 1,
+    "BenchCycles": 27485,
+    "BenchCyclesMax": 27485,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "BodyCycles": 1319,
+    "BodyCyclesMax": 28973,
+    "WriteCycles": 1149,
+    "WriteCyclesMax": 1264,
+    "AlgorithmCycles": 0,
+    "AlgorithmCyclesMax": 0,
+    "Fault": 32,
+    "fcsDeadlineMissCount": 1,
+    "HardwareRelease": 0,
+    "ModeRequest": 0,
+    "ModeActive": 0,
+    "ActualAppliedState": 0,
+    "PendingState": 0,
+    "clearTrip": 0,
+    "closeGiLoop": 0,
+    "closeGvLoop": 0,
+    "closeGsLoop": 0,
+    "RecordArm": 0,
+    "WaveArm": 0,
+    "RingCount": 0,
+    "WaveCount": 0,
+    "RootMethod": 0,
+    "RootMethodActive": 0,
+    "fast_summaries_available": 1,
+    "fast_substeps_available": 0,
+    "fast_integrals_available": 0,
+    "InputsValid": 1,
+    "InputFaultMask": 0,
+    "vBusRef_pu": 0.374449342,
+    "guiVbusTripLimit_Volts": 204.0,
+    "guiVbus_Volts": 2.46249962,
+    "guiVbusPM_Volts": 0.596677959,
+    "guiVbusMN_Volts": 1.8658216
+  },
+  "conditional_conversion": {
+    "configured_cpu_hz": 200000000,
+    "actual_clock_independently_verified": false,
+    "BenchCycles_us": 137.425,
+    "BodyCyclesMax_us": 144.865,
+    "WriteCycles_us": 5.745,
+    "WriteCyclesMax_us": 6.32,
+    "period_budget_cycles": 4000,
+    "nominal_write_budget_cycles": 1628,
+    "bench_to_period_budget_ratio": 6.87125,
+    "bench_to_nominal_write_budget_ratio": 16.882678132678134,
+    "nominal_write_budget_caveat": "1628 cycles to ZERO before subtracting 40 TBCLK guard margin and submission overhead"
+  },
+  "firmware_association": {
+    "local_candidate_out_sha256": "8c8251baff6b1e1938c3e6c8d531643ffd261c1e05e3c729bcfb7e42527bddd5",
+    "local_candidate_fast_c_sha256": "b8665494d2fd304f3b644c451dbf0f479b0380913f42350ab3a798260ada00a8",
+    "on_device_bytes_verified": false,
+    "benchmark_request_value_visible_in_screenshot": false,
+    "fast_path_indication": "summaries=1, integrals=0; consistent with instructed request=2; ordinary RootMethod does not select benchmark root"
+  },
+  "interpretation": {
+    "fault_32": "VIENNA_PC_PERIOD; post guard after benchmark forces OST and resets control history",
+    "deadline_miss_unique_cause": null,
+    "deadline_miss_caveat": "accumulated earlier pre-write guard; late subsequent ISR or debug halt/resume not excluded",
+    "wcet_verified": false,
+    "full_isr_measured": false,
+    "closed_loop_hardware_verified": false,
+    "gate_candidate_physically_submitted": false,
+    "hardware_release_allowed": false
+  },
+  "screenshots": [
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-73fb9d79-d9f8-42f0-9074-22273f86cbb4.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026\\ccs_status.png",
+      "sha256": "ef1f2f63e0cbb7a8a5566204dacc5c725d59c9bdb33c81719fc57ad13abbe9bb",
+      "bytes": 73156
+    },
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-b1cce6d3-d24d-4c40-8d97-63fdccf64ef6.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026\\ccs_benchmark.png",
+      "sha256": "a5aefc998cfce6bb16698b4be51f465c6aa7d9572bc84399364cfe4337b6dc16",
+      "bytes": 85905
+    }
+  ],
+  "limitations": [
+    "One fixed fixture only; no worst-case distribution.",
+    "Actual CPU frequency, OUT loading fingerprint and pause/single-step history not independently shown.",
+    "Current WriteCycles/BodyCycles describe OFF operation; do not establish normal MPC timing.",
+    "Real measured input is separate from benchmark fixture.",
+    "No firmware, PWM, ADC, CMPSS, TZ or protection parameter changes in this reporting turn."
+  ]
+}

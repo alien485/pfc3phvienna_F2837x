@@ -1,24 +1,29 @@
 {
   "scope": "source fingerprints, branch isolation, CCS metadata and watch syntax/symbols; no GUI/hardware test",
   "branch": "new_mpc",
-  "head": "1c93fcd53644baa0716826c66007696b512cb46d",
+  "head": "44f0ec5d6421aff4c48e369325d66959e44a55bd",
+  "historical_baseline_commit": "1c93fcd53644baa0716826c66007696b512cb46d",
+  "baseline_is_ancestor": true,
   "main_unchanged": true,
   "parent_changed_files": [
     ".cproject"
   ],
   "unchanged_reference_files": [
     "TI_PCMFPC_ZCDC_移植任务提示词.md",
+    "pcmfpc_zcdc/vienna_eso_dq_measured.m",
+    "pcmfpc_zcdc/configure_outerloop_features.m"
+  ],
+  "reviewed_changed_reference_files": [
     "VIENNA_PCMFPC_ZCDC.slx",
     "pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m",
-    "pcmfpc_zcdc/vienna_eso_dq_measured.m",
-    "pcmfpc_zcdc/configure_outerloop_features.m",
     "output/paper_aligned_validation/paper_aligned_delivery_20261025.json"
   ],
-  "watch_expression_count": 65,
+  "reference_compatibility_report_sha256": "da9d75abb54d9a351e670e2ca2252a1bf7658a1e56b0fcb011805098e7c0fd4b",
+  "watch_expression_count": 64,
   "watch_gui_import_tested": false,
   "compiled_artifacts": {
-    "vienna_pcmfpc_zcdc_F2837x.map": "e1240cdc5a18ac67f91f1a0a4f925f24948def5c3eb3741e1e666c5ec2d291b2",
-    "vienna_pcmfpc_zcdc_F2837x.out": "fb386048985a2865ebdd3258f7a348cf7d7f92b8f1c878bbda21b683fceb1b83"
+    "vienna_pcmfpc_zcdc_F2837x.map": "5222c7d46836f54a98f85e1c36194b0f627057c5cfe8b70bd247bc964a02ebaf",
+    "vienna_pcmfpc_zcdc_F2837x.out": "52971695495f326d60d936a80f57aee79c52750c4e84dae0016b364f3a780b2b"
   },
   "reference_hashes": {
     "TI_PCMFPC_ZCDC_移植任务提示词.md": "c68910eac2b47a97602089d7b8fb742b87e619d48ff0200a3d617d0292517417",
@@ -27,6 +32,14 @@
     "pcmfpc_zcdc/vienna_eso_dq_measured.m": "e35d80c3078c3d2cbf7b796da3d7d513b214b4d18412277574439c4e6883a84a",
     "pcmfpc_zcdc/configure_outerloop_features.m": "8482a368cab3470a9738bb0eaa0094ae289d428ee611fcb97e2432d2c7220c2c",
     "output/paper_aligned_validation/paper_aligned_delivery_20261025.json": "26be0f4fea9f5730de0f68573a9f2f1b3135cbc154217d165df3e2d4acb35502"
+  },
+  "current_reference_hashes": {
+    "TI_PCMFPC_ZCDC_移植任务提示词.md": "c68910eac2b47a97602089d7b8fb742b87e619d48ff0200a3d617d0292517417",
+    "VIENNA_PCMFPC_ZCDC.slx": "382680964ffceb3bd6deba359b8a475654ea8a97bcac83871d6b8e19308a869d",
+    "pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m": "6be3a96d7bbb3c6251303ada29a17ff6fee396b1ff7fc0831579461d11005fea",
+    "pcmfpc_zcdc/vienna_eso_dq_measured.m": "e35d80c3078c3d2cbf7b796da3d7d513b214b4d18412277574439c4e6883a84a",
+    "pcmfpc_zcdc/configure_outerloop_features.m": "8482a368cab3470a9738bb0eaa0094ae289d428ee611fcb97e2432d2c7220c2c",
+    "output/paper_aligned_validation/paper_aligned_delivery_20261025.json": "7001e2a4cd9b29a53edf661f58f96bd0436abcb4f4d5ab931f6db5bc1462f696"
   },
   "checks": "PASS"
 }

@@ -14,8 +14,10 @@ VIENNA_pcmMeasuredDQ_A
 VIENNA_pcmReferenceSaturation
 VIENNA_pcmOutputSource
 VIENNA_pcmOutputDetailValid
+VIENNA_pcmOutputIntegralValid
 PC_fast_output_substeps_available
 PC_fast_output_summaries_available
+PC_fast_output_integrals_available
 VIENNA_pcmFault
 VIENNA_pcmCoreStatus
 VIENNA_vBusRef_pu
@@ -60,6 +62,3 @@ VIENNA_pcmWaveArm
 VIENNA_pcmWaveCount
 VIENNA_pcmRecords
 VIENNA_pcmWave
-*(volatile unsigned int *)0x4093
-*(volatile unsigned int *)0x4193
-*(volatile unsigned int *)0x4293

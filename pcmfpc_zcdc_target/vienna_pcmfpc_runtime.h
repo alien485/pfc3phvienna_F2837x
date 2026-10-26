@@ -30,6 +30,8 @@ extern volatile float VIENNA_pcmMeasuredDQ_A[2];
 /* Output source: 0 unavailable this tick, 1 control, 2 shadow, 3 numeric bench.
  * DetailValid=0 means PC_Output interval substeps must not be interpreted. */
 extern volatile uint16_t VIENNA_pcmOutputSource,VIENNA_pcmOutputDetailValid;
+/* 0 means interval u_integral fields are placeholders, not physical zeros. */
+extern volatile uint16_t VIENNA_pcmOutputIntegralValid;
 /* One-shot numeric benchmark, no ADC substitution or gate submission.
  * Request 1=reference32, 2=fast; status 0=idle,1=OK,2=unsafe,3=bad request,4=core error. */
 extern volatile uint16_t VIENNA_pcmBenchRequest,VIENNA_pcmBenchStatus;

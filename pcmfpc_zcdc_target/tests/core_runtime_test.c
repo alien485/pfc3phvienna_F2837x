@@ -70,6 +70,7 @@ static void benchmark_checks(void)
         count=VIENNA_pcmBenchCount;VIENNA_pcmBenchRequest=root;post();
         req(VIENNA_pcmBenchStatus==1U && !VIENNA_pcmBenchRequest && VIENNA_pcmBenchCount==count+1U,"safe all-OFF benchmark one numeric run");
         req(VIENNA_pcmOutputSource==3U && VIENNA_pcmOutputDetailValid==(root==1U),"benchmark source and reference/fast detail flags");
+        req(VIENNA_pcmOutputIntegralValid==(root==1U),"benchmark distinguishes unavailable fast pole integral");
         req(VIENNA_pcmBenchSelectedId>=1U && VIENNA_pcmBenchSelectedId<=8U && VIENNA_pcmBenchHWState==PC_id_to_hw(VIENNA_pcmBenchSelectedId),"benchmark diagnostics hold valid numerical gate only");
         req(!VIENNA_pcmActualAppliedState && !VIENNA_pcmPendingState && VIENNA_pcmTick==tick,"benchmark does not submit gate or advance sample");
         req(!memcmp(&before,&VIENNA_pcmInput,sizeof(before)) && !memcmp(&grid,&VIENNA_pcmGrid,sizeof(grid)) &&
@@ -114,7 +115,7 @@ static void benchmark_checks(void)
     req(!VIENNA_pcmRecords[3].selected_id && !VIENNA_pcmRecords[3].pred_dq_A[0],"invalid selected ID never indexes outside candidate array");
     VIENNA_pcmRecordArm=0U;
     VIENNA_PCMFPC_sample(EPWM_TZ_FLAG_OST);
-    req(!VIENNA_pcmOutputSource && !VIENNA_pcmOutputDetailValid,"next sample invalidates output provenance and detail availability");
+    req(!VIENNA_pcmOutputSource && !VIENNA_pcmOutputDetailValid && !VIENNA_pcmOutputIntegralValid,"next sample invalidates output provenance and detail availability");
 }
 static void diagnostic_checks(void)
 {
@@ -185,6 +186,7 @@ int main(void)
     req(!VIENNA_pcmInput.zcdc_enable && VIENNA_pcmInput.terminal_enable,"terminal OFF mode preserves explicit core contract");
     req(VIENNA_pcmAlgorithmCycles>0U && VIENNA_pcmAlgorithmCyclesMax>=VIENNA_pcmAlgorithmCycles,"algorithm counter records stub elapsed ticks");
     req(VIENNA_pcmOutputSource==1U && VIENNA_pcmOutputDetailValid,"reference dispatch marks real control and full substeps");
+    req(VIENNA_pcmOutputIntegralValid,"reference control integral is valid");
     VIENNA_pcmRecordArm=1U;VIENNA_pcmRingCount=0U;
     VIENNA_pcmInput.id_ref_A=1.25f;VIENNA_pcmInput.iq_ref_A=-.25f;
     VIENNA_pcmIdRef_A=2.5f;VIENNA_pcmIqRef_A=.5f;
@@ -211,7 +213,9 @@ int main(void)
     req((VIENNA_pcmFault&VIENNA_PC_PERIOD) && trip_calls==3U,"injected body period overrun trips all three phases");
     req(VIENNA_pcmBodyCycles>VIENNA_CPU_SYS_CLOCK_FREQ_HZ*VIENNA_FCS_TS_SEC,"body overrun uses configured period budget");
     VIENNA_pcmFault=0U;VIENNA_pcmHardwareRelease=0U;trip_calls=0U;
+    VIENNA_pcmOutputIntegralValid=VIENNA_pcmOutputDetailValid=1U;
     req(VIENNA_PCMFPC_select()==0U && (VIENNA_pcmFault&VIENNA_PC_OBSERVER) && trip_calls==3U,"release revoked blocks select with OFF trip");
+    req(!VIENNA_pcmOutputIntegralValid && !VIENNA_pcmOutputDetailValid,"failed select invalidates stale integral and detail flags");
     VIENNA_pcmHardwareRelease=1U;VIENNA_pcmModeRequest=VIENNA_PC_TERMINAL_ON;
     VIENNA_pcmRootMethod=PC_ROOT_PIECEWISE;
     theta+=6.28318530718f*50.0f*20e-6f;measurement(theta);VIENNA_PCMFPC_sample(4U);
@@ -231,6 +235,7 @@ int main(void)
     selected=VIENNA_PCMFPC_select();
     req(VIENNA_pcmCoreStatus==PC_OK && selected==VIENNA_pcmOutput.hw_state && !VIENNA_pcmFault,"integrated fast dispatch succeeds");
     req(VIENNA_pcmOutputSource==1U && !VIENNA_pcmOutputDetailValid && PC_fast_output_summaries_available,"fast dispatch marks summary-only output");
+    req(!VIENNA_pcmOutputIntegralValid && !PC_fast_output_integrals_available,"fast control integral is invalid placeholder");
     req(VIENNA_pcmOutput.first_interval.substep[0].root_iterations==PC_FAST_SUBSTEP_UNAVAILABLE,"fast dispatch does not mislabel old substeps valid");
     VIENNA_PCMFPC_submitted(selected,100U);
     theta+=6.28318530718f*50.0f*20e-6f;measurement(theta);VIENNA_PCMFPC_sample(0U);

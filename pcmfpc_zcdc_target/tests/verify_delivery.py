@@ -28,9 +28,25 @@ manifest = json.loads((EVIDENCE / "baseline_manifest.json").read_text(encoding="
 parent_changed = [name for name, digest in manifest["files"].items() if sha(REPO / name) != digest]
 assert parent_changed == [".cproject"], parent_changed
 reference_changed = [name for name, digest in manifest["references"].items() if sha(ROOT / name) != digest]
-assert not reference_changed, reference_changed
+compatibility = None
+compatibility_path = EVIDENCE / "rt_optimization/reference_compatibility/REPORT.json"
+if reference_changed:
+    # Never overwrite the historical pin or silently adopt a changed model.
+    # A separately executed comparison may establish a reviewed source-only
+    # compatibility repair; all other drift still fails verification.
+    assert compatibility_path.is_file(), reference_changed
+    compatibility = json.loads(compatibility_path.read_text(encoding="utf-8-sig"))
+    assert compatibility["status"] == "PASS"
+    assert compatibility["control_source_outside_diagnostics_identical"] is True
+    assert compatibility["matlab_all_outputs_identical"] is True
+    assert compatibility["historical_controller_sha256"] == manifest["references"]["pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m"]
+    reviewed = compatibility["approved_reference_hashes"]
+    assert set(reference_changed) == set(reviewed), reference_changed
+    for name in reference_changed:
+        assert sha(ROOT / name) == reviewed[name], name
 assert git("branch", "--show-current") == "new_mpc"
-assert git("rev-parse", "HEAD") == manifest["commit"]
+assert subprocess.run(["git", "-C", str(REPO), "merge-base", "--is-ancestor",
+                       manifest["commit"], "HEAD"], capture_output=True).returncode == 0
 assert git("rev-parse", "main") == manifest["commit"]
 assert ET.parse(TARGET / ".project").findtext("name") == "vienna_pcmfpc_zcdc_F2837x"
 assert "28379D" in ET.parse(TARGET / ".ccsproject").find("deviceVariant").get("value")
@@ -54,10 +70,10 @@ assert len(expressions) == len(set(expressions))
 map_path = TARGET / "FLASH/vienna_pcmfpc_zcdc_F2837x.map"
 map_text = map_path.read_text(encoding="utf-8-sig")
 for expression in expressions:
-    if expression.startswith("*"):
-        assert re.fullmatch(r'\*\(volatile unsigned int \*\)0x(4093|4193|4293)', expression)
-    else:
-        assert re.search(r"\b" + re.escape(expression) + r"\b", map_text), expression
+    # Keep the portable watch list to symbols. Raw register casts are viewed
+    # in Memory Browser because this CCS evaluator rejected their C syntax.
+    assert re.fullmatch(r"[A-Za-z_]\w*", expression), expression
+    assert re.search(r"\b" + re.escape(expression) + r"\b", map_text), expression
 for function in ("PC_run_fast", "PC_run", "VO_reconstruct", "VG_run", "VIENNA_PCMFPC_post"):
     assert re.search(r"\b" + function + r"\b", map_text), function
 assert not subprocess.run(["git", "-C", str(REPO), "diff", "--check"], capture_output=True).returncode
@@ -68,11 +84,15 @@ for relative in ("FLASH/vienna_pcmfpc_zcdc_F2837x.out", "tests/core_runtime_test
 report = {
     "scope": "source fingerprints, branch isolation, CCS metadata and watch syntax/symbols; no GUI/hardware test",
     "branch": git("branch", "--show-current"), "head": git("rev-parse", "HEAD"),
+    "historical_baseline_commit": manifest["commit"], "baseline_is_ancestor": True,
     "main_unchanged": True, "parent_changed_files": parent_changed,
-    "unchanged_reference_files": list(manifest["references"]),
+    "unchanged_reference_files": [name for name in manifest["references"] if name not in reference_changed],
+    "reviewed_changed_reference_files": reference_changed,
+    "reference_compatibility_report_sha256": sha(compatibility_path) if compatibility is not None else None,
     "watch_expression_count": len(expressions), "watch_gui_import_tested": False,
     "compiled_artifacts": {p.name: sha(p) for p in (map_path, map_path.with_suffix(".out"))},
     "reference_hashes": manifest["references"],
+    "current_reference_hashes": {name: sha(ROOT / name) for name in manifest["references"]},
     "checks": "PASS",
 }
 (EVIDENCE / "delivery_checks.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

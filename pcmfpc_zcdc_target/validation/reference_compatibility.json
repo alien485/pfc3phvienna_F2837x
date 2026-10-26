@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "historical_controller_sha256": "a77ea4dea3267d82d444efbf4a7437a39e15b7c48928931f40d6476e67503f4a",
+  "historical_controller": "D:\\GraduateStudentProject\\Vienna_Rectifier\\tmp\\algorithm_diag_assignment_fix\\a2e13a284c8b45b2b0f97249d1c07bb3_before.m",
+  "control_source_outside_diagnostics_identical": true,
+  "diagnostic_change_scope": "Only text after final diagOut assignment and before first zcdcDiag assignment; assertions preserved.",
+  "outside_control_text_sha256": "d25db10ffea4e59f4b32304ddc9301ad995071891b24743fdf37483240027c40",
+  "current_reference_hashes": {
+    "pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m": "6be3a96d7bbb3c6251303ada29a17ff6fee396b1ff7fc0831579461d11005fea",
+    "VIENNA_PCMFPC_ZCDC.slx": "382680964ffceb3bd6deba359b8a475654ea8a97bcac83871d6b8e19308a869d",
+    "output/paper_aligned_validation/paper_aligned_delivery_20261025.json": "7001e2a4cd9b29a53edf661f58f96bd0436abcb4f4d5ab931f6db5bc1462f696"
+  },
+  "slx_embedded_controller": [
+    {
+      "member": "simulink/stateflow/chart_38.xml",
+      "script_matches_current_m": true,
+      "normalized_script_sha256": "6be3a96d7bbb3c6251303ada29a17ff6fee396b1ff7fc0831579461d11005fea"
+    }
+  ],
+  "model_rerun": false,
+  "oracle_input_sha256": "a5dc58fcd1baa87b8d01b9986016166d8199b824ddc5b407e001748daf6e3146",
+  "authority_files_modified_by_check": false,
+  "adapter_paths": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\tests\\observer_build\\reference_compatibility",
+  "scope": "Controller pure-function compatibility; model wiring, InitFcn and formal performance not rerun.",
+  "matlab_all_outputs_identical": true,
+  "approved_reference_hashes": {
+    "pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m": "6be3a96d7bbb3c6251303ada29a17ff6fee396b1ff7fc0831579461d11005fea",
+    "VIENNA_PCMFPC_ZCDC.slx": "382680964ffceb3bd6deba359b8a475654ea8a97bcac83871d6b8e19308a869d",
+    "output/paper_aligned_validation/paper_aligned_delivery_20261025.json": "7001e2a4cd9b29a53edf661f58f96bd0436abcb4f4d5ab931f6db5bc1462f696"
+  },
+  "matlab": {
+    "status": "PASS",
+    "mode7_oracle_cases": 1017,
+    "all_modes_random_cases": 336,
+    "all_modes_random_counts": [
+      42,
+      42,
+      42,
+      42,
+      42,
+      42,
+      42,
+      42
+    ],
+    "total_old_new_cases": 1353,
+    "equal_duration_adapter_vs_unmodified_original_cases": 751,
+    "maximum_absolute_difference_per_output": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "matlab_all_outputs_identical": true,
+    "model_rerun": false,
+    "matlab_version": "23.2.0.2365128 (R2023b)",
+    "scope": "Direct pure-function evaluation of old/new original six outputs and explicit first/candidate duration copies. No SLX simulation."
+  }
+}

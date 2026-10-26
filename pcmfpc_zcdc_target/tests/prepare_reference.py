@@ -1,12 +1,18 @@
 """Instrument a COPY of the pinned MATLAB reference; never edit the reference."""
 from pathlib import Path
+import argparse
 import hashlib
 
 ROOT = Path(__file__).resolve().parents[5]
 TESTS = Path(__file__).resolve().parent
-source = ROOT / 'pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m'
+parser = argparse.ArgumentParser(description='Instrument an explicitly pinned MATLAB source copy; never changes the authority or oracle numeric files.')
+parser.add_argument('--source', type=Path, default=ROOT / 'pcmfpc_zcdc/vienna_pcmfpc_zcdc_complete.m')
+parser.add_argument('--expected-sha', default='a77ea4dea3267d82d444efbf4a7437a39e15b7c48928931f40d6476e67503f4a')
+args = parser.parse_args()
+source = args.source.resolve()
 text = source.read_text(encoding='utf-8')
-assert hashlib.sha256(source.read_bytes()).hexdigest() == 'a77ea4dea3267d82d444efbf4a7437a39e15b7c48928931f40d6476e67503f4a'
+actual_sha = hashlib.sha256(source.read_bytes()).hexdigest()
+assert actual_sha == args.expected_sha.lower(), ('Pinned MATLAB reference hash mismatch', str(source), actual_sha, args.expected_sha)
 text = text.replace('diagOut,algorithmDiag,zcdcDiag] =', 'diagOut,algorithmDiag,zcdcDiag,audit] =', 1)
 text = text.replace('vienna_pcmfpc_zcdc_complete(', 'ti_mode7_reference(', 1)
 text = text.replace('Ts=p(1);L=p(2);Vdc=Uup+Ulow;', '''Ts=p(1);L=p(2);Vdc=Uup+Ulow;

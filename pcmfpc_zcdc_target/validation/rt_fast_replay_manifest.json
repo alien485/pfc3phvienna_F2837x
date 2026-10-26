@@ -1,0 +1,346 @@
+{
+  "date": "2026-10-25",
+  "compiler": "D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe",
+  "flags": "-std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS",
+  "build_command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\tests\\observer_build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\tests\\observer_build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\tests\\ti_fast_replay.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x\\pcmfpc_zcdc_target\\tests\\observer_build\\ti_fast_replay.exe\"",
+  "run_exit_code": 0,
+  "elapsed_s": 0.742276499979198,
+  "dataset": {
+    "source_families": {
+      "oracle": "All 1017 original numeric input rows; theta alone wrapped in double before float32 casting. Original data untouched.",
+      "TI_derived": "Every 12th enabled record from all nine independent closed-loop CSVs; currents/caps/PLL/Fhat/gate/ref reused. Grid voltage reconstructed from ideal 100V line RMS grid and assumed RC phase, because the CSV does not contain eabc. These are same-input replay stimuli, not exact captured ISR input records."
+    },
+    "base_cases": 25028,
+    "labels": {
+      "oracle_bounded_published_trajectory": 500,
+      "oracle_bounded_published_terminal_change": 1,
+      "oracle_bounded_synthetic_boundary": 500,
+      "oracle_bounded_flat_blocking": 16,
+      "ti_derived_old_fcs_100ohm": 1059,
+      "ti_derived_old_fcs_50ohm": 1059,
+      "ti_derived_old_fcs_50ohm_sensitivity": 1059,
+      "ti_derived_pc_off_100ohm": 1059,
+      "ti_derived_pc_off_50ohm": 1059,
+      "ti_derived_pc_off_50ohm_sensitivity": 1059,
+      "ti_derived_pc_on_100ohm": 1059,
+      "ti_derived_pc_on_50ohm": 1059,
+      "ti_derived_pc_on_50ohm_sensitivity": 1059,
+      "random_bounded_physical": 12000,
+      "structured_flat_and_blocking": 1728,
+      "structured_phase_zero_and_np": 720,
+      "structured_exact_ties": 32
+    },
+    "random_seed": 20261025,
+    "production_delta_i_A": 0.02,
+    "directed_budget_boundaries": "C harness adds one float ULP below/exact/above second-ranked current norm gap for every 11th valid base row. These altered delta budgets are test cases only; target parameter is not changed."
+  },
+  "source_sha256": {
+    "vienna_pcmfpc_zcdc.c": "f3f45344c2007f893061c4c1e67e3480d511da9331b624b18d1911c59bdda5a7",
+    "vienna_pcmfpc_fast.c": "b8665494d2fd304f3b644c451dbf0f479b0380913f42350ab3a798260ada00a8",
+    "tests/ti_fast_replay.c": "b85df1aa48b80ffac88383e022cc214b7e50253997e57709caf66f078b0ff52c",
+    "vienna_pcmfpc_zcdc.h": "ff443ef09c702b7b7d3839f2ec30da089980592aaea828fcaf34be8bc0a95733",
+    "vienna_pcmfpc_fast.h": "48883450ae050465d2ff221779983b150ede48bb734337cb084e4c5fe466fb7f",
+    "tests/ti_run_fast_replay.py": "3a5b6bea3e91a9d96ac3b8889b8fff98cc3d9108d6ec34705bc46685320fb862"
+  },
+  "input_sha256": "d198287e3276f99b4c40b2a05369c72f29b6bd167d2a6b541c0359a3a0e8c55c",
+  "reference": "Original readable PC_run, float32, PC_ROOT_PIECEWISE, diagnostic_all_angles=1",
+  "comparison": "Fast path receives identical cfg/input. Baseline bisection32 differences are reported separately.",
+  "scope": "Host arithmetic/compiler regression only; not DSP TMU numeric equivalence, runtime proof, hardware loop validation or exhaustive mathematical equivalence.",
+  "results": {
+    "cases": 31750,
+    "valid": 31739,
+    "invalid": 11,
+    "status_difference": 0,
+    "selected_difference": 0,
+    "pcoff_difference": 0,
+    "active_difference": 0,
+    "rank_i_difference": 0,
+    "rank_u_difference": 0,
+    "set_difference": 0,
+    "discrete_diagnostic_difference": 0,
+    "blocked_difference": 0,
+    "interval_integral_numeric_difference_rows": 0,
+    "max_gi_error_A2": 0,
+    "max_gu_error_V2": 0,
+    "max_gz_error_rad2": 0,
+    "max_dq_error_A": 0,
+    "max_np_error_V": 0,
+    "max_interval_integral_error_V_s": 0,
+    "max_zcdc_diag_numeric_error": 0,
+    "bisection32_vs_piecewise_reference": {
+      "status_difference": 0,
+      "selected_difference": 2198,
+      "pcoff_difference": 2195,
+      "active_difference": 70
+    },
+    "full_interval": {
+      "calls": 46675,
+      "status_difference": 0,
+      "numeric_difference_rows": 0,
+      "discrete_difference_rows": 0,
+      "max_numeric_error_mixed_SI": 0
+    },
+    "summary_interval": {
+      "calls": 46675,
+      "status_difference": 0,
+      "numeric_difference_rows": 0,
+      "discrete_difference_rows": 0
+    },
+    "control_interval": {
+      "calls": 46675,
+      "status_difference": 0,
+      "numeric_difference_rows": 0,
+      "discrete_difference_rows": 0,
+      "integral_unavailable_errors": 0
+    },
+    "availability_flag_errors": 0,
+    "unavailable_marker_errors": 0,
+    "max_budget_limit_error_A": 0,
+    "max_voltage_margin_error_V": 0,
+    "extreme_derived_numeric_guard": {
+      "readable_reference_status": 0,
+      "fast_status": 6,
+      "guard_failure": 0,
+      "reference_margin_finite": 0
+    },
+    "fast_unsafe_error_outputs": 0,
+    "fast_terminal_gate_events": 10,
+    "reference_terminal_gate_events": 10
+  },
+  "results_by_label": {
+    "oracle_bounded_published_trajectory": {
+      "rows": 500,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 0,
+      "bisection_pcoff_diff": 0,
+      "bisection_active_diff": 0
+    },
+    "budget_boundary_above": {
+      "rows": 2275,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 432,
+      "bisection_pcoff_diff": 431,
+      "bisection_active_diff": 24
+    },
+    "budget_boundary_exact": {
+      "rows": 2275,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 434,
+      "bisection_pcoff_diff": 433,
+      "bisection_active_diff": 24
+    },
+    "budget_boundary_below": {
+      "rows": 2161,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 383,
+      "bisection_pcoff_diff": 382,
+      "bisection_active_diff": 21
+    },
+    "oracle_bounded_published_terminal_change": {
+      "rows": 1,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 0,
+      "bisection_pcoff_diff": 0,
+      "bisection_active_diff": 0
+    },
+    "oracle_bounded_synthetic_boundary": {
+      "rows": 500,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 0,
+      "bisection_pcoff_diff": 0,
+      "bisection_active_diff": 0
+    },
+    "oracle_bounded_flat_blocking": {
+      "rows": 16,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 12,
+      "bisection_pcoff_diff": 14,
+      "bisection_active_diff": 1
+    },
+    "ti_derived_old_fcs_100ohm": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 19,
+      "bisection_pcoff_diff": 19,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_old_fcs_50ohm": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 24,
+      "bisection_pcoff_diff": 24,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_old_fcs_50ohm_sensitivity": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 20,
+      "bisection_pcoff_diff": 20,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_pc_off_100ohm": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 42,
+      "bisection_pcoff_diff": 42,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_pc_off_50ohm": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 24,
+      "bisection_pcoff_diff": 24,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_pc_off_50ohm_sensitivity": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 22,
+      "bisection_pcoff_diff": 22,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_pc_on_100ohm": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 31,
+      "bisection_pcoff_diff": 31,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_pc_on_50ohm": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 21,
+      "bisection_pcoff_diff": 21,
+      "bisection_active_diff": 0
+    },
+    "ti_derived_pc_on_50ohm_sensitivity": {
+      "rows": 1059,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 18,
+      "bisection_pcoff_diff": 18,
+      "bisection_active_diff": 0
+    },
+    "random_bounded_physical": {
+      "rows": 12000,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 5,
+      "bisection_pcoff_diff": 3,
+      "bisection_active_diff": 0
+    },
+    "structured_flat_and_blocking": {
+      "rows": 1728,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 668,
+      "bisection_pcoff_diff": 668,
+      "bisection_active_diff": 0
+    },
+    "structured_phase_zero_and_np": {
+      "rows": 720,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 15,
+      "bisection_pcoff_diff": 15,
+      "bisection_active_diff": 0
+    },
+    "structured_exact_ties": {
+      "rows": 32,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 28,
+      "bisection_pcoff_diff": 28,
+      "bisection_active_diff": 0
+    },
+    "invalid_input": {
+      "rows": 8,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 0,
+      "bisection_pcoff_diff": 0,
+      "bisection_active_diff": 0
+    },
+    "invalid_config_L": {
+      "rows": 1,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 0,
+      "bisection_pcoff_diff": 0,
+      "bisection_active_diff": 0
+    },
+    "invalid_config_C": {
+      "rows": 1,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 0,
+      "bisection_pcoff_diff": 0,
+      "bisection_active_diff": 0
+    },
+    "invalid_config_budget": {
+      "rows": 1,
+      "fast_selected_diff": 0,
+      "fast_pcoff_diff": 0,
+      "bisection_selected_diff": 0,
+      "bisection_pcoff_diff": 0,
+      "bisection_active_diff": 0
+    }
+  },
+  "published_terminal_change_rows": [
+    {
+      "serial": "552",
+      "label": "oracle_bounded_published_terminal_change",
+      "input_row": "435",
+      "reference_status": "0",
+      "fast_status": "0",
+      "reference_selected": "2",
+      "fast_selected": "2",
+      "reference_pcoff": "5",
+      "fast_pcoff": "5",
+      "reference_active": "1",
+      "fast_active": "1",
+      "reference_mask": "18",
+      "fast_mask": "18",
+      "max_gi_error_A2": "0",
+      "max_gu_error_V2": "0",
+      "max_gz_error_rad2": "0",
+      "max_dq_error_A": "0",
+      "max_np_error_V": "0",
+      "bisection_status": "0",
+      "bisection_selected": "2",
+      "bisection_pcoff": "5",
+      "bisection_active": "1"
+    }
+  ],
+  "published_terminal_change_5_to_2_preserved": true,
+  "committed_fast_control_regression": {
+    "commit": "44f0ec5",
+    "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\baseline_44f0ec5\\replay_outputs.csv",
+    "old_rows": 31750,
+    "new_rows": 31750,
+    "differing_rows": [],
+    "all_common_control_results_identical": true,
+    "scope": "Control replay CSV only. Removed fast-run integrals are unavailable diagnostics, not zero physical values."
+  },
+  "difference_triage": {
+    "directed_budget_boundary_rows": 0,
+    "reference_cost_gap_within_numeric_gi_error_rows": 0,
+    "other_rows_require_review": 0,
+    "meaning": "Triage only. No difference row is silently removed or declared semantically safe."
+  }
+}

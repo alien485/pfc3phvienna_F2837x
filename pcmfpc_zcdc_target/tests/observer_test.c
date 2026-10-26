@@ -5,6 +5,32 @@
 #include <string.h>
 
 static double maxd(double a,double b){return a>b?a:b;}
+/* Use the unchanged readable interval predictor for the complete executed
+ * gate history. The optimized observer must retain projected pole data; a
+ * CONTROL_ONLY zero placeholder would fail this nonzero-integral check. */
+static void reference_segments(const PC_Config *cfg,const VO_ReconstructInput *in,float deltaU[2],float endpoint[2])
+{
+    PC_Real dq[2]={in->idq_start_A[0],in->idq_start_A[1]};
+    PC_Real f[2]={in->fhat_A_s[0],in->fhat_A_s[1]};
+    PC_Real up=in->up_V,low=in->low_V,dc=up+low,theta=in->theta_start_rad;
+    const float duration[2]={in->duration_before_sec,in->duration_after_sec};
+    const uint16_t gate[2]={in->gate_before_hw,in->gate_after_hw};
+    PC_Interval interval;unsigned segment,k,step;float pole[3],integral[2],dt;
+    deltaU[0]=deltaU[1]=0.0f;
+    for(segment=0;segment<2;segment++){
+        assert(PC_predict_interval(cfg,dq,up,low,gate[segment],theta,in->omega_rad_s,f,duration[segment],&interval)==PC_OK);
+        dt=duration[segment]*0.5f;
+        for(step=0;step<2;step++){
+            for(k=0;k<3;k++)pole[k]=interval.substep[step].pole_abc_V[k];
+            VO_integrate_pole_segment(pole,(float)theta+(float)step*in->omega_rad_s*dt,in->omega_rad_s,dt,integral);
+            for(k=0;k<2;k++)deltaU[k]+=integral[k];
+        }
+        dq[0]=interval.idq_A[0];dq[1]=interval.idq_A[1];
+        theta+=in->omega_rad_s*duration[segment];
+        up=(dc-interval.np_V)*0.5f;low=(dc+interval.np_V)*0.5f;
+    }
+    endpoint[0]=dq[0];endpoint[1]=dq[1];
+}
 int main(void)
 {
     VO_Config c;VO_State s;PC_Config pc;
@@ -14,7 +40,7 @@ int main(void)
     double ih[2],fh[2],cum[2]={0.0,0.0},previous[2]={0.0,0.0};
     double rho,ki,kf,prior,innovation,maxI=0.0,maxF=0.0,delta,angle;
     double numerical[2]={0.0,0.0},alpha,beta,dt;
-    unsigned k,j;uint16_t hw,method;
+    unsigned k,j,nonzeroIntegral=0;uint16_t hw,method;float expectedDelta[2],expectedEnd[2];
     assert(VO_configure(&c,20e-6f,0.003f,3141.592653589793f));VO_reset(&s);
     rho=exp(-(double)c.omega_eso_rad_s*(double)c.sample_sec);
     ki=1.0-rho*rho;kf=(1.0-rho)*(1.0-rho)/(double)c.sample_sec;
@@ -75,6 +101,12 @@ int main(void)
             in.gate_before_hw=hw;in.gate_after_hw=(uint16_t)(7-hw);
             assert(VO_reconstruct(&pc,&in,&out));assert(out.valid && out.source==VO_SOURCE_MODEL_RECONSTRUCTED);
             assert(out.duration_sec==20e-6f);
+            reference_segments(&pc,&in,expectedDelta,expectedEnd);
+            for(j=0;j<2;j++){
+                assert(out.delta_u_dq_V_s[j]==expectedDelta[j]);
+                assert(out.model_end_idq_A[j]==expectedEnd[j]);
+            }
+            if(fabsf(expectedDelta[0])+fabsf(expectedDelta[1])>1e-7f)nonzeroIntegral++;
         }
         in.idq_start_A[0]=0.0f;in.fhat_A_s[0]=0.0f;
         in.gate_before_hw=in.gate_after_hw=0;
@@ -84,5 +116,7 @@ int main(void)
         in.duration_before_sec=-1.0f;assert(!VO_reconstruct(&pc,&in,&out));assert(!out.valid);
     }
     printf("two_executed_gate_segments_all_states_zero_blocking_sequence_reset_both_roots=PASS\n");
+    assert(nonzeroIntegral>0);
+    printf("full_executed_history_vs_unchanged_readable_predictor=PASS nonzero_integral_cases=%u\n",nonzeroIntegral);
     return 0;
 }

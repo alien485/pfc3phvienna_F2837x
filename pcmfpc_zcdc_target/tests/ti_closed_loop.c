@@ -5,6 +5,7 @@
  * 3 reversible100->50->100ohm at0.30/0.45s (simulation only).
  */
 #include "../vienna_pcmfpc_zcdc.h"
+#include "../vienna_pcmfpc_fast.h"
 #include "../vienna_pcmfpc_observer.h"
 #include "../vienna_grid_sync.h"
 #include <math.h>
@@ -14,9 +15,20 @@
 #include <string.h>
 
 typedef float float32_t;
+/* Offline timing hypotheses only. These macros do not alter the DSP target,
+ * SysConfig, PWM/ADC registers, protection thresholds or interrupt guard. */
+#ifndef SIM_CONTROL_STEP_SEC
+#define SIM_CONTROL_STEP_SEC 0.000020
+#endif
+#ifndef SIM_SAMPLE_OFFSET_SEC
+#define SIM_SAMPLE_OFFSET_SEC (SIM_CONTROL_STEP_SEC*0.5)
+#endif
+#ifndef SIM_ISR_OFFSET_SEC
+#define SIM_ISR_OFFSET_SEC (SIM_SAMPLE_OFFSET_SEC+0.000002)
+#endif
 #define VIENNA_FCS_SIGN_EPS_PU 0.005f
-#define VIENNA_FCS_TS_SEC 0.000020f
-#define VIENNA_FCS_DELAY_SEC 0.000010f
+#define VIENNA_FCS_TS_SEC ((float)SIM_CONTROL_STEP_SEC)
+#define VIENNA_FCS_DELAY_SEC ((float)(SIM_CONTROL_STEP_SEC-SIM_SAMPLE_OFFSET_SEC))
 #define VIENNA_FCS_R_OHM 0.2f
 #define VIENNA_PFC_INDUCTOR_VALUE 0.003f
 #define VIENNA_V_MAX_SENSE_VOLTS 454.0f
@@ -27,13 +39,23 @@ typedef float float32_t;
 #include "../vienna_fcs_mpc.h"
 
 #define PI 3.14159265358979323846
+/* Default preserves the original readable bisection32 simulation. The
+ * explicit compile-time option exercises the actual optimized controller. */
+#ifndef TI_CLOSED_LOOP_FAST
+#define TI_CLOSED_LOOP_FAST 0
+#endif
 #ifndef SIM_PLANT_STEP_SEC
 #define SIM_PLANT_STEP_SEC 0.0000005
 #endif
 #define DT SIM_PLANT_STEP_SEC
-#define TS 0.000020
+#define TS SIM_CONTROL_STEP_SEC
+#define SAMPLE_OFFSET SIM_SAMPLE_OFFSET_SEC
+#define ISR_OFFSET SIM_ISR_OFFSET_SEC
+#define ADC_ACQ_END_BASE (8.24e-6+(SAMPLE_OFFSET-10e-6))
+#define INSTRUMENT_PERIOD 0.000100
+#define INSTRUMENT_TICKS ((unsigned)(INSTRUMENT_PERIOD/DT+0.5))
 #define CONTROL_TICKS ((unsigned)(TS/DT+0.5))
-#define ISR_TICK ((unsigned)(12e-6/DT+0.5)-1U)
+#define ISR_TICK ((unsigned)(ISR_OFFSET/DT+0.5)-1U)
 #define DURATION 0.8
 #define STEADY_BEGIN 0.6
 #define STEPS ((unsigned)(DURATION/DT+0.5))
@@ -127,9 +149,9 @@ static void adc_sample(const Plant *p,double now,double cycle_start,unsigned noi
         si=0.0;sv=0.0;
         for(tap=0;tap<4;tap++){
             /* 100ns acquisition end, 210ns nominal conversion; held samples.
-             * Nominal common timestamp remains 10us, matching the port. */
-            tI=cycle_start+8.24e-6+(double)(phase+3U*tap)*0.31e-6+actual_shift;
-            tV=cycle_start+8.24e-6+(double)vslot[phase][tap]*0.31e-6+actual_shift;
+             * All original SOC positions shift by sampleOffset-10us. */
+            tI=cycle_start+ADC_ACQ_END_BASE+(double)(phase+3U*tap)*0.31e-6+actual_shift;
+            tV=cycle_start+ADC_ACQ_END_BASE+(double)vslot[phase][tap]*0.31e-6+actual_shift;
             x=at_history(p,phase,now,tI)+(noisy?0.010*uniform_noise():0.0);
             si+=nearbyint(x/(12.0/2048.0))*(12.0/2048.0);
             x=at_history(p,phase+3U,now,tV)+(noisy?0.10*uniform_noise():0.0);
@@ -138,7 +160,7 @@ static void adc_sample(const Plant *p,double now,double cycle_start,unsigned noi
         current[phase]=(float)(si*0.25);voltage[phase]=(float)(sv*0.25);
     }
     for(phase=0;phase<2;phase++)for(tap=0;tap<4;tap++){
-        tV=cycle_start+8.24e-6+(double)(phase+2U*tap)*0.31e-6+actual_shift;
+        tV=cycle_start+ADC_ACQ_END_BASE+(double)(phase+2U*tap)*0.31e-6+actual_shift;
         x=at_history(p,phase+6U,now,tV);
         cap[phase]+=nearbyint(x/(717.79/4096.0))*(717.79/4096.0);
     }
@@ -188,11 +210,16 @@ int main(int argc,char **argv)
     double t,now,mid[3],kcl,loadR,idref=0.0,reference_used=0.0,integral=0.0,rslew=0.0,rfilter=0.0,unsat,error;
     double kp=0.02122601433380058,ki=4.822205351961461,tau=0.00440172344074206,kaw=227.18374142820204;
     double guiBus=141.4213562373095,angles[3],irms[3],amp[3][HARMONICS+1],thd[3],track[3],zerorms[3],allRMS=0.0,pf,lastSampleTime=0.0;
+    double guiAlpha=TS==0.000020?0.0001056223:1.0-pow(1.0-0.0001056223,TS/0.000020);
     char fileName[1024];FILE *trace,*json;
     if(argc!=5 && argc!=6){fprintf(stderr,"usage: ti_closed_loop mode Rload sensitivity output_prefix [scenario0..3]\n");return 2;}
     mode=(unsigned)atoi(argv[1]);loadR=atof(argv[2]);noisy=(unsigned)atoi(argv[3]);
     scenario=argc==6?(unsigned)atoi(argv[5]):0U;
     if(mode>2 || loadR<=0.0 || scenario>3U)return 2;
+    if(TS<=0.0 || SAMPLE_OFFSET<=1.86e-6 || SAMPLE_OFFSET>=TS || ISR_OFFSET<SAMPLE_OFFSET+1.86e-6 ||
+       ISR_OFFSET>=TS || CONTROL_TICKS<1U || INSTRUMENT_TICKS<1U || ISR_TICK>=CONTROL_TICKS){
+        fprintf(stderr,"invalid offline sampling/ISR timing hypothesis\n");return 2;
+    }
     memset(&plant,0,sizeof(plant));memset(&m,0,sizeof(m));memset(&input,0,sizeof(input));
     plant.up=71.71067811865;plant.low=69.71067811865;plant.L=noisy?0.0021:0.003;
     plant.R=noisy?0.26:0.2;plant.Rload=loadR;m.bus_min=1e30;
@@ -202,7 +229,13 @@ int main(int argc,char **argv)
     for(j=0;j<3;j++){plant.filtered[j]=0;plant.filtered[j+3]=angles[j];}
     plant.filtered[6]=plant.up;plant.filtered[7]=plant.low;
     for(step=0;step<HISTORY;step++)for(j=0;j<8;j++)plant.history[step][j]=plant.filtered[j];
-    PC_default_config(&pc);pc.root_method=PC_ROOT_BISECTION32;
+    PC_default_config(&pc);
+#if TI_CLOSED_LOOP_FAST
+    pc.root_method=PC_ROOT_PIECEWISE;
+#else
+    pc.root_method=PC_ROOT_BISECTION32;
+#endif
+    pc.first_duration_s=(float)(TS-SAMPLE_OFFSET);pc.candidate_duration_s=(float)TS;
     VG_configure(&vg,(float)TS,50.0f,20.0f);VG_reset(&pll);
     VO_configure(&vo,(float)TS,0.003f,3141.592653589793f);VO_reset(&eso);
     snprintf(fileName,sizeof(fileName),"%s.csv",argv[4]);trace=fopen(fileName,"w");if(!trace)return 3;
@@ -216,8 +249,8 @@ int main(int argc,char **argv)
         }
         /* Model the shared target's instrumentation task at an explicitly
          * chosen 10kHz phase. Real Timer2/ISR nesting phase is not reproduced. */
-        if(step%(5U*CONTROL_TICKS)==0U && enabled)
-            rslew+=clip(170.0-rslew,-150.0*0.0001,150.0*0.0001);
+        if(step%INSTRUMENT_TICKS==0U && enabled)
+            rslew+=clip(170.0-rslew,-150.0*INSTRUMENT_PERIOD,150.0*INSTRUMENT_PERIOD);
         plant_step(&plant,gate,t,mid,&kcl);now=t+DT;
         if(kcl>m.kcl_residual_max)m.kcl_residual_max=kcl;
         for(j=0;j<3;j++){
@@ -227,10 +260,10 @@ int main(int argc,char **argv)
         }
         if(step%CONTROL_TICKS==ISR_TICK){
             double cycle_start=(double)(step/CONTROL_TICKS)*TS;
-            lastSampleTime=cycle_start+10e-6;
+            lastSampleTime=cycle_start+SAMPLE_OFFSET;
             adc_sample(&plant,now,cycle_start,noisy,scenario==1U?-1e-6:0.0,current,voltage,&up,&low);
             VG_run(&vg,&pll,voltage);PC_abc_to_dq(current,pll.theta_rad,idq);PC_abc_to_dq(voltage,pll.theta_rad,edq);
-            guiBus+=(double)0.0001056223*((double)up+low-guiBus); /* same ~189ms bandwidth at50kHz */
+            guiBus+=guiAlpha*((double)up+low-guiBus); /* retain the original slow-filter bandwidth */
             if(guiBus>OVERVOLTAGE && m.voltage_trip_first<0){m.voltage_trip_first=now;m.hard_trip=1U;gate=pending=0;enabled=0;}
             if(!enabled && !m.hard_trip && pll.locked && now>0.060){
                 enabled=1U;m.enable_time=now;integral=0.0;rslew=rfilter=(double)up+low;VO_reset(&eso);hasHistory=0;
@@ -241,7 +274,8 @@ int main(int argc,char **argv)
                 for(j=0;j<2;j++){reconstruction.idq_start_A[j]=prevCurrentDQ[j];reconstruction.fhat_A_s[j]=prevFhat[j];}
                 reconstruction.up_V=prevUp;reconstruction.low_V=prevLow;
                 reconstruction.theta_start_rad=prevTheta;reconstruction.omega_rad_s=prevOmega;
-                reconstruction.duration_before_sec=10e-6f;reconstruction.duration_after_sec=10e-6f;
+                reconstruction.duration_before_sec=(float)(TS-SAMPLE_OFFSET);
+                reconstruction.duration_after_sec=(float)SAMPLE_OFFSET;
                 reconstruction.gate_before_hw=(uint16_t)prevGate;reconstruction.gate_after_hw=(uint16_t)gate;reconstruction.sequence=seq;
                 if(!VO_reconstruct(&pc,&reconstruction,&reconstructed)){m.observer_errors++;VO_reset(&eso);du[0]=du[1]=0.0f;}
                 else {du[0]=reconstructed.delta_u_dq_V_s[0];du[1]=reconstructed.delta_u_dq_V_s[1];}
@@ -261,7 +295,11 @@ int main(int argc,char **argv)
                     input.theta_rad=pll.theta_rad;input.omega_rad_s=pll.omega_rad_s;
                     input.fhat_A_s[0]=eso.f_hat_A_s[0];input.fhat_A_s[1]=eso.f_hat_A_s[1];
                     input.applied_hw_state=(uint16_t)gate;input.zcdc_enable=(uint16_t)(mode==2);input.terminal_enable=1U;
+#if TI_CLOSED_LOOP_FAST
+                    if(PC_run_fast(&pc,&input,&output)!=PC_OK){m.core_errors++;pending=0;}
+#else
                     if(PC_run(&pc,&input,&output)!=PC_OK){m.core_errors++;pending=0;}
+#endif
                     else pending=output.hw_state;
                 }
                 /* Same order as target: submit the next gate first, then
@@ -286,13 +324,17 @@ int main(int argc,char **argv)
             }
             if(control%10U==0U || now>=STEADY_BEGIN)
                 fprintf(trace,"%.9g,%u,%u,%u,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%.8g,%u,%u,%u,%u,%u,%u,%.8g,%.8g\n",
-                    cycle_start+10e-6,enabled,gate,pending,current[0],current[1],current[2],up,low,idref,reference_used,pll.theta_rad,pll.omega_rad_s,
+                    cycle_start+SAMPLE_OFFSET,enabled,gate,pending,current[0],current[1],current[2],up,low,idref,reference_used,pll.theta_rad,pll.omega_rad_s,
                     eso.f_hat_A_s[0],eso.f_hat_A_s[1],eso.innovation_A[0],eso.innovation_A[1],output.active,
                     output.selected_id!=output.pc_off_id,output.intersection_count,output.status,(unsigned)(idref>=REF_LIMIT-1e-7),m.hard_trip,plant.Rload,scenario==1U?-1.0:0.0);
         }
         if(step==(unsigned)(STEADY_BEGIN/DT+0.5))harmonic_init(&m,t+0.5*DT);
         if(step>=(unsigned)(STEADY_BEGIN/DT+0.5))accumulate(&m,&plant,mid,t+0.5*DT,idref,pll.theta_rad,pll.omega_rad_s,lastSampleTime);
-        if(!isfinite(plant.up+plant.low) || plant.up<=0 || plant.low<=0){fprintf(stderr,"plant rail invalid\n");fclose(trace);return 5;}
+        if(!isfinite(plant.up+plant.low) || plant.up<=0 || plant.low<=0){
+            fprintf(stderr,"plant rail invalid t=%.12g up=%.12g low=%.12g peak_A=%.12g core_errors=%u observer_errors=%u trip=%u\n",
+                now,plant.up,plant.low,m.peak_all,m.core_errors,m.observer_errors,m.hard_trip);
+            fclose(trace);return 5;
+        }
     }
     fclose(trace);
     for(j=0;j<3;j++){
@@ -309,6 +351,7 @@ int main(int argc,char **argv)
     fprintf(json,"{\n\"mode\":%u,\"load_ohm\":%.9g,\"sensitivity\":%u,\"plant_L_H\":%.9g,\"plant_R_ohm\":%.9g,\n",mode,loadR,noisy,plant.L,plant.R);
     fprintf(json,"\"scenario\":%u,\"actual_ADC_shift_s\":%.9g,\"diode_drop_V\":%.9g,\"switch_on_drop_V\":%.9g,\"dynamic_load_100_50_100ohm\":%u,\n",scenario,scenario==1U?-1e-6:0.0,plant.diode_drop,plant.switch_drop,scenario==3U);
     fprintf(json,"\"plant_step_s\":%.9g,\"control_step_s\":%.9g,\"duration_s\":%.9g,\"steady_window_s\":[%.9g,%.9g],\"THD_samples\":%.0f,\n",DT,TS,DURATION,STEADY_BEGIN,DURATION,m.samples);
+    fprintf(json,"\"effective_sample_offset_s\":%.9g,\"isr_offset_s\":%.9g,\"ADC_SOC_offset_s\":%.9g,\"first_prediction_s\":%.9g,\"candidate_prediction_s\":%.9g,\"nominal_write_window_s\":%.9g,\"instrument_period_s\":%.9g,\"gui_filter_alpha\":%.12g,\n",SAMPLE_OFFSET,ISR_OFFSET,SAMPLE_OFFSET-1.86e-6,TS-SAMPLE_OFFSET,TS,TS-ISR_OFFSET,INSTRUMENT_PERIOD,guiAlpha);
     fprintf(json,"\"outer_kp_A_V\":%.12g,\"outer_ki_A_V_s\":%.12g,\"reference_limit_peak_A\":%.9g,\"proposed_trip_A\":%.9g,\"proposed_software_OV_V\":%.9g,\n",kp,ki,REF_LIMIT,TRIP_CURRENT,OVERVOLTAGE);
     fprintf(json,"\"bus_mean_V\":%.12g,\"bus_ripple_Vpp\":%.12g,\"np_mean_V\":%.12g,\"np_RMS_V\":%.12g,\"np_peak_V\":%.12g,\n",m.bus_sum/m.samples,m.bus_max-m.bus_min,m.np_sum/m.samples,sqrt(m.np_sq/m.samples),m.np_peak);
     fprintf(json,"\"tracking_RMS_A\":%.12g,\"tracking_per_phase_RMS_A\":[%.12g,%.12g,%.12g],\"zero_window_RMS_A\":[%.12g,%.12g,%.12g],\"zero_window_peak_A\":[%.12g,%.12g,%.12g],\n",sqrt(allRMS/(3*m.samples)),track[0],track[1],track[2],zerorms[0],zerorms[1],zerorms[2],m.zero_error_peak[0],m.zero_error_peak[1],m.zero_error_peak[2]);

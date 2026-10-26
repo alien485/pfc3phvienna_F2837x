@@ -18,6 +18,9 @@ typedef struct {
     unsigned fast_unsafe_error,terminal_events,reference_terminal_events;
     unsigned availability_flag_errors,unavailable_marker_errors;
     unsigned full_interval_calls,full_status_diff,full_numeric_diff,full_discrete_diff;
+    unsigned summary_interval_calls,summary_status_diff,summary_numeric_diff,summary_discrete_diff;
+    unsigned control_interval_calls,control_status_diff,control_numeric_diff,control_discrete_diff;
+    unsigned integral_unavailable_errors;
     double max_full_numeric;
     double max_gi,max_gu,max_gz,max_dq,max_np,max_summary_integral,max_diagnostic;
     double max_budget,max_margin;
@@ -32,7 +35,7 @@ static unsigned different_order(const uint16_t a[8],const uint16_t b[8])
 static void compare_full_interval(const PC_Config *c,const PC_Input *in,const PC_Real dq[2],
     PC_Real up,PC_Real low,uint16_t hw,PC_Real theta,PC_Real duration)
 {
-    PC_Interval a,b;unsigned sa,sb,j,k,diff=0,discrete=0;double error=0;
+    PC_Interval a,b,summary,control;unsigned sa,sb,ss,sc,j,k,diff=0,discrete=0;double error=0;
     stats.full_interval_calls++;
     sa=PC_predict_interval(c,dq,up,low,hw,theta,in->omega_rad_s,in->fhat_A_s,duration,&a);
     sb=PC_fast_predict_interval(c,dq,up,low,hw,theta,in->omega_rad_s,in->fhat_A_s,duration,&b,PC_FAST_FULL_SUBSTEPS);
@@ -56,6 +59,31 @@ static void compare_full_interval(const PC_Config *c,const PC_Input *in,const PC
     }
 #undef CHECK_REAL
     stats.full_numeric_diff+=diff;stats.full_discrete_diff+=discrete;maximum(&stats.max_full_numeric,error);
+    /* The public interval API retains a real pole integral in SUMMARY/FULL.
+       CONTROL_ONLY omits it explicitly; zero is an invalid placeholder. */
+    stats.summary_interval_calls++;stats.control_interval_calls++;
+    memset(&summary,0xA5,sizeof(summary));memset(&control,0xA5,sizeof(control));
+    ss=PC_fast_predict_interval(c,dq,up,low,hw,theta,in->omega_rad_s,in->fhat_A_s,duration,&summary,PC_FAST_SUMMARY_ONLY);
+    sc=PC_fast_predict_interval(c,dq,up,low,hw,theta,in->omega_rad_s,in->fhat_A_s,duration,&control,PC_FAST_CONTROL_ONLY);
+    stats.summary_status_diff+=ss!=sa;stats.control_status_diff+=sc!=sa;
+    if(ss==PC_OK){
+        unsigned numeric=a.np_V!=summary.np_V;
+        for(k=0;k<2;k++){
+            numeric|=a.idq_A[k]!=summary.idq_A[k] || a.u_integral_dq_V_s[k]!=summary.u_integral_dq_V_s[k];
+            maximum(&stats.max_summary_integral,(double)a.u_integral_dq_V_s[k]-summary.u_integral_dq_V_s[k]);
+            if(summary.substep[k].root_iterations!=PC_FAST_SUBSTEP_UNAVAILABLE)stats.unavailable_marker_errors++;
+        }
+        stats.summary_numeric_diff+=numeric;stats.summary_discrete_diff+=a.blocked!=summary.blocked;
+    }
+    if(sc==PC_OK){
+        unsigned numeric=a.np_V!=control.np_V;
+        for(k=0;k<2;k++){
+            numeric|=a.idq_A[k]!=control.idq_A[k];
+            if(control.u_integral_dq_V_s[k]!=(PC_Real)0)stats.integral_unavailable_errors++;
+            if(control.substep[k].root_iterations!=PC_FAST_SUBSTEP_UNAVAILABLE)stats.unavailable_marker_errors++;
+        }
+        stats.control_numeric_diff+=numeric;stats.control_discrete_diff+=a.blocked!=control.blocked;
+    }
 }
 static void map_input(const double x[24],PC_Config *c,PC_Input *in)
 {
@@ -79,7 +107,8 @@ static void replay(PC_Config *c,const PC_Input *in,const char *label,unsigned in
     serial++;stats.cases++;
     memset(&optimized,0xA5,sizeof(optimized));
     sa=PC_run(c,in,&reference);sb=PC_run_fast(c,in,&optimized);
-    if(PC_fast_output_substeps_available!=0U || PC_fast_output_summaries_available!=(sb==PC_OK))stats.availability_flag_errors++;
+    if(PC_fast_output_substeps_available!=0U || PC_fast_output_summaries_available!=(sb==PC_OK) ||
+       PC_fast_output_integrals_available!=0U)stats.availability_flag_errors++;
     if(sb==PC_OK)for(j=0;j<9;j++){
         const PC_Interval *b=j?&optimized.candidate_interval[j-1]:&optimized.first_interval;
         if(b->substep[0].root_iterations!=PC_FAST_SUBSTEP_UNAVAILABLE || b->substep[1].root_iterations!=PC_FAST_SUBSTEP_UNAVAILABLE)stats.unavailable_marker_errors++;
@@ -125,7 +154,7 @@ static void replay(PC_Config *c,const PC_Input *in,const char *label,unsigned in
             if(a->blocked!=b->blocked)blocked=1;
             for(k=0;k<2;k++){
                 maximum(&dq,(double)a->idq_A[k]-b->idq_A[k]);
-                maximum(&integ,(double)a->u_integral_dq_V_s[k]-b->u_integral_dq_V_s[k]);
+                if(b->u_integral_dq_V_s[k]!=(PC_Real)0)stats.integral_unavailable_errors++;
             }
         }
         maximum(&dq,(double)reference.idq1_A[0]-optimized.idq1_A[0]);
@@ -238,6 +267,8 @@ int main(int argc,char **argv)
     fprintf(summaryFile,"\"max_gi_error_A2\":%.12g,\"max_gu_error_V2\":%.12g,\"max_gz_error_rad2\":%.12g,\"max_dq_error_A\":%.12g,\"max_np_error_V\":%.12g,\"max_interval_integral_error_V_s\":%.12g,\"max_zcdc_diag_numeric_error\":%.12g,\n",stats.max_gi,stats.max_gu,stats.max_gz,stats.max_dq,stats.max_np,stats.max_summary_integral,stats.max_diagnostic);
     fprintf(summaryFile,"\"bisection32_vs_piecewise_reference\":{\"status_difference\":%u,\"selected_difference\":%u,\"pcoff_difference\":%u,\"active_difference\":%u},\n",stats.bisection_status_diff,stats.bisection_selected_diff,stats.bisection_pcoff_diff,stats.bisection_active_diff);
     fprintf(summaryFile,"\"full_interval\":{\"calls\":%u,\"status_difference\":%u,\"numeric_difference_rows\":%u,\"discrete_difference_rows\":%u,\"max_numeric_error_mixed_SI\":%.12g},\n",stats.full_interval_calls,stats.full_status_diff,stats.full_numeric_diff,stats.full_discrete_diff,stats.max_full_numeric);
+    fprintf(summaryFile,"\"summary_interval\":{\"calls\":%u,\"status_difference\":%u,\"numeric_difference_rows\":%u,\"discrete_difference_rows\":%u},\n",stats.summary_interval_calls,stats.summary_status_diff,stats.summary_numeric_diff,stats.summary_discrete_diff);
+    fprintf(summaryFile,"\"control_interval\":{\"calls\":%u,\"status_difference\":%u,\"numeric_difference_rows\":%u,\"discrete_difference_rows\":%u,\"integral_unavailable_errors\":%u},\n",stats.control_interval_calls,stats.control_status_diff,stats.control_numeric_diff,stats.control_discrete_diff,stats.integral_unavailable_errors);
     fprintf(summaryFile,"\"availability_flag_errors\":%u,\"unavailable_marker_errors\":%u,\"max_budget_limit_error_A\":%.12g,\"max_voltage_margin_error_V\":%.12g,\n",stats.availability_flag_errors,stats.unavailable_marker_errors,stats.max_budget,stats.max_margin);
     fprintf(summaryFile,"\"extreme_derived_numeric_guard\":{\"readable_reference_status\":%u,\"fast_status\":%u,\"guard_failure\":%u,\"reference_margin_finite\":%u},\n",guardRef,guardFast,guardFailure,(unsigned)isfinite(reference.voltage_margin_V));
     fprintf(summaryFile,"\"fast_unsafe_error_outputs\":%u,\"fast_terminal_gate_events\":%u,\"reference_terminal_gate_events\":%u\n}\n",stats.fast_unsafe_error,stats.terminal_events,stats.reference_terminal_events);
@@ -246,5 +277,9 @@ int main(int argc,char **argv)
     printf("max errors: dq_A=%.9g np_V=%.9g gi_A2=%.9g gu_V2=%.9g gz_rad2=%.9g; bisection32 selected differences=%u\n",stats.max_dq,stats.max_np,stats.max_gi,stats.max_gu,stats.max_gz,stats.bisection_selected_diff);
     return (stats.status_diff || stats.fast_unsafe_error || stats.availability_flag_errors || stats.unavailable_marker_errors ||
         stats.selected_diff || stats.pcoff_diff || stats.active_diff || stats.rank_i_diff || stats.rank_u_diff || stats.mask_diff ||
-        stats.diagnostic_diff || stats.blocked_diff || stats.full_status_diff || stats.full_numeric_diff || stats.full_discrete_diff || guardFailure)?1:0;
+        stats.diagnostic_diff || stats.blocked_diff || stats.full_status_diff || stats.full_numeric_diff || stats.full_discrete_diff ||
+        stats.summary_status_diff || stats.summary_numeric_diff || stats.summary_discrete_diff ||
+        stats.control_status_diff || stats.control_numeric_diff || stats.control_discrete_diff || stats.integral_unavailable_errors ||
+        stats.max_gi!=0.0 || stats.max_gu!=0.0 || stats.max_gz!=0.0 || stats.max_dq!=0.0 || stats.max_np!=0.0 ||
+        stats.max_diagnostic!=0.0 || stats.max_budget!=0.0 || stats.max_margin!=0.0 || guardFailure)?1:0;
 }

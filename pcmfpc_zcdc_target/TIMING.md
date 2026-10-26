@@ -45,9 +45,12 @@ root_method=1改用独立PC_run_fast，移除全量清零并共享角度节点�
 ESO同样用fast区间函数但明确要求完整子步。fast候选只保证summary，
 `pcmOutputDetailValid=0`、root_iterations=0xffff表示完整候选子步不可用。
 分段根及共享浮点运算仍须按差分报告解释，且没有板上WCET。
-最终CGT正常成功路径中，两种变换各36次，函数分别31/27条顺序指令组（并行已合组），
-仅此2088cycles=10.44us已超过1628cycle窗口；不含求根/排序/PLL/ESO/ISR，
-所以当前fast也确定不能满足写前时限。错误提前退出更快不能算正常控制通过。
+第四轮CGT成功路径中，控制子步191组和lambda根成功79组的
+两个互不重叠区域，各固定执行18次；保守下界为4860cycles=24.30us（配置200MHz）。
+这不含首/候选区间入口出口、输入、seed、排名/末级、PLL/ESO/ISR等工作，
+已足够否定当前1628cycle写前和4000cycle整周期预算。错误提前退出不能算正常控制通过。
+此前第三轮6408下界及用户27485cycle计时属于旧OUT8c8251...，当前OUT52971695...尚待同样例板上计时。
+历次不同子集的下界不可相减作实际提速率，最新快照见RT_OPTIMIZATION。
 在两类时限、PLL、保护和输入时标验证前不能打开硬件放行。
 静态审计详见根输出resource_timing_audit，不能把宿主运行时间当成DSP WCET。
 
@@ -58,6 +61,8 @@ ESO同样用fast区间函数但明确要求完整子步。fast候选只保证sum
 使用固定的独立数值输入，不替换ADC、PLL、ESO输入，不提交计算出的门极。
 结果见BenchStatus/Cycles/CyclesMax/Count/SelectedId/HWState。
 status=1完成，2条件拒绝，3非法请求，4内核错误；Count只计实际执行次数。
+当前快核心下界已超20us，因此真实DSP单次快benchmark也可能同时出现status=1和
+PERIOD故障；这是数值成功后周期守护生效，不能通过关闭守护消除。
 该计时仅含一个固定工况的core，不包括ESO/PLL，也不是最差ISR时间证明。
 原周期守护仍执行，参考benchmark可能使Body超过20us，触发PERIOD/OST并复位ESO历史；
 不为计时豁免保护。禁止在带主功率时运行，也不通过工具自动写这些变量。
@@ -69,6 +74,11 @@ status=1完成，2条件拒绝，3非法请求，4内核错误；Count只计实�
 `output_source`=0本拍无PC结果、1控制、2影子、3独立数值计时；事件记录只将
 source1/2、core_status=0、合法ID的预测/成本视为有效，其他预测/成本字段填0。
 Watch中的完整substep只有DetailValid=1才可解释，旧RAM不是当前fast轨迹。
+最新PC_run_fast采用CONTROL_ONLY；`pcmOutputIntegralValid=0`和
+`PC_fast_output_integrals_available=0`表示各interval积分仅为0占位，不能当作物理积分。
+独立SUMMARY/FULL入口仍生成真实模型pole积分，ESO仍请求FULL；当前观察表为64项。
+三条原始寄存器指针cast在用户CCS中被拒绝，已从观察脚本移除；如需查看Trip flags，
+使用Memory Browser的Data页/16-bit Hex只读查看0x4093、0x4193、0x4293。
 波形缓冲2000条，50kHz每5拍箱形平均，10kS/s、200ms；theta取5拍窗口中心。
 它提供明确率和长度的基础采集，但5点箱形仅是弱抗混叠，不能单凭该缓存宣称实机
 2..40次THD已测准；应使用已验证的抗混叠链/带宽与独立电流仪器，并保存原始数据。

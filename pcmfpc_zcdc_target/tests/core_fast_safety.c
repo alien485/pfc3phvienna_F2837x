@@ -26,7 +26,8 @@ static void require_fail_safe(uint16_t status,const char *label)
 {
     req(status!=PC_OK,label);req(out.status==status,"status matches return");
     req(out.hw_state==0U && out.selected_id==1U && out.pc_off_id==1U,"failure safe gate and IDs");
-    req(!PC_fast_output_substeps_available && !PC_fast_output_summaries_available,"failed output availability invalid");
+    req(!PC_fast_output_substeps_available && !PC_fast_output_summaries_available &&
+        !PC_fast_output_integrals_available,"failed output availability invalid");
 }
 static void observe_extreme(const char *label)
 {
@@ -46,6 +47,11 @@ int main(void)
     PC_Interval interval;
     init();req(PC_run_fast(&cfg,&input,&out)==PC_OK,"nominal fast success");
     req(PC_fast_output_summaries_available && !PC_fast_output_substeps_available,"summary contract");
+    req(!PC_fast_output_integrals_available,"control run integral diagnostics explicitly unavailable");
+    for(j=0;j<9;j++){
+        const PC_Interval *part=j?&out.candidate_interval[j-1]:&out.first_interval;
+        req(part->u_integral_dq_V_s[0]==0 && part->u_integral_dq_V_s[1]==0,"unavailable control integral uses placeholder");
+    }
     for(j=0;j<2;j++)req(out.first_interval.substep[j].root_iterations==PC_FAST_SUBSTEP_UNAVAILABLE,"summary unavailability sentinel");
     for(j=0;j<3;j++){
         init();input.iabc_A[0]=bad[j];require_fail_safe(PC_run_fast(&cfg,&input,&out),"bad current rejected");
@@ -57,8 +63,11 @@ int main(void)
     init();cfg.root_method=PC_ROOT_BISECTION32;require_fail_safe(PC_run_fast(&cfg,&input,&out),"wrong root rejected");
     init();require_fail_safe(PC_run_fast(NULL,&input,&out),"null config rejected");
     init();require_fail_safe(PC_run_fast(&cfg,NULL,&out),"null input rejected");
-    init();req(PC_run_fast(&cfg,&input,NULL)==PC_ERR_INPUT,"null output rejected");
-    init();req(PC_fast_predict_interval(&cfg,input.iabc_A,85,85,7,0,314,input.fhat_A_s,20e-6f,&interval,2)==PC_ERR_CONFIG,"invalid detail rejected");
+    init();req(PC_run_fast(&cfg,&input,&out)==PC_OK,"valid output precedes null-output guard");
+    req(PC_run_fast(&cfg,&input,NULL)==PC_ERR_INPUT,"null output rejected");
+    req(!PC_fast_output_substeps_available && !PC_fast_output_summaries_available &&
+        !PC_fast_output_integrals_available,"null output cannot retain previous successful availability");
+    init();req(PC_fast_predict_interval(&cfg,input.iabc_A,85,85,7,0,314,input.fhat_A_s,20e-6f,&interval,3)==PC_ERR_CONFIG,"invalid detail rejected");
     init();req(PC_fast_predict_interval(&cfg,input.iabc_A,85,85,8,0,314,input.fhat_A_s,20e-6f,&interval,0)==PC_ERR_INPUT,"interval invalid gate rejected");
     init();req(PC_fast_predict_interval(&cfg,input.iabc_A,85,85,7,0,314,input.fhat_A_s,0,&interval,0)==PC_ERR_INPUT,"interval zero duration rejected");
     init();cfg.R_ohm=(PC_Real)FLT_MAX;observe_extreme("R_float_max");

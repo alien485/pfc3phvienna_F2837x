@@ -1,0 +1,19 @@
+{
+  "Scope": "Only control-substep caller groups plus successful root entry-to-success groups; disjoint regions; not WCET",
+  "Source": "actualCGT25.11.1 listing and linkedOUT20:42:56",
+  "FixedIntervals": 9,
+  "SubstepsEach": 2,
+  "SuccessfulRoots": 18,
+  "ControlCallerGroupsPerSubstep": 174,
+  "RootGroupsToSuccessPerCall": 182,
+  "ControlLcrChargedOnceAndCalleeExcluded": true,
+  "PredicateConsistencyRelaxed": true,
+  "FixedInnerLoopsRelaxed": true,
+  "CombinedLowerBoundCycles": 6408,
+  "CombinedLowerBoundUs": 32.04,
+  "WriteBudgetCycles": 1628,
+  "PeriodBudgetCycles": 4000,
+  "WriteDeadlineFails": true,
+  "FullControlPeriodFails": true,
+  "HardwareMeasured": false
+}

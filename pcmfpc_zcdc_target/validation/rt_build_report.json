@@ -1,0 +1,196 @@
+{
+  "Schema": "ti_pcmfpc_rt_optimization_pass3",
+  "BaseCommit": "44f0ec5",
+  "Linked": ">> Linked Sun Oct 25 20:42:56 2026",
+  "BuildExecutedBy": "root agent; independent logs/map/XML/artifact audit by audit_optimized_build",
+  "NativeBuildExitCode": 0,
+  "CcsErrors": 0,
+  "CcsWarnings": 4,
+  "LinkErrors": 0,
+  "Status": "BUILD_PASS;WRITE_AND_PERIOD_FAIL_STATIC_LOWER_BOUND;HARDWARE_RELEASE_0",
+  "FastCsha256": "b8665494d2fd304f3b644c451dbf0f479b0380913f42350ab3a798260ada00a8",
+  "CoreLowerBound": {
+    "Scope": "Only control-substep caller groups plus successful root entry-to-success groups; disjoint regions; not WCET",
+    "Source": "actualCGT25.11.1 listing and linkedOUT20:42:56",
+    "FixedIntervals": 9,
+    "SubstepsEach": 2,
+    "SuccessfulRoots": 18,
+    "ControlCallerGroupsPerSubstep": 174,
+    "RootGroupsToSuccessPerCall": 182,
+    "ControlLcrChargedOnceAndCalleeExcluded": true,
+    "PredicateConsistencyRelaxed": true,
+    "FixedInnerLoopsRelaxed": true,
+    "CombinedLowerBoundCycles": 6408,
+    "CombinedLowerBoundUs": 32.04,
+    "WriteBudgetCycles": 1628,
+    "PeriodBudgetCycles": 4000,
+    "WriteDeadlineFails": true,
+    "FullControlPeriodFails": true,
+    "HardwareMeasured": false
+  },
+  "IsWcet": false,
+  "HardwareMeasured": false,
+  "CodeWords": 11947,
+  "CodeCapacityWords": 16384,
+  "BssWords": 3110,
+  "BssCapacityWords": 4096,
+  "PcRunMaxFrameWords": 88,
+  "ControlIntervalMaxFrameWords": 50,
+  "RootMaxFrameWords": 36,
+  "StackAllocationWords": 896,
+  "KnownControlChainWords": 248,
+  "KnownFullReconstructChainWords": 466,
+  "GlobalStackUpperBoundProven": false,
+  "NoFilesDeleted": true,
+  "NoCleanRebuild": true,
+  "NoHardwareActions": true,
+  "SourceSnapshotsVerified": true,
+  "SourceHashes": [
+    {
+      "Name": "vienna_pcmfpc_fast.c",
+      "SHA256": "B8665494D2FD304F3B644C451DBF0F479B0380913F42350AB3A798260ADA00A8"
+    },
+    {
+      "Name": "vienna_pcmfpc_fast.h",
+      "SHA256": "48883450AE050465D2FF221779983B150EDE48BB734337CB084E4C5FE466FB7F"
+    },
+    {
+      "Name": "vienna_pcmfpc_runtime.c",
+      "SHA256": "CD91EDA90067ECEEE80D327C6A9FCDCA762E7F68231D5085523026EAD4BB5D58"
+    },
+    {
+      "Name": "vienna_pcmfpc_runtime.h",
+      "SHA256": "2E5CA5342A974CA765F9073EFFCF715DA53543D75C4C5598413D7CA7021CAEB1"
+    },
+    {
+      "Name": "vienna_pcmfpc_observer.c",
+      "SHA256": "87DBA018D1755865CFC8D14C9F29DE957821BFF7ECE3A06D64BDC98311EADCA2"
+    },
+    {
+      "Name": "vienna_pcmfpc_observer.h",
+      "SHA256": "15D9FAF3B071D04429CE7EB40DCDAE128E98CB9AE1C5DBA6F98C033AAA239589"
+    },
+    {
+      "Name": "vienna_grid_sync.c",
+      "SHA256": "8BD9BCAC4466A63C14393F305211121A8E7310C701637D7E57ACDE0E4E852295"
+    },
+    {
+      "Name": "vienna_grid_sync.h",
+      "SHA256": "E1B038DEC6578234FD5689DD00D0ABF1237F512F064128E14BD235F71DB780AC"
+    },
+    {
+      "Name": "vienna.h",
+      "SHA256": "B4E823BF038D4B19B04528B8EDB17878D7F67C928CA253129135F17976F18216"
+    },
+    {
+      "Name": "vienna.c",
+      "SHA256": "DFC68E177C471441BE392806112E81EE302C052579E8C757B15B00C9F09E608A"
+    },
+    {
+      "Name": "vienna_user_settings.h",
+      "SHA256": "8E6C0C0BC67B03C903796C76DFA3BD5A3EAAE9AABBFEA2D23B6F8B8A8B42ABEC"
+    },
+    {
+      "Name": "vienna_settings.h",
+      "SHA256": "9F2389EA86CC9080CFA8792602E141FD006729740EAC0F3BDB9E4E5D2DF4CBB4"
+    },
+    {
+      "Name": "main.syscfg",
+      "SHA256": "087E0505266EA3747F4678D173CE3375AEB9E661B0D22181F58645434FCDE12D"
+    },
+    {
+      "Name": "f2837xd_flash_cpu1_lnk.cmd",
+      "SHA256": "82EAB893DFDD828C771C74D92A987823F78F6B46EA0F427CF5B4B5994DBCD46A"
+    },
+    {
+      "Name": "build_incremental.ps1",
+      "SHA256": "C62A82985AA62763A478916816F950B5A7FC2AF7B58ECB9EECF9B06E7001A8ED"
+    }
+  ],
+  "Artifacts": [
+    {
+      "File": "vienna_pcmfpc_zcdc_F2837x.out",
+      "Bytes": 256676,
+      "Sha256": "8c8251baff6b1e1938c3e6c8d531643ffd261c1e05e3c729bcfb7e42527bddd5"
+    },
+    {
+      "File": "vienna_pcmfpc_zcdc_F2837x.map",
+      "Bytes": 85291,
+      "Sha256": "e3c67617cb0fae0d4c8a76d068894911c86db369fc0ecfae1b7a0b852c8fc010"
+    },
+    {
+      "File": "vienna_pcmfpc_zcdc_F2837x_linkInfo.xml",
+      "Bytes": 403463,
+      "Sha256": "f36c0af41cc1c6449995d8e707dcb2b36479a451ecb22c77af822ea3b7454b73"
+    },
+    {
+      "File": "vienna_pcmfpc_fast.asm",
+      "Bytes": 645964,
+      "Sha256": "a17194f9d13671a18195edb7e020e2f639959babff778bff179910b7d9f3af24"
+    },
+    {
+      "File": "vienna_pcmfpc_runtime.asm",
+      "Bytes": 469803,
+      "Sha256": "09e0699b26122920ec776208ba02f34740bca7484ca5f4043446bb4bf6262ac6"
+    },
+    {
+      "File": "vienna_pcmfpc_observer.asm",
+      "Bytes": 259259,
+      "Sha256": "389faa28a11feee6663bdd8bfd8e1527529ae9b72fe1f217cc78e04b88447960"
+    },
+    {
+      "File": "vienna_grid_sync.asm",
+      "Bytes": 177724,
+      "Sha256": "8dfa9fa606371566a1072a87bf3dabf9ee1849849b70b31ba62a0f9dbd145aca"
+    },
+    {
+      "File": "vienna_main.asm",
+      "Bytes": 512255,
+      "Sha256": "9c70bdb976621ca1681414899fd93a3eeedc9d4b9983590b3ad3f8e0c88dfa50"
+    },
+    {
+      "File": "vienna_pcmfpc_zcdc.asm",
+      "Bytes": 409237,
+      "Sha256": "f0646086fa8a9ddbd8027df0a1ef1766665f4e6f683a4fb68a4f4602da9ca880"
+    },
+    {
+      "File": "ccs_incremental.command.txt",
+      "Bytes": 411,
+      "Sha256": "186238779fb1a38e23d04d1ea04ef3c56e39b7b653e4731193657658ab236df6"
+    },
+    {
+      "File": "ccs_incremental.stdout.log",
+      "Bytes": 14173,
+      "Sha256": "22d4dd13c9d5d58ea8acb52d11f3267343f0557fa38217b7b8d9f5fb162aca01"
+    },
+    {
+      "File": "ccs_incremental.stderr.log",
+      "Bytes": 213,
+      "Sha256": "c913e1a5703e4c1bb92aa6d824934dff7cc6ca0daba7b8c19c6f3e40478084b9"
+    },
+    {
+      "File": "linked_disassembly.txt",
+      "Bytes": 878964,
+      "Sha256": "d869386e6d3b8a63b6d8b34307213ea0ada6776d8a2acb607f25742f4b6e2051"
+    },
+    {
+      "File": "control_substep_bound.json",
+      "Bytes": 28380,
+      "Sha256": "d1addd84b473e631f06443eabef0c54ca06783edddb2a4fd3c41242442f7aefa"
+    },
+    {
+      "File": "root_success_bound.json",
+      "Bytes": 29394,
+      "Sha256": "121083f9591bb89cc834b920d3671d0141fd384d9b9f5bbf3a85f39c138c2525"
+    },
+    {
+      "File": "combined_lower_bound.json",
+      "Bytes": 696,
+      "Sha256": "65fce8f5fe664e7d0585003bf8d3d6e4a1e236dea96f8a760e7a4cdd2e9c67f5"
+    }
+  ],
+  "HostValidation": "../round3/HOST_VALIDATION.md",
+  "InstructionSummary": "listing_summary.json",
+  "RealCallGraph": "realtime_calls.json",
+  "FollowUp": "Only reorganize algorithms/scheduling after a reviewed design; current two timing budgets remain failed. Do not raise hardwareRelease."
+}
