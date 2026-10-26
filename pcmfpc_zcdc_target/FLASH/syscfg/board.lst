@@ -1,0 +1,339 @@
+TMS320C2000 Assembler PC v25.11.1 Mon Oct 26 09:58:50 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+board.asm                                                            PAGE    1
+
+       1              ;***************************************************************
+       2              ;* TMS320C2000 G3 C/C++ Codegen                             PC v25.11.1.LTS *
+       3              ;* Date/Time created: Mon Oct 26 09:58:50 2026                 *
+       4              ;***************************************************************
+       5                      .compiler_opts --abi=eabi --cla_support=cla1 --diag_wrap=off --float_support=fpu32 --hll_source=on --
+       6                      .asg    XAR2, FP
+       7              
+       8              $C$DW$CU        .dwtag  DW_TAG_compile_unit
+       9                      .dwattr $C$DW$CU, DW_AT_name("syscfg/board.c")
+      10                      .dwattr $C$DW$CU, DW_AT_producer("TI TMS320C2000 G3 C/C++ Codegen PC v25.11.1.LTS Copyright (c) 1996-
+      11                      .dwattr $C$DW$CU, DW_AT_TI_version(0x01)
+      12                      .dwattr $C$DW$CU, DW_AT_comp_dir("D:\GraduateStudentProject\Vienna_Rectifier\Vienna_Project\Vienna_MP
+      13              
+      14              $C$DW$1 .dwtag  DW_TAG_subprogram
+      15                      .dwattr $C$DW$1, DW_AT_name("__eallow")
+      16                      .dwattr $C$DW$1, DW_AT_linkage_name("__eallow")
+      17                      .dwattr $C$DW$1, DW_AT_declaration
+      18                      .dwattr $C$DW$1, DW_AT_external
+      19                      .dwendtag $C$DW$1
+      20              
+      21              
+      22              $C$DW$2 .dwtag  DW_TAG_subprogram
+      23                      .dwattr $C$DW$2, DW_AT_name("__edis")
+      24                      .dwattr $C$DW$2, DW_AT_linkage_name("__edis")
+      25                      .dwattr $C$DW$2, DW_AT_declaration
+      26                      .dwattr $C$DW$2, DW_AT_external
+      27                      .dwendtag $C$DW$2
+      28              
+      29              ;       D:\CCS12\CCS12.3.0.00005_win64\ccs1230\ccs\tools\compiler\ti-cgt-c2000_25.11.1.LTS\bin\opt2000.exe C:
+      30              ;       D:\CCS12\CCS12.3.0.00005_win64\ccs1230\ccs\tools\compiler\ti-cgt-c2000_25.11.1.LTS\bin\acia2000.exe -
+      31 00000000               .sect   ".text"
+      32                      .clink
+      33                      .global ||PinMux_init||
+      34              
+      35              $C$DW$3 .dwtag  DW_TAG_subprogram
+      36                      .dwattr $C$DW$3, DW_AT_name("PinMux_init")
+      37                      .dwattr $C$DW$3, DW_AT_low_pc(||PinMux_init||)
+      38                      .dwattr $C$DW$3, DW_AT_high_pc(0x00)
+      39                      .dwattr $C$DW$3, DW_AT_linkage_name("PinMux_init")
+      40                      .dwattr $C$DW$3, DW_AT_external
+      41                      .dwattr $C$DW$3, DW_AT_decl_file("syscfg/board.c")
+      42                      .dwattr $C$DW$3, DW_AT_decl_line(0x3c)
+      43                      .dwattr $C$DW$3, DW_AT_decl_column(0x06)
+      44                      .dwattr $C$DW$3, DW_AT_TI_max_frame_size(-2)
+      45                      .dwpsn  file "syscfg/board.c",line 61,column 1,is_stmt,address ||PinMux_init||,isa 0
+      46              
+      47                      .dwfde $C$DW$CIE, ||PinMux_init||
+      48              
+      49              ;***************************************************************
+      50              ;* FNAME: PinMux_init                   FR SIZE:   0           *
+      51              ;*                                                             *
+      52              ;* FUNCTION ENVIRONMENT                                        *
+      53              ;*                                                             *
+      54              ;* FUNCTION PROPERTIES                                         *
+      55              ;*                            0 Parameter,  0 Auto,  0 SOE     *
+TMS320C2000 Assembler PC v25.11.1 Mon Oct 26 09:58:50 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+board.asm                                                            PAGE    2
+
+      56              ;***************************************************************
+      57              
+      58 00000000       ||PinMux_init||:
+      59                      .dwcfi  cfa_offset, -2
+      60                      .dwcfi  save_reg_to_mem, 26, 0
+      61              $C$DW$4 .dwtag  DW_TAG_TI_branch
+      62                      .dwattr $C$DW$4, DW_AT_low_pc(0x00)
+      63                      .dwattr $C$DW$4, DW_AT_TI_return
+      64              
+      65 00000000 0006          LRETR     ; [CPU_ALU] 
+      66                      ; return occurs ; [] 
+      67                      .dwattr $C$DW$3, DW_AT_TI_end_file("syscfg/board.c")
+      68                      .dwattr $C$DW$3, DW_AT_TI_end_line(0x43)
+      69                      .dwattr $C$DW$3, DW_AT_TI_end_column(0x01)
+      70                      .dwendentry
+      71                      .dwendtag $C$DW$3
+      72              
+      73 00000001               .sect   ".text"
+      74                      .clink
+      75                      .global ||Board_init||
+      76              
+      77              $C$DW$5 .dwtag  DW_TAG_subprogram
+      78                      .dwattr $C$DW$5, DW_AT_name("Board_init")
+      79                      .dwattr $C$DW$5, DW_AT_low_pc(||Board_init||)
+      80                      .dwattr $C$DW$5, DW_AT_high_pc(0x00)
+      81                      .dwattr $C$DW$5, DW_AT_linkage_name("Board_init")
+      82                      .dwattr $C$DW$5, DW_AT_external
+      83                      .dwattr $C$DW$5, DW_AT_decl_file("syscfg/board.c")
+      84                      .dwattr $C$DW$5, DW_AT_decl_line(0x2e)
+      85                      .dwattr $C$DW$5, DW_AT_decl_column(0x06)
+      86                      .dwattr $C$DW$5, DW_AT_TI_max_frame_size(-2)
+      87                      .dwpsn  file "syscfg/board.c",line 47,column 1,is_stmt,address ||Board_init||,isa 0
+      88              
+      89                      .dwfde $C$DW$CIE, ||Board_init||
+      90              
+      91              ;***************************************************************
+      92              ;* FNAME: Board_init                    FR SIZE:   0           *
+      93              ;*                                                             *
+      94              ;* FUNCTION ENVIRONMENT                                        *
+      95              ;*                                                             *
+      96              ;* FUNCTION PROPERTIES                                         *
+      97              ;*                            0 Parameter,  0 Auto,  0 SOE     *
+      98              ;***************************************************************
+      99              
+     100 00000001       ||Board_init||:
+     101                      .dwcfi  cfa_offset, -2
+     102                      .dwcfi  save_reg_to_mem, 26, 0
+     103                      .dwpsn  file "syscfg/board.c",line 52,column 2,is_stmt,isa 0
+     104 00000001 761A          EDIS      ; [CPU_ALU] |52| 
+     105              $C$DW$6 .dwtag  DW_TAG_TI_branch
+     106                      .dwattr $C$DW$6, DW_AT_low_pc(0x00)
+     107                      .dwattr $C$DW$6, DW_AT_TI_return
+     108              
+     109 00000002 0006          LRETR     ; [CPU_ALU] 
+     110                      ; return occurs ; [] 
+TMS320C2000 Assembler PC v25.11.1 Mon Oct 26 09:58:50 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+board.asm                                                            PAGE    3
+
+     111                      .dwattr $C$DW$5, DW_AT_TI_end_file("syscfg/board.c")
+     112                      .dwattr $C$DW$5, DW_AT_TI_end_line(0x35)
+     113                      .dwattr $C$DW$5, DW_AT_TI_end_column(0x01)
+     114                      .dwendentry
+     115                      .dwendtag $C$DW$5
+     116              
+     117              
+     118              ;***************************************************************
+     119              ;* BUILD ATTRIBUTES                                            *
+     120              ;***************************************************************
+     121                      .battr "c28xabi", Tag_File, 1, Tag_float_args(0)
+     122                      .battr "c28xabi", Tag_File, 1, Tag_double_args(0)
+     123                      .dwattr $C$DW$CU, DW_AT_language(DW_LANG_C)
+     124              
+     125              ;***************************************************************
+     126              ;* DWARF CIE ENTRIES                                           *
+     127              ;***************************************************************
+     128              
+     129              $C$DW$CIE       .dwcie 26
+     130                      .dwcfi  cfa_register, 20
+     131                      .dwcfi  cfa_offset, 0
+     132                      .dwcfi  same_value, 28
+     133                      .dwcfi  same_value, 6
+     134                      .dwcfi  same_value, 7
+     135                      .dwcfi  same_value, 8
+     136                      .dwcfi  same_value, 9
+     137                      .dwcfi  same_value, 10
+     138                      .dwcfi  same_value, 11
+     139                      .dwcfi  same_value, 59
+     140                      .dwcfi  same_value, 63
+     141                      .dwcfi  same_value, 67
+     142                      .dwcfi  same_value, 71
+     143                      .dwendentry
+     144                      .dwendtag $C$DW$CU
+     145              
+     146              
+     147              ;***************************************************************
+     148              ;* TYPE INFORMATION                                            *
+     149              ;***************************************************************
+     150              
+     151              $C$DW$TU$2      .dwtag  DW_TAG_type_unit
+     152                      .dwmtype  $C$DW$T$2
+     153              $C$DW$T$2       .dwtag  DW_TAG_unspecified_type
+     154                      .dwattr $C$DW$T$2, DW_AT_name("void")
+     155              
+     156                      .dwendtag $C$DW$TU$2
+     157              
+     158              
+     159              $C$DW$TU$4      .dwtag  DW_TAG_type_unit
+     160                      .dwmtype  $C$DW$T$4
+     161              $C$DW$T$4       .dwtag  DW_TAG_base_type
+     162                      .dwattr $C$DW$T$4, DW_AT_encoding(DW_ATE_boolean)
+     163                      .dwattr $C$DW$T$4, DW_AT_name("bool")
+     164                      .dwattr $C$DW$T$4, DW_AT_byte_size(0x01)
+     165              
+TMS320C2000 Assembler PC v25.11.1 Mon Oct 26 09:58:50 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+board.asm                                                            PAGE    4
+
+     166                      .dwendtag $C$DW$TU$4
+     167              
+     168              
+     169              $C$DW$TU$5      .dwtag  DW_TAG_type_unit
+     170                      .dwmtype  $C$DW$T$5
+     171              $C$DW$T$5       .dwtag  DW_TAG_base_type
+     172                      .dwattr $C$DW$T$5, DW_AT_encoding(DW_ATE_signed_char)
+     173                      .dwattr $C$DW$T$5, DW_AT_name("signed char")
+     174                      .dwattr $C$DW$T$5, DW_AT_byte_size(0x01)
+     175              
+     176                      .dwendtag $C$DW$TU$5
+     177              
+     178              
+     179              $C$DW$TU$6      .dwtag  DW_TAG_type_unit
+     180                      .dwmtype  $C$DW$T$6
+     181              $C$DW$T$6       .dwtag  DW_TAG_base_type
+     182                      .dwattr $C$DW$T$6, DW_AT_encoding(DW_ATE_unsigned_char)
+     183                      .dwattr $C$DW$T$6, DW_AT_name("unsigned char")
+     184                      .dwattr $C$DW$T$6, DW_AT_byte_size(0x01)
+     185              
+     186                      .dwendtag $C$DW$TU$6
+     187              
+     188              
+     189              $C$DW$TU$7      .dwtag  DW_TAG_type_unit
+     190                      .dwmtype  $C$DW$T$7
+     191              $C$DW$T$7       .dwtag  DW_TAG_base_type
+     192                      .dwattr $C$DW$T$7, DW_AT_encoding(DW_ATE_signed_char)
+     193                      .dwattr $C$DW$T$7, DW_AT_name("wchar_t")
+     194                      .dwattr $C$DW$T$7, DW_AT_byte_size(0x02)
+     195              
+     196                      .dwendtag $C$DW$TU$7
+     197              
+     198              
+     199              $C$DW$TU$8      .dwtag  DW_TAG_type_unit
+     200                      .dwmtype  $C$DW$T$8
+     201              $C$DW$T$8       .dwtag  DW_TAG_base_type
+     202                      .dwattr $C$DW$T$8, DW_AT_encoding(DW_ATE_signed)
+     203                      .dwattr $C$DW$T$8, DW_AT_name("short")
+     204                      .dwattr $C$DW$T$8, DW_AT_byte_size(0x01)
+     205              
+     206                      .dwendtag $C$DW$TU$8
+     207              
+     208              
+     209              $C$DW$TU$9      .dwtag  DW_TAG_type_unit
+     210                      .dwmtype  $C$DW$T$9
+     211              $C$DW$T$9       .dwtag  DW_TAG_base_type
+     212                      .dwattr $C$DW$T$9, DW_AT_encoding(DW_ATE_unsigned)
+     213                      .dwattr $C$DW$T$9, DW_AT_name("unsigned short")
+     214                      .dwattr $C$DW$T$9, DW_AT_byte_size(0x01)
+     215              
+     216                      .dwendtag $C$DW$TU$9
+     217              
+     218              
+     219              $C$DW$TU$10     .dwtag  DW_TAG_type_unit
+     220                      .dwmtype  $C$DW$T$10
+TMS320C2000 Assembler PC v25.11.1 Mon Oct 26 09:58:50 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+board.asm                                                            PAGE    5
+
+     221              $C$DW$T$10      .dwtag  DW_TAG_base_type
+     222                      .dwattr $C$DW$T$10, DW_AT_encoding(DW_ATE_signed)
+     223                      .dwattr $C$DW$T$10, DW_AT_name("int")
+     224                      .dwattr $C$DW$T$10, DW_AT_byte_size(0x01)
+     225              
+     226                      .dwendtag $C$DW$TU$10
+     227              
+     228              
+     229              $C$DW$TU$11     .dwtag  DW_TAG_type_unit
+     230                      .dwmtype  $C$DW$T$11
+     231              $C$DW$T$11      .dwtag  DW_TAG_base_type
+     232                      .dwattr $C$DW$T$11, DW_AT_encoding(DW_ATE_unsigned)
+     233                      .dwattr $C$DW$T$11, DW_AT_name("unsigned int")
+     234                      .dwattr $C$DW$T$11, DW_AT_byte_size(0x01)
+     235              
+     236                      .dwendtag $C$DW$TU$11
+     237              
+     238              
+     239              $C$DW$TU$12     .dwtag  DW_TAG_type_unit
+     240                      .dwmtype  $C$DW$T$12
+     241              $C$DW$T$12      .dwtag  DW_TAG_base_type
+     242                      .dwattr $C$DW$T$12, DW_AT_encoding(DW_ATE_signed)
+     243                      .dwattr $C$DW$T$12, DW_AT_name("long")
+     244                      .dwattr $C$DW$T$12, DW_AT_byte_size(0x02)
+     245              
+     246                      .dwendtag $C$DW$TU$12
+     247              
+     248              
+     249              $C$DW$TU$13     .dwtag  DW_TAG_type_unit
+     250                      .dwmtype  $C$DW$T$13
+     251              $C$DW$T$13      .dwtag  DW_TAG_base_type
+     252                      .dwattr $C$DW$T$13, DW_AT_encoding(DW_ATE_unsigned)
+     253                      .dwattr $C$DW$T$13, DW_AT_name("unsigned long")
+     254                      .dwattr $C$DW$T$13, DW_AT_byte_size(0x02)
+     255              
+     256                      .dwendtag $C$DW$TU$13
+     257              
+     258              
+     259              $C$DW$TU$14     .dwtag  DW_TAG_type_unit
+     260                      .dwmtype  $C$DW$T$14
+     261              $C$DW$T$14      .dwtag  DW_TAG_base_type
+     262                      .dwattr $C$DW$T$14, DW_AT_encoding(DW_ATE_signed)
+     263                      .dwattr $C$DW$T$14, DW_AT_name("long long")
+     264                      .dwattr $C$DW$T$14, DW_AT_byte_size(0x04)
+     265              
+     266                      .dwendtag $C$DW$TU$14
+     267              
+     268              
+     269              $C$DW$TU$15     .dwtag  DW_TAG_type_unit
+     270                      .dwmtype  $C$DW$T$15
+     271              $C$DW$T$15      .dwtag  DW_TAG_base_type
+     272                      .dwattr $C$DW$T$15, DW_AT_encoding(DW_ATE_unsigned)
+     273                      .dwattr $C$DW$T$15, DW_AT_name("unsigned long long")
+     274                      .dwattr $C$DW$T$15, DW_AT_byte_size(0x04)
+     275              
+TMS320C2000 Assembler PC v25.11.1 Mon Oct 26 09:58:50 2026
+
+Copyright (c) 1996-2018 Texas Instruments Incorporated
+board.asm                                                            PAGE    6
+
+     276                      .dwendtag $C$DW$TU$15
+     277              
+     278              
+     279              $C$DW$TU$16     .dwtag  DW_TAG_type_unit
+     280                      .dwmtype  $C$DW$T$16
+     281              $C$DW$T$16      .dwtag  DW_TAG_base_type
+     282                      .dwattr $C$DW$T$16, DW_AT_encoding(DW_ATE_float)
+     283                      .dwattr $C$DW$T$16, DW_AT_name("float")
+     284                      .dwattr $C$DW$T$16, DW_AT_byte_size(0x02)
+     285              
+     286                      .dwendtag $C$DW$TU$16
+     287              
+     288              
+     289              $C$DW$TU$17     .dwtag  DW_TAG_type_unit
+     290                      .dwmtype  $C$DW$T$17
+     291              $C$DW$T$17      .dwtag  DW_TAG_base_type
+     292                      .dwattr $C$DW$T$17, DW_AT_encoding(DW_ATE_float)
+     293                      .dwattr $C$DW$T$17, DW_AT_name("double")
+     294                      .dwattr $C$DW$T$17, DW_AT_byte_size(0x04)
+     295              
+     296                      .dwendtag $C$DW$TU$17
+     297              
+     298              
+     299              $C$DW$TU$18     .dwtag  DW_TAG_type_unit
+     300                      .dwmtype  $C$DW$T$18
+     301              $C$DW$T$18      .dwtag  DW_TAG_base_type
+     302                      .dwattr $C$DW$T$18, DW_AT_encoding(DW_ATE_float)
+     303                      .dwattr $C$DW$T$18, DW_AT_name("long double")
+     304                      .dwattr $C$DW$T$18, DW_AT_byte_size(0x04)
+     305              
+     306                      .dwendtag $C$DW$TU$18
+     307              
+
+No Assembly Errors, No Assembly Warnings
