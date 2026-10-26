@@ -14,14 +14,9 @@ const TIDM_1000 = scripting.addModule("/devkits/TIDM_1000/TIDM_1000");
 /**
  * Write custom configuration values to the imported modules.
  */
-TIDM_1000.INCR_BUILD    = 4;
-TIDM_1000.ControlISRCore = 1;
-TIDM_1000.Fsw_Fctrl_Ratio = 1;
 TIDM_1000.Fsw           = 50;
-TIDM_1000.Vout          = 180;
-TIDM_1000.Vin           = 100.008614; // Line RMS = sqrt(3) * 57.74 V phase RMS.
+TIDM_1000.Vin           = 100.008614;
 TIDM_1000.P_Rated       = 2400;
-TIDM_1000.Pout          = 324;
 TIDM_1000.Li            = 3;
 TIDM_1000.Ri            = 0.2;
 TIDM_1000.Cf            = 220;
@@ -33,3 +28,5 @@ TIDM_1000.I_TripLevel   = 4;
 TIDM_1000.Rfltr         = 68;
 TIDM_1000.Cfltr         = 0.1;
 TIDM_1000.Tuning        = 3;
+TIDM_1000.Vout          = 200;
+TIDM_1000.Pout          = 400;
