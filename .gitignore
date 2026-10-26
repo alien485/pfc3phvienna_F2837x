@@ -24,3 +24,11 @@ Release/
 # Operating system
 Thumbs.db
 .DS_Store
+# PCMFPC CCS generated build output
+/pcmfpc_zcdc_target/FLASH/
+
+# PCMFPC generated host test binaries
+/pcmfpc_zcdc_target/tests/**/*.exe
+/pcmfpc_zcdc_target/tests/**/*.dll
+/pcmfpc_zcdc_target/tests/**/*.exp
+/pcmfpc_zcdc_target/tests/**/*.lib
