@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$CcsRoot = 'D:\CCS12\CCS12.3.0.00005_win64\ccs1230\ccs',
+    [string]$WorkspaceDirectory = '',
     [switch]$SkipImport,
     [switch]$ImportOnly,
     [ValidateRange(15, 900)]
@@ -11,7 +12,14 @@ $ErrorActionPreference = 'Stop'
 $targetProject = [IO.Path]::GetFullPath($PSScriptRoot)
 $workspaceRoot = [IO.Path]::GetFullPath((Join-Path $targetProject '..\..\..\..'))
 $evidenceRoot = Join-Path $workspaceRoot 'output\ti_pcmfpc_zcdc_port'
-$ccsWorkspace = Join-Path $evidenceRoot 'ccs_workspace'
+$checkoutName = Split-Path -Leaf (Split-Path -Parent $targetProject)
+if ([string]::IsNullOrWhiteSpace($WorkspaceDirectory)) {
+    # Each checkout needs its own CCS project registry. Reusing the former
+    # workspace can silently address a project imported from another path.
+    $ccsWorkspace = Join-Path $evidenceRoot ('ccs_headless_' + $checkoutName)
+} else {
+    $ccsWorkspace = [IO.Path]::GetFullPath($WorkspaceDirectory)
+}
 $launcher = Join-Path $CcsRoot 'eclipse\eclipsec.exe'
 $jre = Join-Path $CcsRoot 'eclipse\jre\bin\java.exe'
 $configuration = 'FLASH'
@@ -31,6 +39,21 @@ if (-not (Test-Path -LiteralPath $projectFile -PathType Leaf)) {
 $projectName = [string]$projectXml.projectDescription.name
 if ($projectName -ne $expectedName) {
     throw "Refusing to build unexpected project '$projectName'; expected '$expectedName'."
+}
+$cleanupGuard = Join-Path $targetProject 'makefile.init'
+if (-not (Test-Path -LiteralPath $cleanupGuard -PathType Leaf)) {
+    throw 'Missing makefile.init cleanup guard; refusing to launch CCS.'
+}
+$guardText = [IO.File]::ReadAllText($cleanupGuard)
+if ($guardText -notmatch 'override RM\s*=' -or $guardText -notmatch 'CLEAN_DISABLED_BY_POLICY') {
+    throw 'Cleanup guard is incomplete; refusing to launch CCS.'
+}
+[xml]$buildConfiguration = Get-Content -LiteralPath (Join-Path $targetProject '.cproject') -Raw
+foreach ($builder in $buildConfiguration.SelectNodes('//builder')) {
+    if ($builder.GetAttribute('enableCleanBuild') -ne 'false' -or
+        $builder.GetAttribute('cleanBuildTarget') -ne 'CLEAN_DISABLED_BY_POLICY') {
+        throw 'CCS cleanup is not disabled in .cproject; refusing to launch CCS.'
+    }
 }
 
 # A successful C build does not validate a debugger target configuration.
@@ -57,6 +80,22 @@ Write-Output 'F28379D target configuration references verified; no debugger sess
 # Only create directories. No clean, rebuild, file removal, checkout or hardware action.
 [void][IO.Directory]::CreateDirectory($evidenceRoot)
 [void][IO.Directory]::CreateDirectory($ccsWorkspace)
+# CCS 12 bundles EGit 6.1, whose automatic repository mapping fails on linked
+# worktrees. GitHub Desktop manages Git; the compiler only needs project files.
+$gitSettingsDirectory = Join-Path $ccsWorkspace '.metadata\.plugins\org.eclipse.core.runtime\.settings'
+[void][IO.Directory]::CreateDirectory($gitSettingsDirectory)
+$gitPreferences = Join-Path $gitSettingsDirectory 'org.eclipse.egit.core.prefs'
+$gitPreferenceLines = @()
+if (Test-Path -LiteralPath $gitPreferences -PathType Leaf) {
+    $gitPreferenceLines = @([IO.File]::ReadAllLines($gitPreferences) |
+        Where-Object { $_ -notmatch '^core_autoShareProjects=' })
+}
+if (-not ($gitPreferenceLines -match '^eclipse.preferences.version=')) {
+    $gitPreferenceLines = @('eclipse.preferences.version=1') + $gitPreferenceLines
+}
+$gitPreferenceLines += 'core_autoShareProjects=false'
+[IO.File]::WriteAllLines($gitPreferences, [string[]]$gitPreferenceLines,
+    [Text.UTF8Encoding]::new($false))
 
 function Invoke-CcsHeadless {
     param([string]$Phase, [string[]]$Arguments)

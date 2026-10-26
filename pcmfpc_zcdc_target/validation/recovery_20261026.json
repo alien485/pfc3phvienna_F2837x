@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-26",
+  "status": "RECOVERED_AND_BUILD_VERIFIED;PCMFPC_POWER_RELEASE_NOT_ALLOWED",
+  "main": {
+    "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_F2837x",
+    "head": "756e806a61d69973c0f17e87e3608adfe7bb4786",
+    "branch": "main",
+    "tracked_file_count": 82,
+    "changed_tracked_files": [],
+    "working_tree_status": "",
+    "existing_map_linked": ">> Linked Mon Oct 26 14:49:36 2026",
+    "rebuilt_during_recovery": false
+  },
+  "new_mpc": {
+    "path": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc",
+    "target": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target",
+    "head": "531702a5f61236dca1f39bd8837bf86f8b45516f",
+    "branch": "new_mpc",
+    "project": "vienna_pcmfpc_zcdc_F2837x",
+    "fast_c_sha256": "25d29682837e9c2379c7b3c9d3523f5f25f5db980499987423e3dab1915e9872",
+    "fast_h_sha256": "fb1edfd454046ca0cef110d120ae88c92c7fd207320bc159beee748d8eebf945",
+    "source_matches_final_round5_backup": true,
+    "kernel_revision": 5,
+    "watch_count": 65,
+    "out_sha256": "a55af358c59ffbcc358cbfb1c168b9550143de4f8c739d04cbbec8e7db6a482e",
+    "map_sha256": "eacf71c007d7a21b1930bfd0c10280a2e4c021ece05fd29cd3753ef8df288a5f",
+    "build_errors": 0,
+    "build_warnings": 1,
+    "headless_import_exit": 0,
+    "headless_build_exit": 0,
+    "source_verification": "PASS"
+  },
+  "recovery": {
+    "original_stash_preserved": true,
+    "stash_commit": "33f98e908e426af8e50526f3d94edb4c9e7847a7",
+    "bundle": "repository_before_recovery.bundle",
+    "selected_files": "restored_files.json",
+    "deleted_fast_entry_not_applied": true,
+    "python_cache_not_restored": true,
+    "source_newline_conversions_recorded_in_delivery_checks": true
+  },
+  "cleanup_incident": {
+    "occurred_during_earlier_headless_incremental_attempt": true,
+    "reason": "CCS automatically scheduled clean after a new workspace took over existing output",
+    "affected_location": "new_mpc target generated outputs and regenerated vienna_settings.h only; handwritten source hashes checked",
+    "logs": "egit_fixed_before_clean_guard/ccs_incremental.stdout.log",
+    "main_unchanged": true,
+    "handwritten_core_restored_and_checked": true,
+    "mitigation": [
+      ".cproject enableCleanBuild=false and blocked clean target",
+      "makefile.init rejects clean/rebuild and RM/RMDIR expansions",
+      "build script refuses to launch without guards"
+    ],
+    "dry_run_clean_rejected": true,
+    "final_fresh_workspace_build_has_no_clean": true
+  },
+  "gui": {
+    "main": "use existing main CCS workspace",
+    "pcmfpc_workspace": "D:\\GraduateStudentProject\\Vienna_Rectifier\\CCS_Workspaces\\new_mpc",
+    "copy_projects_into_workspace": false,
+    "old_ccs_egit_auto_share_disabled_in_new_workspaces": true
+  },
+  "no_algorithm_or_peripheral_parameter_changes_in_recovery": true,
+  "no_hardware_actions": true,
+  "no_commit_or_push": true,
+  "board_timing": {
+    "round4_user_fixture_cycles": 23425,
+    "round5_hardware_timing_verified": false,
+    "hardware_release": 0
+  }
+}

@@ -92,7 +92,9 @@ typedef struct {
 typedef struct {
     PF_LambdaPlan local;
     const PF_LambdaPlan *plan;
-    PC_Real a,b,B,root,residual;
+    /* Reserved layout only, not control state: retain C28x data-page
+     * placement while the temporary FP values remain local scalars. */
+    PC_Real reserved[5];
     uint16_t active,n,k,found;
 } PF_LambdaWork;
 #endif
@@ -134,6 +136,8 @@ static PF_SelectWork pf_select_work;
 volatile uint16_t PC_fast_output_substeps_available=0U;
 volatile uint16_t PC_fast_output_summaries_available=0U;
 volatile uint16_t PC_fast_output_integrals_available=0U;
+/* Observation only: identifies this kernel, never gates control or start. */
+volatile uint16_t PC_fast_kernel_revision=5U;
 
 static void pf_rotation(PC_Real theta,PF_Rotation *r)
 {
@@ -373,40 +377,43 @@ static uint16_t pf_lambda_root(const PC_Real q[3],uint16_t hw,PC_Real c,
     PC_Real up,PC_Real low,PC_Real next[3],const PF_LambdaPlan *shared)
 {
     PF_LambdaWork *w=&pf_lambda_work;
+    /* Keep short-lived FP values in local scalars; preserve the exact
+     * phase-order sums, segment order and final projection expressions. */
+    PC_Real a,b,B,root,residual;
     if(shared)w->plan=shared;
     else{
         pf_lambda_plan(q,c,up,low,&w->local);w->plan=&w->local;
     }
     if(w->plan->status!=PC_OK)return w->plan->status;
     w->active=(uint16_t)(hw | (w->plan->off_active & (uint16_t)~hw));
-    w->a=-w->plan->cl;w->found=0U;
+    a=-w->plan->cl;w->found=0U;
     for(w->k=0U;w->k<=w->plan->count;w->k++){
         if(w->k<w->plan->count && (w->plan->phase[w->k]&hw))continue;
-        w->b=w->k<w->plan->count?w->plan->point[w->k]:w->plan->cu;
-        w->B=(PC_Real)0;
-        if(w->active&1U)w->B+=(hw&1U)?q[0]:w->plan->base[0];
-        if(w->active&2U)w->B+=(hw&2U)?q[1]:w->plan->base[1];
-        if(w->active&4U)w->B+=(hw&4U)?q[2]:w->plan->base[2];
+        b=w->k<w->plan->count?w->plan->point[w->k]:w->plan->cu;
+        B=(PC_Real)0;
+        if(w->active&1U)B+=(hw&1U)?q[0]:w->plan->base[0];
+        if(w->active&2U)B+=(hw&2U)?q[1]:w->plan->base[1];
+        if(w->active&4U)B+=(hw&4U)?q[2]:w->plan->base[2];
         w->n=(uint16_t)((w->active&1U)+((w->active>>1)&1U)+((w->active>>2)&1U));
-        if(w->n==0U)w->root=w->a;
-        else if(w->n==1U)w->root=-w->B;
-        else if(w->n==2U)w->root=-w->B/(PC_Real)2;
-        else w->root=-w->B/(PC_Real)3;
-        if(w->root>=w->a && w->root<=w->b){w->found=1U;break;}
+        if(w->n==0U)root=a;
+        else if(w->n==1U)root=-B;
+        else if(w->n==2U)root=-B/(PC_Real)2;
+        else root=-B/(PC_Real)3;
+        if(root>=a && root<=b){w->found=1U;break;}
         if(w->k<w->plan->count){
-            w->active^=w->plan->phase[w->k];w->a=w->b;
+            w->active^=w->plan->phase[w->k];a=b;
         }
     }
     if(!w->found){
         /* Only endpoint rounding within the existing residual tolerance is
          * accepted; tolerance is never used to snap a candidate current. */
-        w->root=-w->plan->cl;
-        w->residual=pf_lambda_projection(q,hw,w->plan->cu,w->plan->cl,w->root,next);
-        if(pf_finite(w->residual) && PC_ABS(w->residual)<=w->plan->tolerance)return PC_OK;
-        w->root=w->plan->cu;
+        root=-w->plan->cl;
+        residual=pf_lambda_projection(q,hw,w->plan->cu,w->plan->cl,root,next);
+        if(pf_finite(residual) && PC_ABS(residual)<=w->plan->tolerance)return PC_OK;
+        root=w->plan->cu;
     }
-    w->residual=pf_lambda_projection(q,hw,w->plan->cu,w->plan->cl,w->root,next);
-    if(!pf_finite(w->residual) || PC_ABS(w->residual)>w->plan->tolerance)return PC_ERR_ROOT;
+    residual=pf_lambda_projection(q,hw,w->plan->cu,w->plan->cl,root,next);
+    if(!pf_finite(residual) || PC_ABS(residual)>w->plan->tolerance)return PC_ERR_ROOT;
     return PC_OK;
 }
 #endif
@@ -594,6 +601,7 @@ uint16_t PC_run_fast(const PC_Config *cfg,const PC_Input *in,PC_Output *out)
     PC_Real dc,up1,low1,theta1,theta2,amp;
     PC_Real lo,hi,budget,minI,spreadLo,spreadHi,gzLo,gzHi;
     uint16_t status,j,k,r,m,n,chosen,pcOff,mask=0U,cmask=0U,iteration;
+    PC_fast_kernel_revision=5U;
     PC_fast_output_substeps_available=0U;
     PC_fast_output_summaries_available=0U;
     PC_fast_output_integrals_available=0U;

@@ -98,7 +98,7 @@
         "COMP_OPTIONS": {
             "COMP_NUM": "3",
             "MODEL_STYLE": "1",
-            "SFRAPATH": "D:/GraduateStudentProject/Vienna_Rectifier/Vienna_Project/Vienna_MPC/pfc3phvienna_F2837x/pcmfpc_zcdc_target/SFRAData/SFRAData.csv",
+            "SFRAPATH": "D:/GraduateStudentProject/Vienna_Rectifier/Vienna_Project/Vienna_MPC/pfc3phvienna_new_mpc/pcmfpc_zcdc_target/SFRAData/SFRAData.csv",
             "COMP_ABS_LIMIT": "256",
             "COMP_STYLE": "9"
         }

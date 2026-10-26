@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-26",
+  "source": "user-provided CCS Expressions screenshot",
+  "result": "FIXTURE_NUMERIC_PASS;REALTIME_BUDGET_FAIL",
+  "observed": {
+    "BenchStatus": 1,
+    "CoreStatus": 0,
+    "BenchCycles": 23425,
+    "BenchCyclesMax": 23425,
+    "BenchCount": 1,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "Fault": 32,
+    "ActualAppliedState": 0,
+    "PendingState": 0,
+    "BodyCycles": 1319,
+    "BodyCyclesMax": 24914,
+    "WriteCycles": 1149,
+    "WriteCyclesMax": 1264,
+    "AlgorithmCycles": 0,
+    "AlgorithmCyclesMax": 0,
+    "BenchRequest": 0,
+    "fcsDeadlineMissCount": 1,
+    "Tick": 2055288,
+    "RecordArm": 0,
+    "RingCount": 0,
+    "guiVbusTripLimit_Volts": 204,
+    "vBusRef_pu": 0.374449342
+  },
+  "comparison": {
+    "prior_fixture_cycles": 27485,
+    "new_fixture_cycles": 23425,
+    "cycles_saved": 4060,
+    "elapsed_cycle_reduction_percent": 14.771693651082408,
+    "comparison_assumes_same_fixture_clock_and_no_halt": true
+  },
+  "conditional_200MHz_conversion": {
+    "actual_cpu_clock_independently_verified": false,
+    "old_us": 137.425,
+    "new_us": 117.125,
+    "saved_us": 20.3,
+    "body_max_us": 124.57,
+    "is_complete_isr": false
+  },
+  "budgets": {
+    "period_cycles": 4000,
+    "nominal_to_zero_cycles": 1628,
+    "nominal_window_caveat": "subtract 40TBCLK guard and submission overhead",
+    "bench_to_period_ratio": 5.85625,
+    "bench_to_nominal_write_ratio": 14.388820638820638,
+    "pass": false
+  },
+  "firmware_association": {
+    "basis": "followup after explicit fourth-round Load Program instructions; screenshot alone does not prove device bytes",
+    "candidate_out_sha256": "52971695495f326d60d936a80f57aee79c52750c4e84dae0016b364f3a780b2b",
+    "candidate_fast_c_sha256": "36412b8fa7c0c6f8051c330ce828d2db92ac4ca4b69c5c260afe533c2f723ac5",
+    "on_device_out_fingerprint_verified": false
+  },
+  "limits": {
+    "wcet_verified": false,
+    "halt_history_known": false,
+    "HardwareRelease_loops_OST_directly_visible": false,
+    "normal_loop_write_timing_verified": false,
+    "closed_loop_hardware_verified": false,
+    "hardware_release_allowed": false,
+    "exact_behavioral_equivalence_to_original": false
+  },
+  "screenshot": {
+    "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-5ae4946a-ec81-4682-ae68-ffabeaa0c571.png",
+    "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round4\\ccs_benchmark.png",
+    "sha256": "828bb80f08840fa9e2bd54dfa2a969425a93f8c41dee042a93ea4c6368866a62",
+    "bytes": 90600
+  },
+  "agent_hardware_actions": false,
+  "code_changes_in_evidence_recording": false
+}

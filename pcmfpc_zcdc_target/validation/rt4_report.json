@@ -164,11 +164,17 @@
     "source": "rt_optimization/build_pass4/combined_lower_bound.json"
   },
   "hardware_timing": {
-    "current_out_measured": false,
+    "current_out_measured": true,
     "prior_out_sha256": "8c8251baff6b1e1938c3e6c8d531643ffd261c1e05e3c729bcfb7e42527bddd5",
     "prior_fixed_fixture_cycles": 27485,
-    "new_out_fixture_cycles": null,
-    "required_next_step": "User only: same no-power/OST/release0 BenchRequest2 once, record cycles/count/status/IDs/fault and halt history"
+    "new_out_fixture_cycles": 23425,
+    "required_next_step": "Continued software optimization only; hardware release remains0. Newer OUTs require separate measurement.",
+    "on_device_out_sha_verified": false,
+    "association_basis": "user followup after fourth-round Load Program instructions; screenshot lacks OUT fingerprint",
+    "new_out_body_max_cycles": 24914,
+    "cycle_reduction_vs_prior_percent": 14.771693651082408,
+    "single_sample_not_wcet": true,
+    "measurement": "bench_20261026_round4/REPORT.json"
   },
   "no_hardware_actions_by_agent": true,
   "no_cleanup_or_deletion": true,

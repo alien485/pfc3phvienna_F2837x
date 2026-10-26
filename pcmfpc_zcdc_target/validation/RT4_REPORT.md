@@ -73,10 +73,12 @@ RAM代码12531/16384word，bss3180/4096word；PCrun/control/lambda/plan帧88/36/
 真实可用窗口还需扣40TBCLK守护及提交开销。该下界忽略callee计划、其他循环次数、指令等待等，
 不是WCET、平均耗时或实际DSP计时。不得与旧6408下界相减作提速率。
 
-旧OUT 8c8251...的27485cycle/137.425us只属于此前用户样例，不能当成新OUT的测量。
-新OUT还需用户按BENCH_TIMING在无主功率、全OST及放行0下写一次BenchRequest=2，
-记录BenchStatus/Cycles/Count/SelectedId/HWState/Fault和暂停历史，以比较同一样例真实耗时。
-即使比27485降低，也不改变当前未通过实时预算的结论，不清Trip或打开硬件放行。
+旧OUT 8c8251...的27485cycle/137.425us只属于此前用户样例。
+用户后续反馈第四轮固定样例23425cycle，减少4060cycle/14.77169%，配置200MHz为117.125us；
+Body最大24914cycle，CoreStatus0/BenchStatus1/Count1，Fault32，实际/待执行0。
+原截图与完整关联边界见根bench_20261026_round4。截图没有OUT指纹、主频或暂停历史的独立证明，
+只测一个固定样例，不是WCET；同条件比较表明本轮耗时有所降低，仍远超两个预算。
+不得把这个测量沿用到后续OUT；不清Trip或打开硬件放行。
 
 ## 下一步
 

@@ -1,13 +1,222 @@
 {
   "scope": "source fingerprints, branch isolation, CCS metadata and watch syntax/symbols; no GUI/hardware test",
   "branch": "new_mpc",
-  "head": "44f0ec5d6421aff4c48e369325d66959e44a55bd",
+  "head": "531702a5f61236dca1f39bd8837bf86f8b45516f",
   "historical_baseline_commit": "1c93fcd53644baa0716826c66007696b512cb46d",
   "baseline_is_ancestor": true,
-  "main_unchanged": true,
+  "main_tip": "756e806a61d69973c0f17e87e3608adfe7bb4786",
+  "main_contains_historical_baseline": true,
+  "main_advanced_since_historical_baseline": true,
   "parent_changed_files": [
     ".cproject"
   ],
+  "parent_newline_only_files": [
+    ".ccsproject",
+    ".gitattributes",
+    "CLAmath.h",
+    "DCL_PI_C4.asm",
+    "DCL_PI_L2.asm",
+    "FCS_MPC_BUILD4_保姆操作指南.md",
+    "device/F2837xD_CodeStartBranch.asm",
+    "device/device.c",
+    "device/device.h",
+    "device/driverlib.h",
+    "f2837xd_flash_cpu1_lnk.cmd",
+    "libraries/DCL/DCL.h",
+    "libraries/DCL/DCLCLA.h",
+    "libraries/DCL/DCLF32.h",
+    "libraries/power_measurement/power_meas_sine_analyzer.h",
+    "libraries/sfra/sfra_f32.h",
+    "libraries/spll/spll_1ph_notch.h",
+    "libraries/spll/spll_1ph_sogi.h",
+    "libraries/spll/spll_1ph_sogi_fll.h",
+    "libraries/utilities/dlog_4ch.h",
+    "libraries/utilities/emavg.h",
+    "libraries/utilities/rampgen.h",
+    "setupdebugenv_fcs_build4_guide.js",
+    "sfra_gui_scicomms_driverlib.c",
+    "sfra_gui_scicomms_driverlib.h",
+    "solution.js",
+    "targetConfigs/TMS320F28377D.ccxml",
+    "vienna_clatask.cla",
+    "vienna_main.c"
+  ],
+  "parent_newline_evidence": {
+    ".ccsproject": {
+      "historical_raw_sha256": "bfc7e37d647d7c2a148e70492cf0a926f1803243c960ab55a0feafe9a2e83fa3",
+      "canonical_historical_commit_sha256": "bfc7e37d647d7c2a148e70492cf0a926f1803243c960ab55a0feafe9a2e83fa3",
+      "actual_raw_sha256": "5ba0a6254f16f51fa4fa57280d749960b472ad6d6aa809765c47dc252e1342dd",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    ".gitattributes": {
+      "historical_raw_sha256": "1a1dbe176bc233b499d35a57db7513f2941c99ab9759f177830c9149be99005b",
+      "canonical_historical_commit_sha256": "1a1dbe176bc233b499d35a57db7513f2941c99ab9759f177830c9149be99005b",
+      "actual_raw_sha256": "d8fb0de4792538f93822b2c0d235604921299d5e54a3d6ec7a6cb34536e8bf1e",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "CLAmath.h": {
+      "historical_raw_sha256": "75b458e0532e8bec1857ec90b854b30dd4aac1925573aa990c81db7a227e04b1",
+      "canonical_historical_commit_sha256": "75b458e0532e8bec1857ec90b854b30dd4aac1925573aa990c81db7a227e04b1",
+      "actual_raw_sha256": "863b3613dd98c9cf38f19c202894a8267faecfcc190a4878f396a0317f8ad538",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "DCL_PI_C4.asm": {
+      "historical_raw_sha256": "a2d2eb9de5b92ff81582b67f7e2863b3ea4e9f043ba63585a92ea50003d26544",
+      "canonical_historical_commit_sha256": "a2d2eb9de5b92ff81582b67f7e2863b3ea4e9f043ba63585a92ea50003d26544",
+      "actual_raw_sha256": "ab7e32b4b2cb87a281a0a2660f62cd4229fdcf10af179a1938642d79f99d00d9",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "DCL_PI_L2.asm": {
+      "historical_raw_sha256": "b056810ea49b0edbe7ea605f71fd56fb0ba07dadce9755d00b3853ca132ac9ab",
+      "canonical_historical_commit_sha256": "b056810ea49b0edbe7ea605f71fd56fb0ba07dadce9755d00b3853ca132ac9ab",
+      "actual_raw_sha256": "ff18bd8be3b20b4a3a5d688f083575db9c8f533490888ffdab48385077adce22",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "FCS_MPC_BUILD4_保姆操作指南.md": {
+      "historical_raw_sha256": "eaa6f1b2d6cc341676900be5e6f22c8d8535bf48d89e4b129ac3168099c0a635",
+      "canonical_historical_commit_sha256": "eaa6f1b2d6cc341676900be5e6f22c8d8535bf48d89e4b129ac3168099c0a635",
+      "actual_raw_sha256": "571290afb338cc9e9886344d96661976e0f69faa1ce8262f554383cf69a025ca",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "device/F2837xD_CodeStartBranch.asm": {
+      "historical_raw_sha256": "723bd8d113ff5df8731b43b66fbdffb331280006a248f58b04bd573f2a60e903",
+      "canonical_historical_commit_sha256": "723bd8d113ff5df8731b43b66fbdffb331280006a248f58b04bd573f2a60e903",
+      "actual_raw_sha256": "c85fdbd1d1379cc0444e9466699abdce3369f603bbeab9b7f30e323b7a50bcde",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "device/device.c": {
+      "historical_raw_sha256": "b0e61bf639ff4616b635abe5d489aeccc26199a23477160d085508ef27a691e2",
+      "canonical_historical_commit_sha256": "b0e61bf639ff4616b635abe5d489aeccc26199a23477160d085508ef27a691e2",
+      "actual_raw_sha256": "54be0df350574552ab2aa3dfcc7fcc04b7afb1babf652b776363ee390bea580a",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "device/device.h": {
+      "historical_raw_sha256": "70e11e75408a10c3efd48a8bbe3a64c7bf9e0d84ff32c37b60a38d37c53bbecb",
+      "canonical_historical_commit_sha256": "70e11e75408a10c3efd48a8bbe3a64c7bf9e0d84ff32c37b60a38d37c53bbecb",
+      "actual_raw_sha256": "0011e84c075d7120aa12c68ca23ae4f4bf0804f6e7c222d841824e6d4815eaa3",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "device/driverlib.h": {
+      "historical_raw_sha256": "6c0a0d2dba4b20618006b27c29fcd8597a2879afd6ada5c2dbbbc6c2fd4cd583",
+      "canonical_historical_commit_sha256": "6c0a0d2dba4b20618006b27c29fcd8597a2879afd6ada5c2dbbbc6c2fd4cd583",
+      "actual_raw_sha256": "333027207ffdd2a2c520a8736f2484273e7a2263ea9031475a23542b1a45f2b3",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "f2837xd_flash_cpu1_lnk.cmd": {
+      "historical_raw_sha256": "c1715b2a1d0d9a3343ec51e135bdb6bda6731295c3a153609bd21bce00c036c1",
+      "canonical_historical_commit_sha256": "c1715b2a1d0d9a3343ec51e135bdb6bda6731295c3a153609bd21bce00c036c1",
+      "actual_raw_sha256": "442446c395c53b38c97d886101935d58bb249e3633b0ef3fbf9e3d8b8fcd62e6",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/DCL/DCL.h": {
+      "historical_raw_sha256": "77c28c1d858954c053635a02803729d84dfc38589ca470ded5bf93cd0afef8ee",
+      "canonical_historical_commit_sha256": "77c28c1d858954c053635a02803729d84dfc38589ca470ded5bf93cd0afef8ee",
+      "actual_raw_sha256": "6488745b01038911f2d681fcf0ff14805b97ca483c72d3f73fd64f2dd7cc5c16",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/DCL/DCLCLA.h": {
+      "historical_raw_sha256": "9b888becec72b587e58b676704d8d3137f5090622ac70841246dd7d860d7e134",
+      "canonical_historical_commit_sha256": "9b888becec72b587e58b676704d8d3137f5090622ac70841246dd7d860d7e134",
+      "actual_raw_sha256": "ac9a8406e0e1682cdac977077ae472858b1e1b632a80e036d92ad1e25432fa76",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/DCL/DCLF32.h": {
+      "historical_raw_sha256": "6f4de4d5b2abf7c437f31c3a97076d1ddfbff55a77166f5cd16af89f16259ee7",
+      "canonical_historical_commit_sha256": "6f4de4d5b2abf7c437f31c3a97076d1ddfbff55a77166f5cd16af89f16259ee7",
+      "actual_raw_sha256": "17cd7e11774a063c3f534df5924225fdff03292242fe6507505fe69a155e8b0d",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/power_measurement/power_meas_sine_analyzer.h": {
+      "historical_raw_sha256": "c06d5100e1caaeb20e5a8964adb737fb5ab4379e55587dbebce7d9439a11d3b4",
+      "canonical_historical_commit_sha256": "c06d5100e1caaeb20e5a8964adb737fb5ab4379e55587dbebce7d9439a11d3b4",
+      "actual_raw_sha256": "56ac1bddec9940dc0c7a2bc1f2ef654ac60cd56da1792479d35c704895c526b2",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/sfra/sfra_f32.h": {
+      "historical_raw_sha256": "c32118fc617cf695c51bcdbad82750852ba86f5ffce678986f595cc53fa91659",
+      "canonical_historical_commit_sha256": "c32118fc617cf695c51bcdbad82750852ba86f5ffce678986f595cc53fa91659",
+      "actual_raw_sha256": "21ba192ca57e579069d9c2227771e7bfabe32e9e708e43cefb4c81c3c526c643",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/spll/spll_1ph_notch.h": {
+      "historical_raw_sha256": "6b864ef2fc76dc02ed88a7814476bfc8af6e9837703c3b321e9b4efe1d3a86ef",
+      "canonical_historical_commit_sha256": "a31d79f04e51c91c7ea78eb108702fe067fe40e7b665f2096ce915111bc8e81b",
+      "actual_raw_sha256": "3edd16f5bb4a6c252b993e0ae865b61a5162141cb84a4fa8b4d05712c3b2b533",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/spll/spll_1ph_sogi.h": {
+      "historical_raw_sha256": "e65bb601e267977e25f11b14c2f71fdb2655d08d034c7182122d9133942c3052",
+      "canonical_historical_commit_sha256": "e65bb601e267977e25f11b14c2f71fdb2655d08d034c7182122d9133942c3052",
+      "actual_raw_sha256": "eb35673dffc3150f596fb5cc347467f15fb951431958107266af0e1f9e87df84",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/spll/spll_1ph_sogi_fll.h": {
+      "historical_raw_sha256": "0c27e57cea9c80fe2b4fa46dcea47f0af5004d458afd29f3f4d2511bb9a9a8bd",
+      "canonical_historical_commit_sha256": "0c27e57cea9c80fe2b4fa46dcea47f0af5004d458afd29f3f4d2511bb9a9a8bd",
+      "actual_raw_sha256": "699262fbcbec38afa183933dbb45326da4f5ee670b450804ee1619b8c008bf25",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/utilities/dlog_4ch.h": {
+      "historical_raw_sha256": "160dbd97909e9866057994c940ab45d6662380f138266345641522d5f8a17795",
+      "canonical_historical_commit_sha256": "160dbd97909e9866057994c940ab45d6662380f138266345641522d5f8a17795",
+      "actual_raw_sha256": "9201c4659c4bc4f7e648664cde8ff997f90d6cedbc90c7f50ebfa9933735d8ce",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/utilities/emavg.h": {
+      "historical_raw_sha256": "67f257b3a1ff80c3ab2c52348dcb049ea8d502c340018bf84889ffacdd20be0b",
+      "canonical_historical_commit_sha256": "67f257b3a1ff80c3ab2c52348dcb049ea8d502c340018bf84889ffacdd20be0b",
+      "actual_raw_sha256": "f08ca01f67bb6f9d73f4086875e9297c78c42d6bbac30309598cab6a7ff07232",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "libraries/utilities/rampgen.h": {
+      "historical_raw_sha256": "981550e21ae4cc8a986598b260f447aa6bb2607569cf21ec085020d3e2534528",
+      "canonical_historical_commit_sha256": "981550e21ae4cc8a986598b260f447aa6bb2607569cf21ec085020d3e2534528",
+      "actual_raw_sha256": "1f776d7e36d17a1b30fd1e21639e9a49007f41313a94338dc385f84382db112f",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "setupdebugenv_fcs_build4_guide.js": {
+      "historical_raw_sha256": "fc43b3005ba2f514ac55759aea30072b2f8e62983a59484ecf3ba2c227ca786d",
+      "canonical_historical_commit_sha256": "fc43b3005ba2f514ac55759aea30072b2f8e62983a59484ecf3ba2c227ca786d",
+      "actual_raw_sha256": "e035bbfd1e68121aea1bc39fcfc26f6e159715b51f9de87eb6d56fe4ff13e898",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "sfra_gui_scicomms_driverlib.c": {
+      "historical_raw_sha256": "096423a9c18e06ff90033db067145433ef3997362e0a2c40f478a0465ac6a1fc",
+      "canonical_historical_commit_sha256": "40dcf1a397691b0e74cb704256ff9de26c0654db9450163b5a38ad241897605e",
+      "actual_raw_sha256": "f501df02acb310a62532abcc922ef9c66caaf0318db025c03ce4e7ff8c78f28b",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "sfra_gui_scicomms_driverlib.h": {
+      "historical_raw_sha256": "80e43c2706032189d2f2dccc3c47b81c4cd0131aac7f5af489e8543bfca1265e",
+      "canonical_historical_commit_sha256": "ba97dd22c1e51ef4019eb53cf5565f98c2027a5414c40bb10c5797483c0d8b12",
+      "actual_raw_sha256": "3cb3a6608b3a908f51d369069b2bdcd331f815c8f95251149fa17d55878f91f5",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "solution.js": {
+      "historical_raw_sha256": "773adbca7fd800f4085556d100653aaef96ad5991014dfa77314efbdc296e5ea",
+      "canonical_historical_commit_sha256": "773adbca7fd800f4085556d100653aaef96ad5991014dfa77314efbdc296e5ea",
+      "actual_raw_sha256": "b05e825b25765c5ddc16b5b5023ba0009d0246be047f840bb1a26b85649b3e90",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "targetConfigs/TMS320F28377D.ccxml": {
+      "historical_raw_sha256": "3bb4bef70974860bffb7fe91754198941d6988fa58ff903815f74cd5427d9e85",
+      "canonical_historical_commit_sha256": "3bb4bef70974860bffb7fe91754198941d6988fa58ff903815f74cd5427d9e85",
+      "actual_raw_sha256": "1aad23ba580f8964255fadec1b764049442afd2c90cfaf972a13c1c9ab0242d3",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "vienna_clatask.cla": {
+      "historical_raw_sha256": "2a96bda8c2500c3dcb1edae9fcc46cdffa280a50ced19cee710fb5b5ce4b958a",
+      "canonical_historical_commit_sha256": "baf13519260308c764ec951c11b26c41128bdcd794ca015c907327a588e86b74",
+      "actual_raw_sha256": "1816f7123d0904ab31f45f9d939b40871e0cc615bd0b4473a052776cb761adaf",
+      "non_eol_bytes_identical_to_historical_commit": true
+    },
+    "vienna_main.c": {
+      "historical_raw_sha256": "4d40b19acc921a9cf9fd84e9729deb6fdc0d944308884b55bcf6773afc5340fc",
+      "canonical_historical_commit_sha256": "71031df589f2f0c646c911f98071c196bd111ce0e73f04b020fed7397501ff35",
+      "actual_raw_sha256": "7436adfb2363caa677e62a415f89fef5e14478acf683fe89685556ac6d704867",
+      "non_eol_bytes_identical_to_historical_commit": true
+    }
+  },
   "unchanged_reference_files": [
     "TI_PCMFPC_ZCDC_移植任务提示词.md",
     "pcmfpc_zcdc/vienna_eso_dq_measured.m",
@@ -19,11 +228,11 @@
     "output/paper_aligned_validation/paper_aligned_delivery_20261025.json"
   ],
   "reference_compatibility_report_sha256": "da9d75abb54d9a351e670e2ca2252a1bf7658a1e56b0fcb011805098e7c0fd4b",
-  "watch_expression_count": 64,
+  "watch_expression_count": 65,
   "watch_gui_import_tested": false,
   "compiled_artifacts": {
-    "vienna_pcmfpc_zcdc_F2837x.map": "5222c7d46836f54a98f85e1c36194b0f627057c5cfe8b70bd247bc964a02ebaf",
-    "vienna_pcmfpc_zcdc_F2837x.out": "52971695495f326d60d936a80f57aee79c52750c4e84dae0016b364f3a780b2b"
+    "vienna_pcmfpc_zcdc_F2837x.map": "eacf71c007d7a21b1930bfd0c10280a2e4c021ece05fd29cd3753ef8df288a5f",
+    "vienna_pcmfpc_zcdc_F2837x.out": "a55af358c59ffbcc358cbfb1c168b9550143de4f8c739d04cbbec8e7db6a482e"
   },
   "reference_hashes": {
     "TI_PCMFPC_ZCDC_移植任务提示词.md": "c68910eac2b47a97602089d7b8fb742b87e619d48ff0200a3d617d0292517417",

@@ -13,6 +13,8 @@ ROOT = TARGET.parents[3]
 EVIDENCE = ROOT / "output/ti_pcmfpc_zcdc_port"
 DEST = TARGET / "validation"
 FILES = {
+    "recovery_20261026/REPORT.md": "RECOVERY_20261026.md",
+    "recovery_20261026/REPORT.json": "recovery_20261026.json",
     "PROGRESS.md": "PROGRESS.md",
     "AUDIT.md": "AUDIT.md",
     "baseline_manifest.json": "baseline_manifest.json",
@@ -57,6 +59,8 @@ FILES = {
     "rt_optimization/reference_compatibility/REPORT.json": "reference_compatibility.json",
     "bench_20261026/REPORT.md": "BENCH_20261026.md",
     "bench_20261026/REPORT.json": "bench_20261026.json",
+    "bench_20261026_round4/REPORT.md": "BENCH_RT4_20261026.md",
+    "bench_20261026_round4/REPORT.json": "bench_rt4_20261026.json",
     "rt_optimization/round4/REPORT.md": "RT4_REPORT.md",
     "rt_optimization/round4/REPORT.json": "rt4_report.json",
     "rt_optimization/build_pass4/AUDIT.md": "RT4_BUILD_AUDIT.md",

@@ -1,5 +1,10 @@
 # TI PCMFPC-ZCDC 移植进度
 
+2026-10-26恢复补记：main保持原目录/756e806，82个受跟踪文件未改；new_mpc使用独立目录
+Vienna_Project/Vienna_MPC/pfc3phvienna_new_mpc，恢复第五轮版本5，真实导入/构建通过。
+当前路径、清理保护、原暂存删除项恢复和工具兼容修复以recovery_20261026/REPORT及新项目
+RECOVERY_AND_WORKFLOW.md为准。以下优化阶段记录属于恢复前历史，不代表main仍停留在原基线。
+
 日期：2026-10-26。分支 new_mpc。用户已将首版提交并同步为44f0ec5；本轮后续优化未提交/推送。
 
 唯一源工程：Vienna_Project/Vienna_MPC/pfc3phvienna_F2837x。

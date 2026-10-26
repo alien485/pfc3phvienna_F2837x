@@ -1,5 +1,9 @@
 # F28379D PCMFPC-ZCDC 模式7移植目标
 
+2026-10-26：本工程已恢复到独立new_mpc工作目录，保留第五轮已验证源码，版本观察项为5。
+当前打开方法、main/new_mpc对应目录、暂存恢复边界和构建清理保护以
+`RECOVERY_AND_WORKFLOW.md`为准。以下RT4报告属于恢复前的历史实验快照；PCMFPC仍未放行带功率闭环。
+
 唯一 CCS 项目名：`vienna_pcmfpc_zcdc_F2837x`。工作分支：`new_mpc`。
 本目录是独立目标；父目录原 FCS 工程保留对照，父 `.cproject` 仅增加本目录排除项。
 本次移植没有写原MATLAB/SLX。参考此前另有诊断赋值兼容更新，已独立核对1353组

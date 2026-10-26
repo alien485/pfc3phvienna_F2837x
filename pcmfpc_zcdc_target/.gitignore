@@ -33,3 +33,7 @@ Thumbs.db
 /tests/*.dll
 /tests/*.exp
 /tests/*.lib
+
+# Python test caches are generated, not controller source.
+__pycache__/
+*.py[cod]

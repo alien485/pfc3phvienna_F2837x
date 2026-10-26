@@ -1,3 +1,4 @@
+PC_fast_kernel_revision
 VIENNA_pcmHardwareRelease
 VIENNA_pcmModeRequest
 VIENNA_pcmModeActive

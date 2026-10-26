@@ -41,6 +41,8 @@ enum { PC_FAST_SUMMARY_ONLY = 0U, PC_FAST_FULL_SUBSTEPS = 1U,
 extern volatile uint16_t PC_fast_output_substeps_available;
 extern volatile uint16_t PC_fast_output_summaries_available;
 extern volatile uint16_t PC_fast_output_integrals_available;
+/* Diagnostic build marker, initialized and refreshed by PC_run_fast only. */
+extern volatile uint16_t PC_fast_kernel_revision;
 
 #ifdef __cplusplus
 extern "C" {

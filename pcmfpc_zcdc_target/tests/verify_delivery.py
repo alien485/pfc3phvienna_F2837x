@@ -25,7 +25,36 @@ def git(*args):
 
 
 manifest = json.loads((EVIDENCE / "baseline_manifest.json").read_text(encoding="utf-8-sig"))
-parent_changed = [name for name, digest in manifest["files"].items() if sha(REPO / name) != digest]
+newline_only_parent_files = []
+newline_parent_evidence = {}
+
+
+def parent_matches_historical(name, digest):
+    actual = (REPO / name).read_bytes()
+    if hashlib.sha256(actual).hexdigest() == digest:
+        return True
+    original = subprocess.check_output(
+        ["git", "-C", str(REPO), "show", manifest["commit"] + ":" + name])
+    normalized = original.replace(b"\r\n", b"\n")
+    # Preserve the original raw pin. Some original TI files have mixed EOLs,
+    # which Git canonicalizes. Also use the immutable historical commit's
+    # canonical bytes: every non-EOL byte must match, and binaries must retain
+    # exact raw hashes. This does not adopt a new source/model baseline.
+    text_file = b"\0" not in actual and b"\0" not in original
+    if text_file and actual.replace(b"\r\n", b"\n") == normalized:
+        newline_only_parent_files.append(name)
+        newline_parent_evidence[name] = {
+            "historical_raw_sha256": digest,
+            "canonical_historical_commit_sha256": hashlib.sha256(normalized).hexdigest(),
+            "actual_raw_sha256": hashlib.sha256(actual).hexdigest(),
+            "non_eol_bytes_identical_to_historical_commit": True,
+        }
+        return True
+    return False
+
+
+parent_changed = [name for name, digest in manifest["files"].items()
+                  if not parent_matches_historical(name, digest)]
 assert parent_changed == [".cproject"], parent_changed
 reference_changed = [name for name, digest in manifest["references"].items() if sha(ROOT / name) != digest]
 compatibility = None
@@ -47,7 +76,11 @@ if reference_changed:
 assert git("branch", "--show-current") == "new_mpc"
 assert subprocess.run(["git", "-C", str(REPO), "merge-base", "--is-ancestor",
                        manifest["commit"], "HEAD"], capture_output=True).returncode == 0
-assert git("rev-parse", "main") == manifest["commit"]
+main_tip = git("rev-parse", "refs/heads/main")
+# The user's independent main branch may advance. Its historical baseline
+# remains an ancestor; never reset main to make this verification pass.
+assert subprocess.run(["git", "-C", str(REPO), "merge-base", "--is-ancestor",
+                       manifest["commit"], main_tip], capture_output=True).returncode == 0
 assert ET.parse(TARGET / ".project").findtext("name") == "vienna_pcmfpc_zcdc_F2837x"
 assert "28379D" in ET.parse(TARGET / ".ccsproject").find("deviceVariant").get("value")
 parent_entries = ET.parse(REPO / ".cproject").findall(".//sourceEntries/entry")
@@ -85,7 +118,11 @@ report = {
     "scope": "source fingerprints, branch isolation, CCS metadata and watch syntax/symbols; no GUI/hardware test",
     "branch": git("branch", "--show-current"), "head": git("rev-parse", "HEAD"),
     "historical_baseline_commit": manifest["commit"], "baseline_is_ancestor": True,
-    "main_unchanged": True, "parent_changed_files": parent_changed,
+    "main_tip": main_tip, "main_contains_historical_baseline": True,
+    "main_advanced_since_historical_baseline": main_tip != manifest["commit"],
+    "parent_changed_files": parent_changed,
+    "parent_newline_only_files": newline_only_parent_files,
+    "parent_newline_evidence": newline_parent_evidence,
     "unchanged_reference_files": [name for name in manifest["references"] if name not in reference_changed],
     "reviewed_changed_reference_files": reference_changed,
     "reference_compatibility_report_sha256": sha(compatibility_path) if compatibility is not None else None,

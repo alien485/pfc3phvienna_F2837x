@@ -1,3 +1,14 @@
+# CCS can schedule an implicit clean after importing an existing output tree.
+# Stop before any removal recipe; the workspace forbids bulk file deletion.
+ifneq ($(strip $(filter clean rebuild CLEAN_DISABLED_BY_POLICY,$(MAKECMDGOALS))),)
+$(error Bulk cleanup is disabled by workspace policy. Use incremental all; ask the user to handle any required cleanup manually)
+endif
+
+# These recursive override values also block removal from other generated
+# targets. Ordinary compilation and linking do not need these commands.
+override RM = $(error File removal is disabled by workspace policy)
+override RMDIR = $(error Directory removal is disabled by workspace policy)
+
 # SysConfig generates the settings header alongside the solution sources.
 .DEFAULT_GOAL := all
 override GEN_MISC_FILES := \
