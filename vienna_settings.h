@@ -118,7 +118,7 @@ extern "C" {
 
 #define VIENNA_GS_GAINKP ((float32_t)1.0000000000)
 
-#define VIENNA_VBUS_REF_SET_VOLTS ((float32_t)200)
+#define VIENNA_VBUS_REF_SET_VOLTS ((float32_t)170)
 
 //=============================================================================
 // User code settings file

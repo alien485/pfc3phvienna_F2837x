@@ -52,7 +52,7 @@
 #define VIENNA_NON_LINEAR_V_LOOP_KP_MULTIPLIER ((float32_t)5.0)
 
 // Filtered bus trip at 1.2 * 180 V; not an instantaneous hardware clamp.
-#define VIENNA_VBUS_TRIP_LIMIT_VOLTS ((float32_t)216.0)
+#define VIENNA_VBUS_TRIP_LIMIT_VOLTS ((float32_t)300.0)
 
 //
 // PWM Related

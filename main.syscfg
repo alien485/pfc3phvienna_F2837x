@@ -28,5 +28,5 @@ TIDM_1000.I_TripLevel   = 4;
 TIDM_1000.Rfltr         = 68;
 TIDM_1000.Cfltr         = 0.1;
 TIDM_1000.Tuning        = 3;
-TIDM_1000.Vout          = 200;
 TIDM_1000.Pout          = 400;
+TIDM_1000.Vout          = 170;
