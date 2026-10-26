@@ -74,7 +74,7 @@ extern "C" {
 #define VIENNA_V_MAX_SENSE_VOLTS ((float32_t)454)
 
 #define VIENNA_I_MAX_SENSE_AMPS ((float32_t)12)
-#define VIENNA_I_TRIP_LIMIT_AMPS ((float32_t)4)
+#define VIENNA_I_TRIP_LIMIT_AMPS ((float32_t)10)
 #define VIENNA_VAC_TYPICAL_VOLTS ((float32_t)100.008614)
 
 //
@@ -118,7 +118,7 @@ extern "C" {
 
 #define VIENNA_GS_GAINKP ((float32_t)1.0000000000)
 
-#define VIENNA_VBUS_REF_SET_VOLTS ((float32_t)170)
+#define VIENNA_VBUS_REF_SET_VOLTS ((float32_t)200)
 
 //=============================================================================
 // User code settings file
