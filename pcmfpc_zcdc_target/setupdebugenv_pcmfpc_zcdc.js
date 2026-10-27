@@ -2,6 +2,7 @@
 // Observation only. Never starts, clears trips, resets or writes target memory.
 expRemoveAll();
 expAdd("PC_fast_kernel_revision", getNatural());
+expAdd("PC_fast_profile", getNatural());
 expAdd("VIENNA_pcmHardwareRelease", getNatural());
 expAdd("VIENNA_pcmModeRequest", getNatural());
 expAdd("VIENNA_pcmModeActive", getNatural());

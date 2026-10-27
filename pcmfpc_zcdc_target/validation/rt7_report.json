@@ -1,0 +1,345 @@
+{
+  "date": "2026-10-26",
+  "status": "HOST_AND_TI_BUILD_PASS;USER_FIXTURE_AND_COARSE_PROFILE_PASS;REALTIME_BUDGET_FAIL",
+  "branch": "new_mpc",
+  "starting_head": "10c0f3bc966d399bc43374122d11f8afcf6915be",
+  "project": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target",
+  "kernel_revision": 7,
+  "watch_expressions": 66,
+  "implementation": {
+    "control_files": [
+      "vienna_pcmfpc_fast.c",
+      "vienna_pcmfpc_fast.h",
+      "vienna_pcmfpc_runtime.c",
+      "vienna_pcmfpc_runtime.h"
+    ],
+    "integer_intersection_exact": true,
+    "core_diagnostic_flag_semantics_unchanged": true,
+    "runtime_fast_diagnostic_all_angles": 0,
+    "runtime_reference_diagnostic_all_angles": 1,
+    "predictor_model_FP_thresholds_roots_unchanged": true,
+    "one_shot_profile": {
+      "request2": "plain fast",
+      "request3": "fast coarse stages",
+      "request4": "fast coarse plus nested roots",
+      "normally_armed": false,
+      "normal_unarmed_clock_callbacks": 0,
+      "clock": "existing Timer0 read-only RAM callback",
+      "clock_modulus": 2000001,
+      "root_cycles_nested_in_prediction": true,
+      "instrumentation_overhead_automatically_subtracted": false
+    }
+  },
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "530a0d979fc4938e2b04ea954964fa5a3ad50666a551a9fecd61c63e4d3c5f31",
+    "vienna_pcmfpc_fast.h": "8548b529e9abcbf1c6715de05cb3dd723bd79d92938430eac5f595723b04fc17",
+    "vienna_pcmfpc_runtime.c": "bb90b1a62c1655f740908796c2a2f5470f70c2bb9474df0e8b0e48296e29258c",
+    "vienna_pcmfpc_runtime.h": "8897749c36f761eae83f9a88029e35c0fff88a6dc23d26c5fe12c0034ff3b271"
+  },
+  "host": {
+    "status": "PASS_ROUND6_EQUIVALENCE_AND_PROFILE",
+    "public_struct_comparisons": [
+      {
+        "diagnostic_all_angles": 1,
+        "exit": 0,
+        "public_struct": {
+          "cases": 31750,
+          "status_differences": 0,
+          "public_flag_differences": 0,
+          "PC_Output_byte_difference_rows": 0,
+          "interval_calls_all_detail_modes": 140025,
+          "interval_status_differences": 0,
+          "PC_Interval_byte_difference_calls": 0,
+          "revision_errors": 0
+        },
+        "cross_policy": {
+          "policy_cases": 31750,
+          "policy_status_differences": 0,
+          "policy_undocumented_byte_differences": 0
+        }
+      },
+      {
+        "diagnostic_all_angles": 0,
+        "exit": 0,
+        "public_struct": {
+          "cases": 31750,
+          "status_differences": 0,
+          "public_flag_differences": 0,
+          "PC_Output_byte_difference_rows": 0,
+          "interval_calls_all_detail_modes": 140025,
+          "interval_status_differences": 0,
+          "PC_Interval_byte_difference_calls": 0,
+          "revision_errors": 0
+        },
+        "cross_policy": {
+          "policy_cases": 0,
+          "policy_status_differences": 0,
+          "policy_undocumented_byte_differences": 0
+        }
+      }
+    ],
+    "whitebox": {
+      "checks": 81,
+      "failures": 0,
+      "intersection_cases": 10321920,
+      "rank_permutations": 40320,
+      "counter": "fake_downcounter_only"
+    },
+    "safety_runtime_observer": [
+      {
+        "name": "fast_safety",
+        "exit": 0,
+        "stdout": "edge=R_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=L_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=omega_float_max fast_status=6 reference_status=3 finite_public_success=-1 margin=0 gate=0\nedge=delta_i_float_max fast_status=0 reference_status=0 finite_public_success=1 margin=48.1042366 gate=0\nedge=duration_float_max fast_status=6 reference_status=6 finite_public_success=-1 margin=0 gate=0\nedge=C_float_min fast_status=4 reference_status=4 finite_public_success=-1 margin=0 gate=0\nfast_safety_checks=85 PASS; nonfinite_public_success_edges=0",
+        "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\core_fast_safety.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\\fast_safety.exe\""
+      },
+      {
+        "name": "observer",
+        "exit": 0,
+        "stdout": "deltaU_vs_independent_cumulative_double_oracle max_i_A=9.98109619e-07 max_f_A_s=0.00887037572\nanalytic_rotation_vs_20000_midpoint_integral error_V_s=[2.23083589e-10,2.10332511e-12]\ntwo_executed_gate_segments_all_states_zero_blocking_sequence_reset_both_roots=PASS\nfull_executed_history_vs_unchanged_readable_predictor=PASS nonzero_integral_cases=16",
+        "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_observer.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\observer_test.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\\observer.exe\""
+      },
+      {
+        "name": "runtime",
+        "exit": 0,
+        "stdout": "runtime_host_checks=299 real_PLL_ESO_core_with_stub_timer_and_trip=PASS\nNo target execution: next sample assumes one ZERO crossed; analog ADC, ISR latency, AQ and hardware trip paths require bench tests.",
+        "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_grid_sync.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_observer.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\core_runtime_test.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\\runtime_adapter.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round7\\host\\pass2\\build\\runtime.exe\""
+      }
+    ],
+    "unchanged_model_functions": {
+      "scope": "literal source bodies, no universal floating-point proof",
+      "functions": {
+        "pf_lambda_plan": true,
+        "pf_lambda_root": true,
+        "pf_lambda_dense_root": true,
+        "pf_root": true,
+        "pf_interval": true,
+        "pf_rotation": true,
+        "pf_plan": true,
+        "pf_dq_to_abc": true,
+        "pf_abc_to_dq": true,
+        "pf_seed": true,
+        "pf_projection": true,
+        "pf_rank": true,
+        "pf_angle_cost": true,
+        "pf_output_init": true
+      }
+    },
+    "evidence": "host/pass2/REPORT.json"
+  },
+  "closed_loop": {
+    "status": "PASS_ROUND6_TRAJECTORY_EQUIVALENCE",
+    "pairs": 10,
+    "all_trace_and_metric_bytes_identical": true,
+    "evidence": "closed_loop/REPORT.json"
+  },
+  "build": {
+    "method": "TI CCS-generated gmake all incremental rules; CCS app launcher failed before compilation",
+    "native_exit": 0,
+    "compiler": "TI CGT25.11.1.LTS",
+    "errors": 0,
+    "warnings": 0,
+    "clean_or_rebuild": false,
+    "stdout": "gmake_incremental.log",
+    "out_sha256": "928bb780011e931ce7b9f82f805cb65e458b66193fb5d22085e2376f791ec405",
+    "failed_CCS_launcher_evidence": "../round7/build_launcher_failure/RESULT.json",
+    "direct_Java_fallback_exit": 15,
+    "direct_Java_reached_compiler": false
+  },
+  "actual_build_audit": "../build_pass7/AUDIT.json",
+  "inherited_older_piecewise_difference": {
+    "selected_differences": 1887,
+    "strict_equivalence_status": "FAIL_EXACT_EQUIVALENCE",
+    "fixed_in_this_round": false
+  },
+  "isolation": {
+    "main_tracked_files_unchanged": 82,
+    "protected_target_files_unchanged": 17,
+    "unchanged_parent_Kit_json_sha256": "acddabf7e9570af6fdb086bae9e40f89c9bb7f38459c7de1f162a6166a1d48e2",
+    "no_PWM_ADC_CMPSS_TZ_or_protection_timing_changes": true,
+    "main_head_at_start": "756e806a61d69973c0f17e87e3608adfe7bb4786",
+    "main_head_at_final_check": "81822e3fc2f8915fc74ddef43234ab796163208a",
+    "independent_main_commit_observed_during_task": true,
+    "main_worktree_file_contents_unchanged_during_task": true,
+    "main_commit_not_merged_into_new_mpc": true
+  },
+  "hardware": {
+    "round7_board_measurement_available": true,
+    "prior_kernel_revision": 6,
+    "prior_fixed_fixture_cycles": 21217,
+    "qualified_for_power": false,
+    "hardware_release": 0,
+    "current_period_cycles": 4000,
+    "nominal_write_window_cycles": 1628,
+    "actual_CPU_clock_independently_verified": false,
+    "no_claim_of_speedup_or_WCET": true,
+    "round7_plain_cycles": 21138,
+    "round7_coarse_profile": {
+      "setup_cycles": 814,
+      "delay_cycles": 1783,
+      "plan_seed_cycles": 591,
+      "candidates_cycles": 14823,
+      "select_cycles": 2142,
+      "terminal_prepare_cycles": 470,
+      "angles_cycles": 470,
+      "output_cycles": 404,
+      "total_cycles": 21497,
+      "root_cycles": 0,
+      "clock_pair_overhead": 29,
+      "mode": 1,
+      "valid": 1,
+      "completed": 1,
+      "core_status": 0,
+      "root_calls": 0,
+      "angle_calls": 1,
+      "read_count": 11,
+      "clock_fault": 0
+    },
+    "plain_comparison_vs_round6": {
+      "prior_cycles": 21217,
+      "current_cycles": 21138,
+      "cycles_saved": 79,
+      "relative_decrease_percent": 0.372342932554084,
+      "conditional_200MHz_saved_us": 0.395,
+      "same_clock_fixture_and_no_halt_assumed": true,
+      "single_sample_does_not_establish_statistical_speedup": true
+    },
+    "user_confirmed_two_separate_requests": true,
+    "evidence": "../../bench_20261026_round7/REPORT.json",
+    "next_step": "Data sufficient to prioritize both root and prediction work outside root windows; no repeated benchmark required until a changed implementation is ready",
+    "round7_fine_profile": {
+      "setup_cycles": 814,
+      "delay_cycles": 1927,
+      "plan_seed_cycles": 591,
+      "candidates_cycles": 15999,
+      "select_cycles": 2142,
+      "terminal_prepare_cycles": 470,
+      "angles_cycles": 470,
+      "output_cycles": 404,
+      "total_cycles": 22817,
+      "root_cycles": 9005,
+      "clock_pair_overhead": 29,
+      "mode": 2,
+      "valid": 1,
+      "completed": 1,
+      "core_status": 0,
+      "root_calls": 18,
+      "angle_calls": 1,
+      "read_count": 47,
+      "clock_fault": 0
+    },
+    "round7_fine_instrumented_breakdown": {
+      "prediction_total_cycles": 17926,
+      "root_window_cycles": 9005,
+      "prediction_outside_root_windows_cycles": 8921,
+      "other_stages_cycles": 4891,
+      "root_window_percent_total": 39.46618749178244,
+      "prediction_outside_root_windows_percent_total": 39.09804093439102,
+      "other_stages_percent_total": 21.435771573826532,
+      "root_window_percent_prediction": 50.23429655249358,
+      "root_windows_already_included_in_stage_totals": true
+    },
+    "fine_measurement_evidence": "../../bench_20261026_round7_fine/REPORT.json"
+  },
+  "delivery_check_status": "PASS",
+  "no_agent_hardware_actions_deletion_or_Git_commit_push": true,
+  "actual_TI_audit": {
+    "all_pinned_hashes_match": true,
+    "all_bound_callees_in_RAM": true,
+    "callback": {
+      "caller": "pf_profile_read",
+      "site_word": "0x18003",
+      "loaded_pointer_word": "0xf54c",
+      "target": "pc_profile_clock",
+      "target_word": "0x1a644",
+      "init_binding_words": [
+        "0x83241",
+        "0x83243",
+        "0x83246"
+      ],
+      "period_decimal": 2000001,
+      "callback_instructions": [
+        "VMOV32 ACC,*(0:0x0c00)",
+        "LRETR"
+      ],
+      "read_only": true
+    },
+    "inactive_path_no_clock_or_empty_profile_helpers": true,
+    "inactive_guards_have_nonzero_overhead": true,
+    "expected_clock_reads_success": {
+      "coarse": 11,
+      "fine": 47
+    },
+    "memory": [
+      {
+        "name": "RAMGS12GS15",
+        "origin_word": 98304,
+        "capacity_words": 16384,
+        "used_words": 13645,
+        "unused_words": 2739
+      },
+      {
+        "name": "RAMM1",
+        "origin_word": 1024,
+        "capacity_words": 1024,
+        "used_words": 937,
+        "unused_words": 87
+      },
+      {
+        "name": "RAMGS3",
+        "origin_word": 61440,
+        "capacity_words": 4096,
+        "used_words": 3222,
+        "unused_words": 874
+      },
+      {
+        "name": "RAMGS4GS5",
+        "origin_word": 65536,
+        "capacity_words": 8192,
+        "used_words": 7168,
+        "unused_words": 1024
+      },
+      {
+        "name": "RAMGS6GS11",
+        "origin_word": 73728,
+        "capacity_words": 24576,
+        "used_words": 24000,
+        "unused_words": 576
+      }
+    ],
+    "listed_max_frames_words": {
+      "ISR1": 66,
+      "pf_profile_read": 2,
+      "pf_profile_begin": 4,
+      "pf_profile_finish": 4,
+      "pf_profile_stage": 4,
+      "pf_lambda_plan": 22,
+      "pf_lambda_root": 20,
+      "pf_lambda_dense_root": 30,
+      "pf_control_interval": 40,
+      "PC_run_fast": 88,
+      "pf_root": 36,
+      "pf_interval": 114,
+      "PC_fast_predict_interval": 42,
+      "VO_reconstruct": 164,
+      "pc_profile_clock": 2,
+      "VIENNA_PCMFPC_select": 8,
+      "VIENNA_PCMFPC_sample": 44,
+      "pc_benchmark": 12,
+      "VIENNA_PCMFPC_post": 20,
+      "pc_projection": 10,
+      "pc_root": 64,
+      "PC_predict_interval": 58
+    },
+    "stack_allocation_words": 896,
+    "known_stack_frame_sums_words": {
+      "normal_generic": 244,
+      "normal_dense": 232,
+      "shadow_generic": 256,
+      "benchmark_generic": 268,
+      "benchmark_fine_clock_callback": 230,
+      "FAST_FULL_reconstruction": 466,
+      "reference_reconstruction_available_branch": 506
+    },
+    "stack_limits": "Known compiler frame sums, not a complete worst-case stack proof. Interrupted background, automatic hardware ISR frame, nested interrupts, exceptional/library paths and measured watermark are not established."
+  }
+}

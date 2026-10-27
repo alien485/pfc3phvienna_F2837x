@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS_PLAIN_COARSE_FINE_OUTPUT_EQUIVALENCE",
+  "scope": "Current v11 separately compiled plain/profiled CONTROL paths; HOST only, no target execution, hardware timing, TMU proof or WCET",
+  "result": {
+    "base_cases": 31750,
+    "directed_derived_failure_cases": 2,
+    "policies": [
+      {
+        "diagnostic_all_angles": 0,
+        "mode": 1,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 0,
+        "minimum_partial_root_calls": 0,
+        "maximum_partial_root_calls": 0
+      },
+      {
+        "diagnostic_all_angles": 0,
+        "mode": 2,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 2,
+        "minimum_partial_root_calls": 1,
+        "maximum_partial_root_calls": 5
+      },
+      {
+        "diagnostic_all_angles": 1,
+        "mode": 1,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 0,
+        "minimum_partial_root_calls": 0,
+        "maximum_partial_root_calls": 0
+      },
+      {
+        "diagnostic_all_angles": 1,
+        "mode": 2,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 2,
+        "minimum_partial_root_calls": 1,
+        "maximum_partial_root_calls": 5
+      }
+    ],
+    "validation_errors": 0
+  },
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+    "vienna_pcmfpc_fast.h": "f56af0541cc59d079a570dd87b5d4dfda9c74068db5f3bc08dc3b543d9b1fd88",
+    "vienna_pcmfpc_zcdc.c": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+    "vienna_pcmfpc_zcdc.h": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+    "tests/ti_fast_replay.c": "4664ddd564a0075f00a153c9f822e8afe95f684e05c911f6a3766fe2e988f082"
+  },
+  "input_dataset_sha256": "d198287e3276f99b4c40b2a05369c72f29b6bd167d2a6b541c0359a3a0e8c55c",
+  "harness_sha256": "eb64c6f14b53053cac7f217a679ee168603c48264c242318c679e2d1dbdc130f",
+  "driver_sha256": "4746273d0376ca1ba0ffdcafe669586fca689f7c9792c990d31307f0ef2e3afe",
+  "compile_command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\profile_replay\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\profile_replay\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\profile_replay\\profile_replay.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\profile_replay\\build\\profile_replay.exe\"",
+  "run_exit": 0,
+  "counter": "deterministic fake periodic downcounter; no device I/O",
+  "unchanged_host_report_sha256": "748006005e0c5be80c038aaa0a6a44a3eda699e33393f32c4cf0b22bd787e13f"
+}

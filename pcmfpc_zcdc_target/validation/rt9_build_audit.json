@@ -1,0 +1,258 @@
+{
+  "scope": "Independent read-only actual TI round9 OUT/MAP/ASM audit; evidence writes only, no production edits/build/hardware/Git/deletion",
+  "build_method": "TI CCS-generated gmake all incremental rules; same installed TI CGT and project options; no CCS application startup attempted this round",
+  "compiler": "TI CGT25.11.1.LTS",
+  "native_exit": 0,
+  "errors": 0,
+  "warnings": 0,
+  "linked_line": ">> Linked Tue Oct 27 14:28:26 2026",
+  "pinned_files": 32,
+  "all_pinned_hashes_match": true,
+  "pinned_hash_checks": {
+    ".cproject": true,
+    "build_incremental.ps1": true,
+    "f2837xd_flash_cpu1_lnk.cmd": true,
+    "main.syscfg": true,
+    "makefile.init": true,
+    "vienna.c": true,
+    "vienna.h": true,
+    "vienna_grid_sync.asm": true,
+    "vienna_grid_sync.c": true,
+    "vienna_grid_sync.h": true,
+    "vienna_hal.c": true,
+    "vienna_hal.h": true,
+    "vienna_main.asm": true,
+    "vienna_main.c": true,
+    "vienna_pcmfpc_fast.asm": true,
+    "vienna_pcmfpc_fast.c": true,
+    "vienna_pcmfpc_fast.h": true,
+    "vienna_pcmfpc_observer.asm": true,
+    "vienna_pcmfpc_observer.c": true,
+    "vienna_pcmfpc_observer.h": true,
+    "vienna_pcmfpc_runtime.asm": true,
+    "vienna_pcmfpc_runtime.c": true,
+    "vienna_pcmfpc_runtime.h": true,
+    "vienna_pcmfpc_zcdc.asm": true,
+    "vienna_pcmfpc_zcdc.c": true,
+    "vienna_pcmfpc_zcdc.h": true,
+    "vienna_pcmfpc_zcdc_F2837x.map": true,
+    "vienna_pcmfpc_zcdc_F2837x.out": true,
+    "vienna_pcmfpc_zcdc_F2837x_linkInfo.xml": true,
+    "vienna_settings.h": true,
+    "vienna_user_settings.h": true,
+    "gmake_incremental.log": true
+  },
+  "out_sha256": "9a4daa12eb422d6c1efb78d8ed3fefc79a4c76013bacf13526bff6935839578b",
+  "fast_c_sha256": "e2affd9a2d3728e6aa67f0fa044603b3c25ac74458b87965210f2bfdb6b25dec",
+  "fast_h_sha256": "813bbb59344ed582d77b1ad157c26487e5f70fdc37f9499a3b62a8cc29d98bab",
+  "unchanged20_pinned_protected_files_vs8": {
+    ".cproject": true,
+    "build_incremental.ps1": true,
+    "f2837xd_flash_cpu1_lnk.cmd": true,
+    "main.syscfg": true,
+    "makefile.init": true,
+    "vienna.c": true,
+    "vienna.h": true,
+    "vienna_hal.c": true,
+    "vienna_hal.h": true,
+    "vienna_main.c": true,
+    "vienna_grid_sync.c": true,
+    "vienna_grid_sync.h": true,
+    "vienna_pcmfpc_observer.c": true,
+    "vienna_pcmfpc_observer.h": true,
+    "vienna_pcmfpc_runtime.c": true,
+    "vienna_pcmfpc_runtime.h": true,
+    "vienna_pcmfpc_zcdc.c": true,
+    "vienna_pcmfpc_zcdc.h": true,
+    "vienna_settings.h": true,
+    "vienna_user_settings.h": true
+  },
+  "revision": {
+    "symbol_word": "0x7a3",
+    "DP": "0x1e",
+    "offset": "0x23",
+    "actual_store_word": "0x1908f",
+    "actual_value": 9,
+    "disasm_line": 4519,
+    "compiler_initializer": 9
+  },
+  "RAM_code": {
+    "run_start": "0x18000",
+    "words": 15099,
+    "hex_words": "0x3afb",
+    "free_words": 1285,
+    "delta_vs8_words": 278
+  },
+  "memory": [
+    {
+      "name": "RAMGS12GS15",
+      "origin_word": 98304,
+      "capacity_words": 16384,
+      "used_words": 15099,
+      "unused_words": 1285
+    },
+    {
+      "name": "RAMM1",
+      "origin_word": 1024,
+      "capacity_words": 1024,
+      "used_words": 937,
+      "unused_words": 87
+    },
+    {
+      "name": "RAMGS3",
+      "origin_word": 61440,
+      "capacity_words": 4096,
+      "used_words": 3222,
+      "unused_words": 874
+    },
+    {
+      "name": "RAMGS4GS5",
+      "origin_word": 65536,
+      "capacity_words": 8192,
+      "used_words": 7168,
+      "unused_words": 1024
+    },
+    {
+      "name": "RAMGS6GS11",
+      "origin_word": 73728,
+      "capacity_words": 24576,
+      "used_words": 24000,
+      "unused_words": 576
+    }
+  ],
+  "BSS_words": 3222,
+  "BSS_delta_words_vs8": 0,
+  "fast_profile_closure_functions": 23,
+  "fast_profile_closure_call_sites": 54,
+  "all_bound_callees_RAM": true,
+  "helper_run_word": "0x18392",
+  "helper_is_leaf": true,
+  "callback": {
+    "target_run_word": "0x1abf2",
+    "reads_only": "Timer0 TIM at0xc00",
+    "period_modulus": 2000001,
+    "actual_binding_instructions": [
+      {
+        "address": 537151,
+        "op": "LCR",
+        "args": "0x08364f",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26315
+      },
+      {
+        "address": 537153,
+        "op": "MOVL",
+        "args": "XAR5, #0x1e8481",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26317
+      },
+      {
+        "address": 537155,
+        "op": "MOVL",
+        "args": "XAR4, #0x01abf2",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26319
+      },
+      {
+        "address": 537157,
+        "op": "MOVL",
+        "args": "ACC, XAR5",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26321
+      },
+      {
+        "address": 537158,
+        "op": "LCR",
+        "args": "0x0198ee",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26322
+      }
+    ],
+    "actual_clock_instructions": [
+      {
+        "address": 109554,
+        "op": "VMOV32",
+        "args": "ACC, *(0:0x0c00)",
+        "function": "pc_profile_clock",
+        "line": 11943
+      },
+      {
+        "address": 109556,
+        "op": "LRETR",
+        "args": "",
+        "function": "pc_profile_clock",
+        "line": 11945
+      }
+    ]
+  },
+  "private_wrapper_linked": false,
+  "ordinary_plain_profile_references": [],
+  "profiler_success_contract": {
+    "coarse_reads": 11,
+    "fine_reads": 47,
+    "fine_root_calls": 18,
+    "verified_by": "unchanged source/profiling ASM plus independent HOST tests; no target measurement"
+  },
+  "assembly_comparison": {
+    "pf_lambda_plan": true,
+    "pf_lambda_dense_root": true,
+    "pf_root": true,
+    "pf_interval": true,
+    "pf_seed": true,
+    "pf_control_interval_plain": true,
+    "pf_control_interval_profiled": true,
+    "pf_rank": true,
+    "pf_plan": true,
+    "pf_output_init": true,
+    "pf_config_valid": true,
+    "pf_profile_read": true,
+    "pf_profile_begin": true,
+    "pf_profile_stage": true,
+    "pf_profile_finish": true,
+    "pf_profile_clear": true,
+    "PC_fast_profile_configure": true,
+    "PC_fast_profile_arm": true,
+    "PC_fast_predict_interval": true,
+    "pc_profile_clock": true
+  },
+  "listed_max_frame_words_including_return_header": {
+    "ISR1": 66,
+    "PC_run_fast": 86,
+    "pf_control_interval_plain": 62,
+    "pf_control_interval_profiled": 64,
+    "pf_lambda_root": 20,
+    "pf_lambda_plan": 22,
+    "pf_lambda_single_plan": 24,
+    "pf_lambda_dense_root": 30,
+    "pf_interval": 114,
+    "pf_root": 36,
+    "VO_reconstruct": 164
+  },
+  "stack_allocation_words": 896,
+  "known_stack_chain_frame_sums_words": {
+    "normal_plain_generic_single_plan": 266,
+    "normal_plain_generic_full_plan": 264,
+    "normal_plain_dense": 252,
+    "shadow_generic_single_plan": 278,
+    "benchmark_plain_single_plan": 290,
+    "benchmark_fine_single_plan": 292,
+    "FAST_FULL_reconstruction": 466,
+    "compiled_reference_reconstruction": 406
+  },
+  "stack_scope": "Known-chain frame sums only: no proof of background interrupted frames, hardware auto ISR frame, nesting, exceptions or watermark",
+  "current_period": {
+    "configured_CPU_Hz": 200000000,
+    "configured_control_Hz": 50000,
+    "period_cycles": 4000,
+    "nominal_write_window_cycles": 1628
+  },
+  "version9_target_runtime_measured": false,
+  "timing_conclusion": "No board speedup, WCET or real-time qualification claimed. Prior 19212-cycle plain time belongs to version8 only.",
+  "prior_dedicated_single_root_proxies_do_not_describe_this_binary": true,
+  "actual_linked_BSS_layout_unchanged_vs8": {
+    "scope": "Actual linked ELF .bss symbol addresses and sizes; .bss alone, not all linker sections",
+    "symbol_count": 135,
+    "all_symbol_addresses_and_sizes_identical": true,
+    "differences": {}
+  }
+}

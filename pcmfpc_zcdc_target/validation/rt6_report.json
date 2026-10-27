@@ -1,0 +1,297 @@
+{
+  "date": "2026-10-26",
+  "status": "HOST_AND_CCS_PASS;USER_FIXTURE_NUMERIC_PASS;REALTIME_BUDGET_FAIL",
+  "branch": "new_mpc",
+  "starting_head": "10c0f3bc966d399bc43374122d11f8afcf6915be",
+  "project": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target",
+  "kernel_revision": 6,
+  "implementation": {
+    "modified_control_files": [
+      "vienna_pcmfpc_fast.c",
+      "vienna_pcmfpc_fast.h"
+    ],
+    "functions": [
+      "pf_lambda_dense_root",
+      "pf_dense_sum",
+      "pf_control_interval",
+      "PC_run_fast"
+    ],
+    "specialized_hardware_states": [
+      3,
+      5,
+      6,
+      7
+    ],
+    "unchanged_generic_hardware_states": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "new_scratch_BSS_words": 0,
+    "FULL_SUMMARY_observer_unchanged": true,
+    "candidates_substeps_costs_selection_thresholds_unchanged": true
+  },
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "574549145827de39fcb70cc9c545154de0da66b6f009cd45f188f39b16e36620",
+    "vienna_pcmfpc_fast.h": "412bd5cddb5d522ccb54e5968571768b719b85b74fef446ae0a1c1c3d9c7e65e"
+  },
+  "host": {
+    "status": "PASS_ROUND5_EQUIVALENCE",
+    "bytewise_public_struct_comparison": {
+      "cases": 31750,
+      "status_differences": 0,
+      "public_flag_differences": 0,
+      "PC_Output_byte_difference_rows": 0,
+      "interval_calls_all_detail_modes": 140025,
+      "interval_status_differences": 0,
+      "PC_Interval_byte_difference_calls": 0,
+      "revision_errors": 0
+    },
+    "dense_root_differential": {
+      "cases": 191620,
+      "status_differences": 0,
+      "next_current_byte_difference_calls": 0,
+      "shared_path_differences": 0,
+      "nonfinite_success": 0,
+      "residual_failures": 0,
+      "generic_error_cases": 75949,
+      "dense_error_cases": 75949,
+      "maximum_KCL_residual_A": 1.43051147461e-06
+    },
+    "safety_and_independent_model_checks_pass": true,
+    "report": "host/pass2/REPORT.json",
+    "report_narrative_correction": {
+      "record": "report_correction.json",
+      "executed_runner_sha256": "94103b03851e29f2434119c7d659592eb138024630d295ab3f31ca544024c344",
+      "current_narrative_corrected_runner_sha256": "1fc591b59301aa1fdddfb294ed7124f95999ef991311f847e83e94493c20e394",
+      "only_description_changed": true,
+      "numeric_tests_rerun": false
+    }
+  },
+  "exact_rational": {
+    "status": "PASS_EXACT_RATIONAL_MODEL",
+    "checks": 24128,
+    "no_root_cases": 15962,
+    "states": [
+      3,
+      5,
+      6,
+      7
+    ],
+    "coverage": [
+      "positive/negative/zero OFF current",
+      "OFF q near +/-(cu+cl)",
+      "strict/end-point events",
+      "equal/unequal/zero scaled caps",
+      "balanced and unbalanced q",
+      "both possible root segments"
+    ],
+    "scope": "Exact real-arithmetic algebra only; not C floating-point equivalence, target timing or hardware validation."
+  },
+  "closed_loop_vs_round5": {
+    "status": "PASS_ROUND5_TRAJECTORY_EQUIVALENCE",
+    "pairs": 10,
+    "all_csv_byte_identical": true,
+    "all_metric_files_byte_identical": true,
+    "report": "closed_loop_round5_comparison/REPORT.json"
+  },
+  "inherited_older_piecewise_difference": {
+    "status": "FAIL_EXACT_EQUIVALENCE",
+    "selected_differences": 1887,
+    "not_fixed_by_this_round": true
+  },
+  "actual_CCS": {
+    "linked_line": ">> Linked Mon Oct 26 17:09:40 2026",
+    "native_exit_code_reported": 0,
+    "errors": 0,
+    "warnings": 0,
+    "out_sha256": "e39871137761f725db15b5becd716c6f8d95408a418daf72a864b514babf3ed6",
+    "all_pinned_hashes_match": true,
+    "all_fast_direct_callees_in_ram": true,
+    "dense_root_is_leaf": true,
+    "dense_sum_is_inlined": true,
+    "memory": [
+      {
+        "name": "RAMGS12GS15",
+        "origin_word": 98304,
+        "capacity_words": 16384,
+        "used_words": 13097,
+        "unused_words": 3287
+      },
+      {
+        "name": "RAMM1",
+        "origin_word": 1024,
+        "capacity_words": 1024,
+        "used_words": 937,
+        "unused_words": 87
+      },
+      {
+        "name": "RAMGS3",
+        "origin_word": 61440,
+        "capacity_words": 4096,
+        "used_words": 3180,
+        "unused_words": 916
+      },
+      {
+        "name": "RAMGS4GS5",
+        "origin_word": 65536,
+        "capacity_words": 8192,
+        "used_words": 7168,
+        "unused_words": 1024
+      },
+      {
+        "name": "RAMGS6GS11",
+        "origin_word": 73728,
+        "capacity_words": 24576,
+        "used_words": 24000,
+        "unused_words": 576
+      }
+    ],
+    "listed_frames_words": {
+      "ISR1": 66,
+      "pf_lambda_plan": 22,
+      "pf_lambda_root": 20,
+      "pf_lambda_dense_root": 30,
+      "pf_control_interval": 36,
+      "PC_run_fast": 88,
+      "pf_root": 36,
+      "pf_interval": 114,
+      "PC_fast_predict_interval": 42,
+      "VO_reconstruct": 164,
+      "VIENNA_PCMFPC_select": 8,
+      "VIENNA_PCMFPC_sample": 44,
+      "pc_benchmark": 6,
+      "VIENNA_PCMFPC_post": 20,
+      "pc_projection": 10,
+      "pc_root": 64,
+      "PC_predict_interval": 58
+    },
+    "known_stack_chains_words": {
+      "normal_generic": 240,
+      "normal_dense": 228,
+      "shadow_generic": 252,
+      "benchmark_generic": 258,
+      "FAST_FULL_reconstruction": 466,
+      "reference_reconstruction_available_branch": 506
+    },
+    "stack_allocation_words": 896,
+    "static_lower_bound": {
+      "scope": "Relaxed successful-path lower bound on selected mandatory code regions; no execution-time measurement, speedup or WCET",
+      "caller_substeps": 18,
+      "caller_minimum_issue_groups_per_substep": 196,
+      "generic_candidate_roots": 8,
+      "generic_minimum_issue_groups_per_root": 75,
+      "dense_candidate_roots": 8,
+      "dense_minimum_issue_groups_per_root": 79,
+      "first_step_roots": 2,
+      "first_step_relaxed_minimum_per_root": 75,
+      "formula": "18*196 + 8*75 + 8*79 + 2*75",
+      "minimum_groups": 4910,
+      "minimum_us_at_200MHz": 24.55,
+      "first_step_ge2ON_groups": 4918,
+      "first_step_ge2ON_us_at_200MHz": 24.59,
+      "control_includes_dispatch": true,
+      "control_has_one_LCR_issue_group_callee_body_excluded": true,
+      "root_goal_instruction_and_epilogue_excluded": true,
+      "excluded_costs": [
+        "all nonselected PC_run_fast regions",
+        "first/candidate plan and seed callees",
+        "general NULL-plan callee work",
+        "return epilogues and branch latency",
+        "pipeline/resource/memory stalls",
+        "write stage",
+        "ISR and other surrounding work"
+      ],
+      "interpretation": "Relaxed mandatory-region lower bound, not measured runtime, WCET or proof of speedup. The current configuration is 50kHz: 20us/4000 CPU cycles at 200MHz, with 1628 cycles from ISR entry to the next ZERO deadline. The 4910-group floor already exceeds the entire 4000-cycle period, so revision6 remains ineligible for real-time operation at this configuration. Comparing this lower bound with an earlier lower bound cannot establish speedup.",
+      "current_configuration": {
+        "control_frequency_Hz": 50000,
+        "period_us": 20,
+        "period_CPU_cycles_at_200MHz": 4000,
+        "ISR_entry_to_next_ZERO_cycles": 1628,
+        "lower_bound_exceeds_entire_period": true,
+        "real_time_qualified": false
+      }
+    }
+  },
+  "isolation": {
+    "main_head": "756e806a61d69973c0f17e87e3608adfe7bb4786",
+    "main_tracked_files_checked": 82,
+    "main_tracked_files_unchanged": true,
+    "protected_target_files_checked": 19,
+    "protected_target_files_unchanged": true,
+    "preexisting_user_change_retained": "Kit.json (parent project SFRA path; preserve)",
+    "no_PWM_ADC_CMPSS_TZ_protection_timing_changes": true
+  },
+  "hardware": {
+    "round6_board_measurement_available": true,
+    "prior_screenshot_round": 4,
+    "prior_screenshot_cycles": 23425,
+    "configured_CPU_Hz": 200000000,
+    "actual_clock_verified": false,
+    "configured_period_cycles": 4000,
+    "nominal_write_window_cycles": 1628,
+    "static_lower_bound_cycles": 4910,
+    "static_lower_bound_exceeds_configured_period": true,
+    "hardware_release": 0,
+    "qualified_for_power_operation": false,
+    "user_next_step": "Keep HardwareRelease and loops zero, main power OFF; further algorithm optimization and later timing qualification required.",
+    "user_confirmed_kernel_revision": 6,
+    "round6_fixed_fixture_cycles": 21217,
+    "round6_fixed_fixture_bench_status": 1,
+    "round6_fixed_fixture_count": 1,
+    "round6_fixed_fixture_fault": 32,
+    "conditional_200MHz_bench_us": 106.085,
+    "comparison_vs_round4": {
+      "prior_round": 4,
+      "prior_fixture_cycles": 23425,
+      "new_fixture_cycles": 21217,
+      "cycles_saved": 2208,
+      "elapsed_cycle_reduction_percent": 9.425827107790822,
+      "prior_round3_fixture_cycles": 27485,
+      "cycles_saved_vs_round3": 6268,
+      "elapsed_cycle_reduction_vs_round3_percent": 22.80516645442969,
+      "comparison_assumes_same_fixture_clock_and_no_halt": true,
+      "round5_standalone_board_timing_available": false,
+      "cannot_isolate_round6_only_gain_from_round5": true
+    },
+    "on_device_OUT_fingerprint_verified": false,
+    "measurement_evidence": "../../bench_20261026_round6/REPORT.json"
+  },
+  "agent_actions": {
+    "hardware_connected": false,
+    "flash_loaded": false,
+    "target_variables_written": false,
+    "main_power_enabled": false,
+    "trip_cleared": false,
+    "clean_or_recursive_deletion": false,
+    "git_committed_or_pushed": false
+  },
+  "evidence_paths": {
+    "HOST": "host/pass2/REPORT.json",
+    "actual_CCS": "../build_pass6/AUDIT.json",
+    "closed_loop": "closed_loop_round5_comparison/REPORT.json",
+    "source_review": "audit/SOURCE_REVIEW.md"
+  },
+  "delivery_checks": {
+    "status": "PASS",
+    "watch_expression_count": 65,
+    "compiled_artifacts": {
+      "vienna_pcmfpc_zcdc_F2837x.map": "2678cc7058f675b0b11f43c38eef33c86588fc9b9679cc4fe58257a40656c1fa",
+      "vienna_pcmfpc_zcdc_F2837x.out": "e39871137761f725db15b5becd716c6f8d95408a418daf72a864b514babf3ed6"
+    },
+    "parent_local_path_evidence": {
+      "Kit.json": {
+        "historical_sha256": "dd8923214bf2b132715b49f0e744cb303c14480293a240a67392d12d25253bae",
+        "actual_sha256": "acddabf7e9570af6fdb086bae9e40f89c9bb7f38459c7de1f162a6166a1d48e2",
+        "field": "MODEL.COMP_OPTIONS.SFRAPATH",
+        "old": "D:/GraduateStudentProject/Vienna_Rectifier/Vienna_Project/Vienna_MPC/pfc3phvienna_F2837x/SFRAData/SFRAData.csv",
+        "local": "D:/GraduateStudentProject/Vienna_Rectifier/Vienna_Project/Vienna_MPC/pfc3phvienna_new_mpc/SFRAData/SFRAData.csv",
+        "only_path_substitution_and_eol_allowed": true,
+        "preexisting_user_edit_preserved": true
+      }
+    },
+    "file": "../../delivery_checks.json"
+  },
+  "verification_script_change": "Permit only existing parent Kit.json SFRA path localization, requiring all other non-EOL bytes to equal immutable historical commit; no user file overwritten."
+}

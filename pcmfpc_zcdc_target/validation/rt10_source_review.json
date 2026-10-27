@@ -1,0 +1,53 @@
+{
+  "status": "PASS_SOURCE_CONTRACT_REVIEW_WITH_FORMAL_HOST_SUPPORT",
+  "reviewer_scope": "Root integration review of audited prototype plus actual frozen live10, not an additional independent board run",
+  "selected_sha256": "c14f50f50ba60ea677e87b0fd3b29da5fd12d85030891f48b69713e01a4ecd7f",
+  "live_sha256": {
+    "vienna_pcmfpc_fast.c": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+    "vienna_pcmfpc_fast.h": "28e0b215684ef7c65a53a1fc1c79391d1abf7609cebea0ab93fd6ce5fe245aad"
+  },
+  "live_differs_from_selected_only_marker9_to10": true,
+  "public_header_tokens_unchanged_except_comments": true,
+  "model_helpers_unchanged": {
+    "unchanged_functions": {
+      "pf_lambda_plan": true,
+      "pf_lambda_single_plan": true,
+      "pf_lambda_root": true,
+      "pf_lambda_dense_root": true,
+      "pf_root": true,
+      "pf_interval": true,
+      "pf_rotation": true,
+      "pf_plan": true,
+      "pf_dq_to_abc": true,
+      "pf_abc_to_dq": true,
+      "pf_seed": true,
+      "pf_projection": true,
+      "pf_rank": true,
+      "pf_angle_cost": true,
+      "pf_output_init": true,
+      "pf_intersection": true
+    },
+    "text_comparison_ignores_only_line_endings": true
+  },
+  "preserved": [
+    "All8 candidates and2 substeps, candidate0 full interval before candidate1",
+    "N1 dq copied before output clearing; f pointer read at original step position",
+    "Cached np/dc/h/c/setup_status derived by original expressions; error returned at original touch point",
+    "Every interval summary, public array, unavailable integral zero and substep sentinel remains written",
+    "immutable candidate seed and shared root plan; candidate midpoint/current remain independent",
+    "18 root calls, coarse11/fine47 clock reads,8stage profile API; setup remains in delay/candidate stages"
+  ],
+  "new_context_ownership": "Same non-reentrant CPU1 ISR1 ownership as existing workspaces; no reserved field repurposed",
+  "actual_RAM_context": {
+    "words": 20,
+    "run_word": "0xf526",
+    "output_section": ".bss",
+    "bank": "RAMGS3",
+    "existing_linker_unchanged": true
+  },
+  "runtime_risks": [
+    "New batch core frame86 versus62/64 before; known chain grows, not a stack-watermark proof",
+    "10 existing BSS objects move at link even though all old fast workspaces keep addresses; use symbols from current OUT",
+    "No target speedup demonstrated yet; lazyhf rejected on resource evidence without asserting measured slowdown"
+  ]
+}

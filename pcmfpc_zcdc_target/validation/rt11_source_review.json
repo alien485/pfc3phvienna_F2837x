@@ -1,0 +1,63 @@
+{
+  "scope": "Final live11 source-only review. Only these two new round11 audit files are created; no production, old evidence or build/hardware changes.",
+  "review_date_local": "2026-10-27",
+  "live_sha256": {
+    "vienna_pcmfpc_fast.c": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+    "vienna_pcmfpc_fast.h": "f56af0541cc59d079a570dd87b5d4dfda9c74068db5f3bc08dc3b543d9b1fd88"
+  },
+  "live_manifest_match": true,
+  "reviewed_C_trial_sha256": "fce69594928ce6dae75b4e9ddd7853c6b72e302cd3cc9bde8ff9746cb5d93ac8",
+  "trial_header_sha256": "28e0b215684ef7c65a53a1fc1c79391d1abf7609cebea0ab93fd6ce5fe245aad",
+  "comparison": {
+    "live_vs_reviewed_C_trial": "Exactly two kernel marker10U->11U replacements; complete normalized-newline text otherwise identical.",
+    "header": "Token sequence after removing comments/whitespace is identical to reviewed trial; documentation only.",
+    "kernel_marker_occurrences_11": 2,
+    "live_C_source_proof_inherited_from": "C_SOURCE_REVIEW.md/json",
+    "AB_results_not_reinterpreted": true,
+    "old16helpers": "Parent formal runner owns exact source verification. Not rerun or claimed independently in this source-only review.",
+    "old19ASM": "Core agent owns actual assembly comparison. Not a source-only assertion."
+  },
+  "ON_dependency": {
+    "actual_function": "pf_dq_to_abc_on",
+    "actual_dispatch": "result && STEP==1U only",
+    "old_reads_only": [
+      {
+        "line": 723,
+        "guard": "hw&1U"
+      },
+      {
+        "line": 725,
+        "guard": "hw&2U"
+      },
+      {
+        "line": 727,
+        "guard": "hw&4U"
+      }
+    ],
+    "initialized_before_each_read": true,
+    "hw0": "No old scalar is computed; no old read follows.",
+    "hw1": "Only original a is computed and old0 written; b and B/C components are unused.",
+    "hw2_4_3_5_6": "Original a/b and each used ON inverse-Clarke expression retained.",
+    "hw7": "All three original output expressions retained.",
+    "neutral_sum": "phase0 then phase1 then phase2, unchanged.",
+    "no_KCL_or_norm_identity": true
+  },
+  "failure_alias_boundary": {
+    "no_new_public_write_guard_or_control_return": true,
+    "original_cap_root_numeric_finalmidpoint_order_retained": true,
+    "root_never_reads_old": true,
+    "old_local_free_local_next_distinct_arrays": true,
+    "no_next_alias": true,
+    "N1_seed_FULL_observer_unchanged": true,
+    "private_OFF_scratch": "Can remain stale; is never read in reviewed CONTROL path and is not a public output byte contract. FULL uses its separate unchanged old trace path.",
+    "private_FP_flags": "Removed unused arithmetic may alter FP status flags, but the reviewed code does not inspect those flags. No claim about external white-box observation of private scratch/flags.",
+    "ownership": "Original static workspace is CPU1 ISR1 exclusive and non-reentrant; unchanged."
+  },
+  "decision": "PASS for source dependency/initialization/alias/public failure-touch review of the pinned live11 source. This does not by itself establish full target binary FP equivalence, RAM capacity, stack adequacy, speedup, WCET or hardware readiness.",
+  "pending_owner_checks": [
+    "formal byte/status/alias and closed-loop regression",
+    "actual TI FP grouping/unchanged helper ASM",
+    "actual OUT RAM/callback/profile-inactive/stack/resource audit",
+    "plain board benchmark if delivered"
+  ]
+}

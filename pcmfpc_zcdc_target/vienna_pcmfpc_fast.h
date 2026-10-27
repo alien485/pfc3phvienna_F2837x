@@ -23,6 +23,15 @@
  * diode model as FULL/SUMMARY. Its floating-point operation order differs;
  * near ties, zero-current blocking and terminal selection are not promised
  * bit-identical to those paths. No cost/zero epsilon is added to mask this.
+ * Revision 10 batches eight candidates in one shared model core and caches
+ * common setup scalars. N=1 retains standalone reads and failure writes.
+ * Revision 9 omits unused ON events only in single-ON NULL plans; the
+ * generic solver and shared plans retain revision 8 arithmetic.
+ * Revision 8 uses two constant CONTROL substeps and separate ordinary/fine
+ * profile kernels generated from one model body. Profiling API is unchanged.
+ * Revision 7 also simplifies the bounded integer candidate intersection.
+ * Revision 6 specializes CONTROL masks with at least two ON phases; its
+ * model, phase-order sums, closed-segment and residual rules are unchanged.
  */
 enum { PC_FAST_SUMMARY_ONLY = 0U, PC_FAST_FULL_SUBSTEPS = 1U,
        PC_FAST_CONTROL_ONLY = 2U };
@@ -41,13 +50,45 @@ enum { PC_FAST_SUMMARY_ONLY = 0U, PC_FAST_FULL_SUBSTEPS = 1U,
 extern volatile uint16_t PC_fast_output_substeps_available;
 extern volatile uint16_t PC_fast_output_summaries_available;
 extern volatile uint16_t PC_fast_output_integrals_available;
-/* Diagnostic build marker, initialized and refreshed by PC_run_fast only. */
+/* Diagnostic build marker (revision 10), refreshed by PC_run_fast only. */
 extern volatile uint16_t PC_fast_kernel_revision;
+
+/* Optional one-shot profiling, owned by the same CPU1 ISR1 as the kernel.
+ * clock returns a raw periodic DOWN-counter in [0,period-1]; period is its
+ * modulus (inclusive hardware PRD + 1), not the PRD register value. Every
+ * measured span, including the whole run, must be shorter than one period.
+ * configure/arm are called only while the owner is idle, never from clock.
+ * mode 1 records disjoint stage buckets; mode 2 also records nested roots.
+ * root_cycles is INCLUDED in delay/candidates and must not be added again.
+ * Clock instrumentation/reads perturb timings. clock_pair_overhead is an
+ * observed adjacent-read delta, not a correction automatically subtracted.
+ */
+typedef uint32_t (*PC_FastProfileClock)(void);
+typedef struct {
+    uint32_t setup_cycles, delay_cycles, plan_seed_cycles, candidates_cycles;
+    uint32_t select_cycles, terminal_prepare_cycles, angles_cycles, output_cycles;
+    uint32_t total_cycles, root_cycles, clock_pair_overhead;
+    uint16_t mode, valid, completed, core_status;
+    uint16_t root_calls, angle_calls, read_count, clock_fault;
+} PC_FastProfile;
+extern volatile PC_FastProfile PC_fast_profile;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 uint16_t PC_run_fast(const PC_Config *cfg, const PC_Input *in, PC_Output *out);
+
+/* Configure cancels any outstanding request and invalidates the report.
+ * arm(0) cancels and invalidates; arm(1/2) requires a clock/nonzero modulus.
+ * Invalid arms return PC_ERR_CONFIG and cancel any older pending request.
+ * A successful arm is consumed by exactly the next PC_run_fast, including
+ * error/null-input calls. Ordinary unarmed runs never read the clock and
+ * preserve the frozen report. valid=1 only after PC_OK and in-range samples;
+ * completed/core_status distinguish a consumed failed or clock-invalid run.
+ * On failed runs partial buckets are not a stage-time breakdown.
+ */
+void PC_fast_profile_configure(PC_FastProfileClock clock, uint32_t period);
+uint16_t PC_fast_profile_arm(uint16_t mode);
 
 /* FULL_SUBSTEPS writes every PC_Substep field on PC_OK, including pole_abc_V
  * and theta_end_rad needed by the executed-gate observer reconstruction.

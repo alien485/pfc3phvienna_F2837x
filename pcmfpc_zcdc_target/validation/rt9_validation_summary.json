@@ -1,0 +1,247 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS_ROUND9_HOST_VALIDATION",
+  "candidate": "plan-only NULL single-ON event builder; original generic solver otherwise retained",
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "e2affd9a2d3728e6aa67f0fa044603b3c25ac74458b87965210f2bfdb6b25dec",
+    "vienna_pcmfpc_fast.h": "813bbb59344ed582d77b1ad157c26487e5f70fdc37f9499a3b62a8cc29d98bab"
+  },
+  "executed_source_snapshots_still_match_live": true,
+  "executed_snapshot_file_count": 19,
+  "same_policy_public_output_comparisons": [
+    {
+      "diagnostic_all_angles": 1,
+      "exit": 0,
+      "public_struct": {
+        "cases": 31750,
+        "status_differences": 0,
+        "public_flag_differences": 0,
+        "PC_Output_byte_difference_rows": 0,
+        "interval_calls_all_detail_modes": 140025,
+        "interval_status_differences": 0,
+        "PC_Interval_byte_difference_calls": 0,
+        "revision_errors": 0
+      },
+      "cross_policy": {
+        "policy_cases": 31750,
+        "policy_status_differences": 0,
+        "policy_undocumented_byte_differences": 0
+      }
+    },
+    {
+      "diagnostic_all_angles": 0,
+      "exit": 0,
+      "public_struct": {
+        "cases": 31750,
+        "status_differences": 0,
+        "public_flag_differences": 0,
+        "PC_Output_byte_difference_rows": 0,
+        "interval_calls_all_detail_modes": 140025,
+        "interval_status_differences": 0,
+        "PC_Interval_byte_difference_calls": 0,
+        "revision_errors": 0
+      },
+      "cross_policy": {
+        "policy_cases": 0,
+        "policy_status_differences": 0,
+        "policy_undocumented_byte_differences": 0
+      }
+    }
+  ],
+  "single_on_actual_generic_root_differential": {
+    "cases": 325551,
+    "shared_cases": 167976,
+    "NULL_cases": 157575,
+    "successes": 117792,
+    "root_error_cases": 102345,
+    "numeric_error_cases": 105414,
+    "status_differences": 0,
+    "success_next_byte_differences": 0,
+    "failed_next_byte_differences": 0,
+    "shared_plan_mutations": 0,
+    "inconsistent_shared_cases": 9852,
+    "forced_status_cases": 1218,
+    "natural_root_error_cases": 101736,
+    "max_double_sum_KCL_A": 1024,
+    "max_float_KCL_A": 1024,
+    "max_float_residual_over_used_tolerance": 0.668877242652,
+    "bounded_domain_successes": 78772,
+    "bounded_domain_max_float_KCL_A": 9.1552734375e-05
+  },
+  "control_and_fake_clock": {
+    "checks": 85,
+    "failures": 0,
+    "profile_checks": 80,
+    "control_cases": 24912,
+    "control_status_differences": 0,
+    "control_byte_differences": 0,
+    "control_successes": 24614,
+    "control_failures": 298,
+    "blocked_successes": 1492,
+    "shared_seed_cases": 12456,
+    "NULL_seed_cases": 12456,
+    "status_counts": [
+      24614,
+      0,
+      0,
+      0,
+      150,
+      0,
+      148
+    ],
+    "counter": "fake_downcounter_only"
+  },
+  "unchanged_model_proof": {
+    "unchanged_functions": {
+      "pf_lambda_plan": true,
+      "pf_lambda_dense_root": true,
+      "pf_root": true,
+      "pf_interval": true,
+      "pf_rotation": true,
+      "pf_plan": true,
+      "pf_dq_to_abc": true,
+      "pf_abc_to_dq": true,
+      "pf_seed": true,
+      "pf_projection": true,
+      "pf_rank": true,
+      "pf_angle_cost": true,
+      "pf_output_init": true,
+      "pf_intersection": true
+    },
+    "generic_root_known_NULL_plan_dispatch_only": true,
+    "generic_root_remaining_text_identical": true,
+    "text_comparison_ignores_only_line_endings": true,
+    "expected_generic_root_body_sha256": "dc80967bc16e6f9581af35976a58b8f7e30c1ea65200d95f65d42d864370abe3",
+    "actual_generic_root_body_sha256": "dc80967bc16e6f9581af35976a58b8f7e30c1ea65200d95f65d42d864370abe3"
+  },
+  "safety_runtime_observer": [
+    {
+      "name": "fast_safety",
+      "exit": 0,
+      "stdout": "edge=R_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=L_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=omega_float_max fast_status=6 reference_status=3 finite_public_success=-1 margin=0 gate=0\nedge=delta_i_float_max fast_status=0 reference_status=0 finite_public_success=1 margin=48.1042366 gate=0\nedge=duration_float_max fast_status=6 reference_status=6 finite_public_success=-1 margin=0 gate=0\nedge=C_float_min fast_status=4 reference_status=4 finite_public_success=-1 margin=0 gate=0\nfast_safety_checks=85 PASS; nonfinite_public_success_edges=0"
+    },
+    {
+      "name": "observer",
+      "exit": 0,
+      "stdout": "deltaU_vs_independent_cumulative_double_oracle max_i_A=9.98109619e-07 max_f_A_s=0.00887037572\nanalytic_rotation_vs_20000_midpoint_integral error_V_s=[2.23083589e-10,2.10332511e-12]\ntwo_executed_gate_segments_all_states_zero_blocking_sequence_reset_both_roots=PASS\nfull_executed_history_vs_unchanged_readable_predictor=PASS nonzero_integral_cases=16"
+    },
+    {
+      "name": "runtime",
+      "exit": 0,
+      "stdout": "runtime_host_checks=299 real_PLL_ESO_core_with_stub_timer_and_trip=PASS\nNo target execution: next sample assumes one ZERO crossed; analog ADC, ISR latency, AQ and hardware trip paths require bench tests."
+    }
+  ],
+  "closed_loop": {
+    "pairs": 10,
+    "all_trace_and_metric_files_byte_identical": true,
+    "baseline": "actual round8"
+  },
+  "full_profile_equivalence": {
+    "base_cases": 31750,
+    "directed_derived_failure_cases": 2,
+    "policies": [
+      {
+        "diagnostic_all_angles": 0,
+        "mode": 1,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 0,
+        "minimum_partial_root_calls": 0,
+        "maximum_partial_root_calls": 0
+      },
+      {
+        "diagnostic_all_angles": 0,
+        "mode": 2,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 2,
+        "minimum_partial_root_calls": 1,
+        "maximum_partial_root_calls": 5
+      },
+      {
+        "diagnostic_all_angles": 1,
+        "mode": 1,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 0,
+        "minimum_partial_root_calls": 0,
+        "maximum_partial_root_calls": 0
+      },
+      {
+        "diagnostic_all_angles": 1,
+        "mode": 2,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 2,
+        "minimum_partial_root_calls": 1,
+        "maximum_partial_root_calls": 5
+      }
+    ],
+    "validation_errors": 0
+  },
+  "evidence": {
+    "host\\pass1\\REPORT.md": {
+      "sha256": "2f1dca2af0fcad42e1e8f3cc489409ee0dfd6fdc9b030854d8d5760d6c009186"
+    },
+    "host\\pass1\\REPORT.json": {
+      "sha256": "2d8f45ecc76e4c40a7915c937e48a4f89aa707b229692e639ad1c7638dd79628"
+    },
+    "closed_loop\\REPORT.md": {
+      "sha256": "9fbf73d315e95e714d026c815a00fa4482a046657c482384c0c66d5d95be5481"
+    },
+    "closed_loop\\REPORT.json": {
+      "sha256": "710073ed292c5d46827f8d4868d8e0e18ebabca8b2a2c3bf05ae8361a2954581"
+    },
+    "profile_replay\\REPORT.md": {
+      "sha256": "01495791f3e6b35268378b7d650790353f267cd1eabdaf42f4295b226a2d45d0"
+    },
+    "profile_replay\\REPORT.json": {
+      "sha256": "bba19402225b399bbf0bfc8dc0d31bdc4f857377d1b034742320c3e343612ef1"
+    }
+  },
+  "prior_report_integrity": {
+    "full_profile_recorded_host_report_hash_still_matches": true,
+    "earlier_round8_scripts_or_snapshots_not_modified": true
+  },
+  "limits": [
+    "HOST sample/code regression only; no universal TI floating-point proof",
+    "No board cycles, WCET or power-operation qualification",
+    "Original older piecewise exact-equivalence FAIL and1887 selected differences remain inherited",
+    "Extreme/private invalid/shared-inconsistent tests are robustness probes, not board operating conditions"
+  ],
+  "validation_agent_actions": {
+    "control_source_edits": false,
+    "CCS_builds": false,
+    "hardware_actions": false,
+    "deletions": false,
+    "git_mutations": false
+  }
+}

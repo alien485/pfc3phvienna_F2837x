@@ -1,0 +1,273 @@
+{
+  "date": "2026-10-27",
+  "status": "RECOMMENDED_OUTPUT_ONLY_PROTOTYPE;NOT_INSTALLED;NO_TARGET_SPEEDUP_CLAIM",
+  "baseline_kernel_revision": 9,
+  "baseline_v8_board_cycles": 19212,
+  "baseline_v9_board_cycles": 19242,
+  "source_prototypes_keep_revision": 9,
+  "selected_trial": "unified_common_setup_inline_isolated",
+  "selected_source_sha256": "c14f50f50ba60ea677e87b0fd3b29da5fd12d85030891f48b69713e01a4ecd7f",
+  "variants": {
+    "baseline9": {
+      "pf_control_interval_plain": {
+        "max_frame_including_return_words": 62,
+        "static_instruction_lines": 565,
+        "SP_FP_lines": 91,
+        "DP_load_lines": 6,
+        "LCR_sites": 4
+      },
+      "pf_control_interval_profiled": {
+        "max_frame_including_return_words": 64,
+        "static_instruction_lines": 610,
+        "SP_FP_lines": 91,
+        "DP_load_lines": 17,
+        "LCR_sites": 8
+      },
+      "PC_run_fast": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 1647,
+        "SP_FP_lines": 238,
+        "DP_load_lines": 33,
+        "LCR_sites": 25
+      },
+      "section_words": {
+        ".bss": 404,
+        "pcmfpc_code": 8247
+      },
+      "estimated_whole_RAM_code_words": 15099,
+      "estimated_code_free_words": 1285,
+      "source_sha256": "e2affd9a2d3728e6aa67f0fa044603b3c25ac74458b87965210f2bfdb6b25dec"
+    },
+    "unified_context_batch": {
+      "pf_control_interval_plain": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 731,
+        "SP_FP_lines": 122,
+        "DP_load_lines": 23,
+        "LCR_sites": 4
+      },
+      "pf_control_interval_profiled": {
+        "max_frame_including_return_words": 88,
+        "static_instruction_lines": 781,
+        "SP_FP_lines": 121,
+        "DP_load_lines": 35,
+        "LCR_sites": 8
+      },
+      "PC_run_fast": {
+        "max_frame_including_return_words": 70,
+        "static_instruction_lines": 1425,
+        "SP_FP_lines": 189,
+        "DP_load_lines": 29,
+        "LCR_sites": 24
+      },
+      "section_words": {
+        ".bss": 436,
+        "pcmfpc_code": 8465
+      },
+      "estimated_whole_RAM_code_words": 15317,
+      "estimated_code_free_words": 1067,
+      "source_sha256": "c61b0fe04974b90ca20330f80fd53d1d639bc49d9acf1356ae2b8266fd5e2f79"
+    },
+    "unified_common_setup": {
+      "pf_control_interval_plain": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 743,
+        "SP_FP_lines": 127,
+        "DP_load_lines": 23,
+        "LCR_sites": 4
+      },
+      "pf_control_interval_profiled": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 784,
+        "SP_FP_lines": 122,
+        "DP_load_lines": 35,
+        "LCR_sites": 8
+      },
+      "PC_run_fast": {
+        "max_frame_including_return_words": 70,
+        "static_instruction_lines": 1425,
+        "SP_FP_lines": 189,
+        "DP_load_lines": 29,
+        "LCR_sites": 24
+      },
+      "section_words": {
+        ".bss": 436,
+        "pcmfpc_code": 8482
+      },
+      "estimated_whole_RAM_code_words": 15334,
+      "estimated_code_free_words": 1050,
+      "source_sha256": "54b5473e68108790a66c974530bfc1e57d2a701373570387cc45680899f1a941"
+    },
+    "unified_common_lazy_hf": {
+      "pf_control_interval_plain": {
+        "max_frame_including_return_words": 92,
+        "static_instruction_lines": 799,
+        "SP_FP_lines": 150,
+        "DP_load_lines": 25,
+        "LCR_sites": 4
+      },
+      "pf_control_interval_profiled": {
+        "max_frame_including_return_words": 90,
+        "static_instruction_lines": 835,
+        "SP_FP_lines": 154,
+        "DP_load_lines": 35,
+        "LCR_sites": 8
+      },
+      "PC_run_fast": {
+        "max_frame_including_return_words": 70,
+        "static_instruction_lines": 1425,
+        "SP_FP_lines": 189,
+        "DP_load_lines": 29,
+        "LCR_sites": 24
+      },
+      "section_words": {
+        ".bss": 436,
+        "pcmfpc_code": 8648
+      },
+      "estimated_whole_RAM_code_words": 15500,
+      "estimated_code_free_words": 884,
+      "source_sha256": "6c19678eea08bcae1923c1ea2d8182fe6fc934a77ea52bc1cc25b974838f92e7"
+    },
+    "unified_context_batch_inline": {
+      "pf_control_interval_plain": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 731,
+        "SP_FP_lines": 122,
+        "DP_load_lines": 23,
+        "LCR_sites": 4
+      },
+      "pf_control_interval_profiled": {
+        "max_frame_including_return_words": 88,
+        "static_instruction_lines": 781,
+        "SP_FP_lines": 121,
+        "DP_load_lines": 35,
+        "LCR_sites": 8
+      },
+      "PC_run_fast": {
+        "max_frame_including_return_words": 72,
+        "static_instruction_lines": 1445,
+        "SP_FP_lines": 195,
+        "DP_load_lines": 29,
+        "LCR_sites": 25
+      },
+      "section_words": {
+        ".bss": 436,
+        "pcmfpc_code": 8453
+      },
+      "estimated_whole_RAM_code_words": 15305,
+      "estimated_code_free_words": 1079,
+      "source_sha256": "9ae254310d38e7887185b7127392f89097ef533b3266d65467b6cff94691fd8f"
+    },
+    "unified_common_setup_inline": {
+      "pf_control_interval_plain": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 743,
+        "SP_FP_lines": 127,
+        "DP_load_lines": 23,
+        "LCR_sites": 4
+      },
+      "pf_control_interval_profiled": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 784,
+        "SP_FP_lines": 122,
+        "DP_load_lines": 35,
+        "LCR_sites": 8
+      },
+      "PC_run_fast": {
+        "max_frame_including_return_words": 72,
+        "static_instruction_lines": 1445,
+        "SP_FP_lines": 195,
+        "DP_load_lines": 29,
+        "LCR_sites": 25
+      },
+      "section_words": {
+        ".bss": 436,
+        "pcmfpc_code": 8470
+      },
+      "estimated_whole_RAM_code_words": 15322,
+      "estimated_code_free_words": 1062,
+      "source_sha256": "e3f2010aaa9d9fc09554d044cba78499fd9fcb2be9317fe3de5edb68f25c7870"
+    },
+    "unified_common_setup_inline_isolated": {
+      "pf_control_interval_plain": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 728,
+        "SP_FP_lines": 127,
+        "DP_load_lines": 8,
+        "LCR_sites": 4
+      },
+      "pf_control_interval_profiled": {
+        "max_frame_including_return_words": 86,
+        "static_instruction_lines": 770,
+        "SP_FP_lines": 122,
+        "DP_load_lines": 21,
+        "LCR_sites": 8
+      },
+      "PC_run_fast": {
+        "max_frame_including_return_words": 72,
+        "static_instruction_lines": 1447,
+        "SP_FP_lines": 195,
+        "DP_load_lines": 31,
+        "LCR_sites": 25
+      },
+      "section_words": {
+        ".bss": 404,
+        ".bss:pf_control_context": 20,
+        "pcmfpc_code": 8415
+      },
+      "estimated_whole_RAM_code_words": 15267,
+      "estimated_code_free_words": 1117,
+      "source_sha256": "c14f50f50ba60ea677e87b0fd3b29da5fd12d85030891f48b69713e01a4ecd7f"
+    }
+  },
+  "selection_reason": [
+    "Real N8 batch loop uses one of the two existing model cores rather than 8 leaf calls",
+    "N1 old signature and f-read alias/touch order retained",
+    "Common scalar setup/status snapshot once, errors replay after original output initialization",
+    "Same local dq/np directly fills both required output representations; no summary omitted",
+    "One shared macro model body; all roots and floating expressions remain unchanged",
+    "Selected binder inlines, context isolated in standard .bss subsection to retain old object-relative BSS layout"
+  ],
+  "rejected_lazy_hf_reason": "Saved multiplications did not justify extra conditional path, frame and stack traffic: ordinary frame92/SP150 vs common86/SP127; no claimed target runtime loss or win",
+  "new_static_state": {
+    "name": "pf_control_context",
+    "words": 20,
+    "section": ".bss:pf_control_context",
+    "original_workspace_types_and_reserved_unchanged": true,
+    "isolated_variant_original_13_BSS_relative_symbol_offsets_unchanged": true,
+    "linked_placement_not_yet_verified": true,
+    "linker_script_changes": false
+  },
+  "important_limits": [
+    "Static body counts are not dynamic cycles; unified core includes N1/N8 branch and full cost loop so static instruction sums are not comparable by naive multiplication",
+    "Ordinary/fine frames increase from62/64 to86/86 while PC_run_fast decreases86 to72; full active chain and long SP access need actual linked audit",
+    "Whole code capacity is estimated from same-option standalone TU delta; actual link mandatory",
+    "Subsection must be verified under existing .bss mapping and all old/new absolute BSS addresses audited",
+    "No prototype was loaded, benchmarked, committed, or installed in production by this task"
+  ],
+  "expected_profile_clock_reads": [
+    11,
+    47
+  ],
+  "expected_roots_per_success": 18,
+  "selected_legacy_compile_exit": 0,
+  "selected_private_and_standalone_frames": {
+    "PC_fast_predict_interval": 42,
+    "private_wrapper_fallback": 2,
+    "candidate_binder_fallback": 2
+  },
+  "host_prototypes_passed": {
+    "unified_context_batch": "prototype_validation/unified_context_batch/host/pass1",
+    "unified_common_setup": "prototype_validation/unified_common_setup/host/pass1",
+    "selected_requires_final_frozen_regression": true
+  },
+  "ordinary_context_padding_correction": {
+    "baseline_main_BSS_words": 404,
+    "ordinary_context_variant_main_BSS_words": 436,
+    "context_struct_words": 20,
+    "extra_alignment_padding_words": 12,
+    "selected_main_BSS_words": 404,
+    "selected_context_subsection_words": 20
+  },
+  "scope_limits": "All code capacity/frame figures are standalone estimates; actual linker subsection mapping, absolute BSS placement, stack chains and board timing remain unverified."
+}

@@ -1,15 +1,27 @@
 {
   "scope": "source fingerprints, branch isolation, CCS metadata and watch syntax/symbols; no GUI/hardware test",
   "branch": "new_mpc",
-  "head": "531702a5f61236dca1f39bd8837bf86f8b45516f",
+  "head": "10c0f3bc966d399bc43374122d11f8afcf6915be",
   "historical_baseline_commit": "1c93fcd53644baa0716826c66007696b512cb46d",
   "baseline_is_ancestor": true,
-  "main_tip": "756e806a61d69973c0f17e87e3608adfe7bb4786",
+  "main_tip": "81822e3fc2f8915fc74ddef43234ab796163208a",
   "main_contains_historical_baseline": true,
   "main_advanced_since_historical_baseline": true,
   "parent_changed_files": [
-    ".cproject"
+    ".cproject",
+    "Kit.json"
   ],
+  "parent_local_path_evidence": {
+    "Kit.json": {
+      "historical_sha256": "dd8923214bf2b132715b49f0e744cb303c14480293a240a67392d12d25253bae",
+      "actual_sha256": "acddabf7e9570af6fdb086bae9e40f89c9bb7f38459c7de1f162a6166a1d48e2",
+      "field": "MODEL.COMP_OPTIONS.SFRAPATH",
+      "old": "D:/GraduateStudentProject/Vienna_Rectifier/Vienna_Project/Vienna_MPC/pfc3phvienna_F2837x/SFRAData/SFRAData.csv",
+      "local": "D:/GraduateStudentProject/Vienna_Rectifier/Vienna_Project/Vienna_MPC/pfc3phvienna_new_mpc/SFRAData/SFRAData.csv",
+      "only_path_substitution_and_eol_allowed": true,
+      "preexisting_user_edit_preserved": true
+    }
+  },
   "parent_newline_only_files": [
     ".ccsproject",
     ".gitattributes",
@@ -228,11 +240,11 @@
     "output/paper_aligned_validation/paper_aligned_delivery_20261025.json"
   ],
   "reference_compatibility_report_sha256": "da9d75abb54d9a351e670e2ca2252a1bf7658a1e56b0fcb011805098e7c0fd4b",
-  "watch_expression_count": 65,
+  "watch_expression_count": 66,
   "watch_gui_import_tested": false,
   "compiled_artifacts": {
-    "vienna_pcmfpc_zcdc_F2837x.map": "eacf71c007d7a21b1930bfd0c10280a2e4c021ece05fd29cd3753ef8df288a5f",
-    "vienna_pcmfpc_zcdc_F2837x.out": "a55af358c59ffbcc358cbfb1c168b9550143de4f8c739d04cbbec8e7db6a482e"
+    "vienna_pcmfpc_zcdc_F2837x.map": "8bc8db09631ac7345cf4da7ac6560aa7c0f9b806cff3854056c42ac756e59aa6",
+    "vienna_pcmfpc_zcdc_F2837x.out": "4b847bd12c26178680d63c14992afd6d3a282d80a1a56ecbd91c0562216db13a"
   },
   "reference_hashes": {
     "TI_PCMFPC_ZCDC_移植任务提示词.md": "c68910eac2b47a97602089d7b8fb742b87e619d48ff0200a3d617d0292517417",

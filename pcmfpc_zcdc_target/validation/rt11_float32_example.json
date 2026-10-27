@@ -1,0 +1,108 @@
+{
+  "scope": "Pure Python arithmetic illustration with one binary32 rounding after each written arithmetic operation. sin/cos are HOST math then cast; division by3 is binary32 rounded division. This is NOT TI TMU/FPU/reassociation emulation, not root replay, not target measurement, and not evidence of actual prototype pass/fail.",
+  "coefficients": {
+    "reciprocal3_u": 0.3333333432674408,
+    "PC_C_v": 0.5773502588272095,
+    "PC_SQRT3_HALF_t": 0.8660253882408142,
+    "3u_exact_fraction": "33554433/33554432",
+    "2vt_exact_fraction": "70368741651675/70368744177664"
+  },
+  "examples": [
+    {
+      "theta_host_double": 0.713,
+      "stored_cs": [
+        0.7564029693603516,
+        0.6541059017181396
+      ],
+      "rho_binary32": 1.0,
+      "rho_exact_on_stored_coefficients": 0.9999999827196575,
+      "root_abc": [
+        0.8999999761581421,
+        -0.30000001192092896,
+        -0.6000000238418579
+      ],
+      "sum_stored_values_exact": -5.960464477539063e-08,
+      "clarke_alpha_beta": [
+        0.8999999165534973,
+        0.17320507764816284
+      ],
+      "original_park_dq": [
+        0.7940570712089539,
+        -0.45768237113952637
+      ],
+      "original_old_abc": [
+        0.8999998569488525,
+        -0.2999998927116394,
+        -0.5999999642372131
+      ],
+      "raw_copy_A": [
+        0.8999999761581421,
+        -0.30000001192092896,
+        -0.6000000238418579
+      ],
+      "rho_projection_B": [
+        0.8999999165534973,
+        -0.2999999523162842,
+        -0.5999999642372131
+      ],
+      "A_minus_original_exact_on_stored_values": [
+        1.1920928955078125e-07,
+        -1.1920928955078125e-07,
+        -5.960464477539063e-08
+      ],
+      "B_minus_original_exact_on_stored_values": [
+        5.960464477539063e-08,
+        -5.960464477539063e-08,
+        0.0
+      ]
+    },
+    {
+      "theta_host_double": 0.713,
+      "stored_cs": [
+        0.7564029693603516,
+        0.6541059017181396
+      ],
+      "rho_binary32": 1.0,
+      "rho_exact_on_stored_coefficients": 0.9999999827196575,
+      "root_abc": [
+        1.0,
+        -0.25,
+        -0.7499989867210388
+      ],
+      "sum_stored_values_exact": 1.0132789611816406e-06,
+      "clarke_alpha_beta": [
+        0.9999997019767761,
+        0.288674533367157
+      ],
+      "original_park_dq": [
+        0.9452264308929443,
+        -0.43575143814086914
+      ],
+      "original_old_abc": [
+        0.9999996423721313,
+        -0.25000035762786865,
+        -0.7499992847442627
+      ],
+      "raw_copy_A": [
+        1.0,
+        -0.25,
+        -0.7499989867210388
+      ],
+      "rho_projection_B": [
+        0.9999997019767761,
+        -0.25000035762786865,
+        -0.7499993443489075
+      ],
+      "A_minus_original_exact_on_stored_values": [
+        3.5762786865234375e-07,
+        3.5762786865234375e-07,
+        2.980232238769531e-07
+      ],
+      "B_minus_original_exact_on_stored_values": [
+        5.960464477539063e-08,
+        0.0,
+        -5.960464477539063e-08
+      ]
+    }
+  ]
+}

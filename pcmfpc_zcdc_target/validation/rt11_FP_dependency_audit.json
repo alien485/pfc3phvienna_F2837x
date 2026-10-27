@@ -1,0 +1,996 @@
+{
+  "scope": "Read-only source-provenance and actual linked FPU dependency review for the newly inlined masked inverse only; not a universal target floating-point equivalence proof.",
+  "actual_out_sha256": "f8128de38d9653df32c002aff259a4e036dd9549a9e1e115563b7ac2492b147b",
+  "actual_source_sha256": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+  "retained_source_lines": {
+    "296": "if(!hw)return;",
+    "297": "a=r->ct*dq[0]-r->st*dq[1];",
+    "298": "if(hw==1U){abc[0]=a;return;}",
+    "299": "b=r->st*dq[0]+r->ct*dq[1];",
+    "300": "if(hw&1U)abc[0]=a;",
+    "301": "if(hw&2U)abc[1]=-a/(PC_Real)2+PC_SQRT3_HALF*b;",
+    "302": "if(hw&4U)abc[2]=-a/(PC_Real)2-PC_SQRT3_HALF*b;"
+  },
+  "dispatch_source_lines": {
+    "704": "        if((STEP)==0U && seed){w->old_abc=seed->old_abc;w->free_abc=seed->free_abc;} \\",
+    "705": "        else{ \\",
+    "706": "            if(result && (STEP)==1U) \\",
+    "707": "                pf_dq_to_abc_on(dq,&plan->node[(STEP)],hw,w->old_local); \\",
+    "708": "            else pf_dq_to_abc(dq,&plan->node[(STEP)],w->old_local); \\",
+    "709": "            free_dq[0]=dq[0]+h*f[0];free_dq[1]=dq[1]+h*f[1]; \\",
+    "710": "            pf_dq_to_abc(free_dq,&plan->node[(STEP)+1U],w->free_local); \\",
+    "711": "            w->old_abc=w->old_local;w->free_abc=w->free_local; \\"
+  },
+  "neutral_source_lines": {
+    "723": "        if(hw&1U)neutral+=(w->old_abc[0]+w->next[0])/(PC_Real)2; \\",
+    "724": "        else if(PC_ABS(w->next[0])<(PC_Real)1e-12)blocked=1U; \\",
+    "725": "        if(hw&2U)neutral+=(w->old_abc[1]+w->next[1])/(PC_Real)2; \\",
+    "726": "        else if(PC_ABS(w->next[1])<(PC_Real)1e-12)blocked=1U; \\",
+    "727": "        if(hw&4U)neutral+=(w->old_abc[2]+w->next[2])/(PC_Real)2; \\"
+  },
+  "actual_control_functions": {
+    "pf_control_interval_plain": {
+      "masked_region_word_bounds_inclusive": [
+        "0x18fa0",
+        "0x18fe2"
+      ],
+      "compiler_source_line_provenance": [
+        {
+          "line": 10100,
+          "text": "        MOVL      XAR4,*-SP[52]         ; [CPU_ALU] |297| "
+        },
+        {
+          "line": 10101,
+          "text": "        MOVB      XAR1,#16              ; [CPU_ALU] |297| "
+        },
+        {
+          "line": 10102,
+          "text": "        MOVB      XAR0,#14              ; [CPU_ALU] |297| "
+        },
+        {
+          "line": 10103,
+          "text": "        MOV32     R6H,*+XAR4[AR1]       ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 10105,
+          "text": "        MPYF32    R0H,R1H,R6H           ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 10106,
+          "text": "||      MOV32     R3H,*+XAR4[AR0]       ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 10108,
+          "text": "        MPYF32    R7H,R2H,R3H           ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 10110,
+          "text": "        CMPB      AL,#1                 ; [CPU_ALU] |298| "
+        },
+        {
+          "line": 10112,
+          "text": "        SUBF32    R0H,R7H,R0H           ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 10114,
+          "text": "        B         ||$C$L218||,EQ        ; [CPU_ALU] |298| "
+        },
+        {
+          "line": 10115,
+          "text": "        ; branchcc occurs ; [] |298| "
+        },
+        {
+          "line": 10117,
+          "text": "        MPYF32    R6H,R2H,R6H           ; [CPU_FPU] |299| "
+        },
+        {
+          "line": 10118,
+          "text": "        MPYF32    R3H,R1H,R3H           ; [CPU_FPU] |299| "
+        },
+        {
+          "line": 10120,
+          "text": "        TBIT      AL,#0                 ; [CPU_ALU] |300| "
+        },
+        {
+          "line": 10122,
+          "text": "        ADDF32    R6H,R6H,R3H           ; [CPU_FPU] |299| "
+        },
+        {
+          "line": 10124,
+          "text": "        B         ||$C$L216||,NTC       ; [CPU_ALU] |300| "
+        },
+        {
+          "line": 10125,
+          "text": "        ; branchcc occurs ; [] |300| "
+        },
+        {
+          "line": 10127,
+          "text": "        MOV32     @||pf_control_work||+12,R0H ; [CPU_FPU] |300| "
+        },
+        {
+          "line": 10130,
+          "text": "        TBIT      AL,#1                 ; [CPU_ALU] |301| "
+        },
+        {
+          "line": 10131,
+          "text": "        B         ||$C$L217||,NTC       ; [CPU_ALU] |301| "
+        },
+        {
+          "line": 10132,
+          "text": "        ; branchcc occurs ; [] |301| "
+        },
+        {
+          "line": 10134,
+          "text": "        MOVIZ     R3H,#16221            ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10135,
+          "text": "        MOV32     R7H,R0H               ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10136,
+          "text": "        MOVXI     R3H,#46039            ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10137,
+          "text": "        NEGF32    R7H,R7H               ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10138,
+          "text": "        MPYF32    R3H,R3H,R6H           ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10139,
+          "text": "        MPYF32    R7H,R7H,#16128        ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10141,
+          "text": "        ADDF32    R3H,R3H,R7H           ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10143,
+          "text": "        MOV32     @||pf_control_work||+14,R3H ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 10146,
+          "text": "        TBIT      AL,#2                 ; [CPU_ALU] |302| "
+        },
+        {
+          "line": 10147,
+          "text": "        B         ||$C$L220||,NTC       ; [CPU_ALU] |302| "
+        },
+        {
+          "line": 10148,
+          "text": "        ; branchcc occurs ; [] |302| "
+        },
+        {
+          "line": 10150,
+          "text": "        NEGF32    R0H,R0H               ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 10151,
+          "text": "        MOVIZ     R3H,#16221            ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 10152,
+          "text": "        MPYF32    R0H,R0H,#16128        ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 10153,
+          "text": "        MOVXI     R3H,#46039            ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 10154,
+          "text": "        MPYF32    R3H,R3H,R6H           ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 10156,
+          "text": "        SUBF32    R0H,R0H,R3H           ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 10158,
+          "text": "        MOV32     @||pf_control_work||+16,R0H ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 10159,
+          "text": "        B         ||$C$L220||,UNC       ; [CPU_ALU] |302| "
+        },
+        {
+          "line": 10160,
+          "text": "        ; branch occurs ; [] |302| "
+        },
+        {
+          "line": 10163,
+          "text": "        MOV32     @||pf_control_work||+12,R0H ; [CPU_FPU] |298| "
+        },
+        {
+          "line": 10165,
+          "text": "        B         ||$C$L220||,UNC       ; [CPU_ALU] |298| "
+        },
+        {
+          "line": 10166,
+          "text": "        ; branch occurs ; [] |298| "
+        }
+      ],
+      "actual_linked_disassembly": [
+        {
+          "line": 4259,
+          "text": "00018fa0   92a3   MOV          AL, AR3"
+        },
+        {
+          "line": 4260,
+          "text": "00018fa1   616a   SB           106, EQ"
+        },
+        {
+          "line": 4261,
+          "text": "00018fa2   8a74   MOVL         XAR4, *-SP[52]"
+        },
+        {
+          "line": 4262,
+          "text": "00018fa3   d110   MOVB         XAR1, #0x10"
+        },
+        {
+          "line": 4263,
+          "text": "00018fa4   d00e   MOVB         XAR0, #0xe"
+        },
+        {
+          "line": 4264,
+          "text": "00018fa5   e2af   MOV32        R6H, *+XAR4[AR1], UNCF"
+        },
+        {
+          "line": 4265,
+          "text": "00018fa6   069c"
+        },
+        {
+          "line": 4266,
+          "text": "00018fa7   e30c   MPYF32       R0H, R1H, R6H"
+        },
+        {
+          "line": 4267,
+          "text": "                ||MOV32        R3H, *+XAR4[AR0]"
+        },
+        {
+          "line": 4268,
+          "text": "00018fa8   4394"
+        },
+        {
+          "line": 4269,
+          "text": "00018fa9   e700   MPYF32       R7H, R2H, R3H"
+        },
+        {
+          "line": 4270,
+          "text": "00018faa   00d7"
+        },
+        {
+          "line": 4271,
+          "text": "00018fab   5201   CMPB         AL, #0x1"
+        },
+        {
+          "line": 4272,
+          "text": "00018fac   e720   SUBF32       R0H, R7H, R0H"
+        },
+        {
+          "line": 4273,
+          "text": "00018fad   0038"
+        },
+        {
+          "line": 4274,
+          "text": "00018fae   6132   SB           50, EQ"
+        },
+        {
+          "line": 4275,
+          "text": "00018faf   e700   MPYF32       R6H, R2H, R6H"
+        },
+        {
+          "line": 4276,
+          "text": "00018fb0   0196"
+        },
+        {
+          "line": 4277,
+          "text": "00018fb1   e700   MPYF32       R3H, R1H, R3H"
+        },
+        {
+          "line": 4278,
+          "text": "00018fb2   00cb"
+        },
+        {
+          "line": 4279,
+          "text": "00018fb3   40a9   TBIT         AL, #0x0"
+        },
+        {
+          "line": 4280,
+          "text": "00018fb4   e710   ADDF32       R6H, R6H, R3H"
+        },
+        {
+          "line": 4281,
+          "text": "00018fb5   00f6"
+        },
+        {
+          "line": 4282,
+          "text": "00018fb6   6c03   SB           3, NTC"
+        },
+        {
+          "line": 4283,
+          "text": "00018fb7   e203   MOV32        @0x10, R0H"
+        },
+        {
+          "line": 4284,
+          "text": "00018fb8   0010"
+        },
+        {
+          "line": 4285,
+          "text": "00018fb9        $C$L216:"
+        },
+        {
+          "line": 4286,
+          "text": "00018fb9   41a9   TBIT         AL, #0x1"
+        },
+        {
+          "line": 4287,
+          "text": "00018fba   6c13   SB           19, NTC"
+        },
+        {
+          "line": 4288,
+          "text": "00018fbb   e801   MOVIZ        R3, #0x3f5d"
+        },
+        {
+          "line": 4289,
+          "text": "00018fbc   faeb"
+        },
+        {
+          "line": 4290,
+          "text": "00018fbd   e6cf   MOV32        R7H, R0H, UNCF"
+        },
+        {
+          "line": 4291,
+          "text": "00018fbe   0007"
+        },
+        {
+          "line": 4292,
+          "text": "00018fbf   e80d   MOVXI        R3H, #0xb3d7"
+        },
+        {
+          "line": 4293,
+          "text": "00018fc0   9ebb"
+        },
+        {
+          "line": 4294,
+          "text": "00018fc1   e6af   NEGF32       R7H, R7H, UNCF"
+        },
+        {
+          "line": 4295,
+          "text": "00018fc2   003f"
+        },
+        {
+          "line": 4296,
+          "text": "00018fc3   e700   MPYF32       R3H, R3H, R6H"
+        },
+        {
+          "line": 4297,
+          "text": "00018fc4   019b"
+        },
+        {
+          "line": 4298,
+          "text": "00018fc5   e84f   MPYF32       R7H, #0x3f00, R7H"
+        },
+        {
+          "line": 4299,
+          "text": "00018fc6   c03f"
+        },
+        {
+          "line": 4300,
+          "text": "00018fc7   7700   NOP          "
+        },
+        {
+          "line": 4301,
+          "text": "00018fc8   e710   ADDF32       R3H, R3H, R7H"
+        },
+        {
+          "line": 4302,
+          "text": "00018fc9   01db"
+        },
+        {
+          "line": 4303,
+          "text": "00018fca   7700   NOP          "
+        },
+        {
+          "line": 4304,
+          "text": "00018fcb   e203   MOV32        @0x12, R3H"
+        },
+        {
+          "line": 4305,
+          "text": "00018fcc   0312"
+        },
+        {
+          "line": 4306,
+          "text": "00018fcd        $C$L217:"
+        },
+        {
+          "line": 4307,
+          "text": "00018fcd   42a9   TBIT         AL, #0x2"
+        },
+        {
+          "line": 4308,
+          "text": "00018fce   6c3d   SB           61, NTC"
+        },
+        {
+          "line": 4309,
+          "text": "00018fcf   e6af   NEGF32       R0H, R0H, UNCF"
+        },
+        {
+          "line": 4310,
+          "text": "00018fd0   0000"
+        },
+        {
+          "line": 4311,
+          "text": "00018fd1   e801   MOVIZ        R3, #0x3f5d"
+        },
+        {
+          "line": 4312,
+          "text": "00018fd2   faeb"
+        },
+        {
+          "line": 4313,
+          "text": "00018fd3   e84f   MPYF32       R0H, #0x3f00, R0H"
+        },
+        {
+          "line": 4314,
+          "text": "00018fd4   c000"
+        },
+        {
+          "line": 4315,
+          "text": "00018fd5   e80d   MOVXI        R3H, #0xb3d7"
+        },
+        {
+          "line": 4316,
+          "text": "00018fd6   9ebb"
+        },
+        {
+          "line": 4317,
+          "text": "00018fd7   e700   MPYF32       R3H, R3H, R6H"
+        },
+        {
+          "line": 4318,
+          "text": "00018fd8   019b"
+        },
+        {
+          "line": 4319,
+          "text": "00018fd9   7700   NOP          "
+        },
+        {
+          "line": 4320,
+          "text": "00018fda   e720   SUBF32       R0H, R0H, R3H"
+        },
+        {
+          "line": 4321,
+          "text": "00018fdb   00c0"
+        },
+        {
+          "line": 4322,
+          "text": "00018fdc   7700   NOP          "
+        },
+        {
+          "line": 4323,
+          "text": "00018fdd   e203   MOV32        @0x14, R0H"
+        },
+        {
+          "line": 4324,
+          "text": "00018fde   0014"
+        },
+        {
+          "line": 4325,
+          "text": "00018fdf   6f2c   SB           44, UNC"
+        },
+        {
+          "line": 4326,
+          "text": "00018fe0        $C$L218:"
+        },
+        {
+          "line": 4327,
+          "text": "00018fe0   e203   MOV32        @0x10, R0H"
+        },
+        {
+          "line": 4328,
+          "text": "00018fe1   0010"
+        },
+        {
+          "line": 4329,
+          "text": "00018fe2   6f29   SB           41, UNC"
+        }
+      ],
+      "dependency_review": {
+        "a": "R7=ct*d; R0=st*q; SUBF32 R0,R7,R0. Two separate MPYF32 then SUBF32.",
+        "b": "R6=ct*q; R3=st*d; ADDF32 R6,R6,R3. Two separate MPYF32 then ADDF32.",
+        "phase1": "NEGF32 a then multiply exact0.5; multiply stored0x3f5db3d7 by b; ADDF32 of these two rounded products.",
+        "phase2": "NEGF32 a then multiply exact0.5; multiply stored0x3f5db3d7 by b; SUBF32 of these two rounded products.",
+        "guards": "hw==0 skips masked inverse; hw==1 early store; bit0/1/2 guard the corresponding phase stores. N1 takes the original inverse branch.",
+        "no_fused_mac_or_new_call_in_masked_region": true
+      }
+    },
+    "pf_control_interval_profiled": {
+      "masked_region_word_bounds_inclusive": [
+        "0x18b06",
+        "0x18b48"
+      ],
+      "compiler_source_line_provenance": [
+        {
+          "line": 8473,
+          "text": "        MOVL      XAR4,*-SP[52]         ; [CPU_ALU] |297| "
+        },
+        {
+          "line": 8474,
+          "text": "        MOVB      XAR1,#16              ; [CPU_ALU] |297| "
+        },
+        {
+          "line": 8475,
+          "text": "        MOVB      XAR0,#14              ; [CPU_ALU] |297| "
+        },
+        {
+          "line": 8476,
+          "text": "        MOV32     R6H,*+XAR4[AR1]       ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 8478,
+          "text": "        MPYF32    R0H,R1H,R6H           ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 8479,
+          "text": "||      MOV32     R3H,*+XAR4[AR0]       ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 8481,
+          "text": "        MPYF32    R7H,R2H,R3H           ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 8483,
+          "text": "        CMPB      AL,#1                 ; [CPU_ALU] |298| "
+        },
+        {
+          "line": 8485,
+          "text": "        SUBF32    R0H,R7H,R0H           ; [CPU_FPU] |297| "
+        },
+        {
+          "line": 8487,
+          "text": "        B         ||$C$L176||,EQ        ; [CPU_ALU] |298| "
+        },
+        {
+          "line": 8488,
+          "text": "        ; branchcc occurs ; [] |298| "
+        },
+        {
+          "line": 8490,
+          "text": "        MPYF32    R6H,R2H,R6H           ; [CPU_FPU] |299| "
+        },
+        {
+          "line": 8491,
+          "text": "        MPYF32    R3H,R1H,R3H           ; [CPU_FPU] |299| "
+        },
+        {
+          "line": 8493,
+          "text": "        TBIT      AL,#0                 ; [CPU_ALU] |300| "
+        },
+        {
+          "line": 8495,
+          "text": "        ADDF32    R6H,R6H,R3H           ; [CPU_FPU] |299| "
+        },
+        {
+          "line": 8497,
+          "text": "        B         ||$C$L174||,NTC       ; [CPU_ALU] |300| "
+        },
+        {
+          "line": 8498,
+          "text": "        ; branchcc occurs ; [] |300| "
+        },
+        {
+          "line": 8500,
+          "text": "        MOV32     @||pf_control_work||+12,R0H ; [CPU_FPU] |300| "
+        },
+        {
+          "line": 8503,
+          "text": "        TBIT      AL,#1                 ; [CPU_ALU] |301| "
+        },
+        {
+          "line": 8504,
+          "text": "        B         ||$C$L175||,NTC       ; [CPU_ALU] |301| "
+        },
+        {
+          "line": 8505,
+          "text": "        ; branchcc occurs ; [] |301| "
+        },
+        {
+          "line": 8507,
+          "text": "        MOVIZ     R3H,#16221            ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8508,
+          "text": "        MOV32     R7H,R0H               ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8509,
+          "text": "        MOVXI     R3H,#46039            ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8510,
+          "text": "        NEGF32    R7H,R7H               ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8511,
+          "text": "        MPYF32    R3H,R3H,R6H           ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8512,
+          "text": "        MPYF32    R7H,R7H,#16128        ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8514,
+          "text": "        ADDF32    R3H,R3H,R7H           ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8516,
+          "text": "        MOV32     @||pf_control_work||+14,R3H ; [CPU_FPU] |301| "
+        },
+        {
+          "line": 8519,
+          "text": "        TBIT      AL,#2                 ; [CPU_ALU] |302| "
+        },
+        {
+          "line": 8520,
+          "text": "        B         ||$C$L178||,NTC       ; [CPU_ALU] |302| "
+        },
+        {
+          "line": 8521,
+          "text": "        ; branchcc occurs ; [] |302| "
+        },
+        {
+          "line": 8523,
+          "text": "        NEGF32    R0H,R0H               ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 8524,
+          "text": "        MOVIZ     R3H,#16221            ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 8525,
+          "text": "        MPYF32    R0H,R0H,#16128        ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 8526,
+          "text": "        MOVXI     R3H,#46039            ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 8527,
+          "text": "        MPYF32    R3H,R3H,R6H           ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 8529,
+          "text": "        SUBF32    R0H,R0H,R3H           ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 8531,
+          "text": "        MOV32     @||pf_control_work||+16,R0H ; [CPU_FPU] |302| "
+        },
+        {
+          "line": 8532,
+          "text": "        B         ||$C$L178||,UNC       ; [CPU_ALU] |302| "
+        },
+        {
+          "line": 8533,
+          "text": "        ; branch occurs ; [] |302| "
+        },
+        {
+          "line": 8536,
+          "text": "        MOV32     @||pf_control_work||+12,R0H ; [CPU_FPU] |298| "
+        },
+        {
+          "line": 8538,
+          "text": "        B         ||$C$L178||,UNC       ; [CPU_ALU] |298| "
+        },
+        {
+          "line": 8539,
+          "text": "        ; branch occurs ; [] |298| "
+        }
+      ],
+      "actual_linked_disassembly": [
+        {
+          "line": 3007,
+          "text": "00018b06   92a3   MOV          AL, AR3"
+        },
+        {
+          "line": 3008,
+          "text": "00018b07   616a   SB           106, EQ"
+        },
+        {
+          "line": 3009,
+          "text": "00018b08   8a74   MOVL         XAR4, *-SP[52]"
+        },
+        {
+          "line": 3010,
+          "text": "00018b09   d110   MOVB         XAR1, #0x10"
+        },
+        {
+          "line": 3011,
+          "text": "00018b0a   d00e   MOVB         XAR0, #0xe"
+        },
+        {
+          "line": 3012,
+          "text": "00018b0b   e2af   MOV32        R6H, *+XAR4[AR1], UNCF"
+        },
+        {
+          "line": 3013,
+          "text": "00018b0c   069c"
+        },
+        {
+          "line": 3014,
+          "text": "00018b0d   e30c   MPYF32       R0H, R1H, R6H"
+        },
+        {
+          "line": 3015,
+          "text": "                ||MOV32        R3H, *+XAR4[AR0]"
+        },
+        {
+          "line": 3016,
+          "text": "00018b0e   4394"
+        },
+        {
+          "line": 3017,
+          "text": "00018b0f   e700   MPYF32       R7H, R2H, R3H"
+        },
+        {
+          "line": 3018,
+          "text": "00018b10   00d7"
+        },
+        {
+          "line": 3019,
+          "text": "00018b11   5201   CMPB         AL, #0x1"
+        },
+        {
+          "line": 3020,
+          "text": "00018b12   e720   SUBF32       R0H, R7H, R0H"
+        },
+        {
+          "line": 3021,
+          "text": "00018b13   0038"
+        },
+        {
+          "line": 3022,
+          "text": "00018b14   6132   SB           50, EQ"
+        },
+        {
+          "line": 3023,
+          "text": "00018b15   e700   MPYF32       R6H, R2H, R6H"
+        },
+        {
+          "line": 3024,
+          "text": "00018b16   0196"
+        },
+        {
+          "line": 3025,
+          "text": "00018b17   e700   MPYF32       R3H, R1H, R3H"
+        },
+        {
+          "line": 3026,
+          "text": "00018b18   00cb"
+        },
+        {
+          "line": 3027,
+          "text": "00018b19   40a9   TBIT         AL, #0x0"
+        },
+        {
+          "line": 3028,
+          "text": "00018b1a   e710   ADDF32       R6H, R6H, R3H"
+        },
+        {
+          "line": 3029,
+          "text": "00018b1b   00f6"
+        },
+        {
+          "line": 3030,
+          "text": "00018b1c   6c03   SB           3, NTC"
+        },
+        {
+          "line": 3031,
+          "text": "00018b1d   e203   MOV32        @0x10, R0H"
+        },
+        {
+          "line": 3032,
+          "text": "00018b1e   0010"
+        },
+        {
+          "line": 3033,
+          "text": "00018b1f        $C$L174:"
+        },
+        {
+          "line": 3034,
+          "text": "00018b1f   41a9   TBIT         AL, #0x1"
+        },
+        {
+          "line": 3035,
+          "text": "00018b20   6c13   SB           19, NTC"
+        },
+        {
+          "line": 3036,
+          "text": "00018b21   e801   MOVIZ        R3, #0x3f5d"
+        },
+        {
+          "line": 3037,
+          "text": "00018b22   faeb"
+        },
+        {
+          "line": 3038,
+          "text": "00018b23   e6cf   MOV32        R7H, R0H, UNCF"
+        },
+        {
+          "line": 3039,
+          "text": "00018b24   0007"
+        },
+        {
+          "line": 3040,
+          "text": "00018b25   e80d   MOVXI        R3H, #0xb3d7"
+        },
+        {
+          "line": 3041,
+          "text": "00018b26   9ebb"
+        },
+        {
+          "line": 3042,
+          "text": "00018b27   e6af   NEGF32       R7H, R7H, UNCF"
+        },
+        {
+          "line": 3043,
+          "text": "00018b28   003f"
+        },
+        {
+          "line": 3044,
+          "text": "00018b29   e700   MPYF32       R3H, R3H, R6H"
+        },
+        {
+          "line": 3045,
+          "text": "00018b2a   019b"
+        },
+        {
+          "line": 3046,
+          "text": "00018b2b   e84f   MPYF32       R7H, #0x3f00, R7H"
+        },
+        {
+          "line": 3047,
+          "text": "00018b2c   c03f"
+        },
+        {
+          "line": 3048,
+          "text": "00018b2d   7700   NOP          "
+        },
+        {
+          "line": 3049,
+          "text": "00018b2e   e710   ADDF32       R3H, R3H, R7H"
+        },
+        {
+          "line": 3050,
+          "text": "00018b2f   01db"
+        },
+        {
+          "line": 3051,
+          "text": "00018b30   7700   NOP          "
+        },
+        {
+          "line": 3052,
+          "text": "00018b31   e203   MOV32        @0x12, R3H"
+        },
+        {
+          "line": 3053,
+          "text": "00018b32   0312"
+        },
+        {
+          "line": 3054,
+          "text": "00018b33        $C$L175:"
+        },
+        {
+          "line": 3055,
+          "text": "00018b33   42a9   TBIT         AL, #0x2"
+        },
+        {
+          "line": 3056,
+          "text": "00018b34   6c3d   SB           61, NTC"
+        },
+        {
+          "line": 3057,
+          "text": "00018b35   e6af   NEGF32       R0H, R0H, UNCF"
+        },
+        {
+          "line": 3058,
+          "text": "00018b36   0000"
+        },
+        {
+          "line": 3059,
+          "text": "00018b37   e801   MOVIZ        R3, #0x3f5d"
+        },
+        {
+          "line": 3060,
+          "text": "00018b38   faeb"
+        },
+        {
+          "line": 3061,
+          "text": "00018b39   e84f   MPYF32       R0H, #0x3f00, R0H"
+        },
+        {
+          "line": 3062,
+          "text": "00018b3a   c000"
+        },
+        {
+          "line": 3063,
+          "text": "00018b3b   e80d   MOVXI        R3H, #0xb3d7"
+        },
+        {
+          "line": 3064,
+          "text": "00018b3c   9ebb"
+        },
+        {
+          "line": 3065,
+          "text": "00018b3d   e700   MPYF32       R3H, R3H, R6H"
+        },
+        {
+          "line": 3066,
+          "text": "00018b3e   019b"
+        },
+        {
+          "line": 3067,
+          "text": "00018b3f   7700   NOP          "
+        },
+        {
+          "line": 3068,
+          "text": "00018b40   e720   SUBF32       R0H, R0H, R3H"
+        },
+        {
+          "line": 3069,
+          "text": "00018b41   00c0"
+        },
+        {
+          "line": 3070,
+          "text": "00018b42   7700   NOP          "
+        },
+        {
+          "line": 3071,
+          "text": "00018b43   e203   MOV32        @0x14, R0H"
+        },
+        {
+          "line": 3072,
+          "text": "00018b44   0014"
+        },
+        {
+          "line": 3073,
+          "text": "00018b45   6f2c   SB           44, UNC"
+        },
+        {
+          "line": 3074,
+          "text": "00018b46        $C$L176:"
+        },
+        {
+          "line": 3075,
+          "text": "00018b46   e203   MOV32        @0x10, R0H"
+        },
+        {
+          "line": 3076,
+          "text": "00018b47   0010"
+        },
+        {
+          "line": 3077,
+          "text": "00018b48   6f29   SB           41, UNC"
+        }
+      ],
+      "dependency_review": {
+        "a": "R7=ct*d; R0=st*q; SUBF32 R0,R7,R0. Two separate MPYF32 then SUBF32.",
+        "b": "R6=ct*q; R3=st*d; ADDF32 R6,R6,R3. Two separate MPYF32 then ADDF32.",
+        "phase1": "NEGF32 a then multiply exact0.5; multiply stored0x3f5db3d7 by b; ADDF32 of these two rounded products.",
+        "phase2": "NEGF32 a then multiply exact0.5; multiply stored0x3f5db3d7 by b; SUBF32 of these two rounded products.",
+        "guards": "hw==0 skips masked inverse; hw==1 early store; bit0/1/2 guard the corresponding phase stores. N1 takes the original inverse branch.",
+        "no_fused_mac_or_new_call_in_masked_region": true
+      }
+    }
+  },
+  "original_root_model_profile_helpers": "All19 normalized compiler instruction streams identical to actual build10; see assembly_comparison.json.",
+  "scope_limits": [
+    "No complete CFG instruction-cost model or cycle bound is asserted.",
+    "HOST formal pass2 establishes exact tested outputs; no F28379D bitwise test over the entire floating-point domain was run.",
+    "OFF-phase old values are intentionally not produced; source audit establishes they are not consumed in this N8 CONTROL path.",
+    "No coordinate identity, KCL complement, unit-angle-norm assumption, approximate threshold or epsilon is introduced."
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-27",
+  "status": "HOST_AND_TI_BUILD_PASS;TARGET_ROUND9_TIMING_PENDING;POWER_NOT_RELEASED",
+  "branch": "new_mpc",
+  "project": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target",
+  "kernel_revision": 9,
+  "watch_expression_count": 66,
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "e2affd9a2d3728e6aa67f0fa044603b3c25ac74458b87965210f2bfdb6b25dec",
+    "vienna_pcmfpc_fast.h": "813bbb59344ed582d77b1ad157c26487e5f70fdc37f9499a3b62a8cc29d98bab"
+  },
+  "build": {
+    "date": "2026-10-27",
+    "method": "TI CCS-generated gmake all incremental rules; same installed TI CGT and project options; no CCS application startup attempted this round",
+    "native_exit": 0,
+    "compiler": "TI CGT25.11.1.LTS",
+    "errors": 0,
+    "warnings": 0,
+    "clean_or_rebuild": false,
+    "stdout": "gmake_incremental.log",
+    "out_sha256": "9a4daa12eb422d6c1efb78d8ed3fefc79a4c76013bacf13526bff6935839578b",
+    "snapshot_count": 32,
+    "map_linked_line": ">> Linked Tue Oct 27 14:28:26 2026"
+  },
+  "implementation": {
+    "modified_control_files": [
+      "vienna_pcmfpc_fast.c",
+      "vienna_pcmfpc_fast.h"
+    ],
+    "new_helper": "pf_lambda_single_plan",
+    "call_condition": "pf_lambda_root NULL shared plan and hw exactly1/2/4",
+    "omitted_work": "ON-phase base/event preparation; sort at most two OFF events",
+    "unchanged": "generic root solver loop, shared plans, phase-order sums, KCL residual, CONTROL macros, FULL/SUMMARY, model/cost criteria and profiling API",
+    "RAM_helper_pragma": true,
+    "partial_plan_never_reused_for_other_hw_or_as_shared": true,
+    "new_global_workspace": false
+  },
+  "validation": {
+    "status": "PASS_ROUND9_HOST_VALIDATION",
+    "source_file_count": 19,
+    "public_output_cases_per_diagnostic_policy": 31750,
+    "interval_comparisons_per_policy": 140025,
+    "actual_generic_root_differential_cases": 325551,
+    "direct_control_cases": 24912,
+    "profile_checks": 80,
+    "safety_runtime_observer_checks": [
+      85,
+      299,
+      16
+    ],
+    "closed_loop_trajectory_pairs": 10,
+    "closed_loop_metrics_pairs": 10,
+    "plain_coarse_fine_comparisons": 127008,
+    "all_differences": 0,
+    "scope": "HOST finite corpus and fake clocks; not universal TI float32/TMU equivalence or WCET"
+  },
+  "resource_summary": {
+    "pcmfpc_code_words": 15099,
+    "capacity_words": 16384,
+    "free_words": 1285,
+    "increase_from8_words": 278,
+    "BSS_words": 3222,
+    "BSS_capacity_words": 4096,
+    "BSS_free_words": 874,
+    "generic_root_frame_words_including_return": 20,
+    "new_plan_helper_frame_words_including_return": 24,
+    "frames_scope": "See actual build audit; stack counts are known paths, not target high-water proof"
+  },
+  "isolation": {
+    "protected_target_files_unchanged": 22,
+    "main_files_unchanged": 82,
+    "parent_Kit_user_edit_preserved": true
+  },
+  "rejected_direction": {
+    "variant": "full single-ON specialized solver/caller dispatch",
+    "reason": "Small fixture instruction proxy saving with extra code and stack; no board timing; retained as rejected prototype only",
+    "performance_proxy_not_reused_for_plan_only": true
+  },
+  "timing": {
+    "round8_plain_cycles": 19212,
+    "round8_conditional_us_at_configured_200MHz": 96.06,
+    "round9_measured_cycles": null,
+    "ISR_period_budget_cycles": 4000,
+    "nominal_ISR_to_ZERO_cycles": 1628,
+    "hardware_release": 0,
+    "instructions": "Load current child CPU1 OUT, verify marker9, only under no main power/all OST/stopped/release0 issue request2 once; same fixed fixture as8",
+    "no_guaranteed_speedup": true
+  },
+  "retained_limitations": [
+    "Earlier float piecewise vs reference strict equivalence FAIL with1887 selected differences remains historical and unresolved",
+    "No complete ISR/WCET or actual CPU clock proof",
+    "No target connect/load/flash/clearTrip/power/write operations performed by agent",
+    "No changes to main, runtime, PWM/ADC/CMPSS/Trip Zone, protection thresholds, timing or root/cost tolerances"
+  ],
+  "evidence": [
+    "host/pass1/REPORT.json",
+    "closed_loop/REPORT.json",
+    "profile_replay/REPORT.json",
+    "audit/PLAN_ONLY_REVIEW.json",
+    "../build_pass9/AUDIT.json",
+    "ISOLATION_CHECKS.json"
+  ],
+  "no_delete_commit_push": true
+}

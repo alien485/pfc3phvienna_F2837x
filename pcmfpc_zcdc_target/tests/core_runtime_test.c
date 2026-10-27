@@ -66,7 +66,7 @@ static void benchmark_checks(void)
     adc_before[3]=VIENNA_v1Meas_pu;adc_before[4]=VIENNA_v2Meas_pu;adc_before[5]=VIENNA_v3Meas_pu;
     adc_before[6]=VIENNA_vBusPMMeas_pu;adc_before[7]=VIENNA_vBusMNMeas_pu;adc_before[8]=VIENNA_vBusMeas_pu;
     before=VIENNA_pcmInput;grid=VIENNA_pcmGrid;observer=VIENNA_pcmObserver;tick=VIENNA_pcmTick;
-    for(root=1U;root<=2U;root++){
+    for(root=1U;root<=4U;root++){
         count=VIENNA_pcmBenchCount;VIENNA_pcmBenchRequest=root;post();
         req(VIENNA_pcmBenchStatus==1U && !VIENNA_pcmBenchRequest && VIENNA_pcmBenchCount==count+1U,"safe all-OFF benchmark one numeric run");
         req(VIENNA_pcmOutputSource==3U && VIENNA_pcmOutputDetailValid==(root==1U),"benchmark source and reference/fast detail flags");
@@ -75,23 +75,41 @@ static void benchmark_checks(void)
         req(!VIENNA_pcmActualAppliedState && !VIENNA_pcmPendingState && VIENNA_pcmTick==tick,"benchmark does not submit gate or advance sample");
         req(!memcmp(&before,&VIENNA_pcmInput,sizeof(before)) && !memcmp(&grid,&VIENNA_pcmGrid,sizeof(grid)) &&
             !memcmp(&observer,&VIENNA_pcmObserver,sizeof(observer)),"completed benchmark never injects fixture into live input/PLL/ESO");
+        if(root>=3U){
+            req(PC_fast_profile.valid && PC_fast_profile.completed &&
+                PC_fast_profile.mode==(uint16_t)(root-2U) && PC_fast_profile.core_status==PC_OK,
+                "safe profile benchmark publishes the requested one-shot mode");
+            req(PC_fast_profile.root_calls==(root==4U?18U:0U),
+                "fine profile counts every root while coarse profile omits nested timing");
+            req(PC_fast_profile.angle_calls==(VIENNA_pcmOutput.active?VIENNA_pcmOutput.intersection_count:0U),
+                "fast runtime computes only intersection angle diagnostics");
+            req(PC_fast_profile.total_cycles>0U && !PC_fast_profile.clock_fault,
+                "profile uses the configured existing downcounter callback");
+        }else req(!PC_fast_profile.valid && !PC_fast_profile.completed,
+                 "plain/reference benchmark does not publish an instrumented profile");
         post();req(VIENNA_pcmBenchCount==count+1U,"cleared request never repeats benchmark");
+        if(root>=3U)req(PC_fast_profile.valid && PC_fast_profile.completed,
+                       "ordinary stopped tick preserves the completed profile for inspection");
     }
     req(adc_before[0]==VIENNA_iL1Meas_pu && adc_before[1]==VIENNA_iL2Meas_pu && adc_before[2]==VIENNA_iL3Meas_pu &&
         adc_before[3]==VIENNA_v1Meas_pu && adc_before[4]==VIENNA_v2Meas_pu && adc_before[5]==VIENNA_v3Meas_pu &&
         adc_before[6]==VIENNA_vBusPMMeas_pu && adc_before[7]==VIENNA_vBusMNMeas_pu && adc_before[8]==VIENNA_vBusMeas_pu,"benchmark preserves all ADC variables");
-    reject_benchmark(3U,3U);reject_benchmark(65535U,3U);
-    VIENNA_pcmHardwareRelease=1U;reject_benchmark(1U,2U);VIENNA_pcmHardwareRelease=0U;
-    VIENNA_closeGiLoop=1;reject_benchmark(2U,2U);VIENNA_closeGiLoop=0;
-    VIENNA_closeGvLoop=1;reject_benchmark(1U,2U);VIENNA_closeGvLoop=0;
-    VIENNA_closeGsLoop=1;reject_benchmark(2U,2U);VIENNA_closeGsLoop=0;
-    VIENNA_pcmActualAppliedState=4U;reject_benchmark(1U,2U);VIENNA_pcmActualAppliedState=0U;
-    VIENNA_pcmPendingState=2U;reject_benchmark(2U,2U);VIENNA_pcmPendingState=0U;
-    for(j=0U;j<3U;j++){
-        trip_flags[j]=0U;reject_benchmark(1U,2U);
-        trip_flags[j]=1U;reject_benchmark(2U,2U); /* another trip bit is not OST */
-        trip_flags[j]=EPWM_TZ_FLAG_OST;
+    reject_benchmark(5U,3U);reject_benchmark(65535U,3U);
+    req(!PC_fast_profile.valid && !PC_fast_profile.completed,"bad benchmark request invalidates stale profile");
+    for(root=1U;root<=4U;root++){
+        VIENNA_pcmHardwareRelease=1U;reject_benchmark(root,2U);VIENNA_pcmHardwareRelease=0U;
+        VIENNA_closeGiLoop=1;reject_benchmark(root,2U);VIENNA_closeGiLoop=0;
+        VIENNA_closeGvLoop=1;reject_benchmark(root,2U);VIENNA_closeGvLoop=0;
+        VIENNA_closeGsLoop=1;reject_benchmark(root,2U);VIENNA_closeGsLoop=0;
+        VIENNA_pcmActualAppliedState=4U;reject_benchmark(root,2U);VIENNA_pcmActualAppliedState=0U;
+        VIENNA_pcmPendingState=2U;reject_benchmark(root,2U);VIENNA_pcmPendingState=0U;
+        for(j=0U;j<3U;j++){
+            trip_flags[j]=0U;reject_benchmark(root,2U);
+            trip_flags[j]=1U;reject_benchmark(root,2U); /* another trip bit is not OST */
+            trip_flags[j]=EPWM_TZ_FLAG_OST;
+        }
     }
+    req(!PC_fast_profile.valid && !PC_fast_profile.completed,"unsafe requests cannot expose an old profile");
     /* The fixture stays isolated, but the unchanged full-body budget still
        fails/reset history if a numerical benchmark itself exceeds 20 us. */
     VIENNA_pcmObserver.valid=VIENNA_pcmObserver.initialized=1U;

@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-26",
+  "source": "Two user-provided CCS screenshots and explicit user confirmation PC_fast_kernel_revision=6",
+  "result": "FIXTURE_NUMERIC_PASS;REALTIME_BUDGET_FAIL",
+  "observed": {
+    "BenchStatus": 1,
+    "CoreStatus": 0,
+    "BenchCycles": 21217,
+    "BenchCyclesMax": 21217,
+    "BenchCount": 1,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "Fault": 32,
+    "ActualAppliedState": 0,
+    "PendingState": 0,
+    "BodyCycles": 1319,
+    "BodyCyclesMax": 22706,
+    "WriteCycles": 1149,
+    "WriteCyclesMax": 1191,
+    "AlgorithmCycles": 0,
+    "AlgorithmCyclesMax": 0,
+    "BenchRequest": 0,
+    "Tick": 3101797,
+    "closeGiLoop": 0,
+    "closeGvLoop": 0,
+    "closeGsLoop": 0,
+    "ShadowEnable": 0,
+    "RootMethod": 0,
+    "RootMethodActive": 0,
+    "InputsValid": 1,
+    "InputFaultMask": 0,
+    "MeasuredDQ_A": [
+      0.0,
+      0.0
+    ],
+    "ReferenceSaturation": 0,
+    "OutputSource": 0,
+    "OutputDetailValid": 0,
+    "OutputIntegralValid": 0,
+    "PC_fast_output_substeps_available": 0,
+    "PC_fast_output_summaries_available": 1,
+    "PC_fast_output_integrals_available": 0
+  },
+  "user_confirmed": {
+    "PC_fast_kernel_revision": 6,
+    "marker_not_visible_in_images": true
+  },
+  "comparison": {
+    "prior_round": 4,
+    "prior_fixture_cycles": 23425,
+    "new_fixture_cycles": 21217,
+    "cycles_saved": 2208,
+    "elapsed_cycle_reduction_percent": 9.425827107790822,
+    "prior_round3_fixture_cycles": 27485,
+    "cycles_saved_vs_round3": 6268,
+    "elapsed_cycle_reduction_vs_round3_percent": 22.80516645442969,
+    "comparison_assumes_same_fixture_clock_and_no_halt": true,
+    "round5_standalone_board_timing_available": false,
+    "cannot_isolate_round6_only_gain_from_round5": true
+  },
+  "conditional_200MHz_conversion": {
+    "actual_CPU_clock_independently_verified": false,
+    "bench_us": 106.085,
+    "prior_round4_bench_us": 117.125,
+    "saved_us_vs_round4": 11.04,
+    "body_max_us": 113.53,
+    "is_complete_ISR": false
+  },
+  "budgets": {
+    "period_cycles": 4000,
+    "nominal_to_zero_cycles": 1628,
+    "nominal_window_caveat": "Subtract 40 TBCLK guard and submission overhead",
+    "bench_to_period_ratio": 5.30425,
+    "bench_to_nominal_write_ratio": 13.032555282555283,
+    "pass": false
+  },
+  "interpretation": {
+    "Fault32": "VIENNA_PC_PERIOD; runtime post compares C body elapsed cycles to 20us budget and latches fault/forces OST",
+    "AlgorithmCycles0": "Stopped normal-control path is distinct from standalone BenchCycles timer",
+    "RootMethod0": "Benchmark request2 overrides copied configuration to fast root independently of normal RootMethodActive",
+    "BodyCycles1319": "Latest ordinary stopped tick; not numerical benchmark duration",
+    "WriteCycles1149": "Stopped path measurement before independent post benchmark; not normal MPC compute-plus-write qualification",
+    "InputsValid1": "Only finite/range checks; does not establish grid presence or PLL lock",
+    "selected_result_not_applied": true
+  },
+  "firmware_association": {
+    "candidate_OUT_sha256": "e39871137761f725db15b5becd716c6f8d95408a418daf72a864b514babf3ed6",
+    "candidate_fast_c_sha256": "574549145827de39fcb70cc9c545154de0da66b6f009cd45f188f39b16e36620",
+    "candidate_revision": 6,
+    "basis": "User confirms revision6 after round6 loading instructions; target binary hash not read",
+    "on_device_OUT_fingerprint_verified": false,
+    "request2_expected_by_instructions_but_value_not_captured": true
+  },
+  "limits": {
+    "WCET_verified": false,
+    "halt_history_known": false,
+    "HardwareRelease_OST_directly_visible": false,
+    "normal_loop_write_timing_verified": false,
+    "closed_loop_hardware_verified": false,
+    "hardware_release_allowed": false
+  },
+  "screenshots": [
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-6c5806e9-151d-430e-91d5-c53e10531ce0.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round6\\ccs_benchmark.png",
+      "sha256": "3a3ea30ce2dbd4ecd8e600e418b3360eb545c78e62653efb4227fa2d3d6b237c",
+      "bytes": 40296
+    },
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-e6f7ea9a-512e-4886-bd68-1bde43f42086.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round6\\ccs_fault_status.png",
+      "sha256": "f2074146ef57e8ac8b664ca923a901c912e0fe8fcf37d7a4772f57e88dedeeba",
+      "bytes": 44808
+    }
+  ],
+  "agent_hardware_actions": false,
+  "control_code_changes_in_evidence_recording": false
+}

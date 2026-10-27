@@ -1,0 +1,37 @@
+{
+  "scope": "Relaxed successful-path lower bound on selected mandatory code regions; no execution-time measurement, speedup or WCET",
+  "caller_substeps": 18,
+  "caller_minimum_issue_groups_per_substep": 196,
+  "generic_candidate_roots": 8,
+  "generic_minimum_issue_groups_per_root": 75,
+  "dense_candidate_roots": 8,
+  "dense_minimum_issue_groups_per_root": 79,
+  "first_step_roots": 2,
+  "first_step_relaxed_minimum_per_root": 75,
+  "formula": "18*196 + 8*75 + 8*79 + 2*75",
+  "minimum_groups": 4910,
+  "minimum_us_at_200MHz": 24.55,
+  "first_step_ge2ON_groups": 4918,
+  "first_step_ge2ON_us_at_200MHz": 24.59,
+  "control_includes_dispatch": true,
+  "control_has_one_LCR_issue_group_callee_body_excluded": true,
+  "root_goal_instruction_and_epilogue_excluded": true,
+  "excluded_costs": [
+    "all nonselected PC_run_fast regions",
+    "first/candidate plan and seed callees",
+    "general NULL-plan callee work",
+    "return epilogues and branch latency",
+    "pipeline/resource/memory stalls",
+    "write stage",
+    "ISR and other surrounding work"
+  ],
+  "interpretation": "Relaxed mandatory-region lower bound, not measured runtime, WCET or proof of speedup. The current configuration is 50kHz: 20us/4000 CPU cycles at 200MHz, with 1628 cycles from ISR entry to the next ZERO deadline. The 4910-group floor already exceeds the entire 4000-cycle period, so revision6 remains ineligible for real-time operation at this configuration. Comparing this lower bound with an earlier lower bound cannot establish speedup.",
+  "current_configuration": {
+    "control_frequency_Hz": 50000,
+    "period_us": 20,
+    "period_CPU_cycles_at_200MHz": 4000,
+    "ISR_entry_to_next_ZERO_cycles": 1628,
+    "lower_bound_exceeds_entire_period": true,
+    "real_time_qualified": false
+  }
+}

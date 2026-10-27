@@ -55,7 +55,30 @@ def parent_matches_historical(name, digest):
 
 parent_changed = [name for name, digest in manifest["files"].items()
                   if not parent_matches_historical(name, digest)]
-assert parent_changed == [".cproject"], parent_changed
+# The user previously built the historical parent in this linked worktree.
+# CCS localized only its SFRA data path. Preserve that pre-existing edit and
+# accept exactly that path substitution; every other canonical byte must match
+# the immutable historical file. This does not relax control-source checks.
+parent_local_path_evidence = {}
+if "Kit.json" in parent_changed:
+    original_kit = subprocess.check_output(
+        ["git", "-C", str(REPO), "show", manifest["commit"] + ":Kit.json"])
+    actual_kit = (REPO / "Kit.json").read_bytes()
+    old_path = json.loads(original_kit)["MODEL"]["COMP_OPTIONS"]["SFRAPATH"]
+    local_path = (REPO / "SFRAData/SFRAData.csv").as_posix()
+    old_literal = json.dumps(old_path).encode("utf-8")
+    new_literal = json.dumps(local_path).encode("utf-8")
+    assert original_kit.count(old_literal) == 1
+    expected_kit = original_kit.replace(old_literal, new_literal, 1)
+    assert actual_kit.replace(b"\r\n", b"\n") == expected_kit.replace(b"\r\n", b"\n")
+    parent_local_path_evidence["Kit.json"] = {
+        "historical_sha256": hashlib.sha256(original_kit).hexdigest(),
+        "actual_sha256": hashlib.sha256(actual_kit).hexdigest(),
+        "field": "MODEL.COMP_OPTIONS.SFRAPATH", "old": old_path, "local": local_path,
+        "only_path_substitution_and_eol_allowed": True,
+        "preexisting_user_edit_preserved": True,
+    }
+assert [name for name in parent_changed if name not in parent_local_path_evidence] == [".cproject"], parent_changed
 reference_changed = [name for name, digest in manifest["references"].items() if sha(ROOT / name) != digest]
 compatibility = None
 compatibility_path = EVIDENCE / "rt_optimization/reference_compatibility/REPORT.json"
@@ -121,6 +144,7 @@ report = {
     "main_tip": main_tip, "main_contains_historical_baseline": True,
     "main_advanced_since_historical_baseline": main_tip != manifest["commit"],
     "parent_changed_files": parent_changed,
+    "parent_local_path_evidence": parent_local_path_evidence,
     "parent_newline_only_files": newline_only_parent_files,
     "parent_newline_evidence": newline_parent_evidence,
     "unchanged_reference_files": [name for name in manifest["references"] if name not in reference_changed],

@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-26",
+  "source": "two user CCS screenshots following request4 instructions; previously confirmed revision7 and request2/3 sequence",
+  "result": "FIXTURE_NUMERIC_PASS;FINE_PROFILE_VALID;REALTIME_BUDGET_FAIL",
+  "observed_benchmark": {
+    "BenchRequest": 0,
+    "BenchStatus": 1,
+    "BenchCycles": 23071,
+    "BenchCyclesMax": 23071,
+    "BenchCount": 3,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "BodyCycles": 1327,
+    "BodyCyclesMax": 24779,
+    "WriteCycles": 1151,
+    "WriteCyclesMax": 1276,
+    "AlgorithmCyclesMax": 0,
+    "fcsDeadlineMissCount": 3,
+    "RecordArm": 0,
+    "RingCount": 0
+  },
+  "profile": {
+    "setup_cycles": 814,
+    "delay_cycles": 1927,
+    "plan_seed_cycles": 591,
+    "candidates_cycles": 15999,
+    "select_cycles": 2142,
+    "terminal_prepare_cycles": 470,
+    "angles_cycles": 470,
+    "output_cycles": 404,
+    "total_cycles": 22817,
+    "root_cycles": 9005,
+    "clock_pair_overhead": 29,
+    "mode": 2,
+    "valid": 1,
+    "completed": 1,
+    "core_status": 0,
+    "root_calls": 18,
+    "angle_calls": 1,
+    "read_count": 47,
+    "clock_fault": 0
+  },
+  "checks": {
+    "sum_matches_total": true,
+    "mode2_completed_and_valid_coreOK": true,
+    "clock_fault0": true,
+    "expected_root_calls18": true,
+    "expected_read_count47": true,
+    "angle_calls1": true,
+    "outer_BenchCycles_exceeds_internal_profile": true
+  },
+  "instrumented_breakdown": {
+    "prediction_total_cycles": 17926,
+    "root_window_cycles": 9005,
+    "prediction_outside_root_windows_cycles": 8921,
+    "other_stages_cycles": 4891,
+    "root_window_percent_total": 39.46618749178244,
+    "prediction_outside_root_windows_percent_total": 39.09804093439102,
+    "other_stages_percent_total": 21.435771573826532,
+    "root_window_percent_prediction": 50.23429655249358,
+    "root_windows_already_included_in_stage_totals": true
+  },
+  "coarse_comparison": {
+    "previous_total": 21497,
+    "current_total": 22817,
+    "increase_cycles": 1320,
+    "delay_increase_cycles": 144,
+    "candidate_increase_cycles": 1176,
+    "other_stages_unchanged": true,
+    "additional_clock_reads": 36,
+    "pair29_times36_not_exact_correction": true,
+    "root_window_is_not_uninstrumented_root_function_time": true
+  },
+  "conditional_200MHz_us": {
+    "actual_clock_independently_verified": false,
+    "outer_benchmark": 115.355,
+    "internal_total": 114.085,
+    "root_windows": 45.025,
+    "prediction_outside_root_windows": 44.605,
+    "other_stages": 24.455,
+    "body_max": 123.895
+  },
+  "plain_baseline": {
+    "kernel_revision": 7,
+    "request": 2,
+    "cycles": 21138,
+    "conditional_200MHz_us": 105.69,
+    "period_budget_cycles": 4000,
+    "period_ratio": 5.2845,
+    "use_this_mode_for_version_speed_comparison": true
+  },
+  "limits": {
+    "same_firmware_assumed_from_workflow_and_mode": true,
+    "revision_marker_in_new_images": false,
+    "new_OUT_fingerprint_read_from_target": false,
+    "candidate_local_OUT_sha256": "928bb780011e931ce7b9f82f805cb65e458b66193fb5d22085e2376f791ec405",
+    "pause_history_verified": false,
+    "sample_count_per_mode": 1,
+    "root_profile_overhead_automatically_subtracted": false,
+    "WCET_or_normal_ISR_qualified": false,
+    "hardware_release_allowed": false
+  },
+  "next_optimization_priority": [
+    "Both root solver work and prediction work outside measured root windows",
+    "Consider reducing fixed two-substep workspace traffic, function boundaries and generic state event handling without changing roots/model/thresholds",
+    "Then inspect two sorting/budget/intersection work; angle phase is small"
+  ],
+  "screenshots": [
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-1dd4decd-88a6-41a6-9fa7-6d98519871ee.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round7_fine\\ccs_request4_benchmark.png",
+      "sha256": "cd33c172c9eedf48214b24f366befff9282517c9f94fddfc2cfebf49278a6b57",
+      "bytes": 34565
+    },
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-6f0e0a10-f09a-43e5-9e14-7703e8501e0f.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round7_fine\\ccs_request4_fine_profile.png",
+      "sha256": "d8de7d1ad07201dd7eca215b0105616156d9283c7ff9a1a500f4bd35e162345a",
+      "bytes": 36013
+    }
+  ],
+  "agent_actions": {
+    "control_code_modified": false,
+    "peripheral_or_protection_modified": false,
+    "hardware_or_target_access": false,
+    "rebuild": false,
+    "delete": false,
+    "Git_commit_or_push": false
+  }
+}

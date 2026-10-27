@@ -1,0 +1,109 @@
+{
+  "scope": "Independent read-only source/mathematical review; only these round11 audit evidence files are created. No production, hardware, old evidence, build, Git or parameter changes.",
+  "review_date_local": "2026-10-27",
+  "source_sha256": {
+    "baseline10": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+    "production_read": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+    "A_raw_next_N8": "1b74929824ccaa0faa848ef076fdd685e6011d47f3c6a8556e75d4c8a39ea9c8",
+    "B_clarke_rho_cache_N8": "a86f91f7f22a04f1ebf7787c745c0c549edb5a7c1adef9f10883af6479e7739f"
+  },
+  "anchors": {
+    "rotation_plan": "vienna_pcmfpc_fast.c pf_rotation/pf_plan lines258-272",
+    "transforms": "pf_abc_to_dq/pf_dq_to_abc lines274-285",
+    "seed": "pf_seed lines327-344",
+    "control_model": "PF_CONTROL_STEP/PF_CONTROL_BODY/PF_CONTROL_CORE lines678-770",
+    "selection_active": "PC_run_fast lines997-1054"
+  },
+  "baseline_model": {
+    "substeps": 2,
+    "candidate_states": 8,
+    "theta_nodes": "theta+(PC_Real)j*omega*h in original operation order",
+    "free_current": "q=M(theta_next)*(dq+h*f_dq)",
+    "neutral": "phase0 then phase1 then phase2; ON phases only, (old_i+next_i)/2",
+    "midpoint": "np+=h_over_C*neutral; next caps from (dc±np)/2"
+  },
+  "small_scheme": {
+    "A": "Copy first root next[3] into independent old_local[3] for N8 STEP1 only. Not a finite-precision identity.",
+    "B": "Cache original Clarke alpha,beta while retaining original Park dq; use rho=ct1*ct1+st1*st1 and original inverse-Clarke for N8 STEP1 old only. Still not a finite-precision identity.",
+    "source_guard_alias_review": "No blocking uninitialized/alias issue in A/B source. Cached alpha/beta dominate each reachable STEP1 read; rho initialized lazily after original caps guard; N1 result==0 does not read new locals.",
+    "localized_invariants_conditional_on_same_FP_outside_change": [
+      "np1",
+      "first-step candidate midpoint",
+      "candidate second-root inputs and outputs",
+      "candidate idq2",
+      "candidate gi",
+      "blocked_candidate",
+      "valid/requested/voltage_margin"
+    ],
+    "possible_effects": [
+      "neutral2",
+      "np2/gu",
+      "error status and partial writes",
+      "midpoint rank/intersection/pcOff",
+      "active via blocked_candidate[pcOff]",
+      "selected_id/hw_state"
+    ],
+    "predeclared_scope_correction": "ACCEPTANCE_SCOPE.md is not modified. Earlier claim active must be invariant was mathematically too strong because pcOff can change. Report the correction explicitly; do not retroactively accept observed decision differences.",
+    "decision": "Parent reported A/B strict FAIL including hardware-subset selected differences122/121. Neither is suitable for default installation. These counts are parent-supplied validation results, not independently executed here."
+  },
+  "larger_scheme": {
+    "implemented_this_round": false,
+    "matrix": "q_next=M_next*P_current*x + h*M_next*f_dq",
+    "alpha_beta_coefficients": "a=c_next*c_current+s_next*s_current; b=s_next*c_current-c_next*s_current",
+    "forcing": "h*(c_next*f_d-s_next*f_q), h*(s_next*f_d+c_next*f_q), at each ending node",
+    "non_equivalence_reasons": [
+      "rotation coefficients and norm",
+      "finite Clarke/inverse-Clarke constants",
+      "intermediate roundings/cancellation",
+      "nonzero KCL residual",
+      "overflow and error domain",
+      "different node expression grouping"
+    ]
+  },
+  "exact_dependency_fallback": {
+    "implemented_at_review": false,
+    "allowed_scope": "Prospective uniquely authorized C: only N8 STEP1, old ON components only; no KCL complement; no neutral sum order change.",
+    "mask0": "Do not evaluate inverse; old_local unread.",
+    "mask1": "Evaluate original a=ct*dq0-st*dq1 only; store old0.",
+    "masks2_4_3_5_6": "Evaluate original a,b; evaluate/store only ON inverse-Clarke components.",
+    "mask7": "Retain all original expressions.",
+    "proof": "Only old_abc reads in CONTROL are guarded by the corresponding hw bit. Root takes free_abc and writes separate next, not old_abc; public output never exports old_local. Next candidate reinitializes model state and never consumes a prior OFF old value.",
+    "conditions": [
+      "Only valid N8 masks0..7",
+      "N1/seed/FULL/observer unchanged",
+      "Preserve original expression grouping and phase0→1→2 neutral additions",
+      "No extra guard/return, no direct next alias",
+      "No observed floating-environment dependency in reviewed path; actual TI grouping must still be checked",
+      "Private scratch bytes are not public failure-output contract"
+    ],
+    "performance": "No cycle claim. New mask branches, stores, register allocation, spilling and ABI can offset removed arithmetic; target compile and plain bench required."
+  },
+  "acceptance": {
+    "do_not_relax": [
+      "32EPS root residual",
+      "strict1e-12 blocked test",
+      "0.02A budget",
+      "sorting/tie priority",
+      "8states/two substeps",
+      "L/R/C and hardware/protection/timing"
+    ],
+    "strict_checks": [
+      "all public success and failure bytes",
+      "status and partial write touch order",
+      "candidate root2/idq2/gi/blocked isolation for A/B",
+      "np2/gu and each dependent discrete decision",
+      "N1 legal alias cases and FULL unchanged"
+    ],
+    "directed_edges": [
+      "signed zero/subnormal",
+      "KCL residual near32EPS acceptance",
+      "±1e-12 predicted zero current",
+      "events/endpoints/equal points/zero-width pieces",
+      "unequal caps and midpoint limit",
+      "0.02A budget and sorting ties",
+      "angle0/pi2/pi/wrap and norm not1",
+      "extreme finite overflow domain"
+    ],
+    "fallback": "Reject failed optimization prototypes and retain production10. No posthoc epsilon or parameter adjustment."
+  }
+}

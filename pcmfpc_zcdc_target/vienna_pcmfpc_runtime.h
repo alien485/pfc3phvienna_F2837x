@@ -33,7 +33,9 @@ extern volatile uint16_t VIENNA_pcmOutputSource,VIENNA_pcmOutputDetailValid;
 /* 0 means interval u_integral fields are placeholders, not physical zeros. */
 extern volatile uint16_t VIENNA_pcmOutputIntegralValid;
 /* One-shot numeric benchmark, no ADC substitution or gate submission.
- * Request 1=reference32, 2=fast; status 0=idle,1=OK,2=unsafe,3=bad request,4=core error. */
+ * Request 1=reference32, 2=fast plain, 3=fast stage profile, 4=fast+root profile.
+ * Requests 2..4 use intersection angles only; 3/4 instrument one call and
+ * never submit its gate. Status 0=idle,1=OK,2=unsafe,3=bad request,4=core error. */
 extern volatile uint16_t VIENNA_pcmBenchRequest,VIENNA_pcmBenchStatus;
 extern volatile uint16_t VIENNA_pcmBenchSelectedId,VIENNA_pcmBenchHWState;
 extern volatile uint32_t VIENNA_pcmBenchCycles,VIENNA_pcmBenchCyclesMax,VIENNA_pcmBenchCount;

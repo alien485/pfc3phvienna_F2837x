@@ -1,0 +1,393 @@
+{
+  "scope": "Independent read-only actual TI round8 OUT/MAP/ASM audit; evidence writes only, no source edits/build/hardware/Git/deletion",
+  "build_method": "TI CCS-generated gmake all incremental rules; same installed TI CGT and project options; no CCS application startup attempted this round",
+  "native_exit": 0,
+  "compiler": "TI CGT25.11.1.LTS",
+  "linked_line": ">> Linked Tue Oct 27 08:48:32 2026",
+  "errors": 0,
+  "warnings": 0,
+  "diagnostic_lines": [],
+  "CCS_application_launch_attempted_this_round": false,
+  "pinned_files": 32,
+  "all_pinned_hashes_match": true,
+  "pinned_hash_checks": {
+    ".cproject": true,
+    "build_incremental.ps1": true,
+    "f2837xd_flash_cpu1_lnk.cmd": true,
+    "main.syscfg": true,
+    "makefile.init": true,
+    "vienna.c": true,
+    "vienna.h": true,
+    "vienna_grid_sync.asm": true,
+    "vienna_grid_sync.c": true,
+    "vienna_grid_sync.h": true,
+    "vienna_hal.c": true,
+    "vienna_hal.h": true,
+    "vienna_main.asm": true,
+    "vienna_main.c": true,
+    "vienna_pcmfpc_fast.asm": true,
+    "vienna_pcmfpc_fast.c": true,
+    "vienna_pcmfpc_fast.h": true,
+    "vienna_pcmfpc_observer.asm": true,
+    "vienna_pcmfpc_observer.c": true,
+    "vienna_pcmfpc_observer.h": true,
+    "vienna_pcmfpc_runtime.asm": true,
+    "vienna_pcmfpc_runtime.c": true,
+    "vienna_pcmfpc_runtime.h": true,
+    "vienna_pcmfpc_zcdc.asm": true,
+    "vienna_pcmfpc_zcdc.c": true,
+    "vienna_pcmfpc_zcdc.h": true,
+    "vienna_pcmfpc_zcdc_F2837x.map": true,
+    "vienna_pcmfpc_zcdc_F2837x.out": true,
+    "vienna_pcmfpc_zcdc_F2837x_linkInfo.xml": true,
+    "vienna_settings.h": true,
+    "vienna_user_settings.h": true,
+    "gmake_incremental.log": true
+  },
+  "out_sha256": "d01c3f7fa2e7a403c8ab5b4c9ef54319aeaa0f8823704c5cba39b886f97b28c2",
+  "fast_c_sha256": "8072a0cbfb2aa810a19f971f504fa398ec4631590eb02793d2b00a26da46828d",
+  "fast_h_sha256": "c898524ad850168d6c792e29b7666979ef7a4225c1874b251984b31b790c3c52",
+  "unchanged20_pinned_protected_files_vs7": {
+    ".cproject": true,
+    "build_incremental.ps1": true,
+    "f2837xd_flash_cpu1_lnk.cmd": true,
+    "main.syscfg": true,
+    "makefile.init": true,
+    "vienna.c": true,
+    "vienna.h": true,
+    "vienna_hal.c": true,
+    "vienna_hal.h": true,
+    "vienna_main.c": true,
+    "vienna_grid_sync.c": true,
+    "vienna_grid_sync.h": true,
+    "vienna_pcmfpc_observer.c": true,
+    "vienna_pcmfpc_observer.h": true,
+    "vienna_pcmfpc_runtime.c": true,
+    "vienna_pcmfpc_runtime.h": true,
+    "vienna_pcmfpc_zcdc.c": true,
+    "vienna_pcmfpc_zcdc.h": true,
+    "vienna_settings.h": true,
+    "vienna_user_settings.h": true
+  },
+  "revision": {
+    "symbol_word": "0x7a3",
+    "DP": "0x1e",
+    "offset": "0x23",
+    "actual_store_word": "0x18f7a",
+    "actual_value": 8,
+    "initializer": 8
+  },
+  "RAM_code": {
+    "load_start": "0xa8000",
+    "run_start": "0x18000",
+    "words": 14821,
+    "hex_words": "0x39e5",
+    "delta_vs7_words": 1176,
+    "free_words": 1563
+  },
+  "memory": [
+    {
+      "name": "RAMGS12GS15",
+      "origin_word": 98304,
+      "capacity_words": 16384,
+      "used_words": 14821,
+      "unused_words": 1563
+    },
+    {
+      "name": "RAMM1",
+      "origin_word": 1024,
+      "capacity_words": 1024,
+      "used_words": 937,
+      "unused_words": 87
+    },
+    {
+      "name": "RAMGS3",
+      "origin_word": 61440,
+      "capacity_words": 4096,
+      "used_words": 3222,
+      "unused_words": 874
+    },
+    {
+      "name": "RAMGS4GS5",
+      "origin_word": 65536,
+      "capacity_words": 8192,
+      "used_words": 7168,
+      "unused_words": 1024
+    },
+    {
+      "name": "RAMGS6GS11",
+      "origin_word": 73728,
+      "capacity_words": 24576,
+      "used_words": 24000,
+      "unused_words": 576
+    }
+  ],
+  "BSS_delta_words_vs7": 0,
+  "fast_profile_closure_functions": 22,
+  "fast_profile_closure_call_sites": 53,
+  "all_bound_callees_RAM": true,
+  "callback": {
+    "target_run_word": "0x1aadc",
+    "pointer_word": "0xf54c",
+    "reads_only": "Timer0 TIM at0xc00",
+    "instructions": [
+      "VMOV32 ACC,*(0:0xc00)",
+      "LRETR"
+    ],
+    "period_modulus": 2000001
+  },
+  "private_wrapper_linked": false,
+  "ordinary_plain_profile_references": 0,
+  "ordinary_plain_has_no_root_clock_guards": true,
+  "caller_dispatch_and_top_stage_guards_still_cost_instructions": true,
+  "profiler_success_contract": {
+    "coarse_reads": 11,
+    "fine_reads": 47,
+    "fine_roots": 18,
+    "one_shot": true,
+    "root_time_nested": true
+  },
+  "assembly_comparison": {
+    "vs7": {
+      "pf_lambda_plan": {
+        "same_normalized_assembly": true,
+        "old_items": 223,
+        "new_items": 223
+      },
+      "pf_lambda_root": {
+        "same_normalized_assembly": true,
+        "old_items": 322,
+        "new_items": 322
+      },
+      "pf_lambda_dense_root": {
+        "same_normalized_assembly": true,
+        "old_items": 447,
+        "new_items": 447
+      },
+      "pf_root": {
+        "same_normalized_assembly": true,
+        "old_items": 673,
+        "new_items": 673
+      },
+      "pf_interval": {
+        "same_normalized_assembly": true,
+        "old_items": 538,
+        "new_items": 538
+      },
+      "pf_seed": {
+        "same_normalized_assembly": true,
+        "old_items": 77,
+        "new_items": 77
+      },
+      "pf_rank": {
+        "same_normalized_assembly": true,
+        "old_items": 97,
+        "new_items": 97
+      },
+      "pf_plan": {
+        "same_normalized_assembly": true,
+        "old_items": 58,
+        "new_items": 58
+      },
+      "pf_profile_begin": {
+        "same_normalized_assembly": true,
+        "old_items": 30,
+        "new_items": 30
+      },
+      "pf_profile_finish": {
+        "same_normalized_assembly": true,
+        "old_items": 54,
+        "new_items": 54
+      },
+      "pf_profile_stage": {
+        "same_normalized_assembly": true,
+        "old_items": 21,
+        "new_items": 21
+      },
+      "pf_profile_read": {
+        "same_normalized_assembly": true,
+        "old_items": 10,
+        "new_items": 10
+      }
+    },
+    "vs_audited_trial": {
+      "pf_control_interval_plain": {
+        "actual_matches_trial_normalized_assembly": true,
+        "actual_items": 592
+      },
+      "pf_control_interval_profiled": {
+        "actual_matches_trial_normalized_assembly": true,
+        "actual_items": 641
+      }
+    }
+  },
+  "FP_dependency_file": "fp_dependency_audit.json",
+  "FP_scope": "Common scalar source model retained. Neutral accumulation phase0->1->2 retained; initial+0 elided by compiler. A MACF32 alias bundles independent ADD and MUL; no fused FMA is introduced there. This is not a universal target bitwise-equivalence assertion.",
+  "listed_max_frame_words_including_return_header": {
+    "ISR1": 66,
+    "pf_profile_read": 2,
+    "pf_lambda_plan": 22,
+    "pf_lambda_root": 20,
+    "pf_lambda_dense_root": 30,
+    "pf_control_interval_profiled": 64,
+    "pf_control_interval_plain": 62,
+    "PC_run_fast": 86,
+    "pf_root": 36,
+    "pf_interval": 114,
+    "PC_fast_predict_interval": 42,
+    "VO_reconstruct": 164,
+    "pc_profile_clock": 2,
+    "VIENNA_PCMFPC_select": 8,
+    "VIENNA_PCMFPC_sample": 44,
+    "pc_benchmark": 12,
+    "VIENNA_PCMFPC_post": 20,
+    "pc_projection": 10,
+    "pc_root": 64,
+    "PC_predict_interval": 58
+  },
+  "private_kernel_frame_details": {
+    "plain": {
+      "header_words": 60,
+      "return_words": 2,
+      "total_words": 62,
+      "FP_parameter_accesses": 3,
+      "maximum_direct_SP_offset": 46
+    },
+    "profiled": {
+      "header_words": 62,
+      "return_words": 2,
+      "total_words": 64,
+      "FP_parameter_accesses": 3,
+      "maximum_direct_SP_offset": 48
+    }
+  },
+  "stack_allocation_words": 896,
+  "known_stack_chain_frame_sums_words": {
+    "normal_plain_generic": 264,
+    "normal_plain_dense": 252,
+    "shadow_plain_generic": 276,
+    "benchmark_plain_generic": 288,
+    "benchmark_fine_generic": 290,
+    "benchmark_fine_clock_callback": 252,
+    "FAST_FULL_reconstruction": 466,
+    "reference_reconstruction_available_branch": 506
+  },
+  "stack_scope": "Known compiler frame sums, not a complete worst-case stack proof; interrupted background, automatic hardware ISR frame, nesting, exceptional/library paths and measured watermark remain unknown.",
+  "success_path_proxy": [
+    {
+      "variant": "baseline7",
+      "seed_first_substep": false,
+      "function": "pf_control_interval",
+      "success_issue_groups_including_LRETR": 637,
+      "roots": 2,
+      "loop_backedges_taken": 1,
+      "MOVL": 95,
+      "MOV32": 121,
+      "MOV_memory_or_stack_groups": 231,
+      "SP_FP_transfer_groups": 59,
+      "DP_setups": 15,
+      "FP_ADD_SUB_MPY_groups": 98,
+      "LCR": 2
+    },
+    {
+      "variant": "baseline7",
+      "seed_first_substep": true,
+      "function": "pf_control_interval",
+      "success_issue_groups_including_LRETR": 567,
+      "roots": 2,
+      "loop_backedges_taken": 1,
+      "MOVL": 90,
+      "MOV32": 105,
+      "MOV_memory_or_stack_groups": 213,
+      "SP_FP_transfer_groups": 58,
+      "DP_setups": 14,
+      "FP_ADD_SUB_MPY_groups": 76,
+      "LCR": 2
+    },
+    {
+      "variant": "split_static_unroll",
+      "seed_first_substep": false,
+      "function": "pf_control_interval_plain",
+      "success_issue_groups_including_LRETR": 541,
+      "roots": 2,
+      "loop_backedges_taken": 0,
+      "MOVL": 78,
+      "MOV32": 120,
+      "MOV_memory_or_stack_groups": 203,
+      "SP_FP_transfer_groups": 55,
+      "DP_setups": 3,
+      "FP_ADD_SUB_MPY_groups": 101,
+      "LCR": 2
+    },
+    {
+      "variant": "split_static_unroll",
+      "seed_first_substep": true,
+      "function": "pf_control_interval_plain",
+      "success_issue_groups_including_LRETR": 477,
+      "roots": 2,
+      "loop_backedges_taken": 0,
+      "MOVL": 74,
+      "MOV32": 105,
+      "MOV_memory_or_stack_groups": 187,
+      "SP_FP_transfer_groups": 53,
+      "DP_setups": 3,
+      "FP_ADD_SUB_MPY_groups": 77,
+      "LCR": 2
+    },
+    {
+      "variant": "split_common_no_cfg",
+      "seed_first_substep": false,
+      "function": "pf_control_interval_plain",
+      "success_issue_groups_including_LRETR": 462,
+      "roots": 2,
+      "loop_backedges_taken": 0,
+      "MOVL": 55,
+      "MOV32": 90,
+      "MOV_memory_or_stack_groups": 153,
+      "SP_FP_transfer_groups": 91,
+      "DP_setups": 3,
+      "FP_ADD_SUB_MPY_groups": 92,
+      "LCR": 2
+    },
+    {
+      "variant": "split_common_no_cfg",
+      "seed_first_substep": true,
+      "function": "pf_control_interval_plain",
+      "success_issue_groups_including_LRETR": 411,
+      "roots": 2,
+      "loop_backedges_taken": 0,
+      "MOVL": 52,
+      "MOV32": 77,
+      "MOV_memory_or_stack_groups": 141,
+      "SP_FP_transfer_groups": 86,
+      "DP_setups": 3,
+      "FP_ADD_SUB_MPY_groups": 70,
+      "LCR": 2
+    }
+  ],
+  "success_path_proxy_limits": "Restricted hw7 successful-path CFG proxy with exactly2 substeps, specified first-step seed, second NULL and inactive clocks. Remaining FP predicates relaxed. Callee bodies, caller dispatch, latencies/stalls excluded; primary issue-group moves only (parallel || memory operations not separately counted). Not a measured runtime or general speedup percentage. No440*2 estimate used.",
+  "trial_proxy_applies_to_actual": "Both actual plain/profiled normalized instruction streams exactly match the audited split_common_no_cfg trial.",
+  "revision7_hardware_baseline": {
+    "plain_cycles": 21138,
+    "plain_us_200MHz": 105.69,
+    "fine_root_window_cycles": 9005,
+    "fine_prediction_outside_root_windows_cycles": 8921
+  },
+  "current_period": {
+    "Hz": 50000,
+    "us": 20,
+    "cycles_200MHz": 4000,
+    "ISR_to_ZERO_cycles": 1628
+  },
+  "revision8_target_runtime_measured": false,
+  "timing_conclusion": "No measured revision8 speedup, WCET or real-time release. Revision7 timings are baseline only. Profile times include instrumentation; nested roots must not be added to total.",
+  "evidence": [
+    "linked_disassembly.txt",
+    "listing_summary.json",
+    "actual_calls.json",
+    "callback_gating.json",
+    "assembly_comparison.json",
+    "fp_dependency_audit.json",
+    "../round8/audit/SUCCESS_PATH_PROXY.json"
+  ]
+}

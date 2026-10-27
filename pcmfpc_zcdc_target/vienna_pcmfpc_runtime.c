@@ -16,6 +16,7 @@
 #pragma CODE_SECTION(VIENNA_PCMFPC_post,"pcmfpc_code")
 #pragma CODE_SECTION(pc_fault,"pcmfpc_code")
 #pragma CODE_SECTION(pc_benchmark,"pcmfpc_code")
+#pragma CODE_SECTION(pc_profile_clock,"pcmfpc_code")
 #pragma FUNC_ALWAYS_INLINE(pc_finite)
 #pragma FUNC_ALWAYS_INLINE(pc_elapsed)
 #pragma FUNC_ALWAYS_INLINE(pc_run_selected)
@@ -71,6 +72,12 @@ static uint32_t pc_elapsed(uint32_t start)
     uint32_t period=(uint32_t)(VIENNA_CPU_SYS_CLOCK_FREQ_HZ/VIENNA_CPU_TIMER0_FREQ_HZ);
     return start>=end?start-end:start+period-end;
 }
+/* Read the already-running timer only. No timer/ADC/PWM configuration writes.
+ * The callback is used exclusively by an explicitly armed numeric benchmark. */
+static uint32_t pc_profile_clock(void)
+{
+    return CPUTimer_getTimerCount(CPUTIMER0_BASE);
+}
 static uint16_t pc_run_selected(const PC_Config *cfg,const PC_Input *in,PC_Output *out)
 {
     uint16_t status;
@@ -89,8 +96,10 @@ static void pc_benchmark(void)
     uint32_t begin;
     if(!request)return;
     VIENNA_pcmBenchRequest=0U;
+    /* Reject/cancelled requests cannot present an older profile as this run. */
+    (void)PC_fast_profile_arm(0U);
     VIENNA_pcmBenchSelectedId=0U;VIENNA_pcmBenchHWState=0U;
-    if(request>2U){VIENNA_pcmBenchStatus=3U;return;}
+    if(request>4U){VIENNA_pcmBenchStatus=3U;return;}
     if(VIENNA_pcmHardwareRelease || VIENNA_closeGiLoop || VIENNA_closeGvLoop ||
        VIENNA_closeGsLoop || VIENNA_pcmActualAppliedState || VIENNA_pcmPendingState ||
        !(EPWM_getTripZoneFlagStatus(VIENNA_HIGH_FREQ_PWM1_BASE)&EPWM_TZ_FLAG_OST) ||
@@ -102,6 +111,8 @@ static void pc_benchmark(void)
      * input/PLL/ESO history and the returned gate is never submitted to HAL. */
     benchmark_config=pc_config;
     benchmark_config.root_method=request==1U?PC_ROOT_BISECTION32:PC_ROOT_PIECEWISE;
+    /* Keep reference diagnostics; fast control needs only intersection angles. */
+    benchmark_config.diagnostic_all_angles=(uint16_t)(request==1U);
     benchmark_input.iabc_A[0]=-0.05f;benchmark_input.iabc_A[1]=3.9221143f;
     benchmark_input.iabc_A[2]=-3.8721143f;
     benchmark_input.eabc_V[0]=0.0f;benchmark_input.eabc_V[1]=70.710678f;
@@ -112,6 +123,10 @@ static void pc_benchmark(void)
     benchmark_input.fhat_A_s[0]=26916.0f;benchmark_input.fhat_A_s[1]=-1417.0f;
     benchmark_input.applied_hw_state=3U;
     benchmark_input.zcdc_enable=1U;benchmark_input.terminal_enable=1U;
+    if(request>=3U){
+        VIENNA_pcmCoreStatus=PC_fast_profile_arm((uint16_t)(request-2U));
+        if(VIENNA_pcmCoreStatus!=PC_OK){VIENNA_pcmBenchStatus=4U;return;}
+    }
     begin=CPUTimer_getTimerCount(CPUTIMER0_BASE);
     VIENNA_pcmCoreStatus=pc_run_selected(&benchmark_config,&benchmark_input,&VIENNA_pcmOutput);
     VIENNA_pcmBenchCycles=pc_elapsed(begin);
@@ -138,6 +153,11 @@ static void pc_fault(uint16_t reason)
 void VIENNA_PCMFPC_init(void)
 {
     PC_default_config(&pc_config);
+    /* Existing HAL loads PRD=SYSCLK/TIMER0_FREQ; the downcounter includes 0.
+     * Pass its inclusive span without changing PRD, prescale or emulation. */
+    PC_fast_profile_configure(pc_profile_clock,
+        (uint32_t)(VIENNA_CPU_SYS_CLOCK_FREQ_HZ/VIENNA_CPU_TIMER0_FREQ_HZ)+1U);
+    (void)PC_fast_profile_arm(0U);
     pc_config.first_duration_s=VIENNA_FCS_DELAY_SEC;
     pc_config.candidate_duration_s=VIENNA_FCS_TS_SEC;
     pc_config.L_H=VIENNA_PFC_INDUCTOR_VALUE;
@@ -296,6 +316,7 @@ uint16_t VIENNA_PCMFPC_select(void)
         pc_fault(VIENNA_PC_OBSERVER);return 0U;
     }
     pc_config.root_method=VIENNA_pcmRootMethodActive;
+    pc_config.diagnostic_all_angles=(uint16_t)(pc_config.root_method!=PC_ROOT_PIECEWISE);
     VIENNA_pcmInput.zcdc_enable=(VIENNA_pcmModeActive==VIENNA_PC_TERMINAL_ON);
     VIENNA_pcmInput.terminal_enable=1U;
     VIENNA_pcmCoreStatus=pc_run_selected(&pc_config,&VIENNA_pcmInput,&VIENNA_pcmOutput);
@@ -340,6 +361,7 @@ void VIENNA_PCMFPC_post(uint32_t start_count)
        VIENNA_pcmGrid.locked && VIENNA_pcmObserver.valid){
         uint32_t begin=CPUTimer_getTimerCount(CPUTIMER0_BASE);
         pc_config.root_method=VIENNA_pcmRootMethodActive;
+        pc_config.diagnostic_all_angles=(uint16_t)(pc_config.root_method!=PC_ROOT_PIECEWISE);
         VIENNA_pcmInput.zcdc_enable=1U;VIENNA_pcmInput.terminal_enable=1U;
         VIENNA_pcmCoreStatus=pc_run_selected(&pc_config,&VIENNA_pcmInput,&VIENNA_pcmOutput);
         VIENNA_pcmOutputSource=2U;

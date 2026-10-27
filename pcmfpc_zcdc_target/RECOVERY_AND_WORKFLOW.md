@@ -1,6 +1,8 @@
 # main 与 new_mpc 的固定工作目录
 
 2026-10-26恢复记录。继续使用既有new_mpc，不创建或重命名fcs_mpc分支。
+当前精确恢复使用第十轮；第十一轮仅保留实验记录；当前版本、OUT与计时步骤以validation/RESTORED_RT10_REPORT.md、BENCH_TIMING.md及PROFILE_TIMING.md为准。
+下文第五轮源指纹是恢复时的历史证据，保留供追溯。
 
 ## 两套工程的位置
 
@@ -37,8 +39,8 @@ PCMFPC产物：新子工程FLASH\vienna_pcmfpc_zcdc_F2837x.out。
 在CPU1上通过Run → Load → Load Program明确选择相应文件；源码修改与编译不会自动更新正在运行的DSP程序。
 两套程序的Expressions分别使用各自项目中的脚本，不把PCMFPC观察项当作main固件一定存在的符号。
 
-PCMFPC新观察表共65项，首项PC_fast_kernel_revision应为5（初始化后）。
-该值仅识别恢复的第五轮软件，不代表已经打开闭环或通过实时/保护验收。
+PCMFPC观察表当前为66项，首项PC_fast_kernel_revision应为10（初始化后），包含PC_fast_profile。
+该值仅识别当前内核，不代表已经打开闭环或通过实时/保护验收。
 
 ## 已恢复什么
 

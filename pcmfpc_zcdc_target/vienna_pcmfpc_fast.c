@@ -18,11 +18,26 @@
 #pragma CODE_SECTION(pf_seed, "pcmfpc_code")
 #pragma CODE_SECTION(pf_root, "pcmfpc_code")
 #pragma CODE_SECTION(pf_interval, "pcmfpc_code")
-#pragma CODE_SECTION(pf_control_interval, "pcmfpc_code")
+#pragma FUNC_ALWAYS_INLINE(pf_control_interval)
+#pragma FUNC_ALWAYS_INLINE(pf_candidate_batch)
+#pragma DATA_SECTION(pf_control_context, ".bss:pf_control_context")
+#pragma CODE_SECTION(pf_control_interval_plain, "pcmfpc_code")
+#pragma CODE_SECTION(pf_control_interval_profiled, "pcmfpc_code")
+#pragma CODE_SECTION(PC_fast_profile_configure, "pcmfpc_code")
+#pragma CODE_SECTION(PC_fast_profile_arm, "pcmfpc_code")
+#pragma CODE_SECTION(pf_profile_clear, "pcmfpc_code")
+#pragma CODE_SECTION(pf_profile_read, "pcmfpc_code")
+#pragma CODE_SECTION(pf_profile_begin, "pcmfpc_code")
+#pragma CODE_SECTION(pf_profile_stage, "pcmfpc_code")
+#pragma CODE_SECTION(pf_profile_finish, "pcmfpc_code")
+#pragma FUNC_ALWAYS_INLINE(pf_profile_elapsed)
 #if !PC_FAST_LEGACY_CONTROL_ROOT
 #pragma CODE_SECTION(pf_lambda_plan, "pcmfpc_code")
 #pragma CODE_SECTION(pf_lambda_root, "pcmfpc_code")
+#pragma CODE_SECTION(pf_lambda_single_plan, "pcmfpc_code")
+#pragma CODE_SECTION(pf_lambda_dense_root, "pcmfpc_code")
 #pragma FUNC_ALWAYS_INLINE(pf_lambda_projection)
+#pragma FUNC_ALWAYS_INLINE(pf_dense_sum)
 #endif
 /* TI does not automatically inline these static O2 helpers when debug
  * information is enabled. Removing their per-substep ABI work is essential;
@@ -33,6 +48,7 @@
 #pragma FUNC_ALWAYS_INLINE(pf_dq_to_abc)
 #pragma FUNC_ALWAYS_INLINE(pf_projection)
 #pragma FUNC_ALWAYS_INLINE(pf_less)
+#pragma FUNC_ALWAYS_INLINE(pf_intersection)
 #pragma FUNC_ALWAYS_INLINE(pf_angle_cost)
 #pragma FUNC_ALWAYS_INLINE(pf_hw)
 /* Always-inlined helper fallback bodies deliberately have no RAM section.
@@ -137,7 +153,108 @@ volatile uint16_t PC_fast_output_substeps_available=0U;
 volatile uint16_t PC_fast_output_summaries_available=0U;
 volatile uint16_t PC_fast_output_integrals_available=0U;
 /* Observation only: identifies this kernel, never gates control or start. */
-volatile uint16_t PC_fast_kernel_revision=5U;
+volatile uint16_t PC_fast_kernel_revision=10U;
+
+/* Profiling state follows the established numerical workspaces. A pending
+ * request is consumed at entry and never enables a subsequent normal call.
+ * The bound clock is read-only; this module does not configure peripherals. */
+typedef struct {
+    PC_FastProfileClock clock;
+    uint32_t period, begin, last, root_begin;
+    uint16_t armed, active;
+} PF_ProfileWork;
+static PF_ProfileWork pf_profile_work;
+volatile PC_FastProfile PC_fast_profile;
+
+/* Private call context; N=1 keeps the original pointer read/touch order.
+ * N=8 is entered only by PC_run_fast after its common candidate seed exists.
+ * No reserved numerical workspace field is reused for this context. */
+typedef struct {
+    const PC_Real *dq0,*f;
+    const PF_Plan *plan;
+    const PF_Seed *seed;
+    PC_Interval *interval;
+    const PC_Input *input;
+    PC_Output *result;
+    PC_Real up,low;
+    uint16_t hw,count;
+} PF_ControlContext;
+static PF_ControlContext pf_control_context;
+
+
+
+static void pf_profile_clear(void)
+{
+    PC_fast_profile.setup_cycles=0UL;PC_fast_profile.delay_cycles=0UL;
+    PC_fast_profile.plan_seed_cycles=0UL;PC_fast_profile.candidates_cycles=0UL;
+    PC_fast_profile.select_cycles=0UL;PC_fast_profile.terminal_prepare_cycles=0UL;
+    PC_fast_profile.angles_cycles=0UL;PC_fast_profile.output_cycles=0UL;
+    PC_fast_profile.total_cycles=0UL;PC_fast_profile.root_cycles=0UL;
+    PC_fast_profile.clock_pair_overhead=0UL;
+    PC_fast_profile.mode=0U;PC_fast_profile.valid=0U;PC_fast_profile.completed=0U;
+    PC_fast_profile.core_status=PC_ERR_INPUT;
+    PC_fast_profile.root_calls=0U;PC_fast_profile.angle_calls=0U;
+    PC_fast_profile.read_count=0U;PC_fast_profile.clock_fault=0U;
+}
+void PC_fast_profile_configure(PC_FastProfileClock clock,uint32_t period)
+{
+    pf_profile_work.clock=clock;pf_profile_work.period=period;
+    pf_profile_work.armed=0U;pf_profile_work.active=0U;
+    pf_profile_clear();
+}
+uint16_t PC_fast_profile_arm(uint16_t mode)
+{
+    pf_profile_work.armed=0U;
+    pf_profile_clear();
+    if(mode>2U || (mode && (!pf_profile_work.clock || !pf_profile_work.period)))
+        return PC_ERR_CONFIG;
+    pf_profile_work.armed=mode;
+    PC_fast_profile.mode=mode;
+    return PC_OK;
+}
+static uint32_t pf_profile_read(void)
+{
+    uint32_t stamp=pf_profile_work.clock();
+    PC_fast_profile.read_count++;
+    if(stamp>=pf_profile_work.period)PC_fast_profile.clock_fault=1U;
+    return stamp;
+}
+static uint32_t pf_profile_elapsed(uint32_t start,uint32_t end)
+{
+    return start>=end?start-end:start+pf_profile_work.period-end;
+}
+static void pf_profile_begin(void)
+{
+    uint32_t first,second;
+    pf_profile_work.active=pf_profile_work.armed;
+    pf_profile_work.armed=0U;
+    first=pf_profile_read();second=pf_profile_read();
+    PC_fast_profile.clock_pair_overhead=pf_profile_elapsed(first,second);
+    pf_profile_work.begin=pf_profile_read();pf_profile_work.last=pf_profile_work.begin;
+}
+static void pf_profile_stage(volatile uint32_t *bucket)
+{
+    uint32_t stamp=pf_profile_read();
+    *bucket=pf_profile_elapsed(pf_profile_work.last,stamp);
+    pf_profile_work.last=stamp;
+}
+static void pf_profile_finish(uint16_t status)
+{
+    uint32_t stamp=pf_profile_read();
+    if(status==PC_OK)PC_fast_profile.output_cycles=pf_profile_elapsed(pf_profile_work.last,stamp);
+    PC_fast_profile.total_cycles=pf_profile_elapsed(pf_profile_work.begin,stamp);
+    PC_fast_profile.core_status=status;PC_fast_profile.completed=1U;
+    PC_fast_profile.valid=(uint16_t)(status==PC_OK && !PC_fast_profile.clock_fault);
+    pf_profile_work.active=0U;
+}
+#define PF_PROFILE_STAGE(member) do { \
+    if(pf_profile_work.active)pf_profile_stage(&PC_fast_profile.member); \
+} while(0)
+#define PF_PROFILE_RETURN(value) do { \
+    uint16_t pf_return_status=(value); \
+    if(pf_profile_work.active)pf_profile_finish(pf_return_status); \
+    return pf_return_status; \
+} while(0)
 
 static void pf_rotation(PC_Real theta,PF_Rotation *r)
 {
@@ -363,6 +480,122 @@ static PC_Real pf_lambda_projection(const PC_Real q[3],uint16_t hw,
     return sum;
 }
 
+/* Exactly the generic root's phase-order sum for a mask with one OFF phase.
+ * Off is 0/1 here, not a phase mask. No grouping or zero snap is introduced. */
+static PC_Real pf_dense_sum(const PC_Real q[3],uint16_t hw,
+    PC_Real off_base,uint16_t off)
+{
+    PC_Real B=(PC_Real)0;
+    if(hw&1U)B+=q[0];else if(off)B+=off_base;
+    if(hw&2U)B+=q[1];else if(off)B+=off_base;
+    if(hw&4U)B+=q[2];else if(off)B+=off_base;
+    return B;
+}
+
+/* For three ON phases there is no relevant diode event. Two ON phases
+ * leave one OFF phase and at most one strict internal event. Preserve the
+ * generic left-to-right closed-segment root selection, with the identical
+ * endpoint fallback and final KCL projection. The existing root workspace
+ * is reused exclusively; no extra BSS shifts the C28x data-page placement.
+ * Only required local-plan fields are written, and later generic NULL calls
+ * always rebuild their complete plan before use. */
+static uint16_t pf_lambda_dense_root(const PC_Real q[3],uint16_t hw,PC_Real c,
+    PC_Real up,PC_Real low,PC_Real next[3],const PF_LambdaPlan *shared)
+{
+    PF_LambdaWork *w=&pf_lambda_work;
+    PC_Real a,b,B,root,residual,off_base,point,off_q,scale,span;
+    if(shared)w->plan=shared;
+    else{
+        w->local.status=PC_ERR_NUMERIC;
+        w->local.cu=c*up;w->local.cl=c*low;
+        span=w->local.cu+w->local.cl;
+        scale=PC_ABS(q[0])+PC_ABS(q[1])+PC_ABS(q[2])+c*(up+low);
+        if(!pf_finite(w->local.cu) || !pf_finite(w->local.cl) ||
+           !pf_finite(span) || !pf_finite(scale))return PC_ERR_NUMERIC;
+        w->local.tolerance=(PC_Real)32*PC_EPS*PC_MAX(scale,(PC_Real)1);
+        w->local.status=PC_OK;w->plan=&w->local;
+    }
+    if(w->plan->status!=PC_OK)return w->plan->status;
+    a=-w->plan->cl;w->found=0U;
+    if(hw==7U){
+        B=(PC_Real)0;B+=q[0];B+=q[1];B+=q[2];
+        root=-B/(PC_Real)3;
+        if(root>=a && root<=w->plan->cu)w->found=1U;
+    }else{
+        /* Public callers already validate hw<=7. This internal dispatch is
+         * limited to 3/5/6, so k identifies their sole OFF phase. */
+        w->k=hw==3U?2U:(hw==5U?1U:0U);off_q=q[w->k];
+        if(off_q<(PC_Real)0){
+            off_base=shared?w->plan->base[w->k]:off_q+w->plan->cl;
+            point=-w->plan->cl-off_q;w->active=(uint16_t)(point>-w->plan->cl);
+        }else{
+            off_base=shared?w->plan->base[w->k]:off_q-w->plan->cu;
+            point=w->plan->cu-off_q;w->active=(uint16_t)(point<=-w->plan->cl);
+        }
+        w->n=(uint16_t)(off_q!=(PC_Real)0 && point>a && point<w->plan->cu);
+        b=w->n?point:w->plan->cu;
+        B=pf_dense_sum(q,hw,off_base,w->active);
+        root=w->active?-B/(PC_Real)3:-B/(PC_Real)2;
+        if(root>=a && root<=b)w->found=1U;
+        else if(w->n){
+            a=b;w->active^=1U;
+            B=pf_dense_sum(q,hw,off_base,w->active);
+            root=w->active?-B/(PC_Real)3:-B/(PC_Real)2;
+            if(root>=a && root<=w->plan->cu)w->found=1U;
+        }
+    }
+    if(!w->found){
+        root=-w->plan->cl;
+        residual=pf_lambda_projection(q,hw,w->plan->cu,w->plan->cl,root,next);
+        if(pf_finite(residual) && PC_ABS(residual)<=w->plan->tolerance)return PC_OK;
+        root=w->plan->cu;
+    }
+    residual=pf_lambda_projection(q,hw,w->plan->cu,w->plan->cl,root,next);
+    if(!pf_finite(residual) || PC_ABS(residual)>w->plan->tolerance)return PC_ERR_ROOT;
+    return PC_OK;
+}
+
+/* A NULL plan for exactly one ON phase needs only its two OFF events.
+ * Keep phase-order arithmetic and stable strict event ordering. ON base[]
+ * entries are never read by pf_lambda_root; shared plans remain authoritative.
+ * The solver, endpoint fallback and final KCL projection are unchanged. */
+static void pf_lambda_single_plan(const PC_Real q[3],PC_Real c,
+    PC_Real up,PC_Real low,uint16_t hw,PF_LambdaPlan *p)
+{
+    PC_Real span,scale,point,key;
+    uint16_t r,phase;
+    p->status=PC_ERR_NUMERIC;
+    p->off_active=0U;p->count=0U;
+    p->cu=c*up;p->cl=c*low;
+    span=p->cu+p->cl;
+    scale=PC_ABS(q[0])+PC_ABS(q[1])+PC_ABS(q[2])+c*(up+low);
+    if(!pf_finite(p->cu) || !pf_finite(p->cl) ||
+       !pf_finite(span) || !pf_finite(scale))return;
+    p->tolerance=(PC_Real)32*PC_EPS*PC_MAX(scale,(PC_Real)1);
+    for(r=0U;r<3U;r++){
+        phase=(uint16_t)(1U<<r);
+        if(phase&hw)continue;
+        if(q[r]<(PC_Real)0){
+            p->base[r]=q[r]+p->cl;
+            point=-p->cl-q[r];
+            if(point>-p->cl)p->off_active|=phase;
+        }else{
+            p->base[r]=q[r]-p->cu;
+            point=p->cu-q[r];
+            if(point<=-p->cl)p->off_active|=phase;
+        }
+        if(q[r]!=(PC_Real)0 && point>-p->cl && point<p->cu){
+            p->point[p->count]=point;
+            p->phase[p->count]=phase;p->count++;
+        }
+    }
+    if(p->count==2U && p->point[1]<p->point[0]){
+        key=p->point[0];p->point[0]=p->point[1];p->point[1]=key;
+        phase=p->phase[0];p->phase[0]=p->phase[1];p->phase[1]=phase;
+    }
+    p->status=PC_OK;
+}
+
 /* Same ideal diode KCL expressed in lambda=c*mu:
  *   ON:  i=q+lambda; OFF: i=max(q+lambda-cu,0)+min(q+lambda+cl,0).
  * A fixed active set gives H=B+N*lambda, N=0..3. Three events give at most
@@ -382,7 +615,11 @@ static uint16_t pf_lambda_root(const PC_Real q[3],uint16_t hw,PC_Real c,
     PC_Real a,b,B,root,residual;
     if(shared)w->plan=shared;
     else{
-        pf_lambda_plan(q,c,up,low,&w->local);w->plan=&w->local;
+        if(hw==1U || hw==2U || hw==4U)
+            pf_lambda_single_plan(q,c,up,low,hw,&w->local);
+        else
+            pf_lambda_plan(q,c,up,low,&w->local);
+        w->plan=&w->local;
     }
     if(w->plan->status!=PC_OK)return w->plan->status;
     w->active=(uint16_t)(hw | (w->plan->off_active & (uint16_t)~hw));
@@ -420,52 +657,146 @@ static uint16_t pf_lambda_root(const PC_Real q[3],uint16_t hw,PC_Real c,
 
 /* Fixed control-only kernel: no pole/integral or detailed trace branches.
  * It and pf_root own distinct static workspaces; neither is reentrant. */
+/* Two constant substeps and a single model body shared by ordinary and
+ * fine-profiled kernels. The ordinary kernel has no root clock branches. */
+#if PC_FAST_LEGACY_CONTROL_ROOT
+#define PF_CONTROL_ROOT_CALL(STEP) \
+        status=pf_root(w->free_abc,hw,c,up,low,&w->mu,&w->width, \
+            &w->iterations,w->next,&w->residual,(STEP)==0U?seed:0);
+#else
+#define PF_CONTROL_ROOT_CALL(STEP) \
+do { \
+        if(hw & (uint16_t)(hw-1U)) \
+            status=pf_lambda_dense_root(w->free_abc,hw,c,up,low,w->next, \
+                ((STEP)==0U && seed)?&seed->lambda:0); \
+        else \
+            status=pf_lambda_root(w->free_abc,hw,c,up,low,w->next, \
+                ((STEP)==0U && seed)?&seed->lambda:0); \
+} while(0)
+#endif
+
+#define PF_CONTROL_STEP(STEP,PROFILE_ROOT,RETURN_STATUS) \
+do { \
+        neutral=(PC_Real)0;blocked=0U; \
+        out->substep[(STEP)].root_iterations=PC_FAST_SUBSTEP_UNAVAILABLE; \
+        up=(dc-np)/(PC_Real)2;low=(dc+np)/(PC_Real)2; \
+        if(up<=(PC_Real)0 || low<=(PC_Real)0 || \
+           !pf_finite(up) || !pf_finite(low))RETURN_STATUS(PC_ERR_MIDPOINT); \
+        if((STEP)==0U && seed){w->old_abc=seed->old_abc;w->free_abc=seed->free_abc;} \
+        else{ \
+            pf_dq_to_abc(dq,&plan->node[(STEP)],w->old_local); \
+            free_dq[0]=dq[0]+h*f[0];free_dq[1]=dq[1]+h*f[1]; \
+            pf_dq_to_abc(free_dq,&plan->node[(STEP)+1U],w->free_local); \
+            w->old_abc=w->old_local;w->free_abc=w->free_local; \
+        } \
+        if(PROFILE_ROOT){ \
+            PC_fast_profile.root_calls++; \
+            pf_profile_work.root_begin=pf_profile_read(); \
+        } \
+        PF_CONTROL_ROOT_CALL(STEP); \
+        if(PROFILE_ROOT){ \
+            uint32_t stamp=pf_profile_read(); \
+            PC_fast_profile.root_cycles+=pf_profile_elapsed(pf_profile_work.root_begin,stamp); \
+        } \
+        if(status!=PC_OK)RETURN_STATUS(status); \
+        if(hw&1U)neutral+=(w->old_abc[0]+w->next[0])/(PC_Real)2; \
+        else if(PC_ABS(w->next[0])<(PC_Real)1e-12)blocked=1U; \
+        if(hw&2U)neutral+=(w->old_abc[1]+w->next[1])/(PC_Real)2; \
+        else if(PC_ABS(w->next[1])<(PC_Real)1e-12)blocked=1U; \
+        if(hw&4U)neutral+=(w->old_abc[2]+w->next[2])/(PC_Real)2; \
+        else if(PC_ABS(w->next[2])<(PC_Real)1e-12)blocked=1U; \
+        out->blocked=(uint16_t)(out->blocked || blocked); \
+        pf_abc_to_dq(w->next,&plan->node[(STEP)+1U],dq); \
+        np+=plan->h_over_C*neutral; \
+        if(!pf_finite(np) || !pf_finite(dq[0]) || !pf_finite(dq[1]))RETURN_STATUS(PC_ERR_NUMERIC); \
+} while(0)
+
+#define PF_CONTROL_BODY(PROFILE_ROOT,RETURN_STATUS) \
+    PF_ControlWork *w=&pf_control_work; \
+    PC_Real np,neutral,dq[2],free_dq[2]; \
+    uint16_t status,blocked; \
+    /* h/C was cached once in the validated interval plan. */ \
+    dq[0]=dq0[0];dq[1]=dq0[1]; \
+    np=initial_np; \
+    out->blocked=0U; \
+    out->u_integral_dq_V_s[0]=(PC_Real)0;out->u_integral_dq_V_s[1]=(PC_Real)0; \
+    if(setup_status!=PC_OK)RETURN_STATUS(setup_status); \
+    PF_CONTROL_STEP(0U,PROFILE_ROOT,RETURN_STATUS); \
+    PF_CONTROL_STEP(1U,PROFILE_ROOT,RETURN_STATUS); \
+    out->idq_A[0]=dq[0];out->idq_A[1]=dq[1];out->np_V=np; \
+    if(PC_ABS(np)>=dc)RETURN_STATUS(PC_ERR_MIDPOINT); \
+    RETURN_STATUS(PC_OK);
+
+
+/* A successful model iteration continues the batch; failures return exactly
+ * at the old per-interval touch point. N=1 uses this identical model body. */
+#define PF_CONTROL_ITER_RETURN(STATUS) do { if((STATUS)!=PC_OK)return (STATUS); } while(0)
+#define PF_CONTROL_CORE(PROFILE_ROOT) \
+    const PC_Real *dq0=pf_control_context.dq0,*f=pf_control_context.f; \
+    const PF_Plan *plan=pf_control_context.plan; \
+    const PF_Seed *seed=pf_control_context.seed; \
+    PC_Interval *single=pf_control_context.interval; \
+    const PC_Input *input=pf_control_context.input; \
+    PC_Output *result=pf_control_context.result; \
+    PC_Real initial_up=pf_control_context.up,initial_low=pf_control_context.low; \
+    PC_Real initial_np=initial_low-initial_up,dc=initial_up+initial_low; \
+    PC_Real h=plan->h,c=plan->c; \
+    uint16_t setup_status=(!pf_finite(c) || c<=(PC_Real)0 || !pf_finite(dc))?PC_ERR_NUMERIC:PC_OK; \
+    uint16_t count=pf_control_context.count,j; \
+    for(j=0U;j<count;j++){ \
+        PC_Interval *out=result?&result->candidate_interval[j]:single; \
+        PC_Real up=initial_up,low=initial_low,e0,e1; \
+        uint16_t hw=result?pf_hw(j):pf_control_context.hw,changed; \
+        PF_CONTROL_BODY(PROFILE_ROOT,PF_CONTROL_ITER_RETURN); \
+        if(result){ \
+            result->idq2_A[j][0]=dq[0];result->idq2_A[j][1]=dq[1]; \
+            result->np2_V[j]=np;result->blocked_candidate[j]=out->blocked; \
+            e0=result->idq2_A[j][0]-input->id_ref_A;e1=result->idq2_A[j][1]-input->iq_ref_A; \
+            result->gi[j]=e0*e0+e1*e1;result->gu[j]=result->np2_V[j]*result->np2_V[j]; \
+            changed=(uint16_t)(hw ^ input->applied_hw_state); \
+            result->switch_count[j]=(uint16_t)((changed&1U)+((changed>>1)&1U)+((changed>>2)&1U)); \
+            if(!pf_finite(result->gi[j]) || !pf_finite(result->gu[j]))return PC_ERR_NUMERIC; \
+        } \
+    } \
+    return PC_OK;
+
+static uint16_t pf_control_interval_plain(void)
+{
+    PF_CONTROL_CORE(0U);
+}
+static uint16_t pf_control_interval_profiled(void)
+{
+    PF_CONTROL_CORE(1U);
+}
+#undef PF_CONTROL_CORE
+#undef PF_CONTROL_ITER_RETURN
+#undef PF_CONTROL_BODY
+#undef PF_CONTROL_STEP
+#undef PF_CONTROL_ROOT_CALL
+
 static uint16_t pf_control_interval(const PC_Config *cfg,const PC_Real dq0[2],
     PC_Real up,PC_Real low,uint16_t hw,const PC_Real f[2],
     const PF_Plan *plan,PC_Interval *out,const PF_Seed *seed)
 {
-    PF_ControlWork *w=&pf_control_work;
-    (void)cfg; /* h/C was cached once in the validated interval plan. */
-    w->dq[0]=dq0[0];w->dq[1]=dq0[1];
-    w->np=low-up;w->dc=up+low;w->h=plan->h;w->c=plan->c;
-    out->blocked=0U;
-    out->u_integral_dq_V_s[0]=(PC_Real)0;out->u_integral_dq_V_s[1]=(PC_Real)0;
-    if(!pf_finite(w->c) || w->c<=(PC_Real)0 || !pf_finite(w->dc))return PC_ERR_NUMERIC;
-    for(w->step=0U;w->step<2U;w->step++){
-        w->neutral=(PC_Real)0;w->blocked=0U;
-        out->substep[w->step].root_iterations=PC_FAST_SUBSTEP_UNAVAILABLE;
-        w->up=(w->dc-w->np)/(PC_Real)2;w->low=(w->dc+w->np)/(PC_Real)2;
-        if(w->up<=(PC_Real)0 || w->low<=(PC_Real)0 ||
-           !pf_finite(w->up) || !pf_finite(w->low))return PC_ERR_MIDPOINT;
-        if(w->step==0U && seed){w->old_abc=seed->old_abc;w->free_abc=seed->free_abc;}
-        else{
-            pf_dq_to_abc(w->dq,&plan->node[w->step],w->old_local);
-            w->free_dq[0]=w->dq[0]+w->h*f[0];w->free_dq[1]=w->dq[1]+w->h*f[1];
-            pf_dq_to_abc(w->free_dq,&plan->node[w->step+1U],w->free_local);
-            w->old_abc=w->old_local;w->free_abc=w->free_local;
-        }
-#if PC_FAST_LEGACY_CONTROL_ROOT
-        w->status=pf_root(w->free_abc,hw,w->c,w->up,w->low,&w->mu,&w->width,
-            &w->iterations,w->next,&w->residual,w->step==0U?seed:0);
-#else
-        w->status=pf_lambda_root(w->free_abc,hw,w->c,w->up,w->low,w->next,
-            (w->step==0U && seed)?&seed->lambda:0);
-#endif
-        if(w->status!=PC_OK)return w->status;
-        if(hw&1U)w->neutral+=(w->old_abc[0]+w->next[0])/(PC_Real)2;
-        else if(PC_ABS(w->next[0])<(PC_Real)1e-12)w->blocked=1U;
-        if(hw&2U)w->neutral+=(w->old_abc[1]+w->next[1])/(PC_Real)2;
-        else if(PC_ABS(w->next[1])<(PC_Real)1e-12)w->blocked=1U;
-        if(hw&4U)w->neutral+=(w->old_abc[2]+w->next[2])/(PC_Real)2;
-        else if(PC_ABS(w->next[2])<(PC_Real)1e-12)w->blocked=1U;
-        out->blocked=(uint16_t)(out->blocked || w->blocked);
-        pf_abc_to_dq(w->next,&plan->node[w->step+1U],w->dq);
-        w->np+=plan->h_over_C*w->neutral;
-        if(!pf_finite(w->np) || !pf_finite(w->dq[0]) || !pf_finite(w->dq[1]))return PC_ERR_NUMERIC;
-    }
-    out->idq_A[0]=w->dq[0];out->idq_A[1]=w->dq[1];out->np_V=w->np;
-    if(PC_ABS(w->np)>=w->dc)return PC_ERR_MIDPOINT;
-    return PC_OK;
+    (void)cfg;
+    pf_control_context.dq0=dq0;pf_control_context.f=f;
+    pf_control_context.plan=plan;pf_control_context.seed=seed;
+    pf_control_context.interval=out;pf_control_context.input=0;
+    pf_control_context.result=0;pf_control_context.up=up;pf_control_context.low=low;
+    pf_control_context.hw=hw;pf_control_context.count=1U;
+    if(pf_profile_work.active==2U)return pf_control_interval_profiled();
+    return pf_control_interval_plain();
+}
+
+static uint16_t pf_candidate_batch(const PC_Input *input,PC_Real up,PC_Real low,PC_Output *out)
+{
+    pf_control_context.dq0=out->idq1_A;pf_control_context.f=input->fhat_A_s;
+    pf_control_context.plan=&pf_candidate_plan;pf_control_context.seed=&pf_candidate_seed;
+    pf_control_context.interval=0;pf_control_context.input=input;
+    pf_control_context.result=out;pf_control_context.up=up;pf_control_context.low=low;
+    pf_control_context.hw=0U;pf_control_context.count=8U;
+    if(pf_profile_work.active==2U)return pf_control_interval_profiled();
+    return pf_control_interval_plain();
 }
 
 /* Internal kernel: caller has validated common inputs and prepared the
@@ -587,6 +918,32 @@ static void pf_rank(const PC_Real a[8],const PC_Real b[8],const uint16_t sw[8],u
     }
 }
 
+/* Exact integer form of the previous adaptive-prefix loop. A three-entry
+ * prefix can intersect in 0..3 entries. Zero needs only the first later hit;
+ * three means prefix two already has the required two. This preserves the
+ * final mask/count/prefix even for empty or arbitrary eight-bit current sets.
+ * No floating-point costs, budgets or stable ordering are changed. */
+static uint16_t pf_intersection(uint16_t cmask,const uint16_t ou[8],
+    uint16_t *mask,uint16_t *count,uint16_t *prefix)
+{
+    uint16_t k,m=3U,n=0U,bits=0U;
+    for(k=0U;k<3U;k++)if(cmask & (uint16_t)(1U<<ou[k])){
+        bits|=(uint16_t)(1U<<ou[k]);n++;
+    }
+    if(!n){
+        for(k=3U;k<8U;k++){
+            m=(uint16_t)(k+1U);
+            if(cmask & (uint16_t)(1U<<ou[k])){
+                bits=(uint16_t)(1U<<ou[k]);n=1U;break;
+            }
+        }
+    }else if(n==3U){
+        m=2U;n=2U;bits=(uint16_t)((1U<<ou[0]) | (1U<<ou[1]));
+    }
+    *mask=bits;*count=n;*prefix=m;
+    return n?(uint16_t)PC_OK:(uint16_t)PC_ERR_INTERSECTION;
+}
+
 static PC_Real pf_angle_cost(PC_Real rd,PC_Real rq,const PC_Real dq[2])
 {
     PC_Real a;
@@ -600,53 +957,44 @@ uint16_t PC_run_fast(const PC_Config *cfg,const PC_Input *in,PC_Output *out)
     PF_SelectWork *s=&pf_select_work;
     PC_Real dc,up1,low1,theta1,theta2,amp;
     PC_Real lo,hi,budget,minI,spreadLo,spreadHi,gzLo,gzHi;
-    uint16_t status,j,k,r,m,n,chosen,pcOff,mask=0U,cmask=0U,iteration;
-    PC_fast_kernel_revision=5U;
+    uint16_t status,j,k,r,m,n,chosen,pcOff,mask=0U,cmask=0U;
+    PC_fast_kernel_revision=10U;
+    if(pf_profile_work.armed)pf_profile_begin();
     PC_fast_output_substeps_available=0U;
     PC_fast_output_summaries_available=0U;
     PC_fast_output_integrals_available=0U;
-    if(!out) return PC_ERR_INPUT;
+    if(!out)PF_PROFILE_RETURN(PC_ERR_INPUT);
     pf_output_init(out);
     /* Safe output on failure is all-OFF hardware state 0, MATLAB ID 1. */
     out->selected_id=1U;out->pc_off_id=1U;out->status=PC_ERR_INPUT;
-    if(!pf_config_valid(cfg)) {out->status=PC_ERR_CONFIG;return out->status;}
+    if(!pf_config_valid(cfg)) {out->status=PC_ERR_CONFIG;PF_PROFILE_RETURN(out->status);}
     if(!in || in->applied_hw_state>7U || !pf_finite(in->up_V) || !pf_finite(in->low_V) ||
        in->up_V<=(PC_Real)0 || in->low_V<=(PC_Real)0 || !pf_finite(in->theta_rad) ||
        !pf_finite(in->omega_rad_s) || !pf_finite(in->id_ref_A) || !pf_finite(in->iq_ref_A) ||
-       !pf_finite(in->fhat_A_s[0]) || !pf_finite(in->fhat_A_s[1])) return out->status;
-    for(r=0U;r<3U;r++) if(!pf_finite(in->iabc_A[r]) || !pf_finite(in->eabc_V[r])) return out->status;
+       !pf_finite(in->fhat_A_s[0]) || !pf_finite(in->fhat_A_s[1]))PF_PROFILE_RETURN(out->status);
+    for(r=0U;r<3U;r++)if(!pf_finite(in->iabc_A[r]) || !pf_finite(in->eabc_V[r]))PF_PROFILE_RETURN(out->status);
     pf_rotation(in->theta_rad,&pf_input_rotation);
     pf_abc_to_dq(in->iabc_A,&pf_input_rotation,s->dq);
     pf_abc_to_dq(in->eabc_V,&pf_input_rotation,s->edq);
     pf_plan(cfg,in->theta_rad,in->omega_rad_s,cfg->first_duration_s,&pf_first_plan);
     dc=in->up_V+in->low_V;
+    PF_PROFILE_STAGE(setup_cycles);
     status=pf_control_interval(cfg,s->dq,in->up_V,in->low_V,in->applied_hw_state,
         in->fhat_A_s,&pf_first_plan,&out->first_interval,0);
-    if(status!=PC_OK) {out->status=status;return status;}
+    if(status!=PC_OK) {out->status=status;PF_PROFILE_RETURN(status);}
     out->idq1_A[0]=out->first_interval.idq_A[0];out->idq1_A[1]=out->first_interval.idq_A[1];
     out->np1_V=out->first_interval.np_V;
+    PF_PROFILE_STAGE(delay_cycles);
     theta1=in->theta_rad+in->omega_rad_s*cfg->first_duration_s;
     theta2=theta1+in->omega_rad_s*cfg->candidate_duration_s;
     up1=(dc-out->np1_V)/(PC_Real)2;low1=(dc+out->np1_V)/(PC_Real)2;
     pf_plan(cfg,theta1,in->omega_rad_s,cfg->candidate_duration_s,&pf_candidate_plan);
     pf_rotation(theta2,&pf_reference_rotation);
     pf_seed(out->idq1_A,in->fhat_A_s,up1,low1,&pf_candidate_plan,&pf_candidate_seed);
-    for(j=0U;j<8U;j++) {
-        uint16_t hw=pf_hw(j),changed;
-        PC_Real e0,e1;
-        status=pf_control_interval(cfg,out->idq1_A,up1,low1,hw,in->fhat_A_s,
-            &pf_candidate_plan,&out->candidate_interval[j],&pf_candidate_seed);
-        if(status!=PC_OK) {out->status=status;return status;}
-        out->idq2_A[j][0]=out->candidate_interval[j].idq_A[0];
-        out->idq2_A[j][1]=out->candidate_interval[j].idq_A[1];
-        out->np2_V[j]=out->candidate_interval[j].np_V;
-        out->blocked_candidate[j]=out->candidate_interval[j].blocked;
-        e0=out->idq2_A[j][0]-in->id_ref_A;e1=out->idq2_A[j][1]-in->iq_ref_A;
-        out->gi[j]=e0*e0+e1*e1;out->gu[j]=out->np2_V[j]*out->np2_V[j];
-        changed=(uint16_t)(hw ^ in->applied_hw_state);
-        out->switch_count[j]=(uint16_t)((changed & 1U)+((changed>>1)&1U)+((changed>>2)&1U));
-        if(!pf_finite(out->gi[j]) || !pf_finite(out->gu[j])) {out->status=PC_ERR_NUMERIC;return out->status;}
-    }
+    PF_PROFILE_STAGE(plan_seed_cycles);
+    status=pf_candidate_batch(in,up1,low1,out);
+    if(status!=PC_OK) {out->status=status;PF_PROFILE_RETURN(status);}
+    PF_PROFILE_STAGE(candidates_cycles);
     pf_rank(out->gi,out->gu,out->switch_count,s->oi);
     pf_rank(out->gu,out->gi,out->switch_count,s->ou);
     minI=out->gi[s->oi[0]];budget=PC_SQRT(minI)+cfg->delta_i_A;
@@ -657,30 +1005,26 @@ uint16_t PC_run_fast(const PC_Config *cfg,const PC_Input *in,PC_Output *out)
     for(k=0U;k<3U;k++) if(PC_SQRT(out->gi[s->oi[k]])<=budget) {
         cmask|=(uint16_t)(1U<<s->oi[k]);out->current_count++;
     }
-    out->current_mask=cmask;m=3U;n=0U;
-    for(iteration=0U;iteration<8U;iteration++) {
-        mask=0U;n=0U;
-        for(k=0U;k<m;k++) if(cmask & (uint16_t)(1U<<s->ou[k])) {mask|=(uint16_t)(1U<<s->ou[k]);n++;}
-        if(n>=1U && n<=2U) break;
-        if(n==0U) {if(m<8U)m++;} else {if(m>1U)m--;}
-    }
-    if(n<1U || n>2U) {out->status=PC_ERR_INTERSECTION;return out->status;}
+    out->current_mask=cmask;
+    status=pf_intersection(cmask,s->ou,&mask,&n,&m);
+    if(status!=PC_OK) {out->status=PC_ERR_INTERSECTION;PF_PROFILE_RETURN(out->status);}
     out->intersection_mask=mask;out->intersection_count=n;out->midpoint_prefix=m;
     pcOff=s->oi[0];
     for(k=0U;k<8U;k++) if(mask & (uint16_t)(1U<<s->oi[k])) {pcOff=s->oi[k];break;}
     out->pc_off_id=(uint16_t)(pcOff+1U);
+    PF_PROFILE_STAGE(select_cycles);
     out->valid=(uint16_t)(in->omega_rad_s>(PC_Real)0 && s->edq[0]>(PC_Real)1e-9 &&
         up1>(PC_Real)0 && low1>(PC_Real)0);
     out->requested=(uint16_t)(in->zcdc_enable!=0U && in->terminal_enable!=0U);
     amp=PC_SQRT(in->id_ref_A*in->id_ref_A+in->iq_ref_A*in->iq_ref_A);
-    if(!pf_finite(amp)){out->status=PC_ERR_NUMERIC;return out->status;}
+    if(!pf_finite(amp)){out->status=PC_ERR_NUMERIC;PF_PROFILE_RETURN(out->status);}
     s->udq[0]=in->id_ref_A;s->udq[1]=in->iq_ref_A;pf_dq_to_abc(s->udq,&pf_reference_rotation,s->iref);
     s->udq[0]=s->edq[0]-cfg->R_ohm*in->id_ref_A+in->omega_rad_s*cfg->L_H*in->iq_ref_A;
     s->udq[1]=s->edq[1]-cfg->R_ohm*in->iq_ref_A-in->omega_rad_s*cfg->L_H*in->id_ref_A;
     /* Finite inputs alone do not guarantee finite derived products. This
        rejects impossible/extreme configurations rather than reporting an
        apparently successful controller with a NaN voltage margin. */
-    if(!pf_finite(s->udq[0]) || !pf_finite(s->udq[1])){out->status=PC_ERR_NUMERIC;return out->status;}
+    if(!pf_finite(s->udq[0]) || !pf_finite(s->udq[1])){out->status=PC_ERR_NUMERIC;PF_PROFILE_RETURN(out->status);}
     pf_dq_to_abc(s->udq,&pf_reference_rotation,s->uref);
     lo=-(PC_Real)FLT_MAX;hi=(PC_Real)FLT_MAX;
     for(r=0U;r<3U;r++) {
@@ -689,16 +1033,20 @@ uint16_t PC_run_fast(const PC_Config *cfg,const PC_Input *in,PC_Output *out)
         lo=PC_MAX(lo,lower-s->uref[r]);hi=PC_MIN(hi,upper-s->uref[r]);
     }
     out->voltage_margin_V=hi-lo;
-    if(!pf_finite(out->voltage_margin_V)){out->status=PC_ERR_NUMERIC;return out->status;}
+    if(!pf_finite(out->voltage_margin_V)){out->status=PC_ERR_NUMERIC;PF_PROFILE_RETURN(out->status);}
     out->active=(uint16_t)(out->valid && out->requested && amp>=(PC_Real)0.1 &&
         PC_MIN(PC_ABS(s->iref[0]),PC_MIN(PC_ABS(s->iref[1]),PC_ABS(s->iref[2])))<=amp*PC_SIN(cfg->zero_window_rad) &&
         (out->voltage_margin_V<-(PC_Real)1e-6 || out->first_interval.blocked || out->blocked_candidate[pcOff]));
     chosen=pcOff;
+    PF_PROFILE_STAGE(terminal_prepare_cycles);
     if(out->active) {
-        for(j=0U;j<8U;j++) if(cfg->diagnostic_all_angles || (mask & (uint16_t)(1U<<j)))
+        for(j=0U;j<8U;j++)if(cfg->diagnostic_all_angles || (mask & (uint16_t)(1U<<j))){
+            if(pf_profile_work.active)PC_fast_profile.angle_calls++;
             out->gz[j]=pf_angle_cost(in->id_ref_A,in->iq_ref_A,out->idq2_A[j]);
+        }
         for(k=0U;k<8U;k++) {j=s->oi[k];if((mask & (uint16_t)(1U<<j)) && out->gz[j]<out->gz[chosen]) chosen=j;}
     }
+    PF_PROFILE_STAGE(angles_cycles);
     gzLo=out->gz[0];gzHi=out->gz[0];spreadLo=(PC_Real)FLT_MAX;spreadHi=-(PC_Real)FLT_MAX;
     for(j=0U;j<8U;j++) {
         gzLo=PC_MIN(gzLo,out->gz[j]);gzHi=PC_MAX(gzHi,out->gz[j]);
@@ -713,5 +1061,5 @@ uint16_t PC_run_fast(const PC_Config *cfg,const PC_Input *in,PC_Output *out)
     out->zcdc_diag[7]=(PC_Real)out->selected_id;out->zcdc_diag[8]=(PC_Real)(chosen!=pcOff);
     out->zcdc_diag[9]=out->gz[chosen];out->status=PC_OK;
     PC_fast_output_summaries_available=1U;
-    return PC_OK;
+    PF_PROFILE_RETURN(PC_OK);
 }

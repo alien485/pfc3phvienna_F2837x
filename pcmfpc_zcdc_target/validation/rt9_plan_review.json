@@ -1,0 +1,60 @@
+{
+  "scope": "Independent read-only review of actual plan_only trial source, not live/target verification",
+  "candidate": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\trials\\plan_only\\vienna_pcmfpc_fast.c",
+  "candidate_sha256": "6ee8b96b03e75bc498679400e3d336f2b58524c33935fd26b1dab6c3499d56bb",
+  "root_body_unchanged_except_NULL_builder_gate": true,
+  "unchanged_function_bodies": {
+    "pf_lambda_plan": true,
+    "pf_lambda_projection": true,
+    "pf_lambda_dense_root": true,
+    "pf_root": true,
+    "pf_interval": true,
+    "pf_seed": true,
+    "pf_plan": true,
+    "pf_profile_read": true,
+    "pf_profile_begin": true,
+    "pf_profile_finish": true,
+    "pf_profile_stage": true
+  },
+  "specialization_gate": "Only shared==NULL and hw exactly1/2/4 select partial builder. shared remains authoritative; hw0 and all other hw keep original full builder.",
+  "ON_base_safety": {
+    "safe_for_actual_call_graph": true,
+    "reason": "Generic root adds only active phases, and chooses hwbit?q:base. An ON phase is active but always selects q, so its partial-plan base is not a source-level read. Both OFF bases are assigned every helper call, includingq0.",
+    "off_active": "ON bits may remain absent; active=hw|(off_active&~hw) reinstates them.",
+    "tail_fields": "point/phase are read only whenk<count; terminal segment usescu. sort readsindex1 only ifcount==2.",
+    "cross_hw_reuse": "A partial plan must not be reused as a shared plan for another hw. Actual seed/shared plans still come from unchanged full builder. Later NULL calls rebuild both relevant OFF fields, and hw0 NULL rebuilds all phases."
+  },
+  "math_and_FP_checks": [
+    "cu/cl/span/full-three-phase scale expression and finite tests/tolerance match original builder verbatim",
+    "q<0/q>=0 initial active conditions and strict q!=0 interior filtering unchanged; no sign-only shortcut",
+    "Only two OFF events collected in original phase order; strict point1<point0 swap preserves equal-point stable order",
+    "Filtered sequence equals original stable plan with ON events removed; original root continues skipping ON events without changinga/active, so removing them preserves tested closed segments",
+    "All original root N0/1/2/3 cases, phase-order B sums, equal-event zero-width checks, first closed-root selection, endpoint fallback and final projection retained",
+    "No new static object or array introduced; expected BSS layout unchanged, to be checked in actual TI artifact"
+  ],
+  "failure_contract": "Private plan/workspace ONbase and unusedtail contents may differ; they are not public outputs and are never consumed for a different hardware mask in the actual path. No exemption for raw root failed status/next bytes is introduced. Shared input must remain unchanged. Public failed PC_Output retains its documented basic/status/safe-gate validity contract.",
+  "source_numeric_blockers": [],
+  "open_placement_issue": null,
+  "pending": [
+    "Selected plan-only rawfloat differential and full pipeline validation",
+    "Actual TI code placement, callbacks, BSS/DP, stack, finite-scale and phase-sum instruction dependencies",
+    "Measured board performance; prior full-solver78/82-group proxies do not apply to plan-only policy"
+  ],
+  "live_candidate_manifest": {
+    "vienna_pcmfpc_fast.c": "e2affd9a2d3728e6aa67f0fa044603b3c25ac74458b87965210f2bfdb6b25dec",
+    "vienna_pcmfpc_fast.h": "813bbb59344ed582d77b1ad157c26487e5f70fdc37f9499a3b62a8cc29d98bab"
+  },
+  "live_fast_c_sha256": "e2affd9a2d3728e6aa67f0fa044603b3c25ac74458b87965210f2bfdb6b25dec",
+  "live_fast_h_sha256": "813bbb59344ed582d77b1ad157c26487e5f70fdc37f9499a3b62a8cc29d98bab",
+  "live_revision_assignments": [
+    "volatile uint16_t PC_fast_kernel_revision=9U;",
+    "PC_fast_kernel_revision=9U;"
+  ],
+  "placement_fix": "Root added CODE_SECTION(pf_lambda_single_plan,\"pcmfpc_code\") before live freeze; actual linked placement still to be checked.",
+  "post_review_integration": {
+    "HOST": "PASS; see ../VALIDATION_SUMMARY.json",
+    "actual_TI_binary": "PASS; see ../../build_pass9/AUDIT.json",
+    "board_timing": "still pending",
+    "scope": "Review-time pending items above are retained for traceability; final integrated status lives in round9/REPORT.json"
+  }
+}

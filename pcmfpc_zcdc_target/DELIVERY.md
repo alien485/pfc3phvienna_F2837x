@@ -1,14 +1,89 @@
 # 移植交付与实际验证状态
 
-当前版本在用户已提交的44f0ec5基础上完成第四轮lambda活动集实验实现。
-最新真实构建为2026-10-26 09:26:31，0errors/1warning；OUT52971695...。
-数学/安全检查通过，原1017参考输入选态不变；扩展31750回放有1887选态差，
-10对宿主闭环轨迹也改变，严格等价FAIL，不能称为原验证版的逐位替代。
-当前保守工作量下界4860cycle/24.30us，仍不满足4000cycle周期及1628cycle名义写前窗口。
-最新实现与64项观察变量见`RT_OPTIMIZATION.md`，完整结果见`validation/RT4_REPORT.md`。
+当前恢复使用第十轮（PC_fast_kernel_revision=10），工作分支仍为new_mpc。
+第十一轮固定请求2三次均19168cycle，比现有第十轮18924单样例多244cycle/1.220us/1.289%，不作为性能升级。
+只把fast.c/.h恢复到已执行验证的第十轮精确字节，未回退分支或删除任何实验/其他用户文件。
+重新TI增量构建0错误/0警告，当前OUT与原第十轮逐字节相同，SHA4b847bd1...；保护22/main82/父Kit均保持。
+当前本地源码和OUT已恢复，板卡仍须用户重新加载后确认marker10；不会自动从11切回10。
+第十一轮与A/B失败实验、源码、测试及三次截图全部保留，见BENCH_RT11_20261027及旧RT11报告。
+当前操作以validation/RESTORED_RT10_REPORT.md和BENCH_TIMING.md为准。HardwareRelease保持0，未放行带功率。
+以下较早轮次是历史交付记录，不是当前版本。
+
+2026-10-27第十一轮：正式采用精确ON分量省算，新增pf_dq_to_abc_on。
+仅候选第二子步省掉未被neutral读取的OFF old电流；所需原乘加、相序、N1延迟、freeDQ、根和FULL/ESO保持。
+A/B坐标复用虽只产生微伏中点差异，却各改变122/121次选态（含硬件参数近零子集），已拒绝默认安装。
+正式双策略31750输出/140025区间及10轨迹/10指标对第十轮逐字节同；1464公参异常/1536 alias等通过。
+127008分析回放通过，实际TI编译链接0错误/0警告，版本11，OUTf8128de3...。
+代码剩941字，BSS剩854字且地址/大小保持；模型核frame各增2字，不能据静态省算宣称提速。
+第十轮用户普通18924cycle（配置200MHz为94.620us）作为基线；第十一轮板上时间待测。
+先按BENCH_TIMING.md请求2；66项JS/TXT不变，main与外设/保护/时序保持，HardwareRelease继续0。
+当前证据validation/RT11_REPORT.md；以下是较早轮次交付时的历史记录。
+
+2026-10-27第十轮：完成批量预测与公共准备。相同模型核心支持N1单区间/N8候选，
+成功PC_run_fast的模型函数入口9→2，仍保留8候选/双子步/18根及原代价、失败输出和诊断契约。
+公共np/dc/h/c及setup状态复用；局部结果填两份完整摘要。公开接口和66项观察表保持。
+正式双策略31750输出/140025区间、24912 CONTROL、80profile、325551根、安全85/runtime299/ESO16通过；
+新增1464公共边界及1536合法alias零差，10轨迹/10指标与127008分析回放对照通过。
+TI CCS生成规则增量链接0错误/0警告，版本10，OUT4b847bd1...；新context20字在RAMGS3。
+代码剩1117字/BSS剩854字，普通核帧增加，资源限制见RT10_BUILD_AUDIT.md。
+第九轮用户普通19242未较第八轮19212提速，分段数据见BENCH_RT9_PROFILE_20261027.md。
+第十轮板上耗时待测，先按BENCH_TIMING.md单次请求2；JS/TXT无需更新。
+main及外设/保护/时序参数保持，HardwareRelease继续0。当前证据validation/RT10_REPORT.md。
+以下较早轮次为交付当时的历史记录，不作为当前固件版本或耗时。
+
+2026-10-27第九轮：仅精简单相ON、无共享计划时的OFF事件准备。
+`pf_lambda_single_plan`只为hw=1/2/4生成两相OFF事件；原`pf_lambda_root`求根循环、共享计划、
+双子步、8候选和代价判据保持。完整专用solver的较大变体已拒绝，未纳入正式代码。
+版本标记9；TI CCS生成规则增量编译链接0错误/0警告，板上第九轮计时尚未取得。
+HOST对第八轮：两种diag各31750输出/140025区间、325551根、24912直接CONTROL、
+80计时检查及安全85/runtime299/ESO16通过；10组闭环及127008计时路径对照均一致。
+观察表仍66项；JS/TXT无需更新。先按BENCH_TIMING.md测请求2，对比第八轮19212cycle。
+main、运行适配层、外设/保护/时序参数未修改，HardwareRelease继续0。
+当前证据见validation/RT9_REPORT.md；以下第八轮及更早内容作为历史记录。
+
+## 历史：第八轮，2026-10-27
+
+版本8固定展开两个预测子步，普通/细计时共用一个模型宏；普通路径不含逐根计时分支。
+仅删除私有叶函数无用cfg参数，公开接口和66项观察表不变。模型、8候选/2子步、根、
+范数预算、1e-12和末级判据均保留；运行适配层、HAL及外设/保护/时序参数未改。
+同策略两种diag各31750完整输出/140025区间、24912直接CONTROL边界以及10闭环轨迹对7逐字节一致。
+80项profile、安全85/runtime299/ESO16通过；实际TI编译链接0error/0warning，OUT d01c3f7f...。
+该轮证据validation/RT8_REPORT.md，步骤BENCH_TIMING/PROFILE_TIMING。用户第八轮普通19212cycle，
+较第七轮单次少9.11%，见validation/BENCH_RT8_20261027.md；仍超预算，HardwareRelease保持0。
+较大的普通/fine代码和栈帧开销均纳入实际构建审计，不以该样例宣称WCET或实时合格。
+没有连接、烧录、写目标、删除、提交或推送。下面为第七轮及之前的历史。
+
+## 当前：第七轮
+
+版本7保留预测模型和浮点公式，直接构造整数候选交集；fast运行策略仅计算交集角度。
+增加一次性coarse/fine分段计时，普通调用没有分析读钟，使用既有Timer0且没有配置写入。
+两种角度策略各31750完整输出/140025区间对第六轮逐字节相同，10对HOST轨迹相同；
+跨角度策略仅未交集gz及全体spread诊断改变。交集10321920例、profile81、runtime299项通过。
+真实TI CGT25.11.1构建链接成功，0error/0warning，OUT928bb780...，linked21:57:56。
+本次CCS控制台启动器未进入编译，改用原CCS生成的gmake增量规则；失败日志未抹去。
+用户第七轮普通计时21138cycle，较第六轮仅少0.372%；coarse候选阶段占68.95%，
+见validation/BENCH_RT7_20261026.md。写前及完整ISR资格仍未通过，HardwareRelease保持0。
+main和外设/保护参数未由本代理修改。
+当前证据见validation/RT7_REPORT.md；按BENCH_TIMING和PROFILE_TIMING由用户在断电/全OST下测量。
+观察表66项，PC_fast_kernel_revision=7，新增PC_fast_profile。没有提交、推送或操作硬件。
+
+## 以下第六轮及之前为历史记录
+
+当前为第六轮（PC_fast_kernel_revision=6），目标为new_mpc独立工作目录中的本工程。
+两相/三相ON状态采用专用lambda根；其余状态、FULL/SUMMARY和ESO保留第五轮实现。
+最新真实CCS增量构建为2026-10-26 17:09:40，0errors/0warnings，OUT e3987113...。
+相对冻结第五轮：31750组完整控制输出、140025次区间输出和10对闭环轨迹逐字节相同；
+新增191620组专用根检查通过。相对更早piecewise实现的1887次选态差及严格等价FAIL仍保留。
+当前静态弱下界4910cycle/24.55us，超过4000cycle周期及1628cycle名义写前窗口。
+用户已确认版本6并反馈单次21217cycle，较第四轮23425少9.4258%（同测试条件假设），
+按配置200MHz为106.085us；仍超周期预算，不能宣称实时合格。HardwareRelease保持0。
+原图、条件限制及Fault32解释见`validation/BENCH_RT6_20261026.md`。
+当前观察表65项。完整证据见`validation/RT6_REPORT.md`和`validation/RT6_BUILD_AUDIT.md`，
+仅由用户按`BENCH_TIMING.md`在无主功率、全OST条件下执行单次请求2计时。
+main及19个时序/外设/保护等受保护目标文件指纹未变；没有提交、推送或操作硬件。
 
 **以下是首次移植（44f0ec5）的历史交付记录。旧10.44us等数值不是当前构建耗时；
-最新结论以RT_OPTIMIZATION及validation/RT4_REPORT.md为准。**
+最新结论以RT_OPTIMIZATION及validation/RT6_REPORT.md为准。**
 
 2026-10-25，分支new_mpc；基线1c93fcd。唯一CCS项目为本目录的
 `vienna_pcmfpc_zcdc_F2837x`，产物`FLASH/vienna_pcmfpc_zcdc_F2837x.out`。

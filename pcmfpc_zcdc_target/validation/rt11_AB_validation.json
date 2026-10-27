@@ -1,0 +1,597 @@
+{
+  "date": "2026-10-27",
+  "status": "REJECT_A_AND_B_STRICT_CONTROL_DECISION_DIFFERENCES",
+  "production_v10_sha256_unchanged": {
+    "vienna_pcmfpc_fast.c": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+    "vienna_pcmfpc_fast.h": "28e0b215684ef7c65a53a1fc1c79391d1abf7609cebea0ab93fd6ce5fe245aad"
+  },
+  "trials": [
+    {
+      "trial": "A_raw_next_N8",
+      "decision": "REJECT_AS_STRICT_EQUIVALENT_OPTIMIZATION_NO_PRODUCTION_INSTALL",
+      "candidate_source_sha256": "1b74929824ccaa0faa848ef076fdd685e6011d47f3c6a8556e75d4c8a39ea9c8",
+      "same_input_status": "FAIL_STRICT_V10_EQUIVALENCE",
+      "policies": [
+        {
+          "diag": 0,
+          "strict": {
+            "cases": 31750,
+            "status_differences": 0,
+            "public_flag_differences": 0,
+            "PC_Output_byte_difference_rows": 11324,
+            "interval_calls_all_detail_modes": 140025,
+            "interval_status_differences": 0,
+            "PC_Interval_byte_difference_calls": 0,
+            "revision_errors": 0
+          },
+          "overall": {
+            "cases": 31750,
+            "status_differences": 0,
+            "bytes_diff": 11324,
+            "selected_diff": 122,
+            "pcoff_diff": 122,
+            "active_diff": 0,
+            "current_mask_diff": 40,
+            "intersection_diff": 157,
+            "count_prefix_diff": 273,
+            "rank_i_diff": 109,
+            "rank_u_diff": 1668,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 7.62939453125e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0009765625,
+            "max_gz": 0.0009725936106406152
+          },
+          "input_near_zero": {
+            "cases": 4273,
+            "status_differences": 0,
+            "bytes_diff": 1420,
+            "selected_diff": 71,
+            "pcoff_diff": 71,
+            "active_diff": 0,
+            "current_mask_diff": 40,
+            "intersection_diff": 101,
+            "count_prefix_diff": 33,
+            "rank_i_diff": 77,
+            "rank_u_diff": 419,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 3.814697265625e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.000244140625,
+            "max_gz": 0.0009725936106406152
+          },
+          "predicted_near_zero": {
+            "cases": 15020,
+            "status_differences": 0,
+            "bytes_diff": 3714,
+            "selected_diff": 72,
+            "pcoff_diff": 72,
+            "active_diff": 0,
+            "current_mask_diff": 40,
+            "intersection_diff": 104,
+            "count_prefix_diff": 47,
+            "rank_i_diff": 78,
+            "rank_u_diff": 712,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 7.62939453125e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0009765625,
+            "max_gz": 0.0009725936106406152
+          },
+          "interval_all_bytes": {
+            "all_interval_cases": 140025,
+            "all_interval_status_differences": 0,
+            "all_interval_byte_differences": 0,
+            "failed_interval_byte_differences": 0,
+            "blocked_interval_differences": 0,
+            "max_interval_current_A": 0,
+            "max_interval_np_V": 0
+          }
+        },
+        {
+          "diag": 1,
+          "strict": {
+            "cases": 31750,
+            "status_differences": 0,
+            "public_flag_differences": 0,
+            "PC_Output_byte_difference_rows": 11324,
+            "interval_calls_all_detail_modes": 140025,
+            "interval_status_differences": 0,
+            "PC_Interval_byte_difference_calls": 0,
+            "revision_errors": 0
+          },
+          "overall": {
+            "cases": 31750,
+            "status_differences": 0,
+            "bytes_diff": 11324,
+            "selected_diff": 122,
+            "pcoff_diff": 122,
+            "active_diff": 0,
+            "current_mask_diff": 40,
+            "intersection_diff": 157,
+            "count_prefix_diff": 273,
+            "rank_i_diff": 109,
+            "rank_u_diff": 1668,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 7.62939453125e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0009765625,
+            "max_gz": 0.0
+          },
+          "input_near_zero": {
+            "cases": 4273,
+            "status_differences": 0,
+            "bytes_diff": 1420,
+            "selected_diff": 71,
+            "pcoff_diff": 71,
+            "active_diff": 0,
+            "current_mask_diff": 40,
+            "intersection_diff": 101,
+            "count_prefix_diff": 33,
+            "rank_i_diff": 77,
+            "rank_u_diff": 419,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 3.814697265625e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.000244140625,
+            "max_gz": 0.0
+          },
+          "predicted_near_zero": {
+            "cases": 15020,
+            "status_differences": 0,
+            "bytes_diff": 3714,
+            "selected_diff": 72,
+            "pcoff_diff": 72,
+            "active_diff": 0,
+            "current_mask_diff": 40,
+            "intersection_diff": 104,
+            "count_prefix_diff": 47,
+            "rank_i_diff": 78,
+            "rank_u_diff": 712,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 7.62939453125e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0009765625,
+            "max_gz": 0.0
+          },
+          "interval_all_bytes": {
+            "all_interval_cases": 140025,
+            "all_interval_status_differences": 0,
+            "all_interval_byte_differences": 0,
+            "failed_interval_byte_differences": 0,
+            "blocked_interval_differences": 0,
+            "max_interval_current_A": 0,
+            "max_interval_np_V": 0
+          }
+        }
+      ],
+      "public_and_alias_edges": {
+        "strict_exit": 0,
+        "original_criteria": {
+          "public_cases": 1464,
+          "public_successes": 768,
+          "public_errors": 696,
+          "errors_after_first_prediction": 406,
+          "public_status_differences": 0,
+          "public_output_byte_differences": 0,
+          "public_flag_differences": 0,
+          "alias_cases": 1536,
+          "alias_successes": 672,
+          "alias_errors": 864,
+          "alias_status_differences": 0,
+          "alias_output_byte_differences": 0,
+          "f_aliases_integral_cases": 384,
+          "dq_and_f_alias_same_integral_cases": 96
+        },
+        "failure_contract": {
+          "public_failed_output_byte_differences": 0,
+          "alias_failed_output_byte_differences": 0
+        }
+      },
+      "closed_loop_status": "FAIL_STRICT_V10_TRAJECTORY_EQUIVALENCE",
+      "trajectory_count": 10,
+      "identical_trajectories": 0,
+      "metrics_deltas": {
+        "tracking_RMS_A": {
+          "changed_metrics": 10,
+          "minimum_delta": -0.0002469778797999922,
+          "maximum_delta": 0.0006754503290000019,
+          "increased": 6,
+          "decreased": 4
+        },
+        "np_RMS_V": {
+          "changed_metrics": 10,
+          "minimum_delta": -0.004314989699000002,
+          "maximum_delta": 0.0024155636390000013,
+          "increased": 7,
+          "decreased": 3
+        },
+        "np_peak_V": {
+          "changed_metrics": 10,
+          "minimum_delta": -0.09609191509799997,
+          "maximum_delta": 0.08232818735400005,
+          "increased": 6,
+          "decreased": 4
+        },
+        "zero_window_RMS_A": {
+          "changed_metrics": 30,
+          "minimum_delta": -0.005659302616100009,
+          "maximum_delta": 0.007112128656900002,
+          "increased": 17,
+          "decreased": 13
+        },
+        "THD_2_40_percent": {
+          "changed_metrics": 30,
+          "minimum_delta": -0.09135158086400008,
+          "maximum_delta": 0.05709165087200002,
+          "increased": 22,
+          "decreased": 8
+        }
+      },
+      "hardware_simulation_failures": [
+        {
+          "case": "pc_off_nominal_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_nominal_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_L_R_noise_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_L_R_noise_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_adc_early_1us",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_adc_early_1us",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_device_drops",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_device_drops",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_load_100_50_100ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_load_100_50_100ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        }
+      ]
+    },
+    {
+      "trial": "B_clarke_rho_cache_N8",
+      "decision": "REJECT_AS_STRICT_EQUIVALENT_OPTIMIZATION_NO_PRODUCTION_INSTALL",
+      "candidate_source_sha256": "a86f91f7f22a04f1ebf7787c745c0c549edb5a7c1adef9f10883af6479e7739f",
+      "same_input_status": "FAIL_STRICT_V10_EQUIVALENCE",
+      "policies": [
+        {
+          "diag": 0,
+          "strict": {
+            "cases": 31750,
+            "status_differences": 0,
+            "public_flag_differences": 0,
+            "PC_Output_byte_difference_rows": 9684,
+            "interval_calls_all_detail_modes": 140025,
+            "interval_status_differences": 0,
+            "PC_Interval_byte_difference_calls": 0,
+            "revision_errors": 0
+          },
+          "overall": {
+            "cases": 31750,
+            "status_differences": 0,
+            "bytes_diff": 9684,
+            "selected_diff": 121,
+            "pcoff_diff": 121,
+            "active_diff": 0,
+            "current_mask_diff": 50,
+            "intersection_diff": 137,
+            "count_prefix_diff": 266,
+            "rank_i_diff": 124,
+            "rank_u_diff": 1425,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 3.814697265625e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.00048828125,
+            "max_gz": 0.0007632069173268974
+          },
+          "input_near_zero": {
+            "cases": 4273,
+            "status_differences": 0,
+            "bytes_diff": 1118,
+            "selected_diff": 70,
+            "pcoff_diff": 70,
+            "active_diff": 0,
+            "current_mask_diff": 50,
+            "intersection_diff": 81,
+            "count_prefix_diff": 33,
+            "rank_i_diff": 82,
+            "rank_u_diff": 326,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 1.9073486328125e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0001220703125,
+            "max_gz": 0.0007632069173268974
+          },
+          "predicted_near_zero": {
+            "cases": 15020,
+            "status_differences": 0,
+            "bytes_diff": 2984,
+            "selected_diff": 70,
+            "pcoff_diff": 70,
+            "active_diff": 0,
+            "current_mask_diff": 50,
+            "intersection_diff": 83,
+            "count_prefix_diff": 47,
+            "rank_i_diff": 83,
+            "rank_u_diff": 556,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 3.814697265625e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0003662109375,
+            "max_gz": 0.0007632069173268974
+          },
+          "interval_all_bytes": {
+            "all_interval_cases": 140025,
+            "all_interval_status_differences": 0,
+            "all_interval_byte_differences": 0,
+            "failed_interval_byte_differences": 0,
+            "blocked_interval_differences": 0,
+            "max_interval_current_A": 0,
+            "max_interval_np_V": 0
+          }
+        },
+        {
+          "diag": 1,
+          "strict": {
+            "cases": 31750,
+            "status_differences": 0,
+            "public_flag_differences": 0,
+            "PC_Output_byte_difference_rows": 9684,
+            "interval_calls_all_detail_modes": 140025,
+            "interval_status_differences": 0,
+            "PC_Interval_byte_difference_calls": 0,
+            "revision_errors": 0
+          },
+          "overall": {
+            "cases": 31750,
+            "status_differences": 0,
+            "bytes_diff": 9684,
+            "selected_diff": 121,
+            "pcoff_diff": 121,
+            "active_diff": 0,
+            "current_mask_diff": 50,
+            "intersection_diff": 137,
+            "count_prefix_diff": 266,
+            "rank_i_diff": 124,
+            "rank_u_diff": 1425,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 3.814697265625e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.00048828125,
+            "max_gz": 0.0
+          },
+          "input_near_zero": {
+            "cases": 4273,
+            "status_differences": 0,
+            "bytes_diff": 1118,
+            "selected_diff": 70,
+            "pcoff_diff": 70,
+            "active_diff": 0,
+            "current_mask_diff": 50,
+            "intersection_diff": 81,
+            "count_prefix_diff": 33,
+            "rank_i_diff": 82,
+            "rank_u_diff": 326,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 1.9073486328125e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0001220703125,
+            "max_gz": 0.0
+          },
+          "predicted_near_zero": {
+            "cases": 15020,
+            "status_differences": 0,
+            "bytes_diff": 2984,
+            "selected_diff": 70,
+            "pcoff_diff": 70,
+            "active_diff": 0,
+            "current_mask_diff": 50,
+            "intersection_diff": 83,
+            "count_prefix_diff": 47,
+            "rank_i_diff": 83,
+            "rank_u_diff": 556,
+            "blocked_diff": 0,
+            "failed_output_bytes_diff": 0,
+            "max_current_A": 0.0,
+            "max_np_V": 3.814697265625e-06,
+            "max_gi": 0.0,
+            "max_gu": 0.0003662109375,
+            "max_gz": 0.0
+          },
+          "interval_all_bytes": {
+            "all_interval_cases": 140025,
+            "all_interval_status_differences": 0,
+            "all_interval_byte_differences": 0,
+            "failed_interval_byte_differences": 0,
+            "blocked_interval_differences": 0,
+            "max_interval_current_A": 0,
+            "max_interval_np_V": 0
+          }
+        }
+      ],
+      "public_and_alias_edges": {
+        "strict_exit": 0,
+        "original_criteria": {
+          "public_cases": 1464,
+          "public_successes": 768,
+          "public_errors": 696,
+          "errors_after_first_prediction": 406,
+          "public_status_differences": 0,
+          "public_output_byte_differences": 0,
+          "public_flag_differences": 0,
+          "alias_cases": 1536,
+          "alias_successes": 672,
+          "alias_errors": 864,
+          "alias_status_differences": 0,
+          "alias_output_byte_differences": 0,
+          "f_aliases_integral_cases": 384,
+          "dq_and_f_alias_same_integral_cases": 96
+        },
+        "failure_contract": {
+          "public_failed_output_byte_differences": 0,
+          "alias_failed_output_byte_differences": 0
+        }
+      },
+      "closed_loop_status": "FAIL_STRICT_V10_TRAJECTORY_EQUIVALENCE",
+      "trajectory_count": 10,
+      "identical_trajectories": 0,
+      "metrics_deltas": {
+        "tracking_RMS_A": {
+          "changed_metrics": 10,
+          "minimum_delta": -0.000612939133900009,
+          "maximum_delta": 0.00044759120430000465,
+          "increased": 5,
+          "decreased": 5
+        },
+        "np_RMS_V": {
+          "changed_metrics": 10,
+          "minimum_delta": -0.0015981777869999991,
+          "maximum_delta": 0.006395135308000011,
+          "increased": 7,
+          "decreased": 3
+        },
+        "np_peak_V": {
+          "changed_metrics": 10,
+          "minimum_delta": -0.05323158438700004,
+          "maximum_delta": 0.04052967976300004,
+          "increased": 6,
+          "decreased": 4
+        },
+        "zero_window_RMS_A": {
+          "changed_metrics": 30,
+          "minimum_delta": -0.0057380306035999945,
+          "maximum_delta": 0.003948611033399996,
+          "increased": 11,
+          "decreased": 19
+        },
+        "THD_2_40_percent": {
+          "changed_metrics": 30,
+          "minimum_delta": -0.147316292585,
+          "maximum_delta": 0.06602117975099997,
+          "increased": 12,
+          "decreased": 18
+        }
+      },
+      "hardware_simulation_failures": [
+        {
+          "case": "pc_off_nominal_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_nominal_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_L_R_noise_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_L_R_noise_50ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_adc_early_1us",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_adc_early_1us",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_device_drops",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_device_drops",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_off_load_100_50_100ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        },
+        {
+          "case": "pc_on_load_100_50_100ohm",
+          "hard_trip_changed": null,
+          "core_errors_changed": null
+        }
+      ]
+    }
+  ],
+  "evidence_sha256": {
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\quantitative\\A_raw_next_N8\\pass1\\REPORT.json": "8f398e2a92b81f1737c5e43f77ed8902c7b379134a719e198386749d0b430f24",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\closed_loop\\A_raw_next_N8\\pass1\\REPORT.json": "bb040d019fd7d5fcbeab2c0e38228004d08013f3835ba95daa5e17b2a274a1fe",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\first_worst_outputs\\A_raw_next_N8\\REPORT.json": "2ae4a8846006337837793ffe6168d14ef2ea84ead6fe1f52ae477f008e0baaab",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\quantitative\\B_clarke_rho_cache_N8\\pass1\\REPORT.json": "c02604a648c61ee06e95e90590173a7160f693b30e2aaf2ea93e217a7e6c34ee",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\closed_loop\\B_clarke_rho_cache_N8\\pass1\\REPORT.json": "5546be5db6080a7bff9eea41992ec24a151dfbf573723c30c32dba44566a977c",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\first_worst_outputs\\B_clarke_rho_cache_N8\\REPORT.json": "f542e62aef2d95d457cdf00940a087d99eb19869ee68b0012634084f51e3d836",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\HARDWARE_SUBSET.json": "1e0d414dbf8afbfa3ee1b681c69aebbdf86e37a626600fb13b2e5900e9bba849",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\driver_selftest\\frozen10_vs_frozen10\\REPORT.json": "c326d888db2089eb8c9934705048c3d642070825e9087a18b6dc8b8e5bcb61fc"
+  },
+  "causal_explanation": "The old inverse/Clarke/Park round trip is not float32 identity. Changing only second-substep oldABC changes neutral integration/np2/gu. pf_rank(gi,gu,sw) uses gu when gi ties, so order_i/current top3 can change even with exactly equal current predictions/gi; midpoint ranks/intersection/pcOff/selected then change. Strict criteria are not relaxed.",
+  "hardware_parameter_subset": "Separate HARDWARE_SUBSET.json/md retains all original strict FAILs; all 122/121 selected differences remain in the requested group. Reporting group is not an acceptance or protection change.",
+  "scope": "Offline explicit marker10 prototypes only; no control edits, hardware/CCS actions, deletion, production install, clock measurements or hardware release by this validator."
+}

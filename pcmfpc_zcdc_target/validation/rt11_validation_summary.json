@@ -1,0 +1,384 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS_FORMAL_ROUND11_HOST_AND_PROFILE",
+  "production_change": "Only exact dependency elimination C: skip unconsumed OFF old-current components in candidate second substep; preserve consumed arithmetic. Rejected non-equivalent A/B coordinate-reuse variants remain output-only.",
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+    "vienna_pcmfpc_fast.h": "f56af0541cc59d079a570dd87b5d4dfda9c74068db5f3bc08dc3b543d9b1fd88"
+  },
+  "executed_snapshot_file_count": 19,
+  "source_snapshot_live_verification": {
+    "vienna_pcmfpc_fast.c": {
+      "report_sha256": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+      "live_sha256": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+      "snapshot_sha256": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+      "match": true
+    },
+    "vienna_pcmfpc_fast.h": {
+      "report_sha256": "f56af0541cc59d079a570dd87b5d4dfda9c74068db5f3bc08dc3b543d9b1fd88",
+      "live_sha256": "f56af0541cc59d079a570dd87b5d4dfda9c74068db5f3bc08dc3b543d9b1fd88",
+      "snapshot_sha256": "f56af0541cc59d079a570dd87b5d4dfda9c74068db5f3bc08dc3b543d9b1fd88",
+      "match": true
+    },
+    "vienna_pcmfpc_runtime.c": {
+      "report_sha256": "bb90b1a62c1655f740908796c2a2f5470f70c2bb9474df0e8b0e48296e29258c",
+      "live_sha256": "bb90b1a62c1655f740908796c2a2f5470f70c2bb9474df0e8b0e48296e29258c",
+      "snapshot_sha256": "bb90b1a62c1655f740908796c2a2f5470f70c2bb9474df0e8b0e48296e29258c",
+      "match": true
+    },
+    "vienna_pcmfpc_runtime.h": {
+      "report_sha256": "8897749c36f761eae83f9a88029e35c0fff88a6dc23d26c5fe12c0034ff3b271",
+      "live_sha256": "8897749c36f761eae83f9a88029e35c0fff88a6dc23d26c5fe12c0034ff3b271",
+      "snapshot_sha256": "8897749c36f761eae83f9a88029e35c0fff88a6dc23d26c5fe12c0034ff3b271",
+      "match": true
+    },
+    "vienna_pcmfpc_zcdc.c": {
+      "report_sha256": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+      "live_sha256": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+      "snapshot_sha256": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+      "match": true
+    },
+    "vienna_pcmfpc_zcdc.h": {
+      "report_sha256": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+      "live_sha256": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+      "snapshot_sha256": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+      "match": true
+    },
+    "vienna_pcmfpc_observer.c": {
+      "report_sha256": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+      "live_sha256": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+      "snapshot_sha256": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+      "match": true
+    },
+    "vienna_pcmfpc_observer.h": {
+      "report_sha256": "12dff9253bf892915b125d46169cd1eb4c0f2d0251352d965894ef9e4bb095fa",
+      "live_sha256": "12dff9253bf892915b125d46169cd1eb4c0f2d0251352d965894ef9e4bb095fa",
+      "snapshot_sha256": "12dff9253bf892915b125d46169cd1eb4c0f2d0251352d965894ef9e4bb095fa",
+      "match": true
+    },
+    "vienna_grid_sync.c": {
+      "report_sha256": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+      "live_sha256": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+      "snapshot_sha256": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+      "match": true
+    },
+    "vienna_grid_sync.h": {
+      "report_sha256": "559ee376c5315dbca86b017a9ca97ba8d20c87d4ef227a0c36ad1827372210c3",
+      "live_sha256": "559ee376c5315dbca86b017a9ca97ba8d20c87d4ef227a0c36ad1827372210c3",
+      "snapshot_sha256": "559ee376c5315dbca86b017a9ca97ba8d20c87d4ef227a0c36ad1827372210c3",
+      "match": true
+    },
+    "tests/validate_round11.py": {
+      "report_sha256": "857f31fee41b822672d45c6dd3226e44d46025a4aea32f153f5c400a4f7c49da",
+      "live_sha256": "857f31fee41b822672d45c6dd3226e44d46025a4aea32f153f5c400a4f7c49da",
+      "snapshot_sha256": "857f31fee41b822672d45c6dd3226e44d46025a4aea32f153f5c400a4f7c49da",
+      "match": true
+    },
+    "tests/single_on_root_probe.c": {
+      "report_sha256": "80c5936df28769430a0281297769f27ebd85eff6f8252e5cd8c31debb6b3088a",
+      "live_sha256": "80c5936df28769430a0281297769f27ebd85eff6f8252e5cd8c31debb6b3088a",
+      "snapshot_sha256": "80c5936df28769430a0281297769f27ebd85eff6f8252e5cd8c31debb6b3088a",
+      "match": true
+    },
+    "tests/validate_round6.py": {
+      "report_sha256": "1fc591b59301aa1fdddfb294ed7124f95999ef991311f847e83e94493c20e394",
+      "live_sha256": "1fc591b59301aa1fdddfb294ed7124f95999ef991311f847e83e94493c20e394",
+      "snapshot_sha256": "1fc591b59301aa1fdddfb294ed7124f95999ef991311f847e83e94493c20e394",
+      "match": true
+    },
+    "tests/round7_profile_test.c": {
+      "report_sha256": "aac9303b521ab20f508c144baa0278e5a75f0872cc3008ac8dc2b4eaa42b1f17",
+      "live_sha256": "aac9303b521ab20f508c144baa0278e5a75f0872cc3008ac8dc2b4eaa42b1f17",
+      "snapshot_sha256": "aac9303b521ab20f508c144baa0278e5a75f0872cc3008ac8dc2b4eaa42b1f17",
+      "match": true
+    },
+    "tests/round8_control_test.c": {
+      "report_sha256": "e9322094581bc45cce6c56b1b1b7abb2d11a5c55548bece5aedeea16dbda02ae",
+      "live_sha256": "e9322094581bc45cce6c56b1b1b7abb2d11a5c55548bece5aedeea16dbda02ae",
+      "snapshot_sha256": "e9322094581bc45cce6c56b1b1b7abb2d11a5c55548bece5aedeea16dbda02ae",
+      "match": true
+    },
+    "tests/ti_fast_replay.c": {
+      "report_sha256": "4664ddd564a0075f00a153c9f822e8afe95f684e05c911f6a3766fe2e988f082",
+      "live_sha256": "4664ddd564a0075f00a153c9f822e8afe95f684e05c911f6a3766fe2e988f082",
+      "snapshot_sha256": "4664ddd564a0075f00a153c9f822e8afe95f684e05c911f6a3766fe2e988f082",
+      "match": true
+    },
+    "tests/core_fast_safety.c": {
+      "report_sha256": "c6c002b22c98a0940ad388a708518b7597b29250d5e0c0bd7839a990b46ee143",
+      "live_sha256": "c6c002b22c98a0940ad388a708518b7597b29250d5e0c0bd7839a990b46ee143",
+      "snapshot_sha256": "c6c002b22c98a0940ad388a708518b7597b29250d5e0c0bd7839a990b46ee143",
+      "match": true
+    },
+    "tests/core_runtime_test.c": {
+      "report_sha256": "0752d7e9593fd6d14effab1dcf2fade250e85f985fd3312a88484a71be940e39",
+      "live_sha256": "0752d7e9593fd6d14effab1dcf2fade250e85f985fd3312a88484a71be940e39",
+      "snapshot_sha256": "0752d7e9593fd6d14effab1dcf2fade250e85f985fd3312a88484a71be940e39",
+      "match": true
+    },
+    "tests/observer_test.c": {
+      "report_sha256": "9b7834ae68cf1d2177350a7c0c653e962bf1c379660c9ea2451cbb10382ba731",
+      "live_sha256": "9b7834ae68cf1d2177350a7c0c653e962bf1c379660c9ea2451cbb10382ba731",
+      "snapshot_sha256": "9b7834ae68cf1d2177350a7c0c653e962bf1c379660c9ea2451cbb10382ba731",
+      "match": true
+    }
+  },
+  "same_policy_comparisons": [
+    {
+      "diagnostic_all_angles": 1,
+      "exit": 0,
+      "public_struct": {
+        "cases": 31750,
+        "status_differences": 0,
+        "public_flag_differences": 0,
+        "PC_Output_byte_difference_rows": 0,
+        "interval_calls_all_detail_modes": 140025,
+        "interval_status_differences": 0,
+        "PC_Interval_byte_difference_calls": 0,
+        "revision_errors": 0
+      },
+      "cross_policy": {
+        "policy_cases": 31750,
+        "policy_status_differences": 0,
+        "policy_undocumented_byte_differences": 0
+      }
+    },
+    {
+      "diagnostic_all_angles": 0,
+      "exit": 0,
+      "public_struct": {
+        "cases": 31750,
+        "status_differences": 0,
+        "public_flag_differences": 0,
+        "PC_Output_byte_difference_rows": 0,
+        "interval_calls_all_detail_modes": 140025,
+        "interval_status_differences": 0,
+        "PC_Interval_byte_difference_calls": 0,
+        "revision_errors": 0
+      },
+      "cross_policy": {
+        "policy_cases": 0,
+        "policy_status_differences": 0,
+        "policy_undocumented_byte_differences": 0
+      }
+    }
+  ],
+  "direct_control_and_fake_clock": {
+    "checks": 85,
+    "failures": 0,
+    "profile_checks": 80,
+    "control_cases": 24912,
+    "control_status_differences": 0,
+    "control_byte_differences": 0,
+    "control_successes": 24614,
+    "control_failures": 298,
+    "blocked_successes": 1492,
+    "shared_seed_cases": 12456,
+    "NULL_seed_cases": 12456,
+    "status_counts": [
+      24614,
+      0,
+      0,
+      0,
+      150,
+      0,
+      148
+    ],
+    "counter": "fake_downcounter_only"
+  },
+  "single_root": {
+    "cases": 325551,
+    "shared_cases": 167976,
+    "NULL_cases": 157575,
+    "successes": 117792,
+    "root_error_cases": 102345,
+    "numeric_error_cases": 105414,
+    "status_differences": 0,
+    "success_next_byte_differences": 0,
+    "failed_next_byte_differences": 0,
+    "shared_plan_mutations": 0,
+    "inconsistent_shared_cases": 9852,
+    "forced_status_cases": 1218,
+    "natural_root_error_cases": 101736,
+    "max_double_sum_KCL_A": 1024,
+    "max_float_KCL_A": 1024,
+    "max_float_residual_over_used_tolerance": 0.668877242652,
+    "bounded_domain_successes": 78772,
+    "bounded_domain_max_float_KCL_A": 9.1552734375e-05
+  },
+  "public_parameter_alias_edges": {
+    "public_cases": 1464,
+    "public_successes": 768,
+    "public_errors": 696,
+    "errors_after_first_prediction": 406,
+    "public_status_differences": 0,
+    "public_output_byte_differences": 0,
+    "public_flag_differences": 0,
+    "alias_cases": 1536,
+    "alias_successes": 672,
+    "alias_errors": 864,
+    "alias_status_differences": 0,
+    "alias_output_byte_differences": 0,
+    "f_aliases_integral_cases": 384,
+    "dq_and_f_alias_same_integral_cases": 96
+  },
+  "safety_runtime_observer": [
+    {
+      "name": "fast_safety",
+      "exit": 0,
+      "stdout": "edge=R_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=L_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=omega_float_max fast_status=6 reference_status=3 finite_public_success=-1 margin=0 gate=0\nedge=delta_i_float_max fast_status=0 reference_status=0 finite_public_success=1 margin=48.1042366 gate=0\nedge=duration_float_max fast_status=6 reference_status=6 finite_public_success=-1 margin=0 gate=0\nedge=C_float_min fast_status=4 reference_status=4 finite_public_success=-1 margin=0 gate=0\nfast_safety_checks=85 PASS; nonfinite_public_success_edges=0",
+      "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\core_fast_safety.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\\fast_safety.exe\""
+    },
+    {
+      "name": "observer",
+      "exit": 0,
+      "stdout": "deltaU_vs_independent_cumulative_double_oracle max_i_A=9.98109619e-07 max_f_A_s=0.00887037572\nanalytic_rotation_vs_20000_midpoint_integral error_V_s=[2.23083589e-10,2.10332511e-12]\ntwo_executed_gate_segments_all_states_zero_blocking_sequence_reset_both_roots=PASS\nfull_executed_history_vs_unchanged_readable_predictor=PASS nonzero_integral_cases=16",
+      "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_observer.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\observer_test.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\\observer.exe\""
+    },
+    {
+      "name": "runtime",
+      "exit": 0,
+      "stdout": "runtime_host_checks=299 real_PLL_ESO_core_with_stub_timer_and_trip=PASS\nNo target execution: next sample assumes one ZERO crossed; analog ADC, ISR latency, AQ and hardware trip paths require bench tests.",
+      "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_grid_sync.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_observer.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\core_runtime_test.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\\runtime_adapter.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\build\\runtime.exe\""
+    }
+  ],
+  "model_helper_proof": {
+    "unchanged_functions": {
+      "pf_lambda_plan": true,
+      "pf_lambda_single_plan": true,
+      "pf_lambda_root": true,
+      "pf_lambda_dense_root": true,
+      "pf_root": true,
+      "pf_interval": true,
+      "pf_rotation": true,
+      "pf_plan": true,
+      "pf_dq_to_abc": true,
+      "pf_abc_to_dq": true,
+      "pf_seed": true,
+      "pf_projection": true,
+      "pf_rank": true,
+      "pf_angle_cost": true,
+      "pf_output_init": true,
+      "pf_intersection": true
+    },
+    "text_comparison_ignores_only_line_endings": true
+  },
+  "closed_loop_status": "PASS_ROUND10_TRAJECTORY_EQUIVALENCE",
+  "closed_loop_pairs": 10,
+  "profile_status": "PASS_PLAIN_COARSE_FINE_OUTPUT_EQUIVALENCE",
+  "profile_comparisons": 127008,
+  "profile_result": {
+    "base_cases": 31750,
+    "directed_derived_failure_cases": 2,
+    "policies": [
+      {
+        "diagnostic_all_angles": 0,
+        "mode": 1,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 0,
+        "minimum_partial_root_calls": 0,
+        "maximum_partial_root_calls": 0
+      },
+      {
+        "diagnostic_all_angles": 0,
+        "mode": 2,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 2,
+        "minimum_partial_root_calls": 1,
+        "maximum_partial_root_calls": 5
+      },
+      {
+        "diagnostic_all_angles": 1,
+        "mode": 1,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 0,
+        "minimum_partial_root_calls": 0,
+        "maximum_partial_root_calls": 0
+      },
+      {
+        "diagnostic_all_angles": 1,
+        "mode": 2,
+        "cases": 31752,
+        "successes": 31739,
+        "errors": 13,
+        "status_differences": 0,
+        "output_byte_differences": 0,
+        "availability_flag_differences": 0,
+        "revision_errors": 0,
+        "metadata_errors": 0,
+        "oneshot_errors": 0,
+        "partial_root_error_cases": 2,
+        "minimum_partial_root_calls": 1,
+        "maximum_partial_root_calls": 5
+      }
+    ],
+    "validation_errors": 0
+  },
+  "authoritative_reports": {
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass2\\REPORT.json": "748006005e0c5be80c038aaa0a6a44a3eda699e33393f32c4cf0b22bd787e13f",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\formal_closed_loop\\pass2\\REPORT.json": "0f1a09612e6272b9ec93cbea9e3e614506e0d3f0cd991da244616009b97bbe6b",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\profile_replay\\REPORT.json": "843be38f2d0388254ceefe5fcfbdeccf3a1c8c7b5eb689496bebe0e7954c608b"
+  },
+  "host_report_sha256_unchanged": "748006005e0c5be80c038aaa0a6a44a3eda699e33393f32c4cf0b22bd787e13f",
+  "profile_host_report_pin_matches": true,
+  "preserved_pass1_label_issue": {
+    "reason": "Both original pass1 runs used the correct actual v10 baseline/source hashes and marker11, but inherited uppercase ROUND9 text in their status labels. Only new test-driver status labels were corrected. Final host/pass2 and formal_closed_loop/pass2 were rerun and are authoritative; original pass1 reports were not modified.",
+    "old_report_and_rejected_evidence_sha256": {
+      "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\host\\pass1\\REPORT.json": "4ed6376539a19f437de7aab645cf8818c33d20a4fcd3356aa320591a433a5c19",
+      "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\formal_closed_loop\\REPORT.json": "69db0265ab9088e8f187a00b79952b003435b8f0ae1e1c6e472e5cdd01c720cf",
+      "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\AB_VALIDATION_SUMMARY.json": "3ea4e99a99ec2663d08d0f16757d866e5957140087f8665d3ce8c2e777ad48b1",
+      "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\HARDWARE_SUBSET.json": "1e0d414dbf8afbfa3ee1b681c69aebbdf86e37a626600fb13b2e5900e9bba849"
+    }
+  },
+  "historical_experiment_evidence_unchanged": {
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\quantitative\\A_raw_next_N8\\pass1\\REPORT.json": {
+      "status": "FAIL_STRICT_V10_EQUIVALENCE",
+      "sha256": "8f398e2a92b81f1737c5e43f77ed8902c7b379134a719e198386749d0b430f24"
+    },
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\closed_loop\\A_raw_next_N8\\pass1\\REPORT.json": {
+      "status": "FAIL_STRICT_V10_TRAJECTORY_EQUIVALENCE",
+      "sha256": "bb040d019fd7d5fcbeab2c0e38228004d08013f3835ba95daa5e17b2a274a1fe"
+    },
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\quantitative\\B_clarke_rho_cache_N8\\pass1\\REPORT.json": {
+      "status": "FAIL_STRICT_V10_EQUIVALENCE",
+      "sha256": "c02604a648c61ee06e95e90590173a7160f693b30e2aaf2ea93e217a7e6c34ee"
+    },
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\closed_loop\\B_clarke_rho_cache_N8\\pass1\\REPORT.json": {
+      "status": "FAIL_STRICT_V10_TRAJECTORY_EQUIVALENCE",
+      "sha256": "5546be5db6080a7bff9eea41992ec24a151dfbf573723c30c32dba44566a977c"
+    },
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\quantitative\\C_exact_ON_old_N8\\pass1\\REPORT.json": {
+      "status": "PASS_STRICT_V10_EQUIVALENCE",
+      "sha256": "c3cda31d6069088315986a0d5e5d9f8852054049ea230865d3b4812566216c6e"
+    },
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round11\\closed_loop\\C_exact_ON_old_N8\\pass1\\REPORT.json": {
+      "status": "PASS_STRICT_V10_TRAJECTORY_EQUIVALENCE",
+      "sha256": "09402b527de2ebeb0231236653b084355ad7243751b60e5dd85ce7fa3c672f31"
+    }
+  },
+  "scope": "HOST exact sample/struct regression and fake-clock bookkeeping only. Does not establish TI/TMU identity, hardware speed/WCET, hard deadline compliance, power-stage safety, hardware-release permission or a universal float proof. Historical original-reference strict-equivalence FAIL remains inherited and unmodified."
+}

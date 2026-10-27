@@ -1,0 +1,194 @@
+{
+  "scope": "Independent read-only audit of sixth CCS actual OUT, MAP and compiler ASM; evidence writes only; no CCS build, source/hardware changes or deletion",
+  "linked_line": ">> Linked Mon Oct 26 17:09:40 2026",
+  "native_exit_code_reported": 0,
+  "errors": 0,
+  "warnings": 0,
+  "snapshot_pinned_files": 34,
+  "all_pinned_hashes_match": true,
+  "hash_check": {
+    ".cproject": true,
+    "build_incremental.ps1": true,
+    "ccs_incremental.command.txt": true,
+    "ccs_incremental.stderr.log": true,
+    "ccs_incremental.stdout.log": true,
+    "f2837xd_flash_cpu1_lnk.cmd": true,
+    "main.syscfg": true,
+    "makefile.init": true,
+    "vienna.c": true,
+    "vienna.h": true,
+    "vienna_grid_sync.asm": true,
+    "vienna_grid_sync.c": true,
+    "vienna_grid_sync.h": true,
+    "vienna_hal.c": true,
+    "vienna_hal.h": true,
+    "vienna_main.asm": true,
+    "vienna_main.c": true,
+    "vienna_pcmfpc_fast.asm": true,
+    "vienna_pcmfpc_fast.c": true,
+    "vienna_pcmfpc_fast.h": true,
+    "vienna_pcmfpc_observer.asm": true,
+    "vienna_pcmfpc_observer.c": true,
+    "vienna_pcmfpc_observer.h": true,
+    "vienna_pcmfpc_runtime.asm": true,
+    "vienna_pcmfpc_runtime.c": true,
+    "vienna_pcmfpc_runtime.h": true,
+    "vienna_pcmfpc_zcdc.asm": true,
+    "vienna_pcmfpc_zcdc.c": true,
+    "vienna_pcmfpc_zcdc.h": true,
+    "vienna_pcmfpc_zcdc_F2837x.map": true,
+    "vienna_pcmfpc_zcdc_F2837x.out": true,
+    "vienna_pcmfpc_zcdc_F2837x_linkInfo.xml": true,
+    "vienna_settings.h": true,
+    "vienna_user_settings.h": true
+  },
+  "out_sha256": "e39871137761f725db15b5becd716c6f8d95408a418daf72a864b514babf3ed6",
+  "fast_c_sha256": "574549145827de39fcb70cc9c545154de0da66b6f009cd45f188f39b16e36620",
+  "actual_calls_file": "actual_calls.json",
+  "all_fast_direct_callees_in_ram": true,
+  "fast_closure_function_count": 13,
+  "fast_closure_direct_call_site_count": 18,
+  "dense_root_is_leaf": true,
+  "dense_sum_is_inlined": true,
+  "revision": {
+    "data_page": 30,
+    "offset": 35,
+    "word_address": "0x7a3",
+    "store_address_word": "0x18a73",
+    "value": 6,
+    "disasm_lines": [
+      2856,
+      2858
+    ]
+  },
+  "asm_initializer_revision": 6,
+  "generic_FULL_assembly_comparison": {
+    "pf_lambda_plan": {
+      "same_normalized_assembly": true,
+      "old_items": 223,
+      "new_items": 223
+    },
+    "pf_lambda_root": {
+      "same_normalized_assembly": true,
+      "old_items": 322,
+      "new_items": 322
+    },
+    "pf_root": {
+      "same_normalized_assembly": true,
+      "old_items": 664,
+      "new_items": 664
+    },
+    "pf_interval": {
+      "same_normalized_assembly": true,
+      "old_items": 538,
+      "new_items": 538
+    }
+  },
+  "floating_point_audit_file": "phase_order_audit.json",
+  "memory": [
+    {
+      "name": "RAMGS12GS15",
+      "origin_word": 98304,
+      "capacity_words": 16384,
+      "used_words": 13097,
+      "unused_words": 3287
+    },
+    {
+      "name": "RAMM1",
+      "origin_word": 1024,
+      "capacity_words": 1024,
+      "used_words": 937,
+      "unused_words": 87
+    },
+    {
+      "name": "RAMGS3",
+      "origin_word": 61440,
+      "capacity_words": 4096,
+      "used_words": 3180,
+      "unused_words": 916
+    },
+    {
+      "name": "RAMGS4GS5",
+      "origin_word": 65536,
+      "capacity_words": 8192,
+      "used_words": 7168,
+      "unused_words": 1024
+    },
+    {
+      "name": "RAMGS6GS11",
+      "origin_word": 73728,
+      "capacity_words": 24576,
+      "used_words": 24000,
+      "unused_words": 576
+    }
+  ],
+  "code_delta_vs_final5_words": 606,
+  "listed_frames_words": {
+    "ISR1": 66,
+    "pf_lambda_plan": 22,
+    "pf_lambda_root": 20,
+    "pf_lambda_dense_root": 30,
+    "pf_control_interval": 36,
+    "PC_run_fast": 88,
+    "pf_root": 36,
+    "pf_interval": 114,
+    "PC_fast_predict_interval": 42,
+    "VO_reconstruct": 164,
+    "VIENNA_PCMFPC_select": 8,
+    "VIENNA_PCMFPC_sample": 44,
+    "pc_benchmark": 6,
+    "VIENNA_PCMFPC_post": 20,
+    "pc_projection": 10,
+    "pc_root": 64,
+    "PC_predict_interval": 58
+  },
+  "stack_allocation_words": 896,
+  "known_stack_chains_words": {
+    "normal_generic": 240,
+    "normal_dense": 228,
+    "shadow_generic": 252,
+    "benchmark_generic": 258,
+    "FAST_FULL_reconstruction": 466,
+    "reference_reconstruction_available_branch": 506
+  },
+  "stack_scope": "Sums of compiler listed maximum frames along known chains, including normal C call frame headers. Not a global worst-case proof; background interrupted stack, automatic hardware ISR frame, nesting, exception/library paths and observed watermark are not established here.",
+  "static_lower_bound_file": "combined_lower_bound.json",
+  "static_lower_bound": {
+    "scope": "Relaxed successful-path lower bound on selected mandatory code regions; no execution-time measurement, speedup or WCET",
+    "caller_substeps": 18,
+    "caller_minimum_issue_groups_per_substep": 196,
+    "generic_candidate_roots": 8,
+    "generic_minimum_issue_groups_per_root": 75,
+    "dense_candidate_roots": 8,
+    "dense_minimum_issue_groups_per_root": 79,
+    "first_step_roots": 2,
+    "first_step_relaxed_minimum_per_root": 75,
+    "formula": "18*196 + 8*75 + 8*79 + 2*75",
+    "minimum_groups": 4910,
+    "minimum_us_at_200MHz": 24.55,
+    "first_step_ge2ON_groups": 4918,
+    "first_step_ge2ON_us_at_200MHz": 24.59,
+    "control_includes_dispatch": true,
+    "control_has_one_LCR_issue_group_callee_body_excluded": true,
+    "root_goal_instruction_and_epilogue_excluded": true,
+    "excluded_costs": [
+      "all nonselected PC_run_fast regions",
+      "first/candidate plan and seed callees",
+      "general NULL-plan callee work",
+      "return epilogues and branch latency",
+      "pipeline/resource/memory stalls",
+      "write stage",
+      "ISR and other surrounding work"
+    ],
+    "interpretation": "Relaxed mandatory-region lower bound, not measured runtime, WCET or proof of speedup. The current configuration is 50kHz: 20us/4000 CPU cycles at 200MHz, with 1628 cycles from ISR entry to the next ZERO deadline. The 4910-group floor already exceeds the entire 4000-cycle period, so revision6 remains ineligible for real-time operation at this configuration. Comparing this lower bound with an earlier lower bound cannot establish speedup.",
+    "current_configuration": {
+      "control_frequency_Hz": 50000,
+      "period_us": 20,
+      "period_CPU_cycles_at_200MHz": 4000,
+      "ISR_entry_to_next_ZERO_cycles": 1628,
+      "lower_bound_exceeds_entire_period": true,
+      "real_time_qualified": false
+    }
+  },
+  "hardware_runtime": "Not measured for revision6; the 4910-group mandatory-region floor exceeds the current 20us/4000-cycle period, so real-time operation is not qualified. No speedup claim."
+}

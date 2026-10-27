@@ -1,0 +1,183 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS_ROUND9_EQUIVALENCE_AND_PROFILE",
+  "scope": "HOST sample/struct regression and fake-clock logic only; no TMU runtime, WCET or power qualification",
+  "baseline_fast_c_sha256": "e2affd9a2d3728e6aa67f0fa044603b3c25ac74458b87965210f2bfdb6b25dec",
+  "baseline_fast_h_sha256": "813bbb59344ed582d77b1ad157c26487e5f70fdc37f9499a3b62a8cc29d98bab",
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+    "vienna_pcmfpc_fast.h": "28e0b215684ef7c65a53a1fc1c79391d1abf7609cebea0ab93fd6ce5fe245aad",
+    "vienna_pcmfpc_runtime.c": "bb90b1a62c1655f740908796c2a2f5470f70c2bb9474df0e8b0e48296e29258c",
+    "vienna_pcmfpc_runtime.h": "8897749c36f761eae83f9a88029e35c0fff88a6dc23d26c5fe12c0034ff3b271",
+    "vienna_pcmfpc_zcdc.c": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+    "vienna_pcmfpc_zcdc.h": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+    "vienna_pcmfpc_observer.c": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+    "vienna_pcmfpc_observer.h": "12dff9253bf892915b125d46169cd1eb4c0f2d0251352d965894ef9e4bb095fa",
+    "vienna_grid_sync.c": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+    "vienna_grid_sync.h": "559ee376c5315dbca86b017a9ca97ba8d20c87d4ef227a0c36ad1827372210c3",
+    "tests/validate_round10.py": "904d1bb7c2e413b2ea75a1828e1bca3f4ee61e4d0f4d74e45670d8745acead16",
+    "tests/single_on_root_probe.c": "80c5936df28769430a0281297769f27ebd85eff6f8252e5cd8c31debb6b3088a",
+    "tests/validate_round6.py": "1fc591b59301aa1fdddfb294ed7124f95999ef991311f847e83e94493c20e394",
+    "tests/round7_profile_test.c": "aac9303b521ab20f508c144baa0278e5a75f0872cc3008ac8dc2b4eaa42b1f17",
+    "tests/round8_control_test.c": "e9322094581bc45cce6c56b1b1b7abb2d11a5c55548bece5aedeea16dbda02ae",
+    "tests/ti_fast_replay.c": "4664ddd564a0075f00a153c9f822e8afe95f684e05c911f6a3766fe2e988f082",
+    "tests/core_fast_safety.c": "c6c002b22c98a0940ad388a708518b7597b29250d5e0c0bd7839a990b46ee143",
+    "tests/core_runtime_test.c": "0752d7e9593fd6d14effab1dcf2fade250e85f985fd3312a88484a71be940e39",
+    "tests/observer_test.c": "9b7834ae68cf1d2177350a7c0c653e962bf1c379660c9ea2451cbb10382ba731"
+  },
+  "unchanged_model_and_intersection_function_bodies": {
+    "unchanged_functions": {
+      "pf_lambda_plan": true,
+      "pf_lambda_single_plan": true,
+      "pf_lambda_root": true,
+      "pf_lambda_dense_root": true,
+      "pf_root": true,
+      "pf_interval": true,
+      "pf_rotation": true,
+      "pf_plan": true,
+      "pf_dq_to_abc": true,
+      "pf_abc_to_dq": true,
+      "pf_seed": true,
+      "pf_projection": true,
+      "pf_rank": true,
+      "pf_angle_cost": true,
+      "pf_output_init": true,
+      "pf_intersection": true
+    },
+    "text_comparison_ignores_only_line_endings": true
+  },
+  "input_dataset_sha256": "d198287e3276f99b4c40b2a05369c72f29b6bd167d2a6b541c0359a3a0e8c55c",
+  "public_struct_comparisons": [
+    {
+      "diagnostic_all_angles": 1,
+      "exit": 0,
+      "public_struct": {
+        "cases": 31750,
+        "status_differences": 0,
+        "public_flag_differences": 0,
+        "PC_Output_byte_difference_rows": 0,
+        "interval_calls_all_detail_modes": 140025,
+        "interval_status_differences": 0,
+        "PC_Interval_byte_difference_calls": 0,
+        "revision_errors": 0
+      },
+      "cross_policy": {
+        "policy_cases": 31750,
+        "policy_status_differences": 0,
+        "policy_undocumented_byte_differences": 0
+      }
+    },
+    {
+      "diagnostic_all_angles": 0,
+      "exit": 0,
+      "public_struct": {
+        "cases": 31750,
+        "status_differences": 0,
+        "public_flag_differences": 0,
+        "PC_Output_byte_difference_rows": 0,
+        "interval_calls_all_detail_modes": 140025,
+        "interval_status_differences": 0,
+        "PC_Interval_byte_difference_calls": 0,
+        "revision_errors": 0
+      },
+      "cross_policy": {
+        "policy_cases": 0,
+        "policy_status_differences": 0,
+        "policy_undocumented_byte_differences": 0
+      }
+    }
+  ],
+  "whitebox": {
+    "checks": 85,
+    "failures": 0,
+    "profile_checks": 80,
+    "control_cases": 24912,
+    "control_status_differences": 0,
+    "control_byte_differences": 0,
+    "control_successes": 24614,
+    "control_failures": 298,
+    "blocked_successes": 1492,
+    "shared_seed_cases": 12456,
+    "NULL_seed_cases": 12456,
+    "status_counts": [
+      24614,
+      0,
+      0,
+      0,
+      150,
+      0,
+      148
+    ],
+    "counter": "fake_downcounter_only"
+  },
+  "whitebox_exit": 0,
+  "safety_runtime_observer": [
+    {
+      "name": "fast_safety",
+      "exit": 0,
+      "stdout": "edge=R_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=L_float_max fast_status=6 reference_status=0 finite_public_success=-1 margin=0 gate=0\nedge=omega_float_max fast_status=6 reference_status=3 finite_public_success=-1 margin=0 gate=0\nedge=delta_i_float_max fast_status=0 reference_status=0 finite_public_success=1 margin=48.1042366 gate=0\nedge=duration_float_max fast_status=6 reference_status=6 finite_public_success=-1 margin=0 gate=0\nedge=C_float_min fast_status=4 reference_status=4 finite_public_success=-1 margin=0 gate=0\nfast_safety_checks=85 PASS; nonfinite_public_success_edges=0",
+      "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\core_fast_safety.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\fast_safety.exe\""
+    },
+    {
+      "name": "observer",
+      "exit": 0,
+      "stdout": "deltaU_vs_independent_cumulative_double_oracle max_i_A=9.98109619e-07 max_f_A_s=0.00887037572\nanalytic_rotation_vs_20000_midpoint_integral error_V_s=[2.23083589e-10,2.10332511e-12]\ntwo_executed_gate_segments_all_states_zero_blocking_sequence_reset_both_roots=PASS\nfull_executed_history_vs_unchanged_readable_predictor=PASS nonzero_integral_cases=16",
+      "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_observer.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\observer_test.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\observer.exe\""
+    },
+    {
+      "name": "runtime",
+      "exit": 0,
+      "stdout": "runtime_host_checks=299 real_PLL_ESO_core_with_stub_timer_and_trip=PASS\nNo target execution: next sample assumes one ZERO crossed; analog ADC, ISR latency, AQ and hardware trip paths require bench tests.",
+      "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_grid_sync.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_observer.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\core_runtime_test.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\runtime_adapter.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\runtime.exe\""
+    }
+  ],
+  "single_on_root_differential": {
+    "cases": 325551,
+    "shared_cases": 167976,
+    "NULL_cases": 157575,
+    "successes": 117792,
+    "root_error_cases": 102345,
+    "numeric_error_cases": 105414,
+    "status_differences": 0,
+    "success_next_byte_differences": 0,
+    "failed_next_byte_differences": 0,
+    "shared_plan_mutations": 0,
+    "inconsistent_shared_cases": 9852,
+    "forced_status_cases": 1218,
+    "natural_root_error_cases": 101736,
+    "max_double_sum_KCL_A": 1024,
+    "max_float_KCL_A": 1024,
+    "max_float_residual_over_used_tolerance": 0.668877242652,
+    "bounded_domain_successes": 78772,
+    "bounded_domain_max_float_KCL_A": 9.1552734375e-05
+  },
+  "single_on_root_run_exit": 0,
+  "single_on_root_build_command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" -Dround8_single_root_export=round9_single_root_export \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\single_on_root_probe.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round9_fast.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\single_on_root_probe.exe\"",
+  "public_parameter_and_alias_edges": {
+    "public_cases": 1464,
+    "public_successes": 768,
+    "public_errors": 696,
+    "errors_after_first_prediction": 406,
+    "public_status_differences": 0,
+    "public_output_byte_differences": 0,
+    "public_flag_differences": 0,
+    "alias_cases": 1536,
+    "alias_successes": 672,
+    "alias_errors": 864,
+    "alias_status_differences": 0,
+    "alias_output_byte_differences": 0,
+    "f_aliases_integral_cases": 384,
+    "dq_and_f_alias_same_integral_cases": 96
+  },
+  "public_edge_exit": 0,
+  "public_edge_template_sha256": "d0d860394fc43a3a87e476762935290c9d2a2fdccc488e3d1ce41d6266f70bbd",
+  "public_edge_build_command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\public_batch_edges.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round9_fast.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\public_batch_edges.exe\"",
+  "original_piecewise_strict_equivalence": "Inherited FAIL not retested or weakened; 1887 historical selected differences remain",
+  "root_and_model_criteria": "16 model/root/transform/intersection helper bodies unchanged; independent round9 mathematics tests remain baseline evidence",
+  "comparison_build_commands": [
+    "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" -DPC_run_fast=PC_run_fast_round9 -DPC_fast_predict_interval=PC_fast_predict_interval_round9 -DPC_fast_output_substeps_available=PC_fast_output_substeps_available_round9 -DPC_fast_output_summaries_available=PC_fast_output_summaries_available_round9 -DPC_fast_output_integrals_available=PC_fast_output_integrals_available_round9 -DPC_fast_kernel_revision=PC_fast_kernel_revision_round9 -DPC_fast_profile=PC_fast_profile_round9 -DPC_fast_profile_configure=PC_fast_profile_configure_round9 -DPC_fast_profile_arm=PC_fast_profile_arm_round9 -c \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round9_control_export.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round9_fast.obj\"",
+    "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round10_exact_probe.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round9_fast.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round10_exact_probe.exe\""
+  ],
+  "whitebox_build_command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -I\"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round10_control_profile_test.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round9_fast.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\host\\pass1\\build\\round10_control_profile_test.exe\"",
+  "no_control_source_edits_or_hardware_actions_or_deletions": true
+}

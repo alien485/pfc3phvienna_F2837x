@@ -1,0 +1,59 @@
+{
+  "scope": "Read-only review of output-only C trial, not live installation or linked-target audit. Only two new round11 audit files are created.",
+  "source_sha256": "fce69594928ce6dae75b4e9ddd7853c6b72e302cd3cc9bde8ff9746cb5d93ac8",
+  "baseline_sha256": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+  "source_delta_exhaustively_checked": true,
+  "restoring_only_added_pragma_helper_and_one_dispatch_restores_baseline_text": true,
+  "unchanged": [
+    "all struct/static storage declarations",
+    "all roots and plans",
+    "N1 standalone/delay path",
+    "FULL substep trace path and observer",
+    "freeDQ and next-angle inverse",
+    "neutral phase order",
+    "all finite/cap/midpoint guards",
+    "all public writes and failure return sites",
+    "profile calls and root counters",
+    "thresholds/configuration/API"
+  ],
+  "private_old_reads": [
+    {
+      "trial_line": 723,
+      "condition": "hw&1U",
+      "expression": "(w->old_abc[0]+w->next[0])/2"
+    },
+    {
+      "trial_line": 725,
+      "condition": "hw&2U",
+      "expression": "(w->old_abc[1]+w->next[1])/2"
+    },
+    {
+      "trial_line": 727,
+      "condition": "hw&4U",
+      "expression": "(w->old_abc[2]+w->next[2])/2"
+    }
+  ],
+  "proof": {
+    "hw0": "early return from private void helper, then no CONTROL old reads",
+    "hw1": "original a assigned before old0 read; b and old1/2 unused",
+    "hw2_4_3_5_6": "original a,b assigned and exactly each ON old component assigned before read",
+    "hw7": "all original a,b and three output expressions evaluated",
+    "root_alias": "root receives free_abc and independent next; it neither receives nor reads old_abc. old_local/free_local/next are distinct arrays.",
+    "shared_seed": "first substep still uses complete original shared seed; C dispatch only result!=NULL and STEP1",
+    "next_candidate": "each new candidate resets dq/np/caps, and writes each ON old needed before reading. Stale OFF private scratch is unobservable.",
+    "failure_contract": "There is no new caller return/guard/public write. Private void helper returns continue to old free/root path. Removing never-read private old stores cannot change public touched-byte sequence. Arithmetic regrouping/target behavior still requires actual differential and TI review.",
+    "fenv": "Reviewed CONTROL path does not observe FP exception status flags. This claim does not extend to external white-box reads of private scratch or interrupt reentrancy."
+  },
+  "trial_assembly_only": {
+    "no_LCR_to_new_helper": true,
+    "matching_helper_LCR_lines": [],
+    "not_a_linked_OUT_RAM_proof": true
+  },
+  "source_decision": "No blocking dependency/initialization/alias/failure-touch issue found. Source-equivalent dependency elimination for the reviewed CPU1-ISR1 N8 contract; not yet a full numerical/target acceptance verdict.",
+  "remaining": [
+    "HOST byte/status/alias and closed-loop differential",
+    "retained FP grouping in actual linked CGT assembly",
+    "RAM code/BSS/stack and inactive profiler path",
+    "plain target bench; no predicted speedup guarantee"
+  ]
+}

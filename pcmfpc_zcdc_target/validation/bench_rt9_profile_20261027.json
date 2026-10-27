@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-27",
+  "source": "User text reply explicitly reporting revision9 requests3/4 under prior workflow",
+  "observed_coarse": {
+    "mode": 1,
+    "valid": 1,
+    "total_cycles": 19600,
+    "delay_cycles": 1539,
+    "candidates_cycles": 13179,
+    "select_cycles": 2136,
+    "root_cycles": 0
+  },
+  "observed_fine": {
+    "mode": 2,
+    "valid": 1,
+    "total_cycles": 21070,
+    "delay_cycles": 1705,
+    "candidates_cycles": 14483,
+    "select_cycles": 2136,
+    "root_cycles": 8840
+  },
+  "derived": {
+    "coarse_candidate_percent": 67.23979591836735,
+    "fine_prediction_total": 16188,
+    "fine_root_nested_window": 8840,
+    "fine_prediction_outside_root": 7348,
+    "fine_other_stages_remainder": 4882,
+    "fine_root_percent": 41.95538680588514,
+    "fine_outside_root_prediction_percent": 34.87422876127195,
+    "fine_other_percent": 23.170384432842905,
+    "fine_minus_coarse": 1470,
+    "delay_difference": 166,
+    "candidate_difference": 1304,
+    "same_select": true
+  },
+  "plain_revision9_cycles": 19242,
+  "limits": [
+    "Only listed fields provided; completed/core_status/clock_fault/root_calls/read_count/full8stage sum not separately reported",
+    "Root time nested in prediction, do not add twice",
+    "Fine/coarse separately compiled CONTROL kernels plus timing overhead; difference is not exact removable timer cost",
+    "Version10 batch setup remains inside original delay/candidate buckets; only total request2 measures speedup fairly",
+    "Actual CPU clock/OUT fingerprint/no-pause history not independently verified; not WCET or closed-loop validation"
+  ]
+}

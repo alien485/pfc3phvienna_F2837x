@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-27",
+  "source": "Three user screenshots following explicit revision11/load/request2 workflow; last two follow requested repetitions",
+  "result": "FIXTURE_NUMERIC_PASS;REPEATABLE_SLOWER_SAMPLE_THAN_V10_BASELINE;REALTIME_BUDGET_FAIL",
+  "observed": [
+    {
+      "BenchRequest": 0,
+      "BenchStatus": 1,
+      "BenchCycles": 19168,
+      "BenchCyclesMax": 19168,
+      "BenchCount": 1,
+      "BenchSelectedId": 3,
+      "BenchHWState": 2,
+      "fcsDeadlineMissCount": 1,
+      "screenshot": {
+        "source": "C:/Users/YAN/AppData/Local/Temp/codex-clipboard-2d668761-f1ef-4a49-b183-a1b0f16ae776.png",
+        "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261027_round11\\ccs_request2_count1.png",
+        "sha256": "669f7587da1d233189f816a6759e5cb09b15ef48330b5622c27b1d255f622973"
+      }
+    },
+    {
+      "BenchRequest": 0,
+      "BenchStatus": 1,
+      "BenchCycles": 19168,
+      "BenchCyclesMax": 19168,
+      "BenchCount": 2,
+      "BenchSelectedId": 3,
+      "BenchHWState": 2,
+      "fcsDeadlineMissCount": 2,
+      "screenshot": {
+        "source": "C:/Users/YAN/AppData/Local/Temp/codex-clipboard-3830005e-d6cd-4a05-99a5-118cc4404a4d.png",
+        "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261027_round11\\ccs_request2_count2.png",
+        "sha256": "57462b07b729f0411ced961ea2d7ab030204574a0ccce82748fbe83816dbdcf1"
+      },
+      "WriteCycles": 1151,
+      "WriteCyclesMax": 1268,
+      "BodyCycles": 1327,
+      "BodyCyclesMax": 20791
+    },
+    {
+      "BenchRequest": 0,
+      "BenchStatus": 1,
+      "BenchCycles": 19168,
+      "BenchCyclesMax": 19168,
+      "BenchCount": 3,
+      "BenchSelectedId": 3,
+      "BenchHWState": 2,
+      "fcsDeadlineMissCount": 3,
+      "screenshot": {
+        "source": "C:/Users/YAN/AppData/Local/Temp/codex-clipboard-35d54846-4326-49c4-a31c-a609ccaf5716.png",
+        "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261027_round11\\ccs_request2_count3.png",
+        "sha256": "e321b647773672789f9642969c3d3eab90a99f90d91af8dad9a99adcf49a8f8f"
+      },
+      "WriteCycles": 1151,
+      "WriteCyclesMax": 1268,
+      "BodyCycles": 1327,
+      "BodyCyclesMax": 20791
+    }
+  ],
+  "summary": {
+    "n": 3,
+    "cycles_min": 19168,
+    "cycles_max": 19168,
+    "cycles_mean": 19168,
+    "range": 0,
+    "conditional_200MHz_us": 95.84,
+    "revision10_baseline_n": 1,
+    "revision10_baseline_cycles": 18924,
+    "extra_cycles": 244,
+    "extra_conditional_us": 1.22,
+    "increase_percent": 1.2893679983090256,
+    "not_a_full_distribution_or_WCET_comparison": true
+  },
+  "decision": "Restore exact previously validated source revision10; retain all11 trial/source/build/test evidence and report no speedup",
+  "association": {
+    "candidate_revision": 11,
+    "marker_visible_in_images": false,
+    "basis": "Immediately preceding load11/checkmarker11/request2 and repeat instructions",
+    "on_device_OUT_hash_independently_verified": false,
+    "local_build11_OUT": "f8128de38d9653df32c002aff259a4e036dd9549a9e1e115563b7ac2492b147b"
+  },
+  "limits": [
+    "Same fixed numeric fixture assumed; not closed-loop plant runs",
+    "Actual clock,interrupt/debug/pause conditions not independently measured",
+    "No separate revision10 repeat distribution; three equal11 samples do not prove WCET or quantify variability across operating points",
+    "DeadlineMiss is cumulative; not proof of per-iteration fullISR duration",
+    "Branch/spill overhead is a plausible explanation, not experimentally isolated cause"
+  ],
+  "hardware_release_allowed": false
+}

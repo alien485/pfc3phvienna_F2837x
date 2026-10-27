@@ -1,0 +1,115 @@
+{
+  "scope": "Actual linked ELF .bss object symbols, old9 vs new10; byte sizes versus C28x word addresses",
+  "old_symbol_count": 111,
+  "new_symbol_count": 112,
+  "unchanged_old_symbols": 101,
+  "changed_old_symbols": 10,
+  "differences": {
+    "A_Task_Ptr": {
+      "old": {
+        "word": 62772,
+        "bytes": 4
+      },
+      "new": {
+        "word": 64656,
+        "bytes": 4
+      }
+    },
+    "vTimer0": {
+      "old": {
+        "word": 64654,
+        "bytes": 8
+      },
+      "new": {
+        "word": 64674,
+        "bytes": 8
+      }
+    },
+    "Alpha_State_Ptr": {
+      "old": {
+        "word": 62770,
+        "bytes": 4
+      },
+      "new": {
+        "word": 64654,
+        "bytes": 4
+      }
+    },
+    "VIENNA_pcmMeasuredDQ_A": {
+      "old": {
+        "word": 63988,
+        "bytes": 8
+      },
+      "new": {
+        "word": 64662,
+        "bytes": 8
+      }
+    },
+    "previous_fhat": {
+      "old": {
+        "word": 63992,
+        "bytes": 8
+      },
+      "new": {
+        "word": 64666,
+        "bytes": 8
+      }
+    },
+    "previous_idq": {
+      "old": {
+        "word": 63996,
+        "bytes": 8
+      },
+      "new": {
+        "word": 64670,
+        "bytes": 8
+      }
+    },
+    "C_Task_Ptr": {
+      "old": {
+        "word": 62776,
+        "bytes": 4
+      },
+      "new": {
+        "word": 64660,
+        "bytes": 4
+      }
+    },
+    "vTimer1": {
+      "old": {
+        "word": 64658,
+        "bytes": 8
+      },
+      "new": {
+        "word": 64678,
+        "bytes": 8
+      }
+    },
+    "wave_sum": {
+      "old": {
+        "word": 62758,
+        "bytes": 24
+      },
+      "new": {
+        "word": 63988,
+        "bytes": 24
+      }
+    },
+    "B_Task_Ptr": {
+      "old": {
+        "word": 62774,
+        "bytes": 4
+      },
+      "new": {
+        "word": 64658,
+        "bytes": 4
+      }
+    }
+  },
+  "new_symbols": {
+    "pf_control_context": {
+      "word": 62758,
+      "bytes": 40
+    }
+  }
+}

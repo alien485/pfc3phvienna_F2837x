@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-26",
+  "source": "3 user CCS screenshots, plus explicit request2/request3 sequence confirmation",
+  "result": "FIXTURE_NUMERIC_PASS;PROFILE_VALID;REALTIME_BUDGET_FAIL",
+  "user_confirmed": "BenchCycles21138 is request2; profile.total21497 is later request3, separate measurements",
+  "plain_request2": {
+    "kernel_revision": 7,
+    "HardwareRelease": 0,
+    "ModeRequest": 0,
+    "ModeActive": 0,
+    "clearTrip": 0,
+    "closeGiLoop": 0,
+    "closeGvLoop": 0,
+    "closeGsLoop": 0,
+    "ShadowEnable": 0,
+    "RootMethod": 0,
+    "RootMethodActive": 0,
+    "InputsValid": 1,
+    "InputFaultMask": 0,
+    "Fault": 32,
+    "CoreStatus": 0,
+    "ActualAppliedState": 0,
+    "PendingState": 0,
+    "BenchRequest": 0,
+    "BenchStatus": 1,
+    "BenchCycles": 21138,
+    "BenchCyclesMax": 21138,
+    "BenchCount": 1,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "AlgorithmCycles": 0,
+    "AlgorithmCyclesMax": 0,
+    "BodyCycles": 1327,
+    "BodyCyclesMax": 22760,
+    "WriteCycles": 1151,
+    "WriteCyclesMax": 1276,
+    "fcsDeadlineMissCount": 1,
+    "Tick": 3883781,
+    "RecordArm": 0,
+    "RingCount": 0,
+    "WaveArm": 0,
+    "WaveCount": 0
+  },
+  "profile_request3": {
+    "setup_cycles": 814,
+    "delay_cycles": 1783,
+    "plan_seed_cycles": 591,
+    "candidates_cycles": 14823,
+    "select_cycles": 2142,
+    "terminal_prepare_cycles": 470,
+    "angles_cycles": 470,
+    "output_cycles": 404,
+    "total_cycles": 21497,
+    "root_cycles": 0,
+    "clock_pair_overhead": 29,
+    "mode": 1,
+    "valid": 1,
+    "completed": 1,
+    "core_status": 0,
+    "root_calls": 0,
+    "angle_calls": 1,
+    "read_count": 11,
+    "clock_fault": 0
+  },
+  "profile_checks": {
+    "eight_stage_sum_matches_total": true,
+    "coarse_mode_expected_read_count11": true,
+    "coarse_mode_does_not_time_roots": true,
+    "angle_evaluations_reduced_to_one": true,
+    "profile_total_is_not_plain_BenchCycles": true
+  },
+  "instrumented_breakdown": {
+    "setup_cycles": {
+      "cycles": 814,
+      "conditional_200MHz_us": 4.07,
+      "percent_of_instrumented_total": 3.7865748709122204
+    },
+    "delay_cycles": {
+      "cycles": 1783,
+      "conditional_200MHz_us": 8.915,
+      "percent_of_instrumented_total": 8.29418058333721
+    },
+    "plan_seed_cycles": {
+      "cycles": 591,
+      "conditional_200MHz_us": 2.955,
+      "percent_of_instrumented_total": 2.749220821509978
+    },
+    "candidates_cycles": {
+      "cycles": 14823,
+      "conditional_200MHz_us": 74.115,
+      "percent_of_instrumented_total": 68.95380750802437
+    },
+    "select_cycles": {
+      "cycles": 2142,
+      "conditional_200MHz_us": 10.71,
+      "percent_of_instrumented_total": 9.964181048518398
+    },
+    "terminal_prepare_cycles": {
+      "cycles": 470,
+      "conditional_200MHz_us": 2.35,
+      "percent_of_instrumented_total": 2.186351583941945
+    },
+    "angles_cycles": {
+      "cycles": 470,
+      "conditional_200MHz_us": 2.35,
+      "percent_of_instrumented_total": 2.186351583941945
+    },
+    "output_cycles": {
+      "cycles": 404,
+      "conditional_200MHz_us": 2.02,
+      "percent_of_instrumented_total": 1.8793319998139275
+    }
+  },
+  "prediction_delay_plus_candidates": {
+    "cycles": 16606,
+    "percent_of_instrumented_total": 77.24798809136159,
+    "includes_roots_transforms_midpoint_checks_and_candidate_cost_work": true
+  },
+  "comparison_vs_round6_plain": {
+    "prior_cycles": 21217,
+    "current_cycles": 21138,
+    "cycles_saved": 79,
+    "relative_decrease_percent": 0.372342932554084,
+    "conditional_200MHz_saved_us": 0.395,
+    "same_clock_fixture_and_no_halt_assumed": true,
+    "single_sample_does_not_establish_statistical_speedup": true
+  },
+  "conditional_200MHz": {
+    "actual_clock_verified": false,
+    "plain_us": 105.69,
+    "profile_total_us": 107.485,
+    "candidate_stage_us": 74.115,
+    "select_stage_us": 10.71,
+    "body_max_us": 113.8
+  },
+  "budgets": {
+    "period_cycles": 4000,
+    "nominal_write_window_cycles": 1628,
+    "plain_core_to_period_ratio": 5.2845,
+    "pass": false
+  },
+  "limits": {
+    "root_runtime_share_measured": false,
+    "request4_needed_for_root_share": true,
+    "sample_count_per_mode": 1,
+    "pause_history_known": false,
+    "on_device_OUT_hash_verified": false,
+    "all_OST_directly_shown": false,
+    "normal_closed_loop_ISR_or_WCET_qualified": false,
+    "HardwareRelease_allowed": false,
+    "profile_overhead_automatically_subtracted": false
+  },
+  "firmware_association": {
+    "revision7_visible": true,
+    "candidate_OUT_sha256": "928bb780011e931ce7b9f82f805cb65e458b66193fb5d22085e2376f791ec405",
+    "candidate_fast_c_sha256": "530a0d979fc4938e2b04ea954964fa5a3ad50666a551a9fecd61c63e4d3c5f31"
+  },
+  "screenshots": [
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-8d85d619-3796-4bd6-9791-1032c03fb929.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round7\\ccs_revision_and_stop.png",
+      "sha256": "8e6b3c7e8464bb6c39e3d13a2f630ae782c1ef4936b9a0a91d6ec610bb2ee448",
+      "bytes": 80143
+    },
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-f228ce94-6857-4ca9-9988-2501d9e95367.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round7\\ccs_request2_benchmark.png",
+      "sha256": "3b9644f4f372608ccf994c37c4a1e81c95993aa78a6c50cde318cd3c60ffc655",
+      "bytes": 84856
+    },
+    {
+      "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-645524f2-6846-404f-a842-883dd4b672aa.png",
+      "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261026_round7\\ccs_request3_profile.png",
+      "sha256": "86c9d07746b1e832f6b42371652a3bb5214ed76ecda23fd554c7ae45b4512c3c",
+      "bytes": 36387
+    }
+  ],
+  "agent_actions": {
+    "control_code_changed": false,
+    "peripheral_or_protection_changed": false,
+    "hardware_or_target_access": false,
+    "delete": false,
+    "Git_commit_or_push": false
+  }
+}

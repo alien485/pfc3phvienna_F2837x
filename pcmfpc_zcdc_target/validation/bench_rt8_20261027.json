@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-27",
+  "source": "User CCS screenshot immediately following version8 LoadCPU1/confirmmarker8/request2 instructions",
+  "result": "FIXTURE_NUMERIC_PASS;REALTIME_BUDGET_FAIL",
+  "observed": {
+    "BenchRequest": 0,
+    "BenchStatus": 1,
+    "BenchCycles": 19212,
+    "BenchCyclesMax": 19212,
+    "BenchCount": 1,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "fcsDeadlineMissCount": 1,
+    "RecordArm": 0,
+    "RingCount": 0,
+    "RingOverflow": 0,
+    "WaveArm": 0,
+    "WaveCount": 0
+  },
+  "comparison": {
+    "baseline_revision": 7,
+    "baseline_plain_cycles": 21138,
+    "new_candidate_revision": 8,
+    "new_plain_cycles": 19212,
+    "cycles_saved": 1926,
+    "elapsed_cycle_reduction_percent": 9.111552653988078,
+    "conditional_200MHz_saved_us": 9.63,
+    "same_clock_fixture_request2_and_no_halt_assumed": true,
+    "single_sample_not_statistical_or_WCET_evidence": true,
+    "vs_revision6_cycles_saved": 2005,
+    "vs_revision6_reduction_percent": 9.449969364189094,
+    "vs_first_27485_cycles_saved": 8273,
+    "vs_first_27485_reduction_percent": 30.10005457522285
+  },
+  "conditional_200MHz_conversion": {
+    "actual_CPU_clock_independently_verified": false,
+    "new_us": 96.06,
+    "revision7_us": 105.69,
+    "is_complete_ISR": false
+  },
+  "budgets": {
+    "period_cycles": 4000,
+    "nominal_write_window_cycles": 1628,
+    "bench_to_period_ratio": 4.803,
+    "bench_to_nominal_write_ratio": 11.800982800982801,
+    "guard_and_submission_costs_not_subtracted": true,
+    "pass": false
+  },
+  "firmware_association": {
+    "basis": "latest explicit version8 load/check/request2 workflow; new screenshot captures only bench rows",
+    "revision_marker_visible_in_this_screenshot": false,
+    "on_device_OUT_fingerprint_verified": false,
+    "candidate_local_OUT_sha256": "d01c3f7fa2e7a403c8ab5b4c9ef54319aeaa0f8823704c5cba39b886f97b28c2",
+    "candidate_fast_c_sha256": "8072a0cbfb2aa810a19f971f504fa398ec4631590eb02793d2b00a26da46828d",
+    "candidate_revision": 8
+  },
+  "limits": {
+    "CoreStatus_not_shown": true,
+    "Fault_not_shown": true,
+    "actual_pending_loops_release_OST_not_shown": true,
+    "pause_history_unknown": true,
+    "deadline_counter_is_cumulative_not_timestamped": true,
+    "no_normal_MPC_gate_write_timing_or_closed_loop_qualification": true,
+    "hardware_release_allowed": false
+  },
+  "interpretation": [
+    "Status1 indicates this fixed numeric request completed; selected ID3/HW2 is unchanged from earlier fixtures",
+    "9.11 percent is elapsed-cycle decrease, not measured closed-loop bandwidth/frequency improvement",
+    "Version8 root helper ASM was unchanged; measured savings cannot be uniquely apportioned to each caller change",
+    "Further priority is remaining generic roots and ordinary-kernel stack/data movement; no repeat coarse/fine requested by this record"
+  ],
+  "screenshot": {
+    "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-3587ac1f-abd2-4481-8d3a-18055e4b2dda.png",
+    "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261027_round8\\ccs_request2_benchmark.png",
+    "sha256": "f8a1ba26960f0940b74125a8d646551ab79060c4fdd4acf55b4a72ed2f9fdde2",
+    "bytes": 30712
+  },
+  "agent_actions": {
+    "control_code_changed": false,
+    "peripheral_protection_changed": false,
+    "hardware_access": false,
+    "rebuild": false,
+    "deleted_files": false,
+    "Git_commit_or_push": false
+  }
+}

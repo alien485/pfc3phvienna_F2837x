@@ -1,5 +1,10 @@
 # 采样、预测、实际装载与观测器时标
 
+当前精确恢复第十轮源码/OUT，marker10，观察表66项；采样、预测和提交时标未改。
+第十一轮3次19168cycle未较第十轮18924提速，源码与证据保留为实验，当前不采用。
+第十轮18924cycle按配置200MHz为94.620us，仍超20us周期；恢复后没有新增板上测量。
+粗/细时钟与嵌套root解释以PROFILE_TIMING.md为准，不将root窗口重复累加，也不把模式差全部当读钟开销。
+
 保留CPU200MHz、ePWM100MHz、TBPRD1000、50kHz。上数CMPB814触发SOCA，
 下数CMPC814触发ISR1。相对ZERO：8.14us触发，10us PERIOD，11.86us中断，20us加载。
 中断到下一ZERO为8.14us=1628CPU周期；原40TBCLK guard保留，三相连续影子写入不得跨ZERO。
@@ -45,11 +50,15 @@ root_method=1改用独立PC_run_fast，移除全量清零并共享角度节点�
 ESO同样用fast区间函数但明确要求完整子步。fast候选只保证summary，
 `pcmOutputDetailValid=0`、root_iterations=0xffff表示完整候选子步不可用。
 分段根及共享浮点运算仍须按差分报告解释，且没有板上WCET。
-第四轮CGT成功路径中，控制子步191组和lambda根成功79组的
-两个互不重叠区域，各固定执行18次；保守下界为4860cycles=24.30us（配置200MHz）。
-这不含首/候选区间入口出口、输入、seed、排名/末级、PLL/ESO/ISR等工作，
-已足够否定当前1628cycle写前和4000cycle整周期预算。错误提前退出不能算正常控制通过。
-此前第三轮6408下界及用户27485cycle计时属于旧OUT8c8251...，当前OUT52971695...尚待同样例板上计时。
+第六轮实际CGT汇编中，控制子步最少196组，generic根75组、dense根79组。
+八个候选各两子步固定包含8次generic和8次dense根，加上首次两子步，
+混合路径静态弱下界为18*196+8*75+8*79+2*75=4910cycles=24.55us（配置200MHz）。
+初始状态也有两相以上ON时为4918cycles；未计plan/seed、入口出口、排名、PLL/ESO/ISR、
+分支延迟及存储停顿等。该下界已超过1628cycle写前和4000cycle整周期预算，
+不能当作实测耗时或WCET。错误提前退出不能算正常控制通过。
+第四轮4860下界、第三轮6408下界均为历史审计，不能据差值判断本轮快慢。
+用户27485/23425cycle分别属于第三/第四轮；后续用户确认版本6并反馈21217cycle，
+按配置200MHz为106.085us，BodyMax22706cycle。原图及限制见validation/BENCH_RT6_20261026.md。
 历次不同子集的下界不可相减作实际提速率，最新快照见RT_OPTIMIZATION。
 在两类时限、PLL、保护和输入时标验证前不能打开硬件放行。
 静态审计详见根输出resource_timing_audit，不能把宿主运行时间当成DSP WCET。
@@ -76,7 +85,7 @@ source1/2、core_status=0、合法ID的预测/成本视为有效，其他预测/
 Watch中的完整substep只有DetailValid=1才可解释，旧RAM不是当前fast轨迹。
 最新PC_run_fast采用CONTROL_ONLY；`pcmOutputIntegralValid=0`和
 `PC_fast_output_integrals_available=0`表示各interval积分仅为0占位，不能当作物理积分。
-独立SUMMARY/FULL入口仍生成真实模型pole积分，ESO仍请求FULL；当前观察表为64项。
+独立SUMMARY/FULL入口仍生成真实模型pole积分，ESO仍请求FULL；当前观察表为66项。
 三条原始寄存器指针cast在用户CCS中被拒绝，已从观察脚本移除；如需查看Trip flags，
 使用Memory Browser的Data页/16-bit Hex只读查看0x4093、0x4193、0x4293。
 波形缓冲2000条，50kHz每5拍箱形平均，10kS/s、200ms；theta取5拍窗口中心。

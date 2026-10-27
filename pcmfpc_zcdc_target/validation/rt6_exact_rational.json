@@ -1,0 +1,20 @@
+{
+  "status": "PASS_EXACT_RATIONAL_MODEL",
+  "checks": 24128,
+  "no_root_cases": 15962,
+  "states": [
+    3,
+    5,
+    6,
+    7
+  ],
+  "coverage": [
+    "positive/negative/zero OFF current",
+    "OFF q near +/-(cu+cl)",
+    "strict/end-point events",
+    "equal/unequal/zero scaled caps",
+    "balanced and unbalanced q",
+    "both possible root segments"
+  ],
+  "scope": "Exact real-arithmetic algebra only; not C floating-point equivalence, target timing or hardware validation."
+}

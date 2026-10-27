@@ -1,0 +1,387 @@
+{
+  "date": "2026-10-27",
+  "status": "HOST_AND_TI_BUILD_PASS;USER_FIXTURE_NUMERIC_PASS;REALTIME_BUDGET_FAIL",
+  "branch": "new_mpc",
+  "starting_head": "10c0f3bc966d399bc43374122d11f8afcf6915be",
+  "project": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target",
+  "kernel_revision": 8,
+  "watch_expression_count": 66,
+  "implementation": {
+    "modified_control_files": [
+      "vienna_pcmfpc_fast.c",
+      "vienna_pcmfpc_fast.h"
+    ],
+    "fixed_substeps": [
+      0,
+      1
+    ],
+    "same_macro_generates_plain_and_fine_kernels": true,
+    "ordinary_kernel_per_root_profile_guards": 0,
+    "private_leaf_unused_cfg_parameter_removed": true,
+    "public_interface_and_profile_contract_unchanged": true,
+    "root_FULL_transform_rank_intersection_helper_bodies_unchanged": 15,
+    "no_candidate_substep_model_threshold_or_protection_changes": true
+  },
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "8072a0cbfb2aa810a19f971f504fa398ec4631590eb02793d2b00a26da46828d",
+    "vienna_pcmfpc_fast.h": "c898524ad850168d6c792e29b7666979ef7a4225c1874b251984b31b790c3c52"
+  },
+  "host": {
+    "status": "PASS_ROUND7_EQUIVALENCE_AND_PROFILE",
+    "public_struct_comparisons": [
+      {
+        "diagnostic_all_angles": 1,
+        "exit": 0,
+        "public_struct": {
+          "cases": 31750,
+          "status_differences": 0,
+          "public_flag_differences": 0,
+          "PC_Output_byte_difference_rows": 0,
+          "interval_calls_all_detail_modes": 140025,
+          "interval_status_differences": 0,
+          "PC_Interval_byte_difference_calls": 0,
+          "revision_errors": 0
+        },
+        "cross_policy": {
+          "policy_cases": 31750,
+          "policy_status_differences": 0,
+          "policy_undocumented_byte_differences": 0
+        }
+      },
+      {
+        "diagnostic_all_angles": 0,
+        "exit": 0,
+        "public_struct": {
+          "cases": 31750,
+          "status_differences": 0,
+          "public_flag_differences": 0,
+          "PC_Output_byte_difference_rows": 0,
+          "interval_calls_all_detail_modes": 140025,
+          "interval_status_differences": 0,
+          "PC_Interval_byte_difference_calls": 0,
+          "revision_errors": 0
+        },
+        "cross_policy": {
+          "policy_cases": 0,
+          "policy_status_differences": 0,
+          "policy_undocumented_byte_differences": 0
+        }
+      }
+    ],
+    "whitebox": {
+      "checks": 85,
+      "failures": 0,
+      "profile_checks": 80,
+      "control_cases": 24912,
+      "control_status_differences": 0,
+      "control_byte_differences": 0,
+      "control_successes": 24614,
+      "control_failures": 298,
+      "blocked_successes": 1492,
+      "shared_seed_cases": 12456,
+      "NULL_seed_cases": 12456,
+      "status_counts": [
+        24614,
+        0,
+        0,
+        0,
+        150,
+        0,
+        148
+      ],
+      "counter": "fake_downcounter_only"
+    },
+    "unchanged_model_and_intersection_function_bodies": {
+      "pf_lambda_plan": true,
+      "pf_lambda_root": true,
+      "pf_lambda_dense_root": true,
+      "pf_root": true,
+      "pf_interval": true,
+      "pf_rotation": true,
+      "pf_plan": true,
+      "pf_dq_to_abc": true,
+      "pf_abc_to_dq": true,
+      "pf_seed": true,
+      "pf_projection": true,
+      "pf_rank": true,
+      "pf_angle_cost": true,
+      "pf_output_init": true,
+      "pf_intersection": true
+    }
+  },
+  "safety_runtime_ESO_checks": [
+    85,
+    299,
+    16
+  ],
+  "closed_loop": {
+    "status": "PASS_ROUND7_TRAJECTORY_EQUIVALENCE",
+    "pairs": 10,
+    "all_trace_and_metric_bytes_identical": true,
+    "evidence": "closed_loop/REPORT.json"
+  },
+  "full_profile_replay": {
+    "status": "PASS_PLAIN_COARSE_FINE_OUTPUT_EQUIVALENCE",
+    "result": {
+      "base_cases": 31750,
+      "directed_derived_failure_cases": 2,
+      "policies": [
+        {
+          "diagnostic_all_angles": 0,
+          "mode": 1,
+          "cases": 31752,
+          "successes": 31739,
+          "errors": 13,
+          "status_differences": 0,
+          "output_byte_differences": 0,
+          "availability_flag_differences": 0,
+          "revision_errors": 0,
+          "metadata_errors": 0,
+          "oneshot_errors": 0,
+          "partial_root_error_cases": 0,
+          "minimum_partial_root_calls": 0,
+          "maximum_partial_root_calls": 0
+        },
+        {
+          "diagnostic_all_angles": 0,
+          "mode": 2,
+          "cases": 31752,
+          "successes": 31739,
+          "errors": 13,
+          "status_differences": 0,
+          "output_byte_differences": 0,
+          "availability_flag_differences": 0,
+          "revision_errors": 0,
+          "metadata_errors": 0,
+          "oneshot_errors": 0,
+          "partial_root_error_cases": 2,
+          "minimum_partial_root_calls": 1,
+          "maximum_partial_root_calls": 5
+        },
+        {
+          "diagnostic_all_angles": 1,
+          "mode": 1,
+          "cases": 31752,
+          "successes": 31739,
+          "errors": 13,
+          "status_differences": 0,
+          "output_byte_differences": 0,
+          "availability_flag_differences": 0,
+          "revision_errors": 0,
+          "metadata_errors": 0,
+          "oneshot_errors": 0,
+          "partial_root_error_cases": 0,
+          "minimum_partial_root_calls": 0,
+          "maximum_partial_root_calls": 0
+        },
+        {
+          "diagnostic_all_angles": 1,
+          "mode": 2,
+          "cases": 31752,
+          "successes": 31739,
+          "errors": 13,
+          "status_differences": 0,
+          "output_byte_differences": 0,
+          "availability_flag_differences": 0,
+          "revision_errors": 0,
+          "metadata_errors": 0,
+          "oneshot_errors": 0,
+          "partial_root_error_cases": 2,
+          "minimum_partial_root_calls": 1,
+          "maximum_partial_root_calls": 5
+        }
+      ],
+      "validation_errors": 0
+    },
+    "evidence": "profile_replay/REPORT.json"
+  },
+  "build": {
+    "date": "2026-10-27",
+    "method": "TI CCS-generated gmake all incremental rules; same installed TI CGT and project options; no CCS application startup attempted this round",
+    "native_exit": 0,
+    "compiler": "TI CGT25.11.1.LTS",
+    "errors": 0,
+    "warnings": 0,
+    "clean_or_rebuild": false,
+    "stdout": "gmake_incremental.log",
+    "out_sha256": "d01c3f7fa2e7a403c8ab5b4c9ef54319aeaa0f8823704c5cba39b886f97b28c2",
+    "snapshot_count": 32,
+    "map_linked_line": ">> Linked Tue Oct 27 08:48:32 2026"
+  },
+  "actual_TI_audit": {
+    "all_pinned_hashes_match": true,
+    "RAM_code": {
+      "load_start": "0xa8000",
+      "run_start": "0x18000",
+      "words": 14821,
+      "hex_words": "0x39e5",
+      "delta_vs7_words": 1176,
+      "free_words": 1563
+    },
+    "memory": [
+      {
+        "name": "RAMGS12GS15",
+        "origin_word": 98304,
+        "capacity_words": 16384,
+        "used_words": 14821,
+        "unused_words": 1563
+      },
+      {
+        "name": "RAMM1",
+        "origin_word": 1024,
+        "capacity_words": 1024,
+        "used_words": 937,
+        "unused_words": 87
+      },
+      {
+        "name": "RAMGS3",
+        "origin_word": 61440,
+        "capacity_words": 4096,
+        "used_words": 3222,
+        "unused_words": 874
+      },
+      {
+        "name": "RAMGS4GS5",
+        "origin_word": 65536,
+        "capacity_words": 8192,
+        "used_words": 7168,
+        "unused_words": 1024
+      },
+      {
+        "name": "RAMGS6GS11",
+        "origin_word": 73728,
+        "capacity_words": 24576,
+        "used_words": 24000,
+        "unused_words": 576
+      }
+    ],
+    "BSS_delta_words_vs7": 0,
+    "revision": {
+      "symbol_word": "0x7a3",
+      "DP": "0x1e",
+      "offset": "0x23",
+      "actual_store_word": "0x18f7a",
+      "actual_value": 8,
+      "initializer": 8
+    },
+    "fast_profile_closure_functions": 22,
+    "fast_profile_closure_call_sites": 53,
+    "all_bound_callees_RAM": true,
+    "callback": {
+      "target_run_word": "0x1aadc",
+      "pointer_word": "0xf54c",
+      "reads_only": "Timer0 TIM at0xc00",
+      "instructions": [
+        "VMOV32 ACC,*(0:0xc00)",
+        "LRETR"
+      ],
+      "period_modulus": 2000001
+    },
+    "private_wrapper_linked": false,
+    "ordinary_plain_profile_references": 0,
+    "ordinary_plain_has_no_root_clock_guards": true,
+    "caller_dispatch_and_top_stage_guards_still_cost_instructions": true,
+    "listed_max_frame_words_including_return_header": {
+      "ISR1": 66,
+      "pf_profile_read": 2,
+      "pf_lambda_plan": 22,
+      "pf_lambda_root": 20,
+      "pf_lambda_dense_root": 30,
+      "pf_control_interval_profiled": 64,
+      "pf_control_interval_plain": 62,
+      "PC_run_fast": 86,
+      "pf_root": 36,
+      "pf_interval": 114,
+      "PC_fast_predict_interval": 42,
+      "VO_reconstruct": 164,
+      "pc_profile_clock": 2,
+      "VIENNA_PCMFPC_select": 8,
+      "VIENNA_PCMFPC_sample": 44,
+      "pc_benchmark": 12,
+      "VIENNA_PCMFPC_post": 20,
+      "pc_projection": 10,
+      "pc_root": 64,
+      "PC_predict_interval": 58
+    },
+    "known_stack_chain_frame_sums_words": {
+      "normal_plain_generic": 264,
+      "normal_plain_dense": 252,
+      "shadow_plain_generic": 276,
+      "benchmark_plain_generic": 288,
+      "benchmark_fine_generic": 290,
+      "benchmark_fine_clock_callback": 252,
+      "FAST_FULL_reconstruction": 466,
+      "reference_reconstruction_available_branch": 506
+    },
+    "stack_allocation_words": 896,
+    "stack_scope": "Known compiler frame sums, not a complete worst-case stack proof; interrupted background, automatic hardware ISR frame, nesting, exceptional/library paths and measured watermark remain unknown.",
+    "FP_scope": "Common scalar source model retained. Neutral accumulation phase0->1->2 retained; initial+0 elided by compiler. A MACF32 alias bundles independent ADD and MUL; no fused FMA is introduced there. This is not a universal target bitwise-equivalence assertion.",
+    "success_path_proxy_limits": "Restricted hw7 successful-path CFG proxy with exactly2 substeps, specified first-step seed, second NULL and inactive clocks. Remaining FP predicates relaxed. Callee bodies, caller dispatch, latencies/stalls excluded; primary issue-group moves only (parallel || memory operations not separately counted). Not a measured runtime or general speedup percentage. No440*2 estimate used."
+  },
+  "isolation": {
+    "main_head_at_start": "81822e3fc2f8915fc74ddef43234ab796163208a",
+    "main_head_at_check": "81822e3fc2f8915fc74ddef43234ab796163208a",
+    "main_tracked_files_unchanged": 82,
+    "protected_target_files_unchanged": 22,
+    "parent_Kit_user_change_preserved_sha256": "acddabf7e9570af6fdb086bae9e40f89c9bb7f38459c7de1f162a6166a1d48e2",
+    "only_old_map_link_timestamp_had_changed_before_edit": true,
+    "runtime_HAL_peripheral_timing_protection_unchanged": true
+  },
+  "inherited_original_piecewise_equivalence": {
+    "status": "FAIL_EXACT_EQUIVALENCE",
+    "selected_differences": 1887,
+    "not_fixed_or_hidden": true
+  },
+  "hardware": {
+    "version8_target_measured": true,
+    "hardware_release": 0,
+    "qualified_for_power": false,
+    "baseline_revision": 7,
+    "baseline_plain_cycles": 21138,
+    "baseline_coarse_total": 21497,
+    "baseline_fine_total": 22817,
+    "baseline_fine_root_window_cycles": 9005,
+    "baseline_fine_prediction_other_cycles": 8921,
+    "new_profile_modes_separately_compiled_cannot_deduce_exact_overhead": true,
+    "configured_period_cycles": 4000,
+    "nominal_write_window_cycles": 1628,
+    "actual_clock_independently_verified": false,
+    "next_step": "Keep release0/main power OFF; future optimization prioritizes remaining generic roots and ordinary prediction data/stack traffic",
+    "user_plain_cycles": 19212,
+    "conditional_200MHz_plain_us": 96.06,
+    "measurement_association": "version8 loading/check/request2 workflow; screenshot bench-only, target hash unverified",
+    "observed_benchmark": {
+      "BenchRequest": 0,
+      "BenchStatus": 1,
+      "BenchCycles": 19212,
+      "BenchCyclesMax": 19212,
+      "BenchCount": 1,
+      "BenchSelectedId": 3,
+      "BenchHWState": 2,
+      "fcsDeadlineMissCount": 1,
+      "RecordArm": 0,
+      "RingCount": 0,
+      "RingOverflow": 0,
+      "WaveArm": 0,
+      "WaveCount": 0
+    },
+    "comparison": {
+      "baseline_revision": 7,
+      "baseline_plain_cycles": 21138,
+      "new_candidate_revision": 8,
+      "new_plain_cycles": 19212,
+      "cycles_saved": 1926,
+      "elapsed_cycle_reduction_percent": 9.111552653988078,
+      "conditional_200MHz_saved_us": 9.63,
+      "same_clock_fixture_request2_and_no_halt_assumed": true,
+      "single_sample_not_statistical_or_WCET_evidence": true,
+      "vs_revision6_cycles_saved": 2005,
+      "vs_revision6_reduction_percent": 9.449969364189094,
+      "vs_first_27485_cycles_saved": 8273,
+      "vs_first_27485_reduction_percent": 30.10005457522285
+    },
+    "measurement_evidence": "../../bench_20261027_round8/REPORT.json"
+  },
+  "delivery_verification": "PASS",
+  "no_agent_hardware_actions_deletion_or_Git_commit_push": true
+}

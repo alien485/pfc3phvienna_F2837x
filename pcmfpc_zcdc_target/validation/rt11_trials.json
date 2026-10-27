@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-27",
+  "baseline_revision": 10,
+  "baseline_c_sha256": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+  "variants": {
+    "A_raw_next_N8": {
+      "compile_exit": 0,
+      "source_sha256": "1b74929824ccaa0faa848ef076fdd685e6011d47f3c6a8556e75d4c8a39ea9c8",
+      "pf_control_interval_plain": {
+        "frame_words_including_return": 86,
+        "static_instruction_lines": 732,
+        "SP_FP_lines": 131,
+        "DP_load_lines": 8
+      },
+      "pf_control_interval_profiled": {
+        "frame_words_including_return": 84,
+        "static_instruction_lines": 785,
+        "SP_FP_lines": 124,
+        "DP_load_lines": 21
+      },
+      "PC_run_fast": {
+        "frame_words_including_return": 72,
+        "static_instruction_lines": 1447,
+        "SP_FP_lines": 195,
+        "DP_load_lines": 31
+      },
+      "PC_fast_predict_interval": {
+        "frame_words_including_return": 42,
+        "static_instruction_lines": 157,
+        "SP_FP_lines": 33,
+        "DP_load_lines": 2
+      },
+      "section_words": {
+        "pcmfpc_code": 8434,
+        ".bss": 404,
+        ".bss:pf_control_context": 20
+      },
+      "estimated_whole_RAM_code_words": 15286,
+      "estimated_code_free_words": 1098
+    },
+    "B_clarke_rho_cache_N8": {
+      "compile_exit": 0,
+      "source_sha256": "a86f91f7f22a04f1ebf7787c745c0c549edb5a7c1adef9f10883af6479e7739f",
+      "pf_control_interval_plain": {
+        "frame_words_including_return": 92,
+        "static_instruction_lines": 794,
+        "SP_FP_lines": 138,
+        "DP_load_lines": 8
+      },
+      "pf_control_interval_profiled": {
+        "frame_words_including_return": 94,
+        "static_instruction_lines": 850,
+        "SP_FP_lines": 145,
+        "DP_load_lines": 21
+      },
+      "PC_run_fast": {
+        "frame_words_including_return": 72,
+        "static_instruction_lines": 1447,
+        "SP_FP_lines": 195,
+        "DP_load_lines": 31
+      },
+      "PC_fast_predict_interval": {
+        "frame_words_including_return": 42,
+        "static_instruction_lines": 157,
+        "SP_FP_lines": 33,
+        "DP_load_lines": 2
+      },
+      "section_words": {
+        "pcmfpc_code": 8657,
+        ".bss": 404,
+        ".bss:pf_control_context": 20
+      },
+      "estimated_whole_RAM_code_words": 15509,
+      "estimated_code_free_words": 875
+    }
+  },
+  "C_exact_ON_old_N8": {
+    "compile_exit": 0,
+    "source_sha256": "fce69594928ce6dae75b4e9ddd7853c6b72e302cd3cc9bde8ff9746cb5d93ac8",
+    "masked_helper_has_no_LCR": true,
+    "pf_control_interval_plain": {
+      "frame_words_including_return": 88,
+      "static_instruction_lines": 783,
+      "SP_FP_lines": 136,
+      "DP_load_lines": 8
+    },
+    "pf_control_interval_profiled": {
+      "frame_words_including_return": 88,
+      "static_instruction_lines": 827,
+      "SP_FP_lines": 136,
+      "DP_load_lines": 21
+    },
+    "PC_run_fast": {
+      "frame_words_including_return": 72,
+      "static_instruction_lines": 1447,
+      "SP_FP_lines": 195,
+      "DP_load_lines": 31
+    },
+    "PC_fast_predict_interval": {
+      "frame_words_including_return": 42,
+      "static_instruction_lines": 157,
+      "SP_FP_lines": 33,
+      "DP_load_lines": 2
+    },
+    "section_words": {
+      "pcmfpc_code": 8592,
+      ".bss": 404,
+      ".bss:pf_control_context": 20
+    },
+    "estimated_whole_RAM_code_words": 15444,
+    "estimated_code_free_words": 940
+  },
+  "baseline_CGT": {
+    "section_words": {
+      "pcmfpc_code": 8415,
+      ".bss": 404,
+      ".bss:pf_control_context": 20
+    },
+    "pf_control_interval_plain": {
+      "frame_words_including_return": 86,
+      "static_instruction_lines": 728,
+      "SP_FP_lines": 127,
+      "DP_load_lines": 8
+    },
+    "pf_control_interval_profiled": {
+      "frame_words_including_return": 86,
+      "static_instruction_lines": 770,
+      "SP_FP_lines": 122,
+      "DP_load_lines": 21
+    },
+    "PC_run_fast": {
+      "frame_words_including_return": 72,
+      "static_instruction_lines": 1447,
+      "SP_FP_lines": 195,
+      "DP_load_lines": 31
+    },
+    "PC_fast_predict_interval": {
+      "frame_words_including_return": 42,
+      "static_instruction_lines": 157,
+      "SP_FP_lines": 33,
+      "DP_load_lines": 2
+    }
+  },
+  "selection": "Only C is numerically eligible; root installs/final-verifies revision11 separately",
+  "A_B_status": "FAIL_STRICT_EQUIVALENCE;NOT_INSTALLED",
+  "A_B_observed_per_policy": {
+    "A_selected_differences": 122,
+    "B_selected_differences": 121,
+    "A_hardware_nearzero_selected_differences": 71,
+    "B_hardware_nearzero_selected_differences": 70,
+    "hardware_nearzero_cases": 3856,
+    "hardware_cases": 24626,
+    "current_gi_blocked_status_active_differences": 0,
+    "A_max_np_difference_V": 7.62939453125e-06,
+    "B_max_np_difference_V": 3.814697265625e-06,
+    "all10_closed_loop_traces_changed": true
+  },
+  "C_status": "PASS_STRICT_FROZEN10_EQUIVALENCE_IN_EXECUTED_HOST_CASES",
+  "C_evidence": {
+    "public_diag_cases_each": 31750,
+    "interval_calls_each": 140025,
+    "public_derived_boundary_cases": 1464,
+    "legal_alias_cases": 1536,
+    "closed_loop_csv_pairs": 10,
+    "metric_file_pairs": 10,
+    "raw_byte_differences": 0
+  },
+  "C_changes": [
+    "New private always-inline ON-only inverse helper",
+    "Only N8 candidate substep1 selects helper",
+    "Retain original a,b and each retained phase expression order",
+    "Skip dead OFF-phase stores and operations, without KCL/rho/coordinate identities"
+  ],
+  "C_unchanged": [
+    "N1/delay/standalone and FULL/ESO",
+    "freeDQ/next-angle inverse, roots, midpoint integration phase order",
+    "all candidates/substeps/checks/markers/public fields",
+    "profiling API and11/47read/18root contracts",
+    "all .bss object layouts and subsection20word context"
+  ],
+  "performance_limits": [
+    "No board timing for these prototypes",
+    "C adds mask branches, +177 codewords and +2word model frames; a speedup is not established by HOST equality",
+    "Static whole-function counts are not dynamic executed counts",
+    "A/B small NP errors caused actual selected-state differences and cannot be dismissed as harmless"
+  ],
+  "no_production_writes_by_this_trial_task": true
+}

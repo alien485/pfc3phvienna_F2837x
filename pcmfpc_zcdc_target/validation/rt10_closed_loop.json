@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS_ROUND9_TRAJECTORY_EQUIVALENCE",
+  "scope": "HOST fast10 against frozen fast9; full angle diagnostic policy remains1 in this existing driver. Cross-policy decisions checked separately. Assumes timely computation; not target timing or power qualification.",
+  "pairs": [
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_nominal_50ohm.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_nominal_50ohm.csv",
+      "baseline_sha256": "43d74c3d483f854b78b1d1812016999589b7ccf21bd8f5172dbc0b91b310cd91",
+      "current_sha256": "43d74c3d483f854b78b1d1812016999589b7ccf21bd8f5172dbc0b91b310cd91",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_nominal_50ohm.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_nominal_50ohm.json",
+        "baseline_sha256": "bc5e8b20a1877a551c8e88600fd8ca9021c2018ab17d0e72267bf743013de935",
+        "current_sha256": "bc5e8b20a1877a551c8e88600fd8ca9021c2018ab17d0e72267bf743013de935",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_nominal_50ohm.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_nominal_50ohm.csv",
+      "baseline_sha256": "49582e30903d8d6cd728e51f887ca9b56acaff3ddc13a78e8127a578b4d5f7c7",
+      "current_sha256": "49582e30903d8d6cd728e51f887ca9b56acaff3ddc13a78e8127a578b4d5f7c7",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_nominal_50ohm.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_nominal_50ohm.json",
+        "baseline_sha256": "be6d5243f62dd583e717ff139df37f2733d0c43ab52d5d329221b4c6d7370c22",
+        "current_sha256": "be6d5243f62dd583e717ff139df37f2733d0c43ab52d5d329221b4c6d7370c22",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_L_R_noise_50ohm.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_L_R_noise_50ohm.csv",
+      "baseline_sha256": "1da8a093386e410ada06ace47a125f7968dac68bd2a408b03ee65b842bc95e5c",
+      "current_sha256": "1da8a093386e410ada06ace47a125f7968dac68bd2a408b03ee65b842bc95e5c",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_L_R_noise_50ohm.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_L_R_noise_50ohm.json",
+        "baseline_sha256": "66666e950c3de2f302a1f35305290a898d5b2c544c8e12f8c9722b551507bac2",
+        "current_sha256": "66666e950c3de2f302a1f35305290a898d5b2c544c8e12f8c9722b551507bac2",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_L_R_noise_50ohm.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_L_R_noise_50ohm.csv",
+      "baseline_sha256": "47aa46e27139b371eb25b420232d97b3b063cc96c8c01b6c4d1780d2d44ca695",
+      "current_sha256": "47aa46e27139b371eb25b420232d97b3b063cc96c8c01b6c4d1780d2d44ca695",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_L_R_noise_50ohm.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_L_R_noise_50ohm.json",
+        "baseline_sha256": "a670d0b68915c0d4cc2c5e0340ef6035dbea000cd4e627f728d3b523c277b02e",
+        "current_sha256": "a670d0b68915c0d4cc2c5e0340ef6035dbea000cd4e627f728d3b523c277b02e",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_adc_early_1us.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_adc_early_1us.csv",
+      "baseline_sha256": "0278c2656323e0524add0a79101a766167a695c10d4e67fd5a754d8f80bd6eb4",
+      "current_sha256": "0278c2656323e0524add0a79101a766167a695c10d4e67fd5a754d8f80bd6eb4",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_adc_early_1us.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_adc_early_1us.json",
+        "baseline_sha256": "53c16721c2398d432a39461092e6f7fafba10247e5da3923857b2d6eaa4fa3f8",
+        "current_sha256": "53c16721c2398d432a39461092e6f7fafba10247e5da3923857b2d6eaa4fa3f8",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_adc_early_1us.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_adc_early_1us.csv",
+      "baseline_sha256": "e0bf6bd5b3d34b7d74a32c67bc4b6e83289c11afc3eec7f2d417cf51df1351a0",
+      "current_sha256": "e0bf6bd5b3d34b7d74a32c67bc4b6e83289c11afc3eec7f2d417cf51df1351a0",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_adc_early_1us.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_adc_early_1us.json",
+        "baseline_sha256": "a89efa37598a5149defa0ccfbd02d21e45e918926eb26b87e0e93e09c03fd657",
+        "current_sha256": "a89efa37598a5149defa0ccfbd02d21e45e918926eb26b87e0e93e09c03fd657",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_device_drops.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_device_drops.csv",
+      "baseline_sha256": "52a05e90fc83c3a08307c81ce056852ede44ae441c81d03d3188cfc6edb92372",
+      "current_sha256": "52a05e90fc83c3a08307c81ce056852ede44ae441c81d03d3188cfc6edb92372",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_device_drops.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_device_drops.json",
+        "baseline_sha256": "8fe071727e2e7b007960c56e8d94d879ecfeff476918e96b267819c09f15abc7",
+        "current_sha256": "8fe071727e2e7b007960c56e8d94d879ecfeff476918e96b267819c09f15abc7",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_device_drops.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_device_drops.csv",
+      "baseline_sha256": "25137747341d1ebe0cb3fabfafea9e4fe374fe78474b7d4f6ac6f1ffc02a18b4",
+      "current_sha256": "25137747341d1ebe0cb3fabfafea9e4fe374fe78474b7d4f6ac6f1ffc02a18b4",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_device_drops.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_device_drops.json",
+        "baseline_sha256": "5cf2f881221513ee6f7ddfe0dec010cd2c46e2ffec1deff4772686d04901cc55",
+        "current_sha256": "5cf2f881221513ee6f7ddfe0dec010cd2c46e2ffec1deff4772686d04901cc55",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_load_100_50_100ohm.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_load_100_50_100ohm.csv",
+      "baseline_sha256": "cf23022cad33ae209fc70db08f27893ce078e200f36467eb57248e57fa5508a6",
+      "current_sha256": "cf23022cad33ae209fc70db08f27893ce078e200f36467eb57248e57fa5508a6",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_off_load_100_50_100ohm.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_off_load_100_50_100ohm.json",
+        "baseline_sha256": "20f5576ad654fc4c88e491f387ff7cdeec0be1c1b6a0b7f288aa365be39dfe9e",
+        "current_sha256": "20f5576ad654fc4c88e491f387ff7cdeec0be1c1b6a0b7f288aa365be39dfe9e",
+        "byte_identical": true
+      }
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_load_100_50_100ohm.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_load_100_50_100ohm.csv",
+      "baseline_sha256": "c8fd26438896fecc0de6046f7a9a9788eb44542e79ccd654db1f050bb41d48b2",
+      "current_sha256": "c8fd26438896fecc0de6046f7a9a9788eb44542e79ccd654db1f050bb41d48b2",
+      "byte_identical": true,
+      "baseline_rows": 13000,
+      "current_rows": 13000,
+      "all_fields_identical": true,
+      "differing_rows": [],
+      "metrics": {
+        "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round9\\closed_loop\\optimized_fast_pc_on_load_100_50_100ohm.json",
+        "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\optimized_fast_pc_on_load_100_50_100ohm.json",
+        "baseline_sha256": "43fc2b1b16a4177b088fe1293fe00f69faa2e7c64df4115d14999b421e3ea966",
+        "current_sha256": "43fc2b1b16a4177b088fe1293fe00f69faa2e7c64df4115d14999b421e3ea966",
+        "byte_identical": true
+      }
+    }
+  ],
+  "source_sha256": {
+    "vienna_pcmfpc_zcdc.c": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+    "vienna_pcmfpc_observer.c": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+    "vienna_grid_sync.c": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+    "tests\\ti_closed_loop.c": "bc8bcd5447ac4b952c82e9b4b6dbf68fc1d18ac1b23e7009986944fb6265dcb8",
+    "vienna_pcmfpc_fast.c": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d"
+  },
+  "command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c99 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -DTI_CLOSED_LOOP_FAST=1 \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_observer.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_grid_sync.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\ti_closed_loop.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round10\\closed_loop\\build\\ti_closed_loop_round10.exe\"",
+  "elapsed_s": 6.750605300068855
+}

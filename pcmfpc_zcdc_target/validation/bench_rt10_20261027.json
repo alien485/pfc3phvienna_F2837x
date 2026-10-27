@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-27",
+  "source": "User screenshot directly after explicit version10/load/request2 workflow",
+  "result": "FIXTURE_NUMERIC_PASS;SMALL_SINGLE_SAMPLE_CYCLE_REDUCTION;REALTIME_BUDGET_FAIL",
+  "observed": {
+    "BenchRequest": 0,
+    "BenchStatus": 1,
+    "BenchCycles": 18924,
+    "BenchCyclesMax": 18924,
+    "BenchCount": 1,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "fcsDeadlineMissCount": 1,
+    "RecordArm": 0,
+    "RingCount": 0,
+    "RingOverflow": 0,
+    "WaveArm": 0
+  },
+  "comparison": {
+    "vs9": {
+      "baseline_cycles": 19242,
+      "saved_cycles": 318,
+      "saved_conditional_us": 1.59,
+      "percent_reduction": 1.652634861241035
+    },
+    "vs8": {
+      "baseline_cycles": 19212,
+      "saved_cycles": 288,
+      "saved_conditional_us": 1.44,
+      "percent_reduction": 1.499063085571518
+    },
+    "same_fixture_request2_clock_nohalt_assumed": true,
+    "single_sample_not_stable_speedup_or_WCET": true
+  },
+  "conditional_200MHz_us": 94.62,
+  "period_ratio": 4.731,
+  "nominal_write_window_ratio": 11.624078624078624,
+  "association": {
+    "candidate_revision": 10,
+    "marker_visible": false,
+    "basis": "immediately preceding load10/checkmarker10/request2 instructions",
+    "actual_on_target_OUT_hash_verified": false,
+    "snapshot_OUT_sha256": "4b847bd12c26178680d63c14992afd6d3a282d80a1a56ecbd91c0562216db13a"
+  },
+  "limits": [
+    "No real closed-loop/plant qualification; fixture only",
+    "Actual CPU clock,CoreStatus,Fault,Release/loop/OST and pause history not shown or independently verified",
+    "DeadlineMiss counter is cumulative; do not clear/disable guards to force pass",
+    "No normal gate submission timing/fullISR/WCET proof"
+  ],
+  "screenshot": {
+    "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-281740fd-3830-4c7a-b72b-b2fab88cb352.png",
+    "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261027_round10\\ccs_request2_benchmark.png",
+    "sha256": "73c0aa1aa6d5dcb02d1617cd4eead7955a2fc648dc56c5bc186b64459afd0c8c"
+  },
+  "agent_control_or_hardware_changes": false
+}

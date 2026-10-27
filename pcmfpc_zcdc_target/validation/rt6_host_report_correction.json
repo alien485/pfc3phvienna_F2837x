@@ -1,0 +1,30 @@
+{
+  "kind": "narrative_only_report_correction",
+  "date": "2026-10-26",
+  "replaced_text": "the storage rewrite preserves the preceding lambda variant",
+  "replacement_text": "dense-state specialization preserves the frozen round5 lambda variant",
+  "executed_runner": "output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\source_snapshot\\tests\\validate_round6.py",
+  "executed_runner_sha256": "94103b03851e29f2434119c7d659592eb138024630d295ab3f31ca544024c344",
+  "current_narrative_corrected_runner": "Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\validate_round6.py",
+  "current_narrative_corrected_runner_sha256": "1fc591b59301aa1fdddfb294ed7124f95999ef991311f847e83e94493c20e394",
+  "executed_source_snapshot_and_manifest_unchanged": true,
+  "report_source_sha256_retains_executed_runner_sha": true,
+  "original_report_markdown_sha256": "5e90a2dce0517a2e17610eb288b1c07f48df6f5851115fafca9172336eead359",
+  "corrected_report_markdown_sha256": "a9889640b7d7c029bd1c9a75fa0b753770d2ee0bea0fb1b2e0f82e1565a0fb8d",
+  "numerical_tests_rerun": false,
+  "control_source_changed": false,
+  "numerical_results_changed": false,
+  "runner_diff": [
+    "--- actual_executed_runner",
+    "+++ narrative_corrected_runner",
+    "@@ -279,7 +279,7 @@",
+    "     (out / \"REPORT.json\").write_text(json.dumps(result, indent=2) + \"\\n\", encoding=\"utf-8\")",
+    "     (snapshot / \"manifest.json\").write_text(json.dumps(source_sha, indent=2) + \"\\n\", encoding=\"utf-8\")",
+    "     text = [\"# Round6 against frozen round5 lambda HOST regression\", \"\", result[\"status\"], \"\",",
+    "-            \"The original float-piecewise strict-equivalence FAIL remains FAIL, including 1887 changed selected IDs. This report only tests whether the storage rewrite preserves the preceding lambda variant.\", \"\",",
+    "+            \"The original float-piecewise strict-equivalence FAIL remains FAIL, including 1887 changed selected IDs. This report only tests whether dense-state specialization preserves the frozen round5 lambda variant.\", \"\",",
+    "             f\"Actual frozen/current linked implementations: {bytewise['cases']} PC_Output comparisons; \"",
+    "             f\"{bytewise['interval_calls_all_detail_modes']} PC_Interval calls across FULL/SUMMARY/CONTROL detail modes.\",",
+    "             f\"Status/flags/PC_Output bytes/PC_Interval bytes differences: {bytewise['status_differences']}/\""
+  ]
+}

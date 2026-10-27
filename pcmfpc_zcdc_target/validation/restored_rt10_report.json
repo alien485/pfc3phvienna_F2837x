@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-27",
+  "status": "RESTORED_EXACT_VALIDATED_REV10;BUILD_PASS;NO_HARDWARE_ACTION",
+  "branch": "new_mpc",
+  "active_kernel_revision": 10,
+  "restored_files": [
+    "vienna_pcmfpc_fast.c",
+    "vienna_pcmfpc_fast.h"
+  ],
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+    "vienna_pcmfpc_fast.h": "28e0b215684ef7c65a53a1fc1c79391d1abf7609cebea0ab93fd6ce5fe245aad"
+  },
+  "reason": {
+    "revision11_repeated_request2_cycles": [
+      19168,
+      19168,
+      19168
+    ],
+    "revision10_recorded_cycles": [
+      18924
+    ],
+    "extra_cycles_vs_recorded10": 244,
+    "conditional_200MHz_extra_us": 1.22,
+    "observed_increase_percent": 1.2893679983090256,
+    "scope": "Repeatable fixed11 fixture;10 currently only one recorded sample; not universal average-performance/WCET comparison"
+  },
+  "build": {
+    "date": "2026-10-27",
+    "method": "TI CCS-generated gmake all incremental rules; same installed TI CGT/project options; no CCS application startup attempted",
+    "native_exit": 0,
+    "compiler": "TI CGT25.11.1.LTS",
+    "errors": 0,
+    "warnings": 0,
+    "clean_or_rebuild": false,
+    "stdout": "gmake_incremental.log",
+    "out_sha256": "4b847bd12c26178680d63c14992afd6d3a282d80a1a56ecbd91c0562216db13a",
+    "snapshot_count": 32,
+    "map_linked_line": ">> Linked Tue Oct 27 21:19:02 2026"
+  },
+  "binary_identical_to_original10": true,
+  "prior_validation_binding": "SOURCE_VALIDATION.json",
+  "original10_evidence": [
+    "../round10/host/pass1/REPORT.json",
+    "../round10/closed_loop/REPORT.json",
+    "../round10/profile_replay/REPORT.json",
+    "../build_pass10/AUDIT.json"
+  ],
+  "current_resources": {
+    "code_words": 15267,
+    "code_free_words": 1117,
+    "BSS_words": 3242,
+    "BSS_free_words": 854,
+    "plain_fine_frames": [
+      86,
+      86
+    ],
+    "PCrun_frame": 72
+  },
+  "preserved": [
+    "main and all protected timing/peripheral/protection/runtime files",
+    "existing user parentKit change",
+    "all11 prototypes/tests/build evidence and3raw screenshots",
+    "branch/worktree and unrelated source/tests/docs history"
+  ],
+  "not_done": [
+    "No Git reset/branch rollback/commit/push",
+    "No file deletion",
+    "No target connect/load/flash/clearTrip or hardware parameter change"
+  ],
+  "board_note": "Local restoration does not update DSP; it still runs11 until user loads current child OUT and initializes marker10",
+  "timing_limits": {
+    "period_cycles": 4000,
+    "nominal_submit_window_cycles": 1628,
+    "release": 0,
+    "new_restored_board_measurement": null
+  },
+  "next_step": "Load current child CPU1 OUT,verify10,keep no-main-power/loops0/OST/release0;do not continue11 as speedup"
+}

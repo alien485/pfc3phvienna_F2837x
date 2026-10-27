@@ -1,0 +1,840 @@
+{
+  "scope": "Independent read-only actual TI round11 OUT/MAP/ASM audit; evidence writes only, no production edits/build/hardware/Git/deletion",
+  "build_method": "TI CCS-generated gmake all incremental rules; same installed TI CGT/project options; no CCS application startup attempted",
+  "compiler": "TI CGT25.11.1.LTS",
+  "native_exit": 0,
+  "errors": 0,
+  "warnings": 0,
+  "linked_line": ">> Linked Tue Oct 27 20:48:10 2026",
+  "pinned_files": 32,
+  "all_pinned_hashes_match": true,
+  "pinned_hash_checks": {
+    ".cproject": true,
+    "build_incremental.ps1": true,
+    "f2837xd_flash_cpu1_lnk.cmd": true,
+    "main.syscfg": true,
+    "makefile.init": true,
+    "vienna.c": true,
+    "vienna.h": true,
+    "vienna_grid_sync.asm": true,
+    "vienna_grid_sync.c": true,
+    "vienna_grid_sync.h": true,
+    "vienna_hal.c": true,
+    "vienna_hal.h": true,
+    "vienna_main.asm": true,
+    "vienna_main.c": true,
+    "vienna_pcmfpc_fast.asm": true,
+    "vienna_pcmfpc_fast.c": true,
+    "vienna_pcmfpc_fast.h": true,
+    "vienna_pcmfpc_observer.asm": true,
+    "vienna_pcmfpc_observer.c": true,
+    "vienna_pcmfpc_observer.h": true,
+    "vienna_pcmfpc_runtime.asm": true,
+    "vienna_pcmfpc_runtime.c": true,
+    "vienna_pcmfpc_runtime.h": true,
+    "vienna_pcmfpc_zcdc.asm": true,
+    "vienna_pcmfpc_zcdc.c": true,
+    "vienna_pcmfpc_zcdc.h": true,
+    "vienna_pcmfpc_zcdc_F2837x.map": true,
+    "vienna_pcmfpc_zcdc_F2837x.out": true,
+    "vienna_pcmfpc_zcdc_F2837x_linkInfo.xml": true,
+    "vienna_settings.h": true,
+    "vienna_user_settings.h": true,
+    "gmake_incremental.log": true
+  },
+  "out_sha256": "f8128de38d9653df32c002aff259a4e036dd9549a9e1e115563b7ac2492b147b",
+  "fast_c_sha256": "83ce61c2d0656b86cf9d6809288696c9e09b948694a098003d7d9fadc235d2e8",
+  "fast_h_sha256": "f56af0541cc59d079a570dd87b5d4dfda9c74068db5f3bc08dc3b543d9b1fd88",
+  "unchanged20_pinned_protected_files_vs10": {
+    ".cproject": true,
+    "build_incremental.ps1": true,
+    "f2837xd_flash_cpu1_lnk.cmd": true,
+    "main.syscfg": true,
+    "makefile.init": true,
+    "vienna.c": true,
+    "vienna.h": true,
+    "vienna_hal.c": true,
+    "vienna_hal.h": true,
+    "vienna_main.c": true,
+    "vienna_grid_sync.c": true,
+    "vienna_grid_sync.h": true,
+    "vienna_pcmfpc_observer.c": true,
+    "vienna_pcmfpc_observer.h": true,
+    "vienna_pcmfpc_runtime.c": true,
+    "vienna_pcmfpc_runtime.h": true,
+    "vienna_pcmfpc_zcdc.c": true,
+    "vienna_pcmfpc_zcdc.h": true,
+    "vienna_settings.h": true,
+    "vienna_user_settings.h": true
+  },
+  "revision": {
+    "symbol_word": "0x7a3",
+    "DP": "0x1e",
+    "offset": "0x23",
+    "actual_store_word": "0x192cf",
+    "actual_value": 11,
+    "disasm_line": 5122,
+    "compiler_initializer": 11
+  },
+  "RAM_code": {
+    "run_start": "0x18000",
+    "words": 15443,
+    "hex_words": "0x3c53",
+    "free_words": 941,
+    "delta_vs10_words": 176
+  },
+  "memory": [
+    {
+      "name": "RAMGS12GS15",
+      "origin_word": 98304,
+      "capacity_words": 16384,
+      "used_words": 15443,
+      "unused_words": 941
+    },
+    {
+      "name": "RAMM1",
+      "origin_word": 1024,
+      "capacity_words": 1024,
+      "used_words": 937,
+      "unused_words": 87
+    },
+    {
+      "name": "RAMGS3",
+      "origin_word": 61440,
+      "capacity_words": 4096,
+      "used_words": 3242,
+      "unused_words": 854
+    },
+    {
+      "name": "RAMGS4GS5",
+      "origin_word": 65536,
+      "capacity_words": 8192,
+      "used_words": 7168,
+      "unused_words": 1024
+    },
+    {
+      "name": "RAMGS6GS11",
+      "origin_word": 73728,
+      "capacity_words": 24576,
+      "used_words": 24000,
+      "unused_words": 576
+    }
+  ],
+  "BSS_words": 3242,
+  "BSS_delta_words_vs10": 0,
+  "fast_profile_closure_functions": 23,
+  "fast_profile_closure_call_sites": 54,
+  "all_bound_callees_RAM": true,
+  "helper_run_word": "0x18392",
+  "helper_is_leaf": true,
+  "callback": {
+    "target_run_word": "0x1ad4a",
+    "reads_only": "Timer0 TIM at0xc00",
+    "period_modulus": 2000001,
+    "actual_binding_instructions": [
+      {
+        "address": 537151,
+        "op": "LCR",
+        "args": "0x08364f",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26678
+      },
+      {
+        "address": 537153,
+        "op": "MOVL",
+        "args": "XAR5, #0x1e8481",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26680
+      },
+      {
+        "address": 537155,
+        "op": "MOVL",
+        "args": "XAR4, #0x01ad4a",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26682
+      },
+      {
+        "address": 537157,
+        "op": "MOVL",
+        "args": "ACC, XAR5",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26684
+      },
+      {
+        "address": 537158,
+        "op": "LCR",
+        "args": "0x019a4a",
+        "function": "VIENNA_PCMFPC_init",
+        "line": 26685
+      }
+    ],
+    "actual_clock_instructions": [
+      {
+        "address": 109898,
+        "op": "VMOV32",
+        "args": "ACC, *(0:0x0c00)",
+        "function": "pc_profile_clock",
+        "line": 12306
+      },
+      {
+        "address": 109900,
+        "op": "LRETR",
+        "args": "",
+        "function": "pc_profile_clock",
+        "line": 12308
+      }
+    ]
+  },
+  "private_wrapper_linked": false,
+  "ordinary_plain_profile_references": [],
+  "profiler_success_contract": {
+    "coarse_reads": 11,
+    "fine_reads": 47,
+    "fine_root_calls": 18,
+    "verified_by": "unchanged source/profiling ASM plus independent HOST tests; no target measurement"
+  },
+  "assembly_comparison": {
+    "pf_lambda_plan": true,
+    "pf_lambda_dense_root": true,
+    "pf_root": true,
+    "pf_interval": true,
+    "pf_seed": true,
+    "pf_lambda_root": true,
+    "pf_lambda_single_plan": true,
+    "pf_rank": true,
+    "pf_plan": true,
+    "pf_output_init": true,
+    "pf_config_valid": true,
+    "pf_profile_read": true,
+    "pf_profile_begin": true,
+    "pf_profile_stage": true,
+    "pf_profile_finish": true,
+    "pf_profile_clear": true,
+    "PC_fast_profile_configure": true,
+    "PC_fast_profile_arm": true,
+    "pc_profile_clock": true
+  },
+  "listed_max_frame_words_including_return_header": {
+    "ISR1": 66,
+    "PC_run_fast": 72,
+    "pf_control_interval_plain": 88,
+    "pf_control_interval_profiled": 88,
+    "pf_lambda_root": 20,
+    "pf_lambda_plan": 22,
+    "pf_lambda_single_plan": 24,
+    "pf_lambda_dense_root": 30,
+    "pf_interval": 114,
+    "pf_root": 36,
+    "VO_reconstruct": 164
+  },
+  "stack_allocation_words": 896,
+  "known_stack_chain_frame_sums_words": {
+    "normal_plain_generic_single_plan": 278,
+    "normal_plain_generic_full_plan": 276,
+    "normal_plain_dense": 264,
+    "shadow_generic_single_plan": 290,
+    "benchmark_plain_single_plan": 302,
+    "benchmark_fine_single_plan": 302,
+    "FAST_FULL_reconstruction": 466,
+    "compiled_reference_reconstruction": 406
+  },
+  "stack_scope": "Known-chain frame sums only: no proof of background interrupted frames, hardware auto ISR frame, nesting, exceptions or watermark",
+  "current_period": {
+    "configured_CPU_Hz": 200000000,
+    "configured_control_Hz": 50000,
+    "period_cycles": 4000,
+    "nominal_write_window_cycles": 1628
+  },
+  "version11_target_runtime_measured": false,
+  "timing_conclusion": "No board speedup, WCET or real-time qualification claimed for version11. Historical 19212/19242-cycle measurements describe versions8/9 only.",
+  "prior_dedicated_single_root_proxies_do_not_describe_this_binary": true,
+  "context": {
+    "words": 20,
+    "run_word": "0xf526",
+    "output_section": ".bss",
+    "bank": "RAMGS3",
+    "existing_linker_unchanged": true
+  },
+  "actual_BSS_object_layout": {
+    "scope": "Actual linked .bss symbols including isolated batch context",
+    "previous_symbol_count": 137,
+    "current_symbol_count": 137,
+    "all_previous_addresses_and_sizes_identical": true,
+    "differences": {},
+    "current_symbols": {
+      ".bss": {
+        "word": 61440,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_cmdPacket": {
+        "word": 62778,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_cmdDispatcher": {
+        "word": 64462,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_varSetTxtList": {
+        "word": 64622,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_varSetBtnList": {
+        "word": 64558,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_varSetSldrList": {
+        "word": 64590,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_varGetList": {
+        "word": 64526,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_arrayGetList": {
+        "word": 64430,
+        "bytes": 0
+      },
+      ".bss:SFRA_GUI_dataSetList": {
+        "word": 64494,
+        "bytes": 0
+      },
+      ".bss:VIENNA_plantMagVect": {
+        "word": 64276,
+        "bytes": 0
+      },
+      ".bss:VIENNA_plantPhaseVect": {
+        "word": 64336,
+        "bytes": 0
+      },
+      ".bss:VIENNA_olMagVect": {
+        "word": 64156,
+        "bytes": 0
+      },
+      ".bss:VIENNA_olPhaseVect": {
+        "word": 64216,
+        "bytes": 0
+      },
+      ".bss:VIENNA_freqVect": {
+        "word": 64096,
+        "bytes": 0
+      },
+      ".bss:VIENNA_dBuff1": {
+        "word": 63188,
+        "bytes": 0
+      },
+      ".bss:VIENNA_dBuff2": {
+        "word": 63388,
+        "bytes": 0
+      },
+      ".bss:VIENNA_dBuff3": {
+        "word": 63588,
+        "bytes": 0
+      },
+      ".bss:VIENNA_dBuff4": {
+        "word": 63788,
+        "bytes": 0
+      },
+      ".bss:vTimer0": {
+        "word": 64674,
+        "bytes": 0
+      },
+      ".bss:vTimer1": {
+        "word": 64678,
+        "bytes": 0
+      },
+      "pf_input_rotation": {
+        "word": 62784,
+        "bytes": 12
+      },
+      "pf_reference_rotation": {
+        "word": 62790,
+        "bytes": 12
+      },
+      "pf_profile_work": {
+        "word": 62796,
+        "bytes": 24
+      },
+      "pf_control_context": {
+        "word": 62758,
+        "bytes": 40
+      },
+      "pf_first_plan": {
+        "word": 62808,
+        "bytes": 48
+      },
+      "pf_candidate_plan": {
+        "word": 62832,
+        "bytes": 48
+      },
+      "pf_standalone_plan": {
+        "word": 62856,
+        "bytes": 48
+      },
+      "pf_lambda_work": {
+        "word": 62910,
+        "bytes": 80
+      },
+      "pf_select_work": {
+        "word": 62950,
+        "bytes": 80
+      },
+      "pf_root_work": {
+        "word": 62990,
+        "bytes": 108
+      },
+      "pf_control_work": {
+        "word": 63044,
+        "bytes": 112
+      },
+      "pf_candidate_seed": {
+        "word": 63100,
+        "bytes": 176
+      },
+      ".bss:pf_control_context": {
+        "word": 62758,
+        "bytes": 0
+      },
+      "history_valid": {
+        "word": 61440,
+        "bytes": 2
+      },
+      "previous_hw": {
+        "word": 61441,
+        "bytes": 2
+      },
+      "previous_trip": {
+        "word": 61442,
+        "bytes": 2
+      },
+      "wave_divider": {
+        "word": 61443,
+        "bytes": 2
+      },
+      "previous_theta": {
+        "word": 61474,
+        "bytes": 4
+      },
+      "previous_omega": {
+        "word": 61476,
+        "bytes": 4
+      },
+      "previous_up": {
+        "word": 61478,
+        "bytes": 4
+      },
+      "previous_low": {
+        "word": 61480,
+        "bytes": 4
+      },
+      "outer_integral": {
+        "word": 61482,
+        "bytes": 4
+      },
+      "outer_filtered": {
+        "word": 61484,
+        "bytes": 4
+      },
+      "previous_idq": {
+        "word": 64670,
+        "bytes": 8
+      },
+      "previous_fhat": {
+        "word": 64666,
+        "bytes": 8
+      },
+      "observer_config": {
+        "word": 61486,
+        "bytes": 20
+      },
+      "wave_sum": {
+        "word": 63988,
+        "bytes": 24
+      },
+      "pc_config": {
+        "word": 61496,
+        "bytes": 32
+      },
+      "benchmark_config": {
+        "word": 61512,
+        "bytes": 32
+      },
+      "grid_config": {
+        "word": 61546,
+        "bytes": 36
+      },
+      "reconstruct_output": {
+        "word": 61564,
+        "bytes": 44
+      },
+      "reconstruct_input": {
+        "word": 61586,
+        "bytes": 48
+      },
+      "benchmark_input": {
+        "word": 61692,
+        "bytes": 64
+      },
+      ".bss:VIENNA_pcmMeasuredDQ_A": {
+        "word": 64662,
+        "bytes": 0
+      },
+      ".bss:previous_idq": {
+        "word": 64670,
+        "bytes": 0
+      },
+      ".bss:previous_fhat": {
+        "word": 64666,
+        "bytes": 0
+      },
+      ".bss:wave_sum": {
+        "word": 63988,
+        "bytes": 0
+      },
+      "SFRA_GUI_varGetList": {
+        "word": 64526,
+        "bytes": 64
+      },
+      "SFRA_GUI_rcvTaskPointer": {
+        "word": 64414,
+        "bytes": 4
+      },
+      "SFRA_GUI_commsOKflg": {
+        "word": 64396,
+        "bytes": 2
+      },
+      "SFRA_GUI_memDataPtr16": {
+        "word": 64420,
+        "bytes": 4
+      },
+      "SFRA_GUI_rxChar": {
+        "word": 64400,
+        "bytes": 2
+      },
+      "SFRA_GUI_lowByteFlag": {
+        "word": 64398,
+        "bytes": 2
+      },
+      "SFRA_GUI_memDataPtr32": {
+        "word": 64422,
+        "bytes": 4
+      },
+      "SFRA_GUI_varSetBtnList": {
+        "word": 64558,
+        "bytes": 64
+      },
+      "SFRA_GUI_led_gpio": {
+        "word": 64412,
+        "bytes": 2
+      },
+      "SFRA_GUI_delayer": {
+        "word": 64407,
+        "bytes": 2
+      },
+      "SFRA_GUI_sendTaskPtr": {
+        "word": 64399,
+        "bytes": 2
+      },
+      "SFRA_GUI_cmdPacket": {
+        "word": 62778,
+        "bytes": 12
+      },
+      "SFRA_GUI_rxWord": {
+        "word": 64401,
+        "bytes": 2
+      },
+      "SFRA_GUI_led_flag": {
+        "word": 64411,
+        "bytes": 2
+      },
+      "SFRA_GUI_memGetAmount": {
+        "word": 64409,
+        "bytes": 2
+      },
+      "SFRA_GUI_arrayGetList": {
+        "word": 64430,
+        "bytes": 64
+      },
+      "SFRA_GUI_dataOut32": {
+        "word": 64418,
+        "bytes": 4
+      },
+      "SFRA_GUI_memGetAddress": {
+        "word": 64424,
+        "bytes": 4
+      },
+      "SFRA_GUI_dataOut16": {
+        "word": 64405,
+        "bytes": 2
+      },
+      "SFRA_GUI_sweep_start": {
+        "word": 64413,
+        "bytes": 2
+      },
+      "SFRA_GUI_rcvTskPtrShdw": {
+        "word": 64406,
+        "bytes": 2
+      },
+      "SFRA_GUI_numWords": {
+        "word": 64403,
+        "bytes": 2
+      },
+      "SFRA_GUI_varSetSldrList": {
+        "word": 64590,
+        "bytes": 64
+      },
+      "SFRA_GUI_wordsLeftToGet": {
+        "word": 64404,
+        "bytes": 2
+      },
+      "SFRA_GUI_serialCommsTimer": {
+        "word": 64397,
+        "bytes": 2
+      },
+      "SFRA_GUI_dataSetList": {
+        "word": 64494,
+        "bytes": 64
+      },
+      "SFRA_GUI_temp": {
+        "word": 64428,
+        "bytes": 4
+      },
+      "SFRA_GUI_sci_base_addr": {
+        "word": 64416,
+        "bytes": 4
+      },
+      "SFRA_GUI_varSetTxtList": {
+        "word": 64622,
+        "bytes": 64
+      },
+      "SFRA_GUI_memSetValue": {
+        "word": 64426,
+        "bytes": 4
+      },
+      "SFRA_GUI_memSetPtr": {
+        "word": 64410,
+        "bytes": 2
+      },
+      "SFRA_GUI_memGetPtr": {
+        "word": 64408,
+        "bytes": 2
+      },
+      "SFRA_GUI_taskDoneFlag": {
+        "word": 64402,
+        "bytes": 2
+      },
+      "SFRA_GUI_cmdDispatcher": {
+        "word": 64462,
+        "bytes": 64
+      },
+      "VIENNA_timer1": {
+        "word": 64002,
+        "bytes": 2
+      },
+      "VIENNA_plantMagVect": {
+        "word": 64276,
+        "bytes": 120
+      },
+      "VIENNA_offset165": {
+        "word": 64012,
+        "bytes": 4
+      },
+      "VIENNA_dVal3": {
+        "word": 64008,
+        "bytes": 4
+      },
+      "VIENNA_dVal2": {
+        "word": 64006,
+        "bytes": 4
+      },
+      "VIENNA_dVal1": {
+        "word": 64004,
+        "bytes": 4
+      },
+      "VIENNA_dVal4": {
+        "word": 64010,
+        "bytes": 4
+      },
+      "VIENNA_offsetCalCounter": {
+        "word": 64000,
+        "bytes": 2
+      },
+      "VIENNA_freqVect": {
+        "word": 64096,
+        "bytes": 120
+      },
+      "VIENNA_olMagVect": {
+        "word": 64156,
+        "bytes": 120
+      },
+      "VIENNA_sfra1": {
+        "word": 64064,
+        "bytes": 64
+      },
+      "VIENNA_dBuff4": {
+        "word": 63788,
+        "bytes": 400
+      },
+      "VIENNA_dBuff1": {
+        "word": 63188,
+        "bytes": 400
+      },
+      "VIENNA_dBuff2": {
+        "word": 63388,
+        "bytes": 400
+      },
+      "VIENNA_dBuff3": {
+        "word": 63588,
+        "bytes": 400
+      },
+      "VIENNA_i": {
+        "word": 64001,
+        "bytes": 2
+      },
+      "VIENNA_plantPhaseVect": {
+        "word": 64336,
+        "bytes": 120
+      },
+      "VIENNA_olPhaseVect": {
+        "word": 64216,
+        "bytes": 120
+      },
+      "VIENNA_dLog1": {
+        "word": 64014,
+        "bytes": 52
+      },
+      "vTimer1": {
+        "word": 64678,
+        "bytes": 8
+      },
+      "vTimer0": {
+        "word": 64674,
+        "bytes": 8
+      },
+      "B_Task_Ptr": {
+        "word": 64658,
+        "bytes": 4
+      },
+      "C_Task_Ptr": {
+        "word": 64660,
+        "bytes": 4
+      },
+      "A_Task_Ptr": {
+        "word": 64656,
+        "bytes": 4
+      },
+      "Alpha_State_Ptr": {
+        "word": 64654,
+        "bytes": 4
+      },
+      "PC_fast_profile": {
+        "word": 62880,
+        "bytes": 60
+      },
+      "VIENNA_pcmMeasuredDQ_A": {
+        "word": 64662,
+        "bytes": 8
+      },
+      "VIENNA_pcmInput": {
+        "word": 61660,
+        "bytes": 64
+      },
+      "VIENNA_pcmGrid": {
+        "word": 61632,
+        "bytes": 56
+      },
+      "VIENNA_pcmAlgorithmCycles": {
+        "word": 61452,
+        "bytes": 4
+      },
+      "VIENNA_pcmWriteCycles": {
+        "word": 61456,
+        "bytes": 4
+      },
+      "VIENNA_pcmTick": {
+        "word": 61450,
+        "bytes": 4
+      },
+      "VIENNA_pcmOutput": {
+        "word": 61760,
+        "bytes": 1996
+      },
+      "VIENNA_pcmObserver": {
+        "word": 61528,
+        "bytes": 36
+      },
+      "VIENNA_pcmBenchCyclesMax": {
+        "word": 61446,
+        "bytes": 4
+      },
+      "VIENNA_pcmRingCount": {
+        "word": 61464,
+        "bytes": 4
+      },
+      "VIENNA_pcmBenchCycles": {
+        "word": 61444,
+        "bytes": 4
+      },
+      "VIENNA_pcmAlgorithmCyclesMax": {
+        "word": 61454,
+        "bytes": 4
+      },
+      "VIENNA_pcmBodyCyclesMax": {
+        "word": 61462,
+        "bytes": 4
+      },
+      "VIENNA_pcmIqRef_A": {
+        "word": 61472,
+        "bytes": 4
+      },
+      "VIENNA_pcmRingOverflow": {
+        "word": 61466,
+        "bytes": 4
+      },
+      "VIENNA_pcmIdRef_A": {
+        "word": 61470,
+        "bytes": 4
+      },
+      "VIENNA_pcmWaveCount": {
+        "word": 61468,
+        "bytes": 4
+      },
+      "VIENNA_pcmWriteCyclesMax": {
+        "word": 61458,
+        "bytes": 4
+      },
+      "VIENNA_pcmBenchCount": {
+        "word": 61448,
+        "bytes": 4
+      },
+      "VIENNA_pcmBodyCycles": {
+        "word": 61460,
+        "bytes": 4
+      }
+    },
+    "new_symbols": {}
+  },
+  "batch_binder_linked": false,
+  "masked_old_helper_linked": false,
+  "masked_old_helper_has_ABI_or_Flash_call": false,
+  "batch_dynamic_interval_model_entries_per_successful_PC_run": 2,
+  "previous10_dynamic_interval_model_entries": 2,
+  "historical_pre10_dynamic_interval_model_entries": 9,
+  "model_entries_scope": "Batch structure retained from10, source branch/loop structure plus actual inlined binder and HOST18-root count; no new11 call-count reduction or target speedup inferred",
+  "BSS_symbol_count_scope": "137 linked .bss symbol entries, including zero-size section labels; not a count of 137 allocated C objects",
+  "retained_FP_dependency_evidence": "FP_dependency_audit.json",
+  "formal_validation_evidence": {
+    "HOST": {
+      "path": "round11\\host\\pass2\\REPORT.json",
+      "sha256": "748006005e0c5be80c038aaa0a6a44a3eda699e33393f32c4cf0b22bd787e13f"
+    },
+    "closed_loop": {
+      "path": "round11\\formal_closed_loop\\pass2\\REPORT.json",
+      "sha256": "0f1a09612e6272b9ec93cbea9e3e614506e0d3f0cd991da244616009b97bbe6b"
+    },
+    "source_review": {
+      "path": "round11\\audit\\FINAL_SOURCE_REVIEW.json",
+      "sha256": "81dd7270639981d7ec3475468fb9660c3a7e886fb57da696c115902638c3a457"
+    },
+    "review_status": "Parent/independent validator completed formal pass2; reports consumed as referenced evidence, not rerun in this binary audit."
+  }
+}

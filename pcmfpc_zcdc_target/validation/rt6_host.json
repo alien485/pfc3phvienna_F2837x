@@ -1,0 +1,183 @@
+{
+  "date": "2026-10-26",
+  "status": "PASS_ROUND5_EQUIVALENCE",
+  "scope": "HOST bit regression against round5 lambda, not mathematical identity on all inputs, target TMU/WCET or hardware qualification",
+  "baseline_fast_c_sha256": "25d29682837e9c2379c7b3c9d3523f5f25f5db980499987423e3dab1915e9872",
+  "baseline_fast_h_sha256": "fb1edfd454046ca0cef110d120ae88c92c7fd207320bc159beee748d8eebf945",
+  "source_sha256": {
+    "vienna_pcmfpc_fast.c": "574549145827de39fcb70cc9c545154de0da66b6f009cd45f188f39b16e36620",
+    "vienna_pcmfpc_fast.h": "412bd5cddb5d522ccb54e5968571768b719b85b74fef446ae0a1c1c3d9c7e65e",
+    "vienna_pcmfpc_zcdc.c": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+    "vienna_pcmfpc_zcdc.h": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+    "vienna_pcmfpc_runtime.c": "cd91eda90067eceee80d327c6a9fcdca762e7f68231d5085523026ead4bb5d58",
+    "vienna_pcmfpc_runtime.h": "2e5ca5342a974ca765f9073effcf715da53543d75c4c5598413d7ca7021caeb1",
+    "vienna_pcmfpc_observer.c": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+    "vienna_pcmfpc_observer.h": "12dff9253bf892915b125d46169cd1eb4c0f2d0251352d965894ef9e4bb095fa",
+    "vienna_grid_sync.c": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+    "vienna_grid_sync.h": "559ee376c5315dbca86b017a9ca97ba8d20c87d4ef227a0c36ad1827372210c3",
+    "tests/validate_round6.py": "94103b03851e29f2434119c7d659592eb138024630d295ab3f31ca544024c344",
+    "tests/validate_lambda_root.py": "3761d325265d571549994d3a39fc67510876d1c63692433fcad5f45f81b8697d",
+    "tests/lambda_root_probe.c": "df25bc837993cc34e92ce8134ed32e0c5816afac0792d4a01843c2c7eacb7bbd",
+    "tests/ti_fast_replay.c": "4664ddd564a0075f00a153c9f822e8afe95f684e05c911f6a3766fe2e988f082",
+    "tests/core_fast_safety.c": "c6c002b22c98a0940ad388a708518b7597b29250d5e0c0bd7839a990b46ee143",
+    "tests/core_runtime_test.c": "77fa4f8c33b40e414dcf2fd0bbffe168d70530886f4b2fd9f668e056b3d40306",
+    "tests/observer_test.c": "9b7834ae68cf1d2177350a7c0c653e962bf1c379660c9ea2451cbb10382ba731",
+    "tests/dense_root_probe.c": "4f9cd6de1b6fa49bdfb81d0530cc2ff435a8650a7c2fd2620c8d76a8c0092205"
+  },
+  "original_piecewise_equivalence_status": "FAIL_EXACT_EQUIVALENCE",
+  "original_harness_return_code": 1,
+  "original_strict_replay": {
+    "cases": 31750,
+    "valid": 31739,
+    "invalid": 11,
+    "status_difference": 0,
+    "selected_difference": 1887,
+    "pcoff_difference": 1880,
+    "active_difference": 42,
+    "rank_i_difference": 1684,
+    "rank_u_difference": 3109,
+    "set_difference": 3305,
+    "discrete_diagnostic_difference": 1887,
+    "blocked_difference": 0,
+    "interval_integral_numeric_difference_rows": 0,
+    "max_gi_error_A2": 5.34057617188e-05,
+    "max_gu_error_V2": 0.0009765625,
+    "max_gz_error_rad2": 9.74641190469,
+    "max_dq_error_A": 3.33786010742e-06,
+    "max_np_error_V": 1.52885913849e-05,
+    "max_interval_integral_error_V_s": 0,
+    "max_zcdc_diag_numeric_error": 9.73513834178,
+    "bisection32_vs_piecewise_reference": {
+      "status_difference": 0,
+      "selected_difference": 2198,
+      "pcoff_difference": 2195,
+      "active_difference": 70
+    },
+    "full_interval": {
+      "calls": 46675,
+      "status_difference": 0,
+      "numeric_difference_rows": 0,
+      "discrete_difference_rows": 0,
+      "max_numeric_error_mixed_SI": 0
+    },
+    "summary_interval": {
+      "calls": 46675,
+      "status_difference": 0,
+      "numeric_difference_rows": 0,
+      "discrete_difference_rows": 0
+    },
+    "control_interval": {
+      "calls": 46675,
+      "status_difference": 0,
+      "numeric_difference_rows": 18991,
+      "discrete_difference_rows": 0,
+      "integral_unavailable_errors": 0
+    },
+    "availability_flag_errors": 0,
+    "unavailable_marker_errors": 0,
+    "max_budget_limit_error_A": 3.33786010742e-06,
+    "max_voltage_margin_error_V": 7.62939453125e-06,
+    "extreme_derived_numeric_guard": {
+      "readable_reference_status": 0,
+      "fast_status": 6,
+      "guard_failure": 0,
+      "reference_margin_finite": 0
+    },
+    "fast_unsafe_error_outputs": 0,
+    "fast_terminal_gate_events": 5,
+    "reference_terminal_gate_events": 10
+  },
+  "original_harness_summary_unchanged_vs_round5": true,
+  "input_dataset_sha256_identical_vs_round5": true,
+  "independent_model_summary_unchanged_vs_round5": true,
+  "safety_and_independent_model_checks_pass": true,
+  "bytewise_public_struct_comparison": {
+    "cases": 31750,
+    "status_differences": 0,
+    "public_flag_differences": 0,
+    "PC_Output_byte_difference_rows": 0,
+    "interval_calls_all_detail_modes": 140025,
+    "interval_status_differences": 0,
+    "PC_Interval_byte_difference_calls": 0,
+    "revision_errors": 0
+  },
+  "bytewise_probe_run_exit": 0,
+  "bytewise_probe_build_command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS -DPC_run_fast=PC_run_fast_round5 -DPC_fast_predict_interval=PC_fast_predict_interval_round5 -DPC_fast_output_substeps_available=PC_fast_output_substeps_available_round5 -DPC_fast_output_summaries_available=PC_fast_output_summaries_available_round5 -DPC_fast_output_integrals_available=PC_fast_output_integrals_available_round5 -DPC_fast_kernel_revision=PC_fast_kernel_revision_round5 -c \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\build_pass5_final\\vienna_pcmfpc_fast.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\\round5_fast.obj\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_fast.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\\round6_exact_probe.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\\round5_fast.obj\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\\round6_exact_probe.exe\"",
+  "comparison_harness_sha256": "43edf988156db95a39d6ad89a1c59e795c030bfda69d8931ce9c6f2e76683055",
+  "dense_root_differential": {
+    "cases": 191620,
+    "status_differences": 0,
+    "next_current_byte_difference_calls": 0,
+    "shared_path_differences": 0,
+    "nonfinite_success": 0,
+    "residual_failures": 0,
+    "generic_error_cases": 75949,
+    "dense_error_cases": 75949,
+    "maximum_KCL_residual_A": 1.43051147461e-06
+  },
+  "dense_root_probe_run_exit": 0,
+  "dense_root_build_command": "call \"D:\\VisualStudio\\Microsoft Visual_Studio2022BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" >nul && set \"TMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\" && set \"TEMP=D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\" && \"D:\\MATLAB2023b\\install\\toolbox\\sldrt\\clang\\win64\\clang.exe\" -std=c11 -O2 -Wall -Wextra -Werror -D_CRT_SECURE_NO_WARNINGS \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\vienna_pcmfpc_zcdc.c\" \"D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\tests\\dense_root_probe.c\" -o \"D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\build\\dense_root_probe.exe\"",
+  "frozen_csv_and_focus_comparisons": [
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round5\\host\\pass2\\raw\\lambda_exact_replay_outputs.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\raw\\lambda_exact_replay_outputs.csv",
+      "baseline_sha256": "5da4e55bd81d698e834b17dea6565796d18e17e2a850ba92931ed497af839392",
+      "current_sha256": "5da4e55bd81d698e834b17dea6565796d18e17e2a850ba92931ed497af839392",
+      "byte_identical": true,
+      "baseline_rows": 31750,
+      "current_rows": 31750,
+      "differing_rows": [],
+      "all_fields_identical": true
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round5\\host\\pass2\\raw\\lambda_exact_replay_differences.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\raw\\lambda_exact_replay_differences.csv",
+      "baseline_sha256": "ce056d4c4efaa3d8ab753b8c672bd32284d8ad180abb850441f783ea9da1d504",
+      "current_sha256": "ce056d4c4efaa3d8ab753b8c672bd32284d8ad180abb850441f783ea9da1d504",
+      "byte_identical": true,
+      "baseline_rows": 4975,
+      "current_rows": 4975,
+      "differing_rows": [],
+      "all_fields_identical": true
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round5\\host\\pass2\\raw\\legacy_exact_replay_outputs.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\raw\\legacy_exact_replay_outputs.csv",
+      "baseline_sha256": "34f0158c47555076d40095c20ca619ff0ee74b4de0c08081df73bb256dfc1049",
+      "current_sha256": "34f0158c47555076d40095c20ca619ff0ee74b4de0c08081df73bb256dfc1049",
+      "byte_identical": true,
+      "baseline_rows": 31750,
+      "current_rows": 31750,
+      "differing_rows": [],
+      "all_fields_identical": true
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round5\\host\\pass2\\raw\\root_blocked_edges.csv",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\raw\\root_blocked_edges.csv",
+      "baseline_sha256": "62adcbc1aa89f9669eb2aecab4974bfc2f586b4d9ce59954917f242c5e0f5cad",
+      "current_sha256": "62adcbc1aa89f9669eb2aecab4974bfc2f586b4d9ce59954917f242c5e0f5cad",
+      "byte_identical": true,
+      "baseline_rows": 11,
+      "current_rows": 11,
+      "differing_rows": [],
+      "all_fields_identical": true
+    },
+    {
+      "baseline": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round5\\host\\pass2\\raw\\lambda_focus.log",
+      "current": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\rt_optimization\\round6\\host\\pass2\\raw\\lambda_focus.log",
+      "baseline_sha256": "d06933633ac49611432a0b3e40c5a9663ff0042d4ea49467e10b8e73dc187237",
+      "current_sha256": "d06933633ac49611432a0b3e40c5a9663ff0042d4ea49467e10b8e73dc187237",
+      "byte_identical": true
+    }
+  ],
+  "closed_loop_comparison": "Parent runs the original closed-loop driver; use --compare-closed-loop afterward.",
+  "no_control_source_changes_by_validation": true,
+  "no_hardware_actions_or_cleanup": true,
+  "report_narrative_correction": {
+    "record": "report_correction.json",
+    "executed_runner_sha256": "94103b03851e29f2434119c7d659592eb138024630d295ab3f31ca544024c344",
+    "current_narrative_corrected_runner_sha256": "1fc591b59301aa1fdddfb294ed7124f95999ef991311f847e83e94493c20e394",
+    "only_description_changed": true,
+    "numeric_tests_rerun": false
+  }
+}

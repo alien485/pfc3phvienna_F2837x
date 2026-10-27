@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-27",
+  "source": "User CCS screenshot following explicit revision9/load/request2 workflow",
+  "result": "FIXTURE_NUMERIC_PASS;NO_SPEEDUP_DEMONSTRATED;REALTIME_BUDGET_FAIL",
+  "observed": {
+    "BenchRequest": 0,
+    "BenchStatus": 1,
+    "BenchCycles": 19242,
+    "BenchCyclesMax": 19242,
+    "BenchCount": 1,
+    "BenchSelectedId": 3,
+    "BenchHWState": 2,
+    "WriteCycles": 1151,
+    "WriteCyclesMax": 1268,
+    "BodyCycles": 1327,
+    "BodyCyclesMax": 20864,
+    "fcsDeadlineMissCount": 1,
+    "RecordArm": 0,
+    "RingCount": 0,
+    "RingOverflow": 0,
+    "WaveArm": 0,
+    "WaveCount": 0
+  },
+  "comparison": {
+    "revision8_cycles": 19212,
+    "cycles_increase": 30,
+    "percent_increase": 0.1561524047470331,
+    "conditional_200MHz_us_increase": 0.15,
+    "single_sample_cannot_establish_stable_regression_or_improvement": true
+  },
+  "conditional_200MHz": {
+    "Bench_us": 96.21,
+    "BodyMax_us": 104.32,
+    "actual_CPU_clock_independently_verified": false,
+    "complete_ISR_measured": false
+  },
+  "budgets": {
+    "period_cycles": 4000,
+    "nominal_write_window_cycles": 1628,
+    "period_ratio": 4.8105,
+    "write_window_ratio": 11.81941031941032,
+    "pass": false
+  },
+  "association": {
+    "candidate_revision": 9,
+    "marker_visible_in_screenshot": false,
+    "basis": "Immediate preceding requested load/marker9/request2 workflow",
+    "on_target_OUT_hash_verified": false,
+    "local_candidate_OUT_sha256": "9a4daa12eb422d6c1efb78d8ed3fefc79a4c76013bacf13526bff6935839578b"
+  },
+  "limits": [
+    "Fixed numeric fixture only, not closed-loop plant experiment or WCET",
+    "CoreStatus/Fault/Release/loops/OST and pause history not included in image",
+    "DeadlineMiss is cumulative",
+    "pc_elapsed legacy wrap correction uses PRD rather than PRD+1, at most one tick error for one wrap; no timer/runtime edit in this round"
+  ],
+  "screenshot": {
+    "source": "C:\\Users\\YAN\\AppData\\Local\\Temp\\codex-clipboard-eecf1401-d242-45bd-83bf-e02ec9a92308.png",
+    "copy": "output\\ti_pcmfpc_zcdc_port\\bench_20261027_round9\\ccs_request2_benchmark.png",
+    "sha256": "e6982d5f1202c691c1be385915693d79614c58633afcb5d03d965b1cf5c02a2d"
+  },
+  "agent_actions": {
+    "hardware": false,
+    "control_source_changed": false,
+    "delete_commit_push": false
+  }
+}
