@@ -15,15 +15,28 @@
 #error PC_FAST_LEGACY_CONTROL_ROOT_must_be_0_or_1
 #endif
 
-/* This implementation uses static angle plans and is NOT reentrant. On the
+/* Revision12 is a single-state FCS ENGINEERING variant of mode7. PC_run_fast
+ * adds dynamic total DC voltage (50ohm load), anchored incremental Fhat,
+ * 7A/50V sampled hard feasibility,6.5A FUTURE-node design headroom,soft NP
+ * recovery (10V,.95),then the original independent rankings/deltaI budget and
+ * reference-projection-constrained terminal choice. Parameters are explicit
+ * control design values, not changed hardware protections or proven bounds.
+ * Existing CONTROL substeps provide the metrics; no extra FULL predictions.
+ * See vienna_pcmfpc_engineering.h and PC_engineering_diag for scope/validity.
+ *
+ * This implementation uses static angle plans and is NOT reentrant. On the
  * DSP it is owned exclusively by CPU1 ISR1; do not call it from CLA/ISR2.
- * The reference PC_run/PC_predict_interval remain unchanged.
+ * Reference PC_run/PC_predict_interval remain unchanged. Public standalone
+ * PC_fast_predict_interval retains the ORIGINAL fixed-DC/frozen-F model for
+ * observer reconstruction, regardless of detail. It never reads live
+ * engineering anchors/diagnostics. CONTROL_ONLY standalone now uses the
+ * original voltage-root loop; live MPC still uses the optimized lambda root.
  * Both fast entry points require cfg->root_method == PC_ROOT_PIECEWISE.
  * CONTROL_ONLY's lambda=c*mu active-set root solves the same real-arithmetic
  * diode model as FULL/SUMMARY. Its floating-point operation order differs;
  * near ties, zero-current blocking and terminal selection are not promised
  * bit-identical to those paths. No cost/zero epsilon is added to mask this.
- * Revision 10 batches eight candidates in one shared model core and caches
+ * Historical revision10 batches eight candidates in one shared model core and caches
  * common setup scalars. N=1 retains standalone reads and failure writes.
  * Revision 9 omits unused ON events only in single-ON NULL plans; the
  * generic solver and shared plans retain revision 8 arithmetic.
@@ -50,7 +63,7 @@ enum { PC_FAST_SUMMARY_ONLY = 0U, PC_FAST_FULL_SUBSTEPS = 1U,
 extern volatile uint16_t PC_fast_output_substeps_available;
 extern volatile uint16_t PC_fast_output_summaries_available;
 extern volatile uint16_t PC_fast_output_integrals_available;
-/* Diagnostic build marker (revision 10), refreshed by PC_run_fast only. */
+/* Diagnostic build marker (revision12), refreshed by PC_run_fast only. */
 extern volatile uint16_t PC_fast_kernel_revision;
 
 /* Optional one-shot profiling, owned by the same CPU1 ISR1 as the kernel.
@@ -60,6 +73,9 @@ extern volatile uint16_t PC_fast_kernel_revision;
  * configure/arm are called only while the owner is idle, never from clock.
  * mode 1 records disjoint stage buckets; mode 2 also records nested roots.
  * root_cycles is INCLUDED in delay/candidates and must not be added again.
+ * Revision12 places the duplicated mode2 fine-profile model body in FLASH;
+ * its cycle counts are NOT the live RAM kernel's write-path cost. Mode1 uses
+ * the ordinary RAM body. Requests remain stopped numeric benchmarks only.
  * Clock instrumentation/reads perturb timings. clock_pair_overhead is an
  * observed adjacent-read delta, not a correction automatically subtracted.
  */

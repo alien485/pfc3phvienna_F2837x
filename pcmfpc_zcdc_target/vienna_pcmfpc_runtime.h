@@ -18,6 +18,30 @@ typedef struct {
     uint16_t actual_hw,pending_hw,fault,output_source,core_status;
 } VIENNA_PC_Record;
 typedef struct { float iabc_A[3],ref_dq_A[2],theta_rad; } VIENNA_PC_Wave;
+/* Compiled timing identity for CCS observation, not measured target clocks.
+ * Revision2: 4 kHz guarded single-state FCS engineering kernel12. */
+typedef struct {
+    uint16_t revision,pwm_period_ticks,tbprd_ticks;
+    float control_hz,sample_us,first_duration_us;
+    uint32_t period_cycles;
+} VIENNA_PC_Timing;
+extern volatile VIENNA_PC_Timing VIENNA_pcmTiming;
+/* Runtime4 combines the guarded engineering kernel12,4kHz timing revision2
+ * and observer prefetch. Reference32 is numeric benchmark only; live control
+ * in this child requires Mode1/2 and RootMethod1.
+ * Observation only: enabled is refreshed, never read as a debugger command. */
+typedef struct { uint16_t enabled,applied; uint32_t block_count; } VIENNA_PC_TerminalGuard;
+extern volatile uint16_t VIENNA_pcmRuntimeRevision;
+extern volatile VIENNA_PC_TerminalGuard VIENNA_pcmTerminalGuard;
+/* Prepare next measurement interval's MODEL integral after gate
+ * submission. Sequence/gate/mode/root are checked before a one-shot consume.
+ * No expected cache (startup or isolated sample tests) uses the old synchronous
+ * reconstruction; a corrupt expected cache fails closed. Observation only. */
+typedef struct {
+    uint16_t ready,status;
+    uint32_t sequence,hits,fallbacks,cycles,cycles_max;
+} VIENNA_PC_ObserverPrefetch;
+extern volatile VIENNA_PC_ObserverPrefetch VIENNA_pcmObserverPrefetch;
 extern volatile uint16_t VIENNA_pcmModeRequest,VIENNA_pcmModeActive;
 extern volatile uint16_t VIENNA_pcmHardwareRelease,VIENNA_pcmShadowEnable;
 extern volatile uint16_t VIENNA_pcmFault,VIENNA_pcmCoreStatus;
@@ -34,9 +58,32 @@ extern volatile uint16_t VIENNA_pcmOutputSource,VIENNA_pcmOutputDetailValid;
 extern volatile uint16_t VIENNA_pcmOutputIntegralValid;
 /* One-shot numeric benchmark, no ADC substitution or gate submission.
  * Request 1=reference32, 2=fast plain, 3=fast stage profile, 4=fast+root profile.
+ * Request 5=isolated PLL + two-segment FULL reconstruction + initialized ESO
+ * update + fast kernel, using configured intervals, without nested profiling.
+ * Its timing includes the FLASH pipeline helper and fixture transfers, excludes
+ * fixture warm initialization, and is not a complete ISR measurement or WCET.
  * Requests 2..4 use intersection angles only; 3/4 instrument one call and
- * never submit its gate. Status 0=idle,1=OK,2=unsafe,3=bad request,4=core error. */
+ * never submit its gate. Request 5 also uses intersection angles only; requests
+ * Request6=same pipeline fixture as5, with its MODEL voltage integral prepared
+ * before timing. Results must match5; measured part excludes reconstruction,
+ * but post/body still includes it. This is not full ISR or write-deadline proof.
+ * Requests>=7 invalid. Status0=idle,1=OK,2=unsafe,3=bad request,4=numeric error. */
 extern volatile uint16_t VIENNA_pcmBenchRequest,VIENNA_pcmBenchStatus;
+/* Continuous stopped numeric test: 0=off,5/6=one corresponding fixture per
+ * post/ISR. A nonzero one-shot Request takes priority for one invocation.
+ * Every invocation rechecks stopped/OST conditions. Unsafe,invalid,numeric
+ * failure or period fault cancels Repeat; start requests also cancel/reject.
+ * Ordinary stopped reset_control deliberately preserves Repeat. */
+extern volatile uint16_t VIENNA_pcmBenchRepeat;
+/* Elapsed ticks of an inclusive periodic DOWN counter; at most one wrap.
+ * Grouping also supports PRD=UINT32_MAX without forming PRD+1 in32bits. */
+#ifdef __TI_COMPILER_VERSION__
+#pragma FUNC_ALWAYS_INLINE(VIENNA_PCMFPC_elapsed_counts)
+#endif
+static inline uint32_t VIENNA_PCMFPC_elapsed_counts(uint32_t start,uint32_t end,uint32_t prd)
+{
+    return start>=end?start-end:start+(prd-end)+1U;
+}
 extern volatile uint16_t VIENNA_pcmBenchSelectedId,VIENNA_pcmBenchHWState;
 extern volatile uint32_t VIENNA_pcmBenchCycles,VIENNA_pcmBenchCyclesMax,VIENNA_pcmBenchCount;
 extern volatile uint32_t VIENNA_pcmTick,VIENNA_pcmAlgorithmCycles,VIENNA_pcmAlgorithmCyclesMax;
@@ -52,6 +99,15 @@ extern PC_Output VIENNA_pcmOutput;
 extern volatile VIENNA_PC_Record VIENNA_pcmRecords[128];
 extern volatile VIENNA_PC_Wave VIENNA_pcmWave[2000];
 void VIENNA_PCMFPC_init(void);
+/* Pure post-selection correction; no ADC, register, history or trip access.
+ * All pointers must be non-NULL. On active successful output, reject a terminal
+ * choice whose dot(reference,predicted_dq) is below the common PC-OFF choice.
+ * Equal projection retains the original angle winner; no epsilon/weight.
+ * A correction changes only selected_id/hw_state and zcdc_diag[7..9].
+ * Costs, predictions, current budget, intersection and common trigger stay.
+ * Errors return without altering out; caller must invalidate failed output.
+ * applied is cleared on entry. This is not a physical power/safety guarantee. */
+uint16_t VIENNA_PCMFPC_terminal_guard(const PC_Input *in,PC_Output *out,uint16_t *applied);
 void VIENNA_PCMFPC_sample(uint16_t trip);
 void VIENNA_PCMFPC_reset_control(void);
 uint16_t VIENNA_PCMFPC_can_start(void);

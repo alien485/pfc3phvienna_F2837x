@@ -33,6 +33,13 @@
 int16_t vTimer0[4];         // Virtual Timers slaved off CPU Timers (A events)
 int16_t vTimer1[4];         // Virtual Timers slaved off CPU Timers (B events)
 
+volatile uint16_t IntruStratPoint = 0U; // Raw16-bit TBCTR, for comparison only.
+volatile uint16_t IntruEndPoint = 0U;
+volatile uint16_t IntruDifPoint = 0U; // Absolute counter difference: invalid across a turn.
+volatile uint32_t IntruCpuCycles = 0UL;
+volatile uint32_t IntruCpuCyclesMax = 0UL;
+volatile float IntruTime_us = 0.0f;
+volatile float IntruTimeMax_us = 0.0f;
 //
 // Variable declarations for state machine
 //
@@ -198,8 +205,25 @@ void main(void)
 #if VIENNA_CONTROL_RUNNING_ON == C28x_CORE
     interrupt void ISR1(void)
     {
+        uint32_t intruCpuStart,intruCpuEnd,intruCpuPeriod;
+        intruCpuStart=CPUTimer_getTimerCount(CPUTIMER0_BASE);
+        IntruStratPoint=EPWM_getTimeBaseCounterValue(EPWM1_BASE);
         VIENNA_pfcControlCode();
         VIENNA_HAL_clearInterrupt(VIENNA_C28x_ISR1_INTERRUPT_PIE_GROUP_NO);
+        IntruEndPoint=EPWM_getTimeBaseCounterValue(EPWM1_BASE);
+        intruCpuEnd=CPUTimer_getTimerCount(CPUTIMER0_BASE);
+        intruCpuPeriod=HWREG(CPUTIMER0_BASE + CPUTIMER_O_PRD);
+        IntruDifPoint=IntruStratPoint + IntruEndPoint;
+        /* Read existing Timer0 only. No reload/prescale/PWM/ADC changes.
+         * Span includes pfcControlCode,PIE clear and capture reads, excluding
+         * ISR prologue/epilogue and the following reporting arithmetic. */
+        IntruCpuCycles=VIENNA_PCMFPC_elapsed_counts(intruCpuStart,intruCpuEnd,intruCpuPeriod);
+        IntruTime_us=(float)IntruCpuCycles*(1000000.0f/VIENNA_CPU_SYS_CLOCK_FREQ_HZ);
+        if(IntruCpuCycles>IntruCpuCyclesMax)
+        {
+            IntruCpuCyclesMax=IntruCpuCycles;
+            IntruTimeMax_us=IntruTime_us;
+        }
     }// control ISR Ends Here
 #endif
 

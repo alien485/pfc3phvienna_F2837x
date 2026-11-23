@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-28",
+  "status": "OFFLINE_CONTROL_RATE_NOT_QUALIFIED",
+  "module_contract_status": "PASS_36490_CHECKS_ZERO_FAILURES",
+  "timing_qualification": {
+    "status": "NATIVE_TI_CONSTANT_VERIFIED_REGISTER_PENDING",
+    "host_matches_native_TI_185tick_constant": true,
+    "verified_offset_ticks": 185,
+    "verified_CMPB_CMPC": 24815,
+    "native_build_proof": {
+      "HAL_asm": "D:\\GraduateStudentProject\\Vienna_Rectifier\\Vienna_Project\\Vienna_MPC\\pfc3phvienna_new_mpc\\pcmfpc_zcdc_target\\FLASH\\vienna_hal.asm",
+      "HAL_asm_sha256": "d2b3137295f7dc0c800c41ffad02c14f63abfe50f8f261b5cd33c018d1eba133",
+      "linked_disassembly": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\control_rate_2khz\\build\\linked_disassembly.txt",
+      "linked_disassembly_sha256": "830f49078dd9ac92977a0f8b9f6091f12b72613c5e2ce71d8da3547428fcbf9f",
+      "linked_instruction_address": "0x82021",
+      "compare_immediate_hex": "0x60ef",
+      "compare_immediate_decimal": 24815,
+      "OUT_sha256": "32406e84a00664d037358e238de2e4591bf2950867419807dc5a7401722353fc",
+      "scope": "Read-only inspection of the implementation owner's native TI build; validator did not build CCS or connect hardware"
+    },
+    "interpretation": "HOST and native TI agree. Earlier186/24814 was a one-tick derivation error, not a compiler disagreement. Preserve pass2's original expectation failure and pass3's pending report. No hardware register has been read."
+  },
+  "timing_arithmetic": {
+    "test": "configured_timing",
+    "control_Hz": 2000,
+    "period_ticks": 50000,
+    "TBPRD": 25000,
+    "ADC_offset_ticks": 185,
+    "CMPB_CMPC": 24815,
+    "Ts_s": 0.000500000023749,
+    "delay_s": 0.000250000011874,
+    "SOC_s": 0.00024815,
+    "ISR_s": 0.00025185,
+    "ISR_to_ZERO_s": 0.00024815,
+    "write_guard_ticks": 40
+  },
+  "module_results": {
+    "test": "control_rate_modules",
+    "checks": 36490,
+    "failures": 0,
+    "PLL_50Hz_phase_RMS_rad": 2.89171333132e-07,
+    "PLL_max_phase_rad": 6.17906330547e-07,
+    "PLL_locked_settled_samples": 1600,
+    "ESO_max_current_error_A": 1.27748446488e-07,
+    "ESO_max_disturbance_error_A_s": 0.00280826014568,
+    "rotating_integral_error_V_s": 9.44648276269e-10,
+    "predictor_calls": 1280,
+    "predictor_status_counts": [
+      1280,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "run_calls": 640,
+    "run_status_counts": [
+      640,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "substep_KCL_max_A": 3.33786010742e-06,
+    "substep_midpoint_invariant_max_V": 9.90854565508e-07,
+    "substep_endpoint_angle_error_max_rad": 2.11631442149e-07,
+    "maximum_projected_current_A": 18.190952301,
+    "maximum_predicted_midpoint_abs_V": 7.59214687347,
+    "reconstruction_calls": 64,
+    "reconstruction_successes": 64,
+    "reconstruction_failures": 0
+  },
+  "two_kHz_plant": {
+    "cases": 6,
+    "mode7_cases": 4,
+    "completed": 6,
+    "with_7A_trip": 6,
+    "core_errors": 0,
+    "observer_errors": 0,
+    "steady_statistics_eligible": false
+  },
+  "bounded_extra_rates": {
+    "cases": 6,
+    "profiles_Hz": [
+      2500,
+      3333.3333333333335,
+      4000
+    ],
+    "completed": 0,
+    "unsupported_timing_refusals": 0,
+    "rail_invalid_exits": 6,
+    "surviving_cases": 0,
+    "target_frequency_changed": false
+  },
+  "evidence_sha256": {
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\control_rate_2khz\\validation\\pass4\\REPORT.json": "c40738969a359277a91b822ae25fd51b8c6586ed4b4683790929536d73ba9d3e",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\control_rate_2khz\\validation\\rate_intersection\\pass1\\REPORT.json": "fd3c30e930fb88da4dff9c0b80025ce2861c939b9fdd60219355ad921292f8a1",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\control_rate_2khz\\validation\\pass2\\REPORT.json": "81c94009ce5b82eb380905d893773da7a7647f37c1dacaf57845f647b697d0fd",
+    "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\control_rate_2khz\\validation\\pass3\\REPORT.json": "b7c7711432f4831afc8ef6781166acb52edc2e0f2cdceb7a1994660bf7d090af"
+  },
+  "source_sha256": {
+    "vienna_settings.h": "9f2389ea86cc9080cfa8792602e141fd006729740eac0f3bdb9e4e5d2df4cbb4",
+    "vienna_user_settings.h": "e054aba03914ec76bfe47c7a45d58c0aaa1f9acfb92a6f0185b68b2e7b658c89",
+    "vienna_hal.c": "962f80ac18509c4c516c2ed21eb0a989bfe6f2dc28cd84b43f8a0868ce633767",
+    "vienna_hal.h": "1c992b16002d73599c0e7c2d5f78155c241daaa58c028f087218edac0029286e",
+    "vienna.h": "b4e823bf038d4b19b04528b8edb17878d7f67c928ca253129135f17976f18216",
+    "main.syscfg": "3f0697955da2b241ae674038000f8694417bab45a13ab3ad2287d66f309ddeb6",
+    "vienna_pcmfpc_zcdc.c": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+    "vienna_pcmfpc_zcdc.h": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+    "vienna_pcmfpc_fast.c": "924aa19f11699214ee06d1581f1044e240dd99821e90cf7d48ca1b7546b0557d",
+    "vienna_pcmfpc_fast.h": "28e0b215684ef7c65a53a1fc1c79391d1abf7609cebea0ab93fd6ce5fe245aad",
+    "vienna_grid_sync.c": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+    "vienna_grid_sync.h": "559ee376c5315dbca86b017a9ca97ba8d20c87d4ef227a0c36ad1827372210c3",
+    "vienna_pcmfpc_observer.c": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+    "vienna_pcmfpc_observer.h": "12dff9253bf892915b125d46169cd1eb4c0f2d0251352d965894ef9e4bb095fa",
+    "tests/control_rate_test.c": "91346d4112dfb4a63f5635762e36582c39f3126c4bccdd19f4b0d42188510d65",
+    "tests/ti_closed_loop.c": "bc8bcd5447ac4b952c82e9b4b6dbf68fc1d18ac1b23e7009986944fb6265dcb8",
+    "vienna_fcs_mpc.h": "c8af59751093e89e1426a5a800e3c73261fe98a50a04e6b14eba3971e543792c"
+  },
+  "snapshot_file_count": 17,
+  "superseded_expectation": "Preserve pass2's literal186tick assertion failure and pass3's native-pending arithmetic report. Actual native TI HAL and linked0x82021 write24815(0x60ef), matching HOST185. Earlier186/24814 was a derivation error, not a compiler disagreement. pass4 is the final independent module result; hardware registers remain unread.",
+  "historical_plant_difference": "Existing ti_closed_loop.c retains its nominal1.86us ADC shift and252us ISR grid event; the native build uses1.85us offset and251.85us ISR. The10ns SOC difference and150ns ISR-grid approximation were not changed inside the old harness. Its filter and protection models also remain unchanged.",
+  "critical_interpretation": "The extra plant harness does not reproduce full runtime core-error OST/loop latching or original half-bus/difference protections. Once a core error/Trip occurs the case is rejected; later negative half-bus voltage is a failed-model diagnostic, not a prediction that real protected hardware would continue running. Post-trip THD/tracking metrics are not steady-state qualification.",
+  "scope": "No control source/threshold edits, CCS build, hardware connection, register read, power operation, Git action or deletion by this validator. The implementation owner supplied the native build, inspected here read-only. Numerical module success and more CPU time do not qualify direct-state2kHz power control or a computation/power frequency intersection."
+}

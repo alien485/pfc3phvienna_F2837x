@@ -60,6 +60,9 @@ PAGE 1 :
 
 SECTIONS
 {
+   /* Stopped numeric fine-profile duplicate. Ordinary live MPC stays in RAM;
+      keep this out of general FLASHB text so startup .cinit retains space. */
+   pcmfpc_profile : > FLASHE, PAGE = 0, ALIGN(4)
    pcmfpc_code : LOAD = FLASHI, RUN = RAMGS12GS15,
        LOAD_START(PCCodeLoadStart), LOAD_SIZE(PCCodeLoadSize),
        RUN_START(PCCodeRunStart), PAGE = 0, ALIGN(4)

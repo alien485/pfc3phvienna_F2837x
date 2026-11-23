@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-28",
+  "main82_unchanged": true,
+  "parent_Kit_preserved": true,
+  "ADC_HAL_TZ_CMPSS_protection_source_unchanged": true,
+  "control_frequency_change": "4000Hz, same single-state output form; existing HAL derives timing",
+  "old_reference_and_observer_source_unchanged": true,
+  "actual_CCS_source_hashes_match_native_audit": true,
+  "actual_HOST_executed_snapshot_matches_live": true,
+  "OUT_sha256": "719730867f2affa96fadc197a401818ebd1f22ef9782d14760f9196596439f1a",
+  "watch_count": 71,
+  "watch_symbols_in_map": true,
+  "unit_checks": 567,
+  "prototype_contract_checks": 83,
+  "current_nominal_raw_CSV_JSON_byte_identical_to_validated_headroom_reference": {
+    "csv": true,
+    "json": true
+  },
+  "native_final_exit": 0,
+  "native_final_errors": 0,
+  "native_final_warnings": 0,
+  "failed_native_attempts_retained": [
+    "native_pass1 RAM full",
+    "native_pass2 FLASHB cinit placement"
+  ],
+  "final_native_attempt": "native_pass3",
+  "tests_final": "validation_pass3",
+  "git_diff_check": "PASS",
+  "hardware_operations": false,
+  "cleanup": false,
+  "git_commit_push": false,
+  "hardware_qualified": false,
+  "next_external_evidence": "CPU1 no-main-power Runtime4/Kernel12/Timing2, BenchRequest5 and6 cycles, BodyCyclesMax/Fault/deadline"
+}

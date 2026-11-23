@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-28",
+  "status": "SINGLE_NUMERICAL_BENCHMARKS_COMPLETE_FULL_ISR_PENDING",
+  "scope": "User-supplied CCS screenshots; no agent target access",
+  "local_OUT_sha256": "32406e84a00664d037358e238de2e4591bf2950867419807dc5a7401722353fc",
+  "target_OUT_hash_visible": false,
+  "actual_CPU_clock_verified": false,
+  "clock_basis_hz": 200000000,
+  "request5_repeat_count": 1,
+  "runs": [
+    {
+      "request_user_identified": 2,
+      "timing_revision_visible": 1,
+      "control_hz_visible": 2000.0,
+      "request_after_completion": 0,
+      "bench_status": 1,
+      "cycles": 19732,
+      "cycles_max_cumulative": 19732,
+      "bench_count_cumulative": 1,
+      "pcm_fault": 0,
+      "time_us_at_configured_200MHz": 98.66,
+      "image_file": "BenchRequest2.png",
+      "image_sha256": "72bb03b46f39ac0654953fdf88ca5e7a65adcb288354f7ec0dda42c4f23979a5"
+    },
+    {
+      "request_user_identified": 5,
+      "timing_revision_visible": 1,
+      "control_hz_visible": 2000.0,
+      "request_after_completion": 0,
+      "bench_status": 1,
+      "cycles": 27718,
+      "cycles_max_cumulative": 27718,
+      "bench_count_cumulative": 2,
+      "pcm_fault": 0,
+      "time_us_at_configured_200MHz": 138.59,
+      "image_file": "BenchRequest5.png",
+      "image_sha256": "e535435f8ea8eb894580e74e85387a34a62b8ed873ca0ef155999afe901c1c92"
+    }
+  ],
+  "nominal_write_budget_after_guard_us": 247.75,
+  "request5_difference_from_nominal_budget_us": 109.16,
+  "difference_is_verified_write_margin": false,
+  "full_write_path_measured": false,
+  "complete_ISR_WCET_measured": false,
+  "deadline_counter_visible": false,
+  "body_cycles_max_visible": false,
+  "hardware_release_loops_and_OST_visible": false,
+  "hardware_release_loops_and_OST_requirement": "Retain release0, all loops stopped and three OST; not independently visible in these crops",
+  "closed_loop_qualification": "NOT_QUALIFIED_OFFLINE_7A_TRIPS",
+  "interpretation": [
+    "Request5 is one sample. Count2 is the cumulative count of request2 plus request5.",
+    "Request5 executes in post, after the normal gate write. Its success is not a real write-deadline test.",
+    "Request5 includes FLASH helper/data transfers and excludes prepare; it does not include the complete ISR.",
+    "Request2 and Request5 use different final MPC inputs. Their cycle difference is not an isolated PLL/ESO cost."
+  ],
+  "no_control_protection_or_frequency_changes": true
+}

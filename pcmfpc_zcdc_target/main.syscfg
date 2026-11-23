@@ -17,6 +17,9 @@ const TIDM_1000 = scripting.addModule("/devkits/TIDM_1000/TIDM_1000");
 TIDM_1000.INCR_BUILD    = 4;
 TIDM_1000.ControlISRCore = 1;
 TIDM_1000.Fsw_Fctrl_Ratio = 1;
+// TI GUI supports 20..200 kHz. The PCMFPC timing trial explicitly overrides
+// this template in vienna_user_settings.h: VIENNA_PCMFPC_CONTROL_RATE_HZ.
+// Do not enter 2 here: the installed powerSUITE validator rejects it.
 TIDM_1000.Fsw           = 50;
 TIDM_1000.Vout          = 170;
 TIDM_1000.Vin           = 100.008614; // Line RMS = sqrt(3) * 57.74 V phase RMS.

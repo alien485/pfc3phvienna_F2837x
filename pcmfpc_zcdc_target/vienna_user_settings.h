@@ -370,13 +370,31 @@
 // check sfra_gui_scicomms_driverlib.c file for defines used by SCI CommsSFRA GUI
 //
 
-// PCMFPC-ZCDC hardware adaptation. Protection and peripheral timing retained.
+// PCMFPC-ZCDC hardware adaptation. Protection thresholds are retained.
 #undef AC_FREQ_HZ
 #define AC_FREQ_HZ 50.0f
 #ifdef __TMS320C28XX_CLA__
 #define VIENNA_PCMFPC_ENABLE 0
 #else
 #define VIENNA_PCMFPC_ENABLE 1
+#endif
+// Project-owned 4 kHz single-state FCS engineering timing trial, below the
+// TI GUI minimum. Requires cached observer reconstruction and target timing
+// qualification; the nominal HOST case alone does not release hardware.
+// Keep the generated 50 kHz template; this override survives SysConfig runs.
+// Direct FCS state hold is retained: one ADC/control update per PWM period.
+// This is not a fixed 2 kHz device switching frequency or power-stage approval.
+#define VIENNA_PCMFPC_CONTROL_RATE_HZ 4000U
+#if VIENNA_FCS_MPC_ENABLE && VIENNA_INCR_BUILD == 4
+// Apply the same time base to C28x and CLA translation units; control stays C28x.
+#if VIENNA_PCMFPC_CONTROL_RATE_HZ == 0U
+#error PCMFPC_control_rate_must_be_positive
+#elif (100000000UL / VIENNA_PCMFPC_CONTROL_RATE_HZ) > 65535UL
+// The existing HAL takes the full period in uint16_t, at 100 MHz TBCLK.
+#error PCMFPC_full_PWM_period_does_not_fit_existing_HAL_uint16
+#endif
+#undef VIENNA_PFC3PH_PWM_SWITCHING_FREQUENCY_HZ
+#define VIENNA_PFC3PH_PWM_SWITCHING_FREQUENCY_HZ ((float32_t)VIENNA_PCMFPC_CONTROL_RATE_HZ)
 #endif
 #define VIENNA_PCMFPC_NOMINAL_HZ 50.0f
 #define VIENNA_PCMFPC_DELTA_I_A 0.02f

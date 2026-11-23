@@ -1,0 +1,293 @@
+{
+  "date": "2026-10-28",
+  "executed_run": "pass2",
+  "unit_checks": 12312,
+  "unit_status": "PASS",
+  "model0_raw_CSV_JSON_events_summary_byte_identical_to_previous": true,
+  "fixed_input_source_sample_s": 0.16425,
+  "fixed_input_OFF_peak_A": [
+    7.22514963,
+    7.03140402,
+    7.14429569,
+    6.95124865
+  ],
+  "fixed_input_combined_predicted_node_margin_A": 0.04875134999999986,
+  "eight_cases": [
+    {
+      "case": "model0_pc_off_nominal",
+      "model": 0,
+      "terminal_mode": 1,
+      "selector_calls": 209,
+      "successful_selected_hw_histogram": {
+        "0": 200,
+        "2": 5,
+        "1": 2,
+        "4": 1
+      },
+      "first_stop_s": 0.16425199999999998,
+      "first_stop_code": 257,
+      "peak_all_A": 4.49953892089813,
+      "stop_free": false,
+      "bus_mean_V_if_stop_free": null,
+      "qualified_170V_closed_loop": false
+    },
+    {
+      "case": "model0_pc_on_nominal",
+      "model": 0,
+      "terminal_mode": 2,
+      "selector_calls": 209,
+      "successful_selected_hw_histogram": {
+        "0": 200,
+        "2": 5,
+        "1": 2,
+        "4": 1
+      },
+      "first_stop_s": 0.16425199999999998,
+      "first_stop_code": 257,
+      "peak_all_A": 4.49953892089813,
+      "stop_free": false,
+      "bus_mean_V_if_stop_free": null,
+      "qualified_170V_closed_loop": false
+    },
+    {
+      "case": "model1_pc_off_nominal",
+      "model": 1,
+      "terminal_mode": 1,
+      "selector_calls": 209,
+      "successful_selected_hw_histogram": {
+        "0": 200,
+        "2": 5,
+        "1": 2,
+        "4": 1
+      },
+      "first_stop_s": 0.16425199999999998,
+      "first_stop_code": 257,
+      "peak_all_A": 4.49953892089813,
+      "stop_free": false,
+      "bus_mean_V_if_stop_free": null,
+      "qualified_170V_closed_loop": false
+    },
+    {
+      "case": "model1_pc_on_nominal",
+      "model": 1,
+      "terminal_mode": 2,
+      "selector_calls": 209,
+      "successful_selected_hw_histogram": {
+        "0": 200,
+        "2": 5,
+        "1": 2,
+        "4": 1
+      },
+      "first_stop_s": 0.16425199999999998,
+      "first_stop_code": 257,
+      "peak_all_A": 4.49953892089813,
+      "stop_free": false,
+      "bus_mean_V_if_stop_free": null,
+      "qualified_170V_closed_loop": false
+    },
+    {
+      "case": "model2_pc_off_nominal",
+      "model": 2,
+      "terminal_mode": 1,
+      "selector_calls": 209,
+      "successful_selected_hw_histogram": {
+        "0": 204,
+        "1": 1,
+        "2": 2,
+        "4": 1
+      },
+      "first_stop_s": 0.16425199999999998,
+      "first_stop_code": 257,
+      "peak_all_A": 4.48346972314615,
+      "stop_free": false,
+      "bus_mean_V_if_stop_free": null,
+      "qualified_170V_closed_loop": false
+    },
+    {
+      "case": "model2_pc_on_nominal",
+      "model": 2,
+      "terminal_mode": 2,
+      "selector_calls": 1480,
+      "successful_selected_hw_histogram": {
+        "0": 1480
+      },
+      "first_stop_s": -1,
+      "first_stop_code": 0,
+      "peak_all_A": 4.085819220641669,
+      "stop_free": true,
+      "bus_mean_V_if_stop_free": 131.384591132,
+      "qualified_170V_closed_loop": false
+    },
+    {
+      "case": "model3_pc_off_nominal",
+      "model": 3,
+      "terminal_mode": 1,
+      "selector_calls": 268,
+      "successful_selected_hw_histogram": {
+        "0": 227,
+        "1": 16,
+        "2": 11,
+        "4": 8,
+        "3": 3,
+        "6": 1,
+        "5": 1
+      },
+      "first_stop_s": 0.19375199999999998,
+      "first_stop_code": 4,
+      "peak_all_A": 6.8850925399714065,
+      "stop_free": false,
+      "bus_mean_V_if_stop_free": null,
+      "qualified_170V_closed_loop": false
+    },
+    {
+      "case": "model3_pc_on_nominal",
+      "model": 3,
+      "terminal_mode": 2,
+      "selector_calls": 1480,
+      "successful_selected_hw_histogram": {
+        "0": 1480
+      },
+      "first_stop_s": -1,
+      "first_stop_code": 0,
+      "peak_all_A": 4.085819220641669,
+      "stop_free": true,
+      "bus_mean_V_if_stop_free": 131.384591132,
+      "qualified_170V_closed_loop": false
+    }
+  ],
+  "combined_pc_off_last_measured_and_physical_state": {
+    "sample_s": 0.19375,
+    "ISR_s": 0.19375199999999998,
+    "policy": 2,
+    "screening_performed": 1,
+    "applied_hw": 3,
+    "selected_hw": 0,
+    "selected_id": 0,
+    "pc_off_id": 0,
+    "idref_used_A": 5.438720703125,
+    "iqref_used_A": 0,
+    "input_up_V": 134.05990600585938,
+    "input_low_V": 1.752416968345642,
+    "physical_up_V": 133.9900158521558,
+    "physical_low_V": 1.754908048880208,
+    "delta_i_A": 0.019999999552965164,
+    "first_duration_s": 0.0002500000118743628,
+    "candidate_duration_s": 0.0005000000237487257,
+    "diagnostics": {
+      "status": 4,
+      "policy": 2,
+      "base_status": 4,
+      "aux_status": 0,
+      "error_source": 1,
+      "guard_reason": 0,
+      "valid": 0,
+      "feasible_mask": 0,
+      "rejected_mask": 0,
+      "feasible_count": 0,
+      "endpoint_feasible_mask": 0,
+      "substep_feasible_mask": 0,
+      "endpoint_evaluated_mask": 0,
+      "substep_evaluated_mask": 0,
+      "delay_full_evaluated": 0,
+      "delay_violation": 0,
+      "no_feasible": 0,
+      "raw_selected_id": 1,
+      "raw_pc_off_id": 1,
+      "failed_candidate_id": 0,
+      "current_limit_A": 0,
+      "safety_margin_A": 0,
+      "effective_limit_A": 0,
+      "first_endpoint_peak_A": 0,
+      "first_substep_peak_A": 0,
+      "first_peak_used_A": 0,
+      "first_margin_A": 0,
+      "selected_margin_A": 0,
+      "min_feasible_margin_A": 0,
+      "first_ctrl_full_endpoint_diff_A": 0,
+      "endpoint_peak_A": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "substep_peak_A": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "peak_used_A": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ctrl_full_endpoint_diff_A": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "input_iabc_A": [
+      -2.9853515625,
+      0.71484375,
+      2.26904296875
+    ],
+    "input_eabc_V": [
+      -31.478515625,
+      -49.600830078125,
+      80.9130859375
+    ],
+    "theta_rad": 4.317416191101074,
+    "omega_rad_s": 314.1371765136719,
+    "fhat_A_s": [
+      26440.203125,
+      -361.69525146484375
+    ],
+    "predicted_dc1_V": 133.81007385253906,
+    "predicted_dc2_V": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "first_dc_valid": 1,
+    "candidate_dc_valid_mask": 0
+  },
+  "physical_protection_A": 7,
+  "filtered_OV_V": 204,
+  "reference_peak_A": 5.5,
+  "delta_A": 0.02,
+  "MCU_modified": false,
+  "hardware_qualified": false,
+  "limitations": [
+    "Two nodes per interval cannot bound continuous current peaks",
+    "New model load dependency50ohm; mismatch not qualified",
+    "Incremental F assumes near-constant grid dq, retains original ESO/reconstruction",
+    "PCon incremental-F models keep all gatesOFF and do not regulate170V",
+    "PCoff combined model loses half-bus balance, fails midpoint validation",
+    "Fixed-point improvement is not a full closed-loop fix",
+    "No DSP timing, native build, target write or hardware test for new HOST variants"
+  ]
+}

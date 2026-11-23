@@ -1,5 +1,54 @@
 # 移植交付与实际验证状态
 
+**当前交付：Runtime5 / Kernel12 / Timing2 / 4 kHz单状态FCS。**
+停止/OST状态支持`VIENNA_pcmBenchRepeat=5/6`连续数值测试、写0停止。
+新`IntruTime_us`/`IntruTimeMax_us`由CPU定时器换算微秒；TBCTR绝对差仍只保留作对照。
+755项运行层HOST检查、6项故障注入、TI增量构建通过（0错误/0警告），观察表79项。
+当前操作见`CCS_CONTINUOUS_BENCH_GUIDE.md`，构建审计为`validation/CONTINUOUS_BENCH_BUILD_AUDIT.json`。
+算法、频率及保护配置保持；未放行带载。以下为Runtime4及更早历史交付。
+
+**历史交付：Runtime4 / Kernel12 / Timing2 / 4 kHz单状态FCS。**
+真实源码、567项运行层HOST检查、完整0.8 s名义闭环及最终TI增量构建已完成；名义母线169.73 V、I峰6.604 A，THD约12%。
+71项观察表，OUT SHA71973086...；实机时限/带载待验证。唯一当前操作说明为`CCS_RUNTIME4_GUIDE.md`，先测同夹具请求5/6。
+当前审计为`validation/SINGLE_FCS_4KHZ_BUILD_AUDIT.json`；以下2 kHz和旧OUT内容按历史保留，不代表当前固件。
+
+2026-10-28最新真实固件为Runtime3：单状态FCS保持，观察器MODEL积分改为写后预计算/下一拍校验消费。
+556项HOST检查与TI增量构建通过（0错误/0警告）；观察表70项，新增同夹具缓存路径请求6。
+当前仍2 kHz/kernel10/Timing.revision1，OUT SHA为5dc95b7f...；尚不能100 V线RMS/50 ohm带载。
+加载及唯一下一步5/6测时见`CCS_RUNTIME3_GUIDE.md`。下面旧OUT/67项等记录按当时版本保留。
+
+2026-10-28追加长区间模型离线对照：12312项检查、8组闭环与固定输入回放完成。
+母线动态与扰动增量组合使旧故障输入OFF预测峰值7.225降至6.951 A，但完整170 V闭环仍不合格：
+PC-ON持续全关断、母线约131 V；组合模型PC-OFF出现严重半母线失衡。
+实现只在tests/output，MCU与保护未改；见 `validation/PREDICTION_DYNAMICS_REPORT.md`。
+
+2026-10-28追加离线电流可行性原型，未进入MCU：2415项检查与原版逐字节对照通过。
+端点/子步约束均避免原7 A事件，但约164.252 ms因无可行候选停机，未达到170 V。
+局部物理回放发现被拒绝的OFF候选峰值6.844 A（预测7.225 A），需继续核查长区间预测偏差。
+实现及边界见 `validation/OFFLINE_CURRENT_LIMIT_REPORT.md`；现有固件/频率/保护保持。
+
+2026-10-28：当前为 **2 kHz 直接FCS控制更新的计时试验版本**，工作分支仍为 `new_mpc`。
+快速算法内核保持第十轮 `PC_fast_kernel_revision=10`；它不能单独区分旧50kHz固件与本轮固件。
+加载并完成初始化后，还须确认 `VIENNA_pcmTiming.revision=1`、`control_hz=2000`、
+`sample_us≈500`、`first_duration_us≈250`、`pwm_period_ticks=50000`、`tbprd_ticks=25000`、`period_cycles=100000`。
+工程自有配置 `VIENNA_PCMFPC_CONTROL_RATE_HZ=2000U` 覆盖TI生成模板；正常默认求解器改为 `PIECEWISE=1`。
+JS/TXT观察表为67项，新增 `VIENNA_pcmTiming`。模式仍默认0、`HardwareRelease=0`，不自动启机。
+本轮离线小步物理仿真6案均触发原7A保护，虽核心/ESO错误为0，2kHz功率闭环仍不合格。
+当前仅用于无主功率计时，不能用于原100V线RMS/50Ω带功率运行。
+TI gmake增量构建已完成，C编译/链接0错误、0警告；SysConfig有1类Clock Tree建议warning（本次日志出现2次）。
+本轮OUT SHA为 `32406e84...`；运行适配层358项、2kHz专项36490项宿主检查通过，功率闭环资格仍为 `NOT_QUALIFIED`。
+用户已反馈请求2/5单次计数19732/27718，按配置200MHz为98.66/138.59us，Status1/Fault0。
+完整写前路径/整ISR/WCET仍待测，单次结果见 `validation/BENCH_2KHZ_20261028.md`，统一证据见 `validation/CONTROL_RATE_2KHZ_REPORT.md`。
+2026-10-28追加固定请求5三次均27718cycles，Status1/Fault0/DeadlineMissCount0；
+用户文字反馈BodyCyclesMax29912。按配置200MHz分别为138.59us、149.56us。
+固定夹具重复测时结束；完整写前路径/ISR及7A离线闭环问题仍待验证，见 `validation/BENCH_2KHZ_REQUEST5_REPEATS_20261028.md`。
+旧18924/19168cycle及OUT `4b847bd1...` 属于旧50kHz实验，不能用于证明新时标下实时合格。
+配置依据、时标和无主功率操作以 `CONTROL_RATE_2KHZ.md`、`BENCH_TIMING.md` 为准。
+
+## 历史：恢复第十轮及此前50kHz实验
+
+以下原记录保留供追溯；其中“当前”、旧OUT、观察项数量及20us预算仅指记录当时版本。
+
 当前恢复使用第十轮（PC_fast_kernel_revision=10），工作分支仍为new_mpc。
 第十一轮固定请求2三次均19168cycle，比现有第十轮18924单样例多244cycle/1.220us/1.289%，不作为性能升级。
 只把fast.c/.h恢复到已执行验证的第十轮精确字节，未回退分支或删除任何实验/其他用户文件。
@@ -53,7 +102,7 @@ main、运行适配层、外设/保护/时序参数未修改，HardwareRelease�
 较大的普通/fine代码和栈帧开销均纳入实际构建审计，不以该样例宣称WCET或实时合格。
 没有连接、烧录、写目标、删除、提交或推送。下面为第七轮及之前的历史。
 
-## 当前：第七轮
+## 历史：第七轮
 
 版本7保留预测模型和浮点公式，直接构造整数候选交集；fast运行策略仅计算交集角度。
 增加一次性coarse/fine分段计时，普通调用没有分析读钟，使用既有Timer0且没有配置写入。

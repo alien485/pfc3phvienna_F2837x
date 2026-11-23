@@ -2,6 +2,11 @@
 // Observation only. Never starts, clears trips, resets or writes target memory.
 expRemoveAll();
 expAdd("PC_fast_kernel_revision", getNatural());
+expAdd("PC_engineering_diag", getNatural());
+expAdd("VIENNA_pcmTiming", getNatural());
+expAdd("VIENNA_pcmRuntimeRevision", getNatural());
+expAdd("VIENNA_pcmTerminalGuard", getNatural());
+expAdd("VIENNA_pcmObserverPrefetch", getNatural());
 expAdd("PC_fast_profile", getNatural());
 expAdd("VIENNA_pcmHardwareRelease", getNatural());
 expAdd("VIENNA_pcmModeRequest", getNatural());
@@ -53,6 +58,14 @@ expAdd("VIENNA_pcmWriteCyclesMax", getNatural());
 expAdd("VIENNA_pcmBodyCycles", getNatural());
 expAdd("VIENNA_pcmBodyCyclesMax", getNatural());
 expAdd("VIENNA_pcmBenchRequest", getNatural());
+expAdd("VIENNA_pcmBenchRepeat", getNatural());
+expAdd("IntruStratPoint", getNatural());
+expAdd("IntruEndPoint", getNatural());
+expAdd("IntruDifPoint", getNatural());
+expAdd("IntruCpuCycles", getNatural());
+expAdd("IntruCpuCyclesMax", getNatural());
+expAdd("IntruTime_us", getNatural());
+expAdd("IntruTimeMax_us", getNatural());
 expAdd("VIENNA_pcmBenchStatus", getNatural());
 expAdd("VIENNA_pcmBenchCycles", getNatural());
 expAdd("VIENNA_pcmBenchCyclesMax", getNatural());

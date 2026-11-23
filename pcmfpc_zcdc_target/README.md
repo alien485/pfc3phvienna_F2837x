@@ -1,5 +1,55 @@
 # F28379D PCMFPC-ZCDC 模式7移植目标
 
+**当前交付：Runtime5 / Kernel12 / Timing2 / 4 kHz单状态FCS。**
+新增停止状态连续数值测试：`VIENNA_pcmBenchRepeat=5/6`开始，`0`停止；
+`IntruTime_us`/`IntruTimeMax_us`用CPU定时器显示本拍/最大微秒耗时。
+755项运行层HOST检查、6项故障注入与TI增量构建通过（0错误/0警告）；观察表79项。
+操作见`CCS_CONTINUOUS_BENCH_GUIDE.md`，当前审计为`validation/CONTINUOUS_BENCH_BUILD_AUDIT.json`。
+本次未改变算法、控制频率或保护；实机时限及带载仍未放行。以下为Runtime4及更早历史记录。
+
+**历史交付：Runtime4 / Kernel12 / Timing2 / 4 kHz单状态FCS。**
+真实源码已集成动态预测、现有子步可行性/未来电流预留、中点软恢复及写后观察器预计算；未改变PWM输出形式或保护门限。
+567项实际运行层HOST检查、完整0.8 s名义闭环与最终TI增量构建通过（0错误/0警告）；名义母线169.73 V、全程I峰6.604 A，THD约12%。
+71项观察表，当前OUT SHA71973086...；实机时限与带载尚未验证，先按`CCS_RUNTIME4_GUIDE.md`无主功率加载并测请求5/6。
+当前构建审计为`validation/SINGLE_FCS_4KHZ_BUILD_AUDIT.json`。下面2 kHz/旧OUT记录仅为当时版本，不作为当前操作依据。
+
+2026-10-28最新真实固件为Runtime3：单状态FCS保持，观察器MODEL积分改为写后预计算/下一拍校验消费。
+556项HOST检查与TI增量构建通过（0错误/0警告）；观察表70项，新增同夹具缓存路径请求6。
+当前仍2 kHz/kernel10/Timing.revision1，OUT SHA为5dc95b7f...；尚不能100 V线RMS/50 ohm带载。
+加载及唯一下一步5/6测时见`CCS_RUNTIME3_GUIDE.md`。下面旧OUT/67项等记录按当时版本保留。
+
+2026-10-28追加长区间模型离线对照：12312项检查、8组闭环与固定输入回放完成。
+母线动态与扰动增量组合使旧故障输入OFF预测峰值7.225降至6.951 A，但完整170 V闭环仍不合格：
+PC-ON持续全关断、母线约131 V；组合模型PC-OFF出现严重半母线失衡。
+实现只在tests/output，MCU与保护未改；见 `validation/PREDICTION_DYNAMICS_REPORT.md`。
+
+2026-10-28追加离线电流可行性原型，未进入MCU：2415项检查与原版逐字节对照通过。
+端点/子步约束均避免原7 A事件，但约164.252 ms因无可行候选停机，未达到170 V。
+局部物理回放发现被拒绝的OFF候选峰值6.844 A（预测7.225 A），需继续核查长区间预测偏差。
+实现及边界见 `validation/OFFLINE_CURRENT_LIMIT_REPORT.md`；现有固件/频率/保护保持。
+
+2026-10-28：当前为 **2 kHz 直接FCS控制更新的计时试验版本**，工作分支仍为 `new_mpc`。
+快速算法内核保持第十轮 `PC_fast_kernel_revision=10`；它不能单独区分旧50kHz固件与本轮固件。
+加载并完成初始化后，还须确认 `VIENNA_pcmTiming.revision=1`、`control_hz=2000`、
+`sample_us≈500`、`first_duration_us≈250`、`pwm_period_ticks=50000`、`tbprd_ticks=25000`、`period_cycles=100000`。
+工程自有配置 `VIENNA_PCMFPC_CONTROL_RATE_HZ=2000U` 覆盖TI生成模板；正常默认求解器改为 `PIECEWISE=1`。
+JS/TXT观察表为67项，新增 `VIENNA_pcmTiming`。模式仍默认0、`HardwareRelease=0`，不自动启机。
+本轮离线小步物理仿真6案均触发原7A保护，虽核心/ESO错误为0，2kHz功率闭环仍不合格。
+当前仅用于无主功率计时，不能用于原100V线RMS/50Ω带功率运行。
+TI gmake增量构建已完成，C编译/链接0错误、0警告；SysConfig有1类Clock Tree建议warning（本次日志出现2次）。
+本轮OUT SHA为 `32406e84...`；运行适配层358项、2kHz专项36490项宿主检查通过，功率闭环资格仍为 `NOT_QUALIFIED`。
+用户已反馈请求2/5单次计数19732/27718，按配置200MHz为98.66/138.59us，Status1/Fault0。
+完整写前路径/整ISR/WCET仍待测，单次结果见 `validation/BENCH_2KHZ_20261028.md`，统一证据见 `validation/CONTROL_RATE_2KHZ_REPORT.md`。
+2026-10-28追加固定请求5三次均27718cycles，Status1/Fault0/DeadlineMissCount0；
+用户文字反馈BodyCyclesMax29912。按配置200MHz分别为138.59us、149.56us。
+固定夹具重复测时结束；完整写前路径/ISR及7A离线闭环问题仍待验证，见 `validation/BENCH_2KHZ_REQUEST5_REPEATS_20261028.md`。
+旧18924/19168cycle及OUT `4b847bd1...` 属于旧50kHz实验，不能用于证明新时标下实时合格。
+配置依据、时标和无主功率操作以 `CONTROL_RATE_2KHZ.md`、`BENCH_TIMING.md` 为准。
+
+## 历史：恢复第十轮及此前50kHz实验
+
+以下原记录保留供追溯；其中“当前”、旧OUT、观察项数量及20us预算仅指记录当时版本。
+
 当前恢复使用第十轮（PC_fast_kernel_revision=10），工作分支仍为new_mpc。
 第十一轮固定请求2三次均19168cycle，比现有第十轮18924单样例多244cycle/1.220us/1.289%，不作为性能升级。
 只把fast.c/.h恢复到已执行验证的第十轮精确字节，未回退分支或删除任何实验/其他用户文件。
@@ -53,6 +103,8 @@ main、运行适配层、外设/保护/时序参数未修改，HardwareRelease�
 当前打开方法、main/new_mpc对应目录、暂存恢复边界和构建清理保护以
 `RECOVERY_AND_WORKFLOW.md`为准。以下RT4报告属于恢复前的历史实验快照；PCMFPC仍未放行带功率闭环。
 
+## 当前工程配置与操作入口
+
 唯一 CCS 项目名：`vienna_pcmfpc_zcdc_F2837x`。工作分支：`new_mpc`。
 本目录是独立目标；父目录原 FCS 工程保留对照，父 `.cproject` 仅增加本目录排除项。
 本次移植没有写原MATLAB/SLX。参考此前另有诊断赋值兼容更新，已独立核对1353组
@@ -63,7 +115,7 @@ main、运行适配层、外设/保护/时序参数未修改，HardwareRelease�
 **默认 `VIENNA_pcmHardwareRelease=0`，任何模式都不能由 clearTrip 启机。**
 默认模式0为原 FCS 内核；模式1/2分别为模式7末级OFF/ON。共同使用新PLL、
 同一SI外环和5.5A峰值参考，故模式0并非父目录固件的逐位等价运行。
-32轮参考求根和快速分段根均保留，默认32轮。当前实时优化见`RT_OPTIMIZATION.md`；
+32轮参考求根和快速分段根均保留；当前正常默认快速分段根 `root_method=1`。实时优化历史见`RT_OPTIMIZATION.md`；
 第四轮CONTROL已采用lambda活动集根，FULL/ESO保留原根；存在浮点选态差异，
 不能作为原验证版的逐位替代。第六轮静态弱下界4910cycle/24.55us是历史审计；
 第八轮不由旧下界或静态指令数推算提速，仍没有实时放行证据。该轮见`validation/RT8_REPORT.md`。
@@ -82,7 +134,7 @@ main、运行适配层、外设/保护/时序参数未修改，HardwareRelease�
 - `vienna.h`：`ISR1 -> VIENNA_pfcControlCode -> ADC -> sample -> clearTrip守护 ->
   make_refs -> 原FCS或PCMFPC_select -> 原deadline检查 -> AQ影子提交 ->
   submitted -> 公共外环 -> post`。
-- `main.syscfg`、`vienna_user_settings.h`：170V/50ohm参数规划；ADC/PWM时序未改。
+- `main.syscfg`、`vienna_user_settings.h`：170V/50ohm参数规划；当前由用户配置显式覆盖为2kHz，ADC采样窗/保护阈值不变，触发位置随PWM时基重算。
 - `build_incremental.ps1`：独立工作区导入及增量构建；不clean、不烧录、不连接硬件。
 - `setupdebugenv_pcmfpc_zcdc.js`、`CCS_Expressions_PCMFPC_ZCDC.txt`：仅添加观察项。
 - `tests/`：核心边界/精度、MATLAB oracle、PLL/ESO、独立小步物理闭环验证。
@@ -113,7 +165,9 @@ CCS12选择本目录 `.project`，项目名必须为 `vienna_pcmfpc_zcdc_F2837x`
 
 已独立比较MATLAB、C double和float32。float32平坦阻断/合成边界仍有选择差异，
 不能声称全部门极等价；PLL必须保持角度有界。分段根是显式待验优化。
-参考20us控制时标不会因算法参数Ts改变而自动改变PWM；本次保持50kHz和原deadline。
+本轮实际PWM时基、ADC/控制更新均为2kHz，仍每周期更新一次；直接保持开关组合，器件实际开关频率不固定。
+`TS=500us/DELAY=250us`同步进入预测器、PLL/ESO和SI外环；保留写入守护，不以旧20us时标验证新配置。
+完整写前流程和整ISR仍待板上测量，500Hz ESO及低频电流/中点性能仍待新时标闭环验证。
 
 证据入口：`tests/core_VALIDATION.md`、`tests/observer_validation.md`、
 根项目 `output/ti_pcmfpc_zcdc_port/c_matlab_comparison.json`、

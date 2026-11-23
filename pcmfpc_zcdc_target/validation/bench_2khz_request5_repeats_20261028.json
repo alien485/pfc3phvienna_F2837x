@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-28",
+  "status": "FIXED_PIPELINE_REPEATABILITY_OBSERVED_FULL_LOOP_PENDING",
+  "scope": "Three user screenshots plus user text; no agent target access",
+  "runs": [
+    {
+      "request_context": 5,
+      "count_visible": 1,
+      "timing_revision": 1,
+      "control_hz": 2000,
+      "bench_request_after_completion": 0,
+      "bench_status": 1,
+      "bench_cycles": 27718,
+      "bench_cycles_max_cumulative": 27718,
+      "pcm_fault": 0,
+      "deadline_miss_count": 0,
+      "time_us_at_configured_200MHz": 138.59,
+      "image": "BenchRequest5_count1.png",
+      "image_sha256": "f997e56e52c040fba57de84b3db559b007d6e40b44f48a4be8f3470e497d1b39"
+    },
+    {
+      "request_context": 5,
+      "count_visible": 2,
+      "timing_revision": 1,
+      "control_hz": 2000,
+      "bench_request_after_completion": 0,
+      "bench_status": 1,
+      "bench_cycles": 27718,
+      "bench_cycles_max_cumulative": 27718,
+      "pcm_fault": 0,
+      "deadline_miss_count": 0,
+      "time_us_at_configured_200MHz": 138.59,
+      "image": "BenchRequest5_count2.png",
+      "image_sha256": "7856a23f1dda3d7272be09aa77971cb00deb008a7d3fe54fedc350a709cb6493"
+    },
+    {
+      "request_context": 5,
+      "count_visible": 3,
+      "timing_revision": 1,
+      "control_hz": 2000,
+      "bench_request_after_completion": 0,
+      "bench_status": 1,
+      "bench_cycles": 27718,
+      "bench_cycles_max_cumulative": 27718,
+      "pcm_fault": 0,
+      "deadline_miss_count": 0,
+      "time_us_at_configured_200MHz": 138.59,
+      "image": "BenchRequest5_count3.png",
+      "image_sha256": "e92816962f9f967ca7671c63df7200a495554e44f0488004b19c6777065c8c47"
+    }
+  ],
+  "samples": 3,
+  "min_cycles": 27718,
+  "max_cycles": 27718,
+  "range_cycles": 0,
+  "all_status1_fault0_deadline0": true,
+  "body_cycles_max_user_reported": 29912,
+  "body_time_us_at_configured_200MHz": 149.56,
+  "body_value_source": "User async text reply, not visible in screenshots",
+  "configured_period_us": 500,
+  "configured_write_budget_after_guard_us": 247.75,
+  "complete_ISR_measured": false,
+  "live_control_write_deadline_qualified": false,
+  "target_CPU_clock_verified": false,
+  "target_OUT_hash_visible": false,
+  "local_OUT_sha256": "32406e84a00664d037358e238de2e4591bf2950867419807dc5a7401722353fc",
+  "count_series_note": "This group shows1,2,3; previous group ended2. Reset/reload reason not provided; groups not combined as one continuous session.",
+  "limitations": [
+    "Identical fixed numerical fixture, not all input states or WCET.",
+    "Benchmark executes in post after the normal gate write. DeadlineMissCount0 does not prove this pipeline met a real closed-loop write deadline.",
+    "BodyCyclesMax includes work up to the counter read in post; excludes later counter/log/flag/GPIO and ISR entry/exit.",
+    "Repeated benchmark timing does not resolve the prior six modeled7A trips."
+  ],
+  "control_code_or_protection_changes": false,
+  "hardware_operations": false,
+  "closed_loop_qualification": "NOT_QUALIFIED",
+  "offline_readonly_followup": {
+    "scope": "Existing pass4 HOST traces only, separate from target timing screenshots",
+    "enable_time_s": 0.060252,
+    "first_7A_trip_time_s": 0.1614735,
+    "time_after_enable_s": 0.1012215,
+    "last_saved_enabled_time_s": 0.15975,
+    "last_saved_enabled_bus_V": 133.534172,
+    "last_saved_enabled_reference_A": 5.120475,
+    "last_saved_used_reference_A": 5.1282951,
+    "saved_pretrip_reference_saturated": false,
+    "core_errors": 0,
+    "observer_errors": 0,
+    "PC_off_on_saved_trace_difference_fields": [
+      "active"
+    ],
+    "pretrip_trace_interval_s": 0.005,
+    "root_cause": "UNRESOLVED_DENSE_EVENT_TRACE_REQUIRED",
+    "limits": [
+      "The bus/reference were still ramping, not at170V steady state.",
+      "Sparse trace cannot identify trip phase, exact active gate or instant-current peak.",
+      "Do not treat post-trip steady-window metrics as qualified closed-loop performance."
+    ],
+    "source_hashes": {
+      "pc_off_nominal.csv": "93938ced6e6b9a3a29938875755681973e6cacfc3e0db558089d20da5564a719",
+      "pc_on_nominal.csv": "1687d1e516dcc03727089ee9e3910194d2c61284bc1d84efdb57d6f37b891766",
+      "pc_off_nominal.json": "5bc1c1e14903ab89268d76cbbf5359516d03b5c82be698f429a4231b90aef7e6",
+      "pc_on_nominal.json": "321450c129df73718f57a059817b62e3611d2ad2e59716bab04f975a8898aa96"
+    },
+    "harness_comparison": {
+      "outer_has_170V_hard_step": false,
+      "ramp_and_prefilter_and_PI_order_match_runtime": true,
+      "basic_delay_one_ZERO_alignment_match": true,
+      "simulation_assumes_computation_meets_deadline": true,
+      "simulation_startup_does_not_replay_full_hardware_supervision": true,
+      "cause_is_MCU_slowdown_proven": false,
+      "identified_definite_startup_or_scheduling_bug": false
+    }
+  }
+}

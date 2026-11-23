@@ -1,0 +1,160 @@
+{
+  "date": "2026-10-28",
+  "status": "HOST_GUARD_IMPLEMENTED_POWER_CONTROL_NOT_QUALIFIED",
+  "unit_tests": {
+    "checks": 2415,
+    "failures": 0,
+    "scope": "HOST offline current-feasibility contracts, not MCU timing or power validation"
+  },
+  "baseline_bytes_unchanged": true,
+  "cases": [
+    {
+      "case": "policy0_pc_off_nominal",
+      "policy": 0,
+      "mode": 1,
+      "core_errors": 0,
+      "observer_errors": 0,
+      "original_7A_trip": 1,
+      "selector_fault_latched": 0,
+      "first_stop_s": -1,
+      "first_selector_status": 0,
+      "whole_run_peak_A": 7.310485975771812,
+      "max_bus_while_control_enabled_V": 134.64543770236068,
+      "steady_qualified": false
+    },
+    {
+      "case": "policy0_pc_on_nominal",
+      "policy": 0,
+      "mode": 2,
+      "core_errors": 0,
+      "observer_errors": 0,
+      "original_7A_trip": 1,
+      "selector_fault_latched": 0,
+      "first_stop_s": -1,
+      "first_selector_status": 0,
+      "whole_run_peak_A": 7.310485975771812,
+      "max_bus_while_control_enabled_V": 134.64543770236068,
+      "steady_qualified": false
+    },
+    {
+      "case": "policy1_pc_off_nominal",
+      "policy": 1,
+      "mode": 1,
+      "core_errors": 0,
+      "observer_errors": 0,
+      "original_7A_trip": 0,
+      "selector_fault_latched": 1,
+      "first_stop_s": 0.16425199999999998,
+      "first_selector_status": 257,
+      "whole_run_peak_A": 4.49953892089813,
+      "max_bus_while_control_enabled_V": 134.64543770236068,
+      "steady_qualified": false
+    },
+    {
+      "case": "policy1_pc_on_nominal",
+      "policy": 1,
+      "mode": 2,
+      "core_errors": 0,
+      "observer_errors": 0,
+      "original_7A_trip": 0,
+      "selector_fault_latched": 1,
+      "first_stop_s": 0.16425199999999998,
+      "first_selector_status": 257,
+      "whole_run_peak_A": 4.49953892089813,
+      "max_bus_while_control_enabled_V": 134.64543770236068,
+      "steady_qualified": false
+    },
+    {
+      "case": "policy2_pc_off_nominal",
+      "policy": 2,
+      "mode": 1,
+      "core_errors": 0,
+      "observer_errors": 0,
+      "original_7A_trip": 0,
+      "selector_fault_latched": 1,
+      "first_stop_s": 0.16425199999999998,
+      "first_selector_status": 257,
+      "whole_run_peak_A": 4.49953892089813,
+      "max_bus_while_control_enabled_V": 134.64543770236068,
+      "steady_qualified": false
+    },
+    {
+      "case": "policy2_pc_on_nominal",
+      "policy": 2,
+      "mode": 2,
+      "core_errors": 0,
+      "observer_errors": 0,
+      "original_7A_trip": 0,
+      "selector_fault_latched": 1,
+      "first_stop_s": 0.16425199999999998,
+      "first_selector_status": 257,
+      "whole_run_peak_A": 4.49953892089813,
+      "max_bus_while_control_enabled_V": 134.64543770236068,
+      "steady_qualified": false
+    }
+  ],
+  "producer322_unit_result": {
+    "old_current_mask": 18,
+    "endpoint_feasible_mask": 5,
+    "new_selected_id": 3,
+    "new_hw_state": 2,
+    "budget_reference": "best-feasible",
+    "delta_i_A": 0.02
+  },
+  "first_new_guard_stop": {
+    "time_s": 0.16425199999999998,
+    "reason": "NO_FEASIBLE_CANDIDATE",
+    "physical_current_A": [
+      0.38292401291270334,
+      3.66553173687315,
+      -4.048455749785963
+    ],
+    "physical_bus_V": 131.58689883792465,
+    "first_predicted_peak_A": 6.633101940155029,
+    "minimum_candidate_peak_A": 7.225149631500244,
+    "candidate_peaks_A": [
+      7.225149631500244,
+      12.298454284667969,
+      12.909269332885742,
+      18.175447463989258,
+      7.337135314941406,
+      13.969794273376465,
+      14.983620643615723,
+      18.725494384765625
+    ]
+  },
+  "local_physical_replay": {
+    "scope": "Original plant_step at the recorded true ISR state, existing gate until nextZERO then each candidate separately. Every trial stops at its first7A event. Independent of the changed closed-loop paths; not hardware.",
+    "delay_hold_peak_A": 6.666173234159036,
+    "OFF_candidate_peak_A": 6.843860292296196,
+    "OFF_candidate_endpoint_currents_A": [
+      0.0,
+      6.821198488712133,
+      -6.8211984887123895
+    ],
+    "OFF_candidate_hit7A": false,
+    "OFF_candidate_dc_end_V": 140.88771787082337,
+    "dc_start_at_recorded_ISR_V": 131.58689883792465,
+    "immediate_OFF_peak_A": 4.417028130212696,
+    "other7_candidates_hit7A": true,
+    "interpretation": "A local physical-model OFF continuation exists below7A while current predictor rejects it. This shows a false infeasibility under this model/state; it is not proof of actual hardware safety or a complete closed-loop policy. Frozen bus/Fhat and sensor/time approximations remain confounded, so no unique cause is claimed."
+  },
+  "firmware_changed": false,
+  "firmware_OUT_sha256": "32406e84a00664d037358e238de2e4591bf2950867419807dc5a7401722353fc",
+  "limits_unchanged": {
+    "control_hz": 2000,
+    "instant_trip_A": 7,
+    "reference_peak_A": 5.5,
+    "filtered_OV_V": 204
+  },
+  "sampled_peak_guarantee": false,
+  "CCS_build_this_round": false,
+  "hardware_operations": false,
+  "evidence_root": "output/ti_pcmfpc_zcdc_port/offline_current_limit",
+  "source_hashes": {
+    "offline_current_limit.h": "670803bf9445f1887ba6b733d367a7617e7de2c454de2cb8a56804beb452f969",
+    "offline_current_limit.c": "82cfefd47df6a709284007f166a9db869ac85a4d07c788f146f0139ee58383ae",
+    "offline_current_limit_test.c": "36fa5aaade0fafadd118744d761f0081f17574569d51d8a101296a0004e08f1d",
+    "validate_offline_current_limit.py": "c51a580552e434bab9d30a78ecaa09ca67043c834584cfffdf23be1a29f43e05"
+  }
+}

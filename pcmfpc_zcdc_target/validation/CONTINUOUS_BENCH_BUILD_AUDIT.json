@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-28",
+  "branch": "new_mpc",
+  "runtime_revision": 5,
+  "core_kernel_revision": 12,
+  "rate_revision": 2,
+  "control_hz": 4000,
+  "native_exit": 0,
+  "compiler_errors": 0,
+  "compiler_linker_warnings": 0,
+  "host_runtime_checks": 755,
+  "host_whitebox_fault_checks": 6,
+  "watch_count": 79,
+  "source_hashes": {
+    ".cproject": "add18bfaa0e88c61b2779f088c5fc42ca8ade6fed012de19841ba9b6ca2bca4a",
+    "CCS_CONTINUOUS_BENCH_GUIDE.md": "11b226eba4d106d56a73eeec318b8a856a90fbe0d3401cee628c2bd3187b9f6e",
+    "CCS_Expressions_PCMFPC_ZCDC.txt": "d766461486670c240ed2ed6f94b36fe32ec1c7085d7bf29fdbff6b05fd56f922",
+    "CCS_RUNTIME4_GUIDE.md": "a2cf1d8a25e67d91e969aff5a33b9024c0140fec7938586bf22fa010378ebcef",
+    "DELIVERY.md": "7252a9b3e8eec9163e510854ab8682ff41701958db37b54eca0dd8bdc6e2c993",
+    "README.md": "365c6a67e35d2c6cf84da4bdd1f59a7bdc28786c14c076ab8698b174c883f7fa",
+    "f2837xd_flash_cpu1_lnk.cmd": "434be20b0d568c895af96410de5f05ba2003a539bb33d6157c1ccfb735e51db2",
+    "main.syscfg": "3f0697955da2b241ae674038000f8694417bab45a13ab3ad2287d66f309ddeb6",
+    "makefile.init": "fa4245f76ae9662c9ce97fb487f081f2d823cb14fb24ed0e2f46e1c36fa5d0fa",
+    "setupdebugenv_pcmfpc_zcdc.js": "5d42656c926c0dc6ca284dbf1ae0970fa3bfd866f12df75b2b5a42f76350981c",
+    "tests/core_runtime_stub.h": "4b9b74970f18c36fe5332dd3d779a890ac154bb8c0609a81fa4276da6dac13f2",
+    "tests/core_runtime_test.c": "0e02333a8b78a612c8898a26b05c3c3cf3c28b7abe9b72b8a5d7e5fb75922a5f",
+    "tests/repeat_bench_fault_test.c": "886093bc84a9ac40f60a04a579dc8d0e63601a4807e01c50ef2006c5c1a08e9b",
+    "tests/ti_closed_loop.c": "bc8bcd5447ac4b952c82e9b4b6dbf68fc1d18ac1b23e7009986944fb6265dcb8",
+    "tests/validate_integrated_single_fcs.py": "d73aee236ee1d4fec3096895da0b16c3758691b2ad7164e3315b4d1f4b93887c",
+    "vienna.h": "b4e823bf038d4b19b04528b8edb17878d7f67c928ca253129135f17976f18216",
+    "vienna_fcs_mpc.h": "c8af59751093e89e1426a5a800e3c73261fe98a50a04e6b14eba3971e543792c",
+    "vienna_grid_sync.c": "8bd9bcac4466a63c14393f305211121a8e7310c701637d7e57acde0e4e852295",
+    "vienna_grid_sync.h": "559ee376c5315dbca86b017a9ca97ba8d20c87d4ef227a0c36ad1827372210c3",
+    "vienna_hal.c": "962f80ac18509c4c516c2ed21eb0a989bfe6f2dc28cd84b43f8a0868ce633767",
+    "vienna_hal.h": "1c992b16002d73599c0e7c2d5f78155c241daaa58c028f087218edac0029286e",
+    "vienna_main.c": "45b60b09f09151b306a65687f54be02d9efe93e727bb3b32fe778a6aaad76bed",
+    "vienna_pcmfpc_engineering.h": "9fa88fe6856a0aae22d289d3911ffbed38ddf32712fe724830c6ef142c670343",
+    "vienna_pcmfpc_fast.c": "205483de3ca0c3d12e2937d48570f91ef2751488105233143890f4fc39690d97",
+    "vienna_pcmfpc_fast.h": "b77e452d91eda463ef0f50fdd28426863ddb9bd0e00738d9eec17d589a3050df",
+    "vienna_pcmfpc_observer.c": "87dba018d1755865cfc8d14c9f29de957821bff7ece3a06d64bdc98311eadca2",
+    "vienna_pcmfpc_observer.h": "12dff9253bf892915b125d46169cd1eb4c0f2d0251352d965894ef9e4bb095fa",
+    "vienna_pcmfpc_runtime.c": "54826cd8d9b72ef8e1e581b1bac7d0200d6ac42b1ffddb3b117c6434da4e5d4d",
+    "vienna_pcmfpc_runtime.h": "b46ae7995af5f3eb0631fe36a5418ca8fc888472e2a2739950839ede44fd5d43",
+    "vienna_pcmfpc_zcdc.c": "ac8ea5244d0a06852ab285b0779f59267f33033cc3357a5e7c8cfc743933ee18",
+    "vienna_pcmfpc_zcdc.h": "63bf1263bf376eec06e6de6adba96a2a459b94e42169e4d74f7cf3a774619c42",
+    "vienna_settings.h": "9f2389ea86cc9080cfa8792602e141fd006729740eac0f3bdb9e4e5d2df4cbb4",
+    "vienna_user_settings.h": "27c82ff2177525781b49cb328f9fe1e3294145cadcc5d9a71431fa66a85d80ef"
+  },
+  "native_artifact_hashes": {
+    "vienna_pcmfpc_zcdc_F2837x.out": "c575581f807bc28f7781820b2dd65f7c382157aefab34de8d2802cd9b7b7cd9b",
+    "vienna_pcmfpc_zcdc_F2837x.map": "072f97a8fc68e7bf4aa7e23e1670a89b88e1e74767be6e048f7c1ab4468006a4",
+    "vienna_pcmfpc_zcdc_F2837x_linkInfo.xml": "3c4c653a125f360e56ad15e1ca6f4f1eb21b6ae7b6c0b5f16e56dd2f85a4b8f2",
+    "vienna_main.asm": "042c09a643f659781eb90e2443374031b9b91840f1218f48c65324303bad347f",
+    "vienna_pcmfpc_runtime.asm": "ce43503ff6fc02cf4b6be53e9ad6d680188a609547e03a918645bffd9a85e7b3"
+  },
+  "out_sha256": "c575581f807bc28f7781820b2dd65f7c382157aefab34de8d2802cd9b7b7cd9b",
+  "memory_C28_words": {
+    "RAMGS12GS15": {
+      "origin": 98304,
+      "length_words": 16384,
+      "used_words": 15595,
+      "free_words": 789
+    },
+    "RAMGS3": {
+      "origin": 61440,
+      "length_words": 4096,
+      "used_words": 3650,
+      "free_words": 446
+    },
+    "RAMM1": {
+      "origin": 1024,
+      "length_words": 1024,
+      "used_words": 951,
+      "free_words": 73
+    }
+  },
+  "unchanged_protected_files": 16,
+  "main_worktree_tracked_files_unchanged": 82,
+  "parent_Kit_unchanged": true,
+  "user_main_bytes_preserved_outside_two_edit_regions": true,
+  "current_main_before_sha256": "aab5ba5b2d2e13b2abe2539afd9feb7fb6a24dee07ed8ea0d5a189fdea6bedb4",
+  "out_before_task_sha256": "224aeba81357e5d232d77c3625bf4ec1abdc6cbac200f45780ed265cea757202",
+  "native_asm_reads": {
+    "Timer0_TIM": "32 bit",
+    "Timer0_PRD": "32 bit",
+    "EPWM1_TBCTR": "16 bit"
+  },
+  "repeat_values": [
+    0,
+    5,
+    6
+  ],
+  "one_shot_requests_preserved": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "timer_span_condition": "less than one existing Timer0 period; zero prescale; CPU configured200MHz",
+  "Intru_measurement_scope": "pfcControlCode+PIEclear+capture reads; excludes ISR prologue/epilogue and reporting",
+  "write_before_budget_us_unchanged": 122.75,
+  "whole_period_us_unchanged": 250,
+  "hardware_operations": false,
+  "target_timing_measured_this_task": false,
+  "hardware_qualified": false,
+  "plant_replay_rerun_this_task": false,
+  "host_report": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\integrated_single_fcs\\repeat_runtime_host1\\REPORT.json",
+  "evidence_root": "D:\\GraduateStudentProject\\Vienna_Rectifier\\output\\ti_pcmfpc_zcdc_port\\continuous_bench\\20261028",
+  "limit": "continuous stopped fixture timing is not live write timing or worst-case qualification"
+}

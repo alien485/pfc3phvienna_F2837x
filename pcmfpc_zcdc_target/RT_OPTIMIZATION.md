@@ -1,5 +1,25 @@
 # 实时路径优化记录
 
+当前Runtime4/Kernel12/4 kHz已采用写后观察器预计算，见`CCS_RUNTIME4_GUIDE.md`。以下旧内核循环数/OUT为历史证据，不能证明本版已满足实机时限。
+
+2026-10-28：当前为 **2 kHz 直接FCS控制更新的计时试验版本**，工作分支仍为 `new_mpc`。
+快速算法内核保持第十轮 `PC_fast_kernel_revision=10`；它不能单独区分旧50kHz固件与本轮固件。
+加载并完成初始化后，还须确认 `VIENNA_pcmTiming.revision=1`、`control_hz=2000`、
+`sample_us≈500`、`first_duration_us≈250`、`pwm_period_ticks=50000`、`tbprd_ticks=25000`、`period_cycles=100000`。
+工程自有配置 `VIENNA_PCMFPC_CONTROL_RATE_HZ=2000U` 覆盖TI生成模板；正常默认求解器改为 `PIECEWISE=1`。
+JS/TXT观察表为67项，新增 `VIENNA_pcmTiming`。模式仍默认0、`HardwareRelease=0`，不自动启机。
+本轮离线小步物理仿真6案均触发原7A保护，虽核心/ESO错误为0，2kHz功率闭环仍不合格。
+当前仅用于无主功率计时，不能用于原100V线RMS/50Ω带功率运行。
+TI gmake增量构建已完成，C编译/链接0错误、0警告；SysConfig有1类Clock Tree建议warning（本次日志出现2次）。
+本轮OUT SHA为 `32406e84...`；运行适配层358项、2kHz专项36490项宿主检查通过，功率闭环资格仍为 `NOT_QUALIFIED`。
+完整写前路径/整ISR/WCET及新板上cycle仍待测，统一证据见 `validation/CONTROL_RATE_2KHZ_REPORT.md`。
+旧18924/19168cycle及OUT `4b847bd1...` 属于旧50kHz实验，不能用于证明新时标下实时合格。
+配置依据、时标和无主功率操作以 `CONTROL_RATE_2KHZ.md`、`BENCH_TIMING.md` 为准。
+
+## 历史：恢复第十轮及此前50kHz实验
+
+以下原记录保留供追溯；其中“当前”、旧OUT、观察项数量及20us预算仅指记录当时版本。
+
 当前恢复使用第十轮（PC_fast_kernel_revision=10），工作分支仍为new_mpc。
 第十一轮固定请求2三次均19168cycle，比现有第十轮18924单样例多244cycle/1.220us/1.289%，不作为性能升级。
 只把fast.c/.h恢复到已执行验证的第十轮精确字节，未回退分支或删除任何实验/其他用户文件。

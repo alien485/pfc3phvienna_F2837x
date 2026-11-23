@@ -1,7 +1,11 @@
 # main 与 new_mpc 的固定工作目录
 
+当前new_mpc子工程交付为Runtime4/Kernel12/4 kHz，实际加载及计时按`CCS_RUNTIME4_GUIDE.md`；以下旧固件标识/观察数量只适用于记录当时。固定main/new_mpc工作目录安排保持。
+
 2026-10-26恢复记录。继续使用既有new_mpc，不创建或重命名fcs_mpc分支。
-当前精确恢复使用第十轮；第十一轮仅保留实验记录；当前版本、OUT与计时步骤以validation/RESTORED_RT10_REPORT.md、BENCH_TIMING.md及PROFILE_TIMING.md为准。
+2026-10-28当前为2kHz直接FCS计时试验：内核仍为第十轮，另以 `VIENNA_pcmTiming` 识别新时标。
+当前配置与步骤以 `CONTROL_RATE_2KHZ.md`、`BENCH_TIMING.md` 及本轮构建报告为准；
+`validation/RESTORED_RT10_REPORT.md` 是旧50kHz恢复证据，第十一轮也只保留为历史实验。
 下文第五轮源指纹是恢复时的历史证据，保留供追溯。
 
 ## 两套工程的位置
@@ -39,8 +43,9 @@ PCMFPC产物：新子工程FLASH\vienna_pcmfpc_zcdc_F2837x.out。
 在CPU1上通过Run → Load → Load Program明确选择相应文件；源码修改与编译不会自动更新正在运行的DSP程序。
 两套程序的Expressions分别使用各自项目中的脚本，不把PCMFPC观察项当作main固件一定存在的符号。
 
-PCMFPC观察表当前为66项，首项PC_fast_kernel_revision应为10（初始化后），包含PC_fast_profile。
-该值仅识别当前内核，不代表已经打开闭环或通过实时/保护验收。
+PCMFPC观察表当前为67项。初始化后 `PC_fast_kernel_revision=10`，还须展开新增的
+`VIENNA_pcmTiming`，确认revision1、2000Hz、约500us/250us、50000/25000ticks和100000cycles。
+这些是编译配置标识，不能代替实际时钟/寄存器核对，也不代表闭环或实时/保护验收通过。
 
 ## 已恢复什么
 
@@ -60,9 +65,15 @@ D:\GraduateStudentProject\Vienna_Rectifier\output\ti_pcmfpc_zcdc_port\recovery_2
 
 ## 当前运行资格
 
-PCMFPC仍只允许无交流主功率的固定数值计时。第四轮用户测得23425周期，约117.125us（200MHz条件），
-仍超当前4000周期预算；第五轮尚无板上计时。恢复和编译成功不等于PCMFPC已能带功率闭环。
-HardwareRelease继续为0，PWM/ADC/CMPSS/TZ和保护阈值均按最终备份保留。
+PCMFPC仍只用于无交流主功率的数值计时。当前2kHz配置的完整周期为100000CPUcycles；
+TI实际编译CMPB/CMPC=24815（补偿185ticks），按配置时钟，中断触发至下一ZERO为248.15us；
+扣40TBCLK预留后247.75us/49550CPUcycles，另需考虑中断入口等开销；板上寄存器/时钟尚待实读。
+本轮TI实际gmake增量构建退出0，C编译/链接0错误、0警告，SysConfig有1类Clock Tree建议warning（本次日志出现2次）；
+当前OUT SHA为 `32406e84...`，完整指纹和报告见 `CONTROL_RATE_2KHZ.md`、`validation/CONTROL_RATE_2KHZ_REPORT.md`。
+旧23425/18924/19168cycle均不是2kHz配置的新板上测量。完成构建不等于完整闭环能按时完成。
+2kHz离线物理仿真的6案均触发保留的7A，当前只能无主功率计时，不能按原100V线RMS/50Ω带功率运行。
+HardwareRelease继续为0；本轮只改变控制/PWM时基和派生时标，CMPSS/TZ、ADC采样窗及保护阈值不改。
+25000事件的偏置校准约需12.5秒，应保持真实零电流并等 `VIENNA_pcmTick` 开始增长后再计时。
 
 本次恢复前，网页建议中的一次提交清理了81项构建产物；它没有从new_mpc提交中删除控制源码。
 恢复验证中另观察到CCS即使收到incremental选项也会自动clean，已保留日志并加入双重阻止：

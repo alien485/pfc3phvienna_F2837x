@@ -1,4 +1,9 @@
 PC_fast_kernel_revision
+PC_engineering_diag
+VIENNA_pcmTiming
+VIENNA_pcmRuntimeRevision
+VIENNA_pcmTerminalGuard
+VIENNA_pcmObserverPrefetch
 PC_fast_profile
 VIENNA_pcmHardwareRelease
 VIENNA_pcmModeRequest
@@ -50,6 +55,14 @@ VIENNA_pcmWriteCyclesMax
 VIENNA_pcmBodyCycles
 VIENNA_pcmBodyCyclesMax
 VIENNA_pcmBenchRequest
+VIENNA_pcmBenchRepeat
+IntruStratPoint
+IntruEndPoint
+IntruDifPoint
+IntruCpuCycles
+IntruCpuCyclesMax
+IntruTime_us
+IntruTimeMax_us
 VIENNA_pcmBenchStatus
 VIENNA_pcmBenchCycles
 VIENNA_pcmBenchCyclesMax

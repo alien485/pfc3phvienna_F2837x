@@ -1,5 +1,5 @@
-/* TI adapter. No automatic start or hardware release. SI core and shared
- * voltage loop are separate from the unchanged PWM/ADC/CMPSS/TZ setup. */
+/* TI adapter. No automatic start or hardware release. The project-owned
+ * control-rate override changes the time base; CMPSS/TZ settings are retained. */
 #include "vienna.h"
 #include "vienna_pcmfpc_runtime.h"
 #include <string.h>
@@ -14,12 +14,17 @@
 #pragma CODE_SECTION(VIENNA_PCMFPC_submitted,"pcmfpc_code")
 #pragma CODE_SECTION(VIENNA_PCMFPC_outer,"pcmfpc_code")
 #pragma CODE_SECTION(VIENNA_PCMFPC_post,"pcmfpc_code")
+#pragma CODE_SECTION(VIENNA_PCMFPC_terminal_guard,"pcmfpc_code")
 #pragma CODE_SECTION(pc_fault,"pcmfpc_code")
 #pragma CODE_SECTION(pc_benchmark,"pcmfpc_code")
 #pragma CODE_SECTION(pc_profile_clock,"pcmfpc_code")
 #pragma FUNC_ALWAYS_INLINE(pc_finite)
 #pragma FUNC_ALWAYS_INLINE(pc_elapsed)
 #pragma FUNC_ALWAYS_INLINE(pc_run_selected)
+#pragma FUNC_ALWAYS_INLINE(pc_invalidate_prefetch)
+#pragma FUNC_CANNOT_INLINE(pc_benchmark_pipeline_prepare)
+#pragma FUNC_CANNOT_INLINE(pc_benchmark_pipeline)
+#pragma FUNC_CANNOT_INLINE(pc_prefetch_observer)
 #pragma DATA_SECTION(VIENNA_pcmRecords,"pcmfpc_trace")
 #pragma DATA_SECTION(VIENNA_pcmWave,"pcmfpc_wave")
 #endif
@@ -27,13 +32,18 @@ volatile uint16_t VIENNA_pcmModeRequest=0U,VIENNA_pcmModeActive=0U;
 volatile uint16_t VIENNA_pcmHardwareRelease=0U,VIENNA_pcmShadowEnable=0U;
 volatile uint16_t VIENNA_pcmFault=0U,VIENNA_pcmCoreStatus=0U;
 volatile uint16_t VIENNA_pcmActualAppliedState=0U,VIENNA_pcmPendingState=0U;
-volatile uint16_t VIENNA_pcmRootMethod=PC_ROOT_BISECTION32;
-volatile uint16_t VIENNA_pcmRootMethodActive=PC_ROOT_BISECTION32,VIENNA_pcmInputsValid=0U;
+volatile uint16_t VIENNA_pcmRootMethod=PC_ROOT_PIECEWISE;
+volatile uint16_t VIENNA_pcmRootMethodActive=PC_ROOT_PIECEWISE,VIENNA_pcmInputsValid=0U;
+volatile VIENNA_PC_Timing VIENNA_pcmTiming;
+volatile uint16_t VIENNA_pcmRuntimeRevision=5U;
+volatile VIENNA_PC_TerminalGuard VIENNA_pcmTerminalGuard;
+volatile VIENNA_PC_ObserverPrefetch VIENNA_pcmObserverPrefetch;
 volatile uint16_t VIENNA_pcmInputFaultMask=0U,VIENNA_pcmReferenceSaturation=0U;
 volatile float VIENNA_pcmMeasuredDQ_A[2];
 volatile uint16_t VIENNA_pcmOutputSource=0U,VIENNA_pcmOutputDetailValid=0U;
 volatile uint16_t VIENNA_pcmOutputIntegralValid=0U;
 volatile uint16_t VIENNA_pcmBenchRequest=0U,VIENNA_pcmBenchStatus=0U;
+volatile uint16_t VIENNA_pcmBenchRepeat=0U;
 volatile uint16_t VIENNA_pcmBenchSelectedId=0U,VIENNA_pcmBenchHWState=0U;
 volatile uint32_t VIENNA_pcmBenchCycles,VIENNA_pcmBenchCyclesMax,VIENNA_pcmBenchCount;
 volatile uint32_t VIENNA_pcmTick,VIENNA_pcmAlgorithmCycles,VIENNA_pcmAlgorithmCyclesMax;
@@ -58,8 +68,20 @@ static VO_ReconstructOutput reconstruct_output;
 static uint16_t history_valid,previous_hw,previous_trip;
 static float previous_idq[2],previous_fhat[2],previous_theta,previous_omega;
 static float previous_up,previous_low,outer_integral,outer_filtered;
+static uint16_t prefetch_valid,prefetch_expected,submitted_valid;
+static uint16_t prefetch_after,prefetch_mode,prefetch_root;
+static uint32_t prefetch_tick,submitted_tick;
 static float wave_sum[6];
 static uint16_t wave_divider;
+/* Numeric pipeline fixture only. Separate storage from every live history
+ * object; the two helpers deliberately retain default FLASH placement. */
+static struct {
+    VG_State grid;
+    VO_State observer;
+    VO_ReconstructInput input;
+    VO_ReconstructOutput output;
+    float idq[2],edq[2];
+} benchmark_pipeline;
 
 static uint16_t pc_finite(float value)
 {
@@ -70,7 +92,7 @@ static uint32_t pc_elapsed(uint32_t start)
 {
     uint32_t end=CPUTimer_getTimerCount(CPUTIMER0_BASE);
     uint32_t period=(uint32_t)(VIENNA_CPU_SYS_CLOCK_FREQ_HZ/VIENNA_CPU_TIMER0_FREQ_HZ);
-    return start>=end?start-end:start+period-end;
+    return VIENNA_PCMFPC_elapsed_counts(start,end,period);
 }
 /* Read the already-running timer only. No timer/ADC/PWM configuration writes.
  * The callback is used exclusively by an explicitly armed numeric benchmark. */
@@ -78,9 +100,46 @@ static uint32_t pc_profile_clock(void)
 {
     return CPUTimer_getTimerCount(CPUTIMER0_BASE);
 }
+static void pc_invalidate_prefetch(void)
+{
+    prefetch_valid=0U;prefetch_expected=0U;
+    VIENNA_pcmObserverPrefetch.ready=0U;
+}
+uint16_t VIENNA_PCMFPC_terminal_guard(const PC_Input *in,PC_Output *out,uint16_t *applied)
+{
+    uint16_t selected,baseline,bits;
+    float selected_projection,baseline_projection;
+    if(applied)*applied=0U;
+    if(!in || !out || !applied)return PC_ERR_INPUT;
+    if(out->status!=PC_OK)return out->status;
+    if(!out->active)return PC_OK;
+    if(out->selected_id<1U || out->selected_id>8U || out->pc_off_id<1U || out->pc_off_id>8U ||
+       out->intersection_count<1U || out->intersection_count>2U || (out->intersection_mask&0xff00U))return PC_ERR_INPUT;
+    selected=(uint16_t)(out->selected_id-1U);baseline=(uint16_t)(out->pc_off_id-1U);
+    bits=(uint16_t)((1U<<selected)|(1U<<baseline));
+    if((out->intersection_mask&bits)!=bits ||
+       out->hw_state!=PC_id_to_hw(out->selected_id))return PC_ERR_INPUT;
+    if(!pc_finite(in->id_ref_A) || !pc_finite(in->iq_ref_A) ||
+       !pc_finite(out->idq2_A[selected][0]) || !pc_finite(out->idq2_A[selected][1]) ||
+       !pc_finite(out->idq2_A[baseline][0]) || !pc_finite(out->idq2_A[baseline][1]) ||
+       !pc_finite(out->gz[baseline]))return PC_ERR_NUMERIC;
+    selected_projection=in->id_ref_A*out->idq2_A[selected][0]+in->iq_ref_A*out->idq2_A[selected][1];
+    baseline_projection=in->id_ref_A*out->idq2_A[baseline][0]+in->iq_ref_A*out->idq2_A[baseline][1];
+    if(!pc_finite(selected_projection) || !pc_finite(baseline_projection))return PC_ERR_NUMERIC;
+    /* The current-budget intersection has at most two entries. If its angle
+     * winner reduces projection, the only eligible remaining entry is pcOff.
+     * Reranking or another atan2 is therefore unnecessary. */
+    if(selected_projection<baseline_projection){
+        out->selected_id=out->pc_off_id;out->hw_state=PC_id_to_hw(out->pc_off_id);
+        out->zcdc_diag[7]=(float)out->selected_id;out->zcdc_diag[8]=0.0f;
+        out->zcdc_diag[9]=out->gz[baseline];*applied=1U;
+    }
+    return PC_OK;
+}
 static uint16_t pc_run_selected(const PC_Config *cfg,const PC_Input *in,PC_Output *out)
 {
-    uint16_t status;
+    uint16_t status,applied=0U;
+    VIENNA_pcmTerminalGuard.enabled=1U;VIENNA_pcmTerminalGuard.applied=0U;
     if(cfg->root_method==PC_ROOT_PIECEWISE){
         status=PC_run_fast(cfg,in,out);VIENNA_pcmOutputDetailValid=0U;
         VIENNA_pcmOutputIntegralValid=(status==PC_OK && PC_fast_output_integrals_available);
@@ -88,24 +147,99 @@ static uint16_t pc_run_selected(const PC_Config *cfg,const PC_Input *in,PC_Outpu
         status=PC_run(cfg,in,out);VIENNA_pcmOutputDetailValid=(status==PC_OK);
         VIENNA_pcmOutputIntegralValid=(status==PC_OK);
     }
+    if(status==PC_OK){
+        status=VIENNA_PCMFPC_terminal_guard(in,out,&applied);
+        VIENNA_pcmTerminalGuard.applied=applied;
+        if(applied)VIENNA_pcmTerminalGuard.block_count++;
+        if(status!=PC_OK){
+            out->status=status;out->valid=0U;
+            VIENNA_pcmOutputDetailValid=0U;VIENNA_pcmOutputIntegralValid=0U;
+        }
+    }
     return status;
+}
+static uint16_t pc_benchmark_pipeline_prepare(void)
+{
+    uint16_t j;
+    const float theta=1.57079632679f,omega=314.159265359f;
+    const float magnitude=81.6496581f;
+    VG_reset(&benchmark_pipeline.grid);
+    benchmark_pipeline.grid.initialized=1U;
+    benchmark_pipeline.grid.locked=1U;
+    benchmark_pipeline.grid.lock_count=grid_config.lock_samples;
+    benchmark_pipeline.grid.next_theta_rad=theta;
+    benchmark_pipeline.grid.omega_rad_s=omega;
+    benchmark_pipeline.grid.previous_alpha_V=magnitude*sinf(omega*VIENNA_FCS_TS_SEC);
+    benchmark_pipeline.grid.previous_beta_V=magnitude*cosf(omega*VIENNA_FCS_TS_SEC);
+    benchmark_input.eabc_V[0]=0.0f;benchmark_input.eabc_V[1]=70.710678f;
+    benchmark_input.eabc_V[2]=-70.710678f;
+    benchmark_input.id_ref_A=4.8f;benchmark_input.iq_ref_A=0.0f;
+    benchmark_input.zcdc_enable=1U;benchmark_input.terminal_enable=1U;
+    benchmark_input.applied_hw_state=5U;
+    benchmark_pipeline.input.idq_start_A[0]=2.0f;
+    benchmark_pipeline.input.idq_start_A[1]=0.0f;
+    benchmark_pipeline.edq[0]=magnitude;benchmark_pipeline.edq[1]=0.0f;
+    benchmark_pipeline.input.up_V=86.0f;benchmark_pipeline.input.low_V=84.0f;
+    benchmark_pipeline.input.theta_start_rad=theta-omega*VIENNA_FCS_TS_SEC;
+    benchmark_pipeline.input.omega_rad_s=omega;
+    benchmark_pipeline.input.duration_before_sec=VIENNA_FCS_DELAY_SEC;
+    benchmark_pipeline.input.duration_after_sec=VIENNA_FCS_TS_SEC-VIENNA_FCS_DELAY_SEC;
+    benchmark_pipeline.input.gate_before_hw=3U;benchmark_pipeline.input.gate_after_hw=5U;
+    benchmark_pipeline.input.sequence=1U;
+    VO_reset(&benchmark_pipeline.observer);
+    if(!VO_update_delta(&observer_config,&benchmark_pipeline.observer,
+        benchmark_pipeline.input.idq_start_A,benchmark_pipeline.edq,0,0U,
+        VO_SOURCE_MODEL_RECONSTRUCTED))return PC_ERR_NUMERIC;
+    for(j=0U;j<2U;j++)
+        benchmark_pipeline.input.fhat_A_s[j]=benchmark_pipeline.observer.f_hat_A_s[j];
+    return PC_OK;
+}
+static uint16_t pc_benchmark_pipeline(uint16_t prefetched)
+{
+    uint16_t j;
+    float dc;
+    if(!VG_run(&grid_config,&benchmark_pipeline.grid,benchmark_input.eabc_V))
+        return PC_ERR_INPUT;
+    /* Two nonzero executed-gate intervals request FULL model substeps through
+     * VO_reconstruct. The following ESO call is an update, not initialization. */
+    if(!prefetched && !VO_reconstruct(&benchmark_config,&benchmark_pipeline.input,&benchmark_pipeline.output))
+        return PC_ERR_NUMERIC;
+    if(!benchmark_pipeline.output.valid || benchmark_pipeline.output.sequence!=1U)return PC_ERR_NUMERIC;
+    benchmark_input.theta_rad=benchmark_pipeline.grid.theta_rad;
+    benchmark_input.omega_rad_s=benchmark_pipeline.grid.omega_rad_s;
+    for(j=0U;j<2U;j++)benchmark_pipeline.idq[j]=benchmark_pipeline.output.model_end_idq_A[j];
+    PC_abc_to_dq(benchmark_input.eabc_V,benchmark_input.theta_rad,benchmark_pipeline.edq);
+    if(!VO_update_delta(&observer_config,&benchmark_pipeline.observer,
+        benchmark_pipeline.idq,benchmark_pipeline.edq,benchmark_pipeline.output.delta_u_dq_V_s,
+        1U,VO_SOURCE_MODEL_RECONSTRUCTED))return PC_ERR_NUMERIC;
+    PC_dq_to_abc(benchmark_pipeline.idq,benchmark_input.theta_rad,benchmark_input.iabc_A);
+    for(j=0U;j<2U;j++)benchmark_input.fhat_A_s[j]=benchmark_pipeline.observer.f_hat_A_s[j];
+    dc=benchmark_pipeline.input.up_V+benchmark_pipeline.input.low_V;
+    benchmark_input.up_V=(dc-benchmark_pipeline.output.model_end_n_V)*0.5f;
+    benchmark_input.low_V=(dc+benchmark_pipeline.output.model_end_n_V)*0.5f;
+    return pc_run_selected(&benchmark_config,&benchmark_input,&VIENNA_pcmOutput);
 }
 static void pc_benchmark(void)
 {
     uint16_t request=VIENNA_pcmBenchRequest;
+    uint16_t repeat=VIENNA_pcmBenchRepeat;
     uint32_t begin;
-    if(!request)return;
+    if(!request && !repeat)return;
     VIENNA_pcmBenchRequest=0U;
     /* Reject/cancelled requests cannot present an older profile as this run. */
     (void)PC_fast_profile_arm(0U);
     VIENNA_pcmBenchSelectedId=0U;VIENNA_pcmBenchHWState=0U;
-    if(request>4U){VIENNA_pcmBenchStatus=3U;return;}
+    if((repeat && repeat!=5U && repeat!=6U) || request>6U){
+        VIENNA_pcmBenchRepeat=0U;VIENNA_pcmBenchStatus=3U;return;
+    }
+    if(!request)request=repeat;
     if(VIENNA_pcmHardwareRelease || VIENNA_closeGiLoop || VIENNA_closeGvLoop ||
        VIENNA_closeGsLoop || VIENNA_pcmActualAppliedState || VIENNA_pcmPendingState ||
+       (repeat && (VIENNA_clearTrip || VIENNA_pcmFault)) ||
        !(EPWM_getTripZoneFlagStatus(VIENNA_HIGH_FREQ_PWM1_BASE)&EPWM_TZ_FLAG_OST) ||
        !(EPWM_getTripZoneFlagStatus(VIENNA_HIGH_FREQ_PWM2_BASE)&EPWM_TZ_FLAG_OST) ||
        !(EPWM_getTripZoneFlagStatus(VIENNA_HIGH_FREQ_PWM3_BASE)&EPWM_TZ_FLAG_OST)){
-        VIENNA_pcmBenchStatus=2U;return;
+        VIENNA_pcmBenchRepeat=0U;VIENNA_pcmBenchStatus=2U;return;
     }
     /* Fixed numerical fixture only. It is never copied into the measured
      * input/PLL/ESO history and the returned gate is never submitted to HAL. */
@@ -113,6 +247,24 @@ static void pc_benchmark(void)
     benchmark_config.root_method=request==1U?PC_ROOT_BISECTION32:PC_ROOT_PIECEWISE;
     /* Keep reference diagnostics; fast control needs only intersection angles. */
     benchmark_config.diagnostic_all_angles=(uint16_t)(request==1U);
+    if(request==5U || request==6U){
+        VIENNA_pcmOutputDetailValid=0U;VIENNA_pcmOutputIntegralValid=0U;
+        VIENNA_pcmCoreStatus=pc_benchmark_pipeline_prepare();
+        /* Request6 uses the SAME fixture/model output as5, but prepares its
+         * integral before the timer. The measured part is a cached write-path
+         * surrogate, not a complete ISR. Total post/body still includes this. */
+        if(request==6U && VIENNA_pcmCoreStatus==PC_OK &&
+           !VO_reconstruct(&benchmark_config,&benchmark_pipeline.input,&benchmark_pipeline.output))
+            VIENNA_pcmCoreStatus=PC_ERR_NUMERIC;
+        VIENNA_pcmBenchCycles=0U;
+        if(VIENNA_pcmCoreStatus==PC_OK){
+            /* Includes the FLASH helper call/return and fixture data transfers;
+             * excludes warm initialization. This is not the complete ISR/WCET. */
+            begin=CPUTimer_getTimerCount(CPUTIMER0_BASE);
+            VIENNA_pcmCoreStatus=pc_benchmark_pipeline((uint16_t)(request==6U));
+            VIENNA_pcmBenchCycles=pc_elapsed(begin);
+        }
+    }else{
     benchmark_input.iabc_A[0]=-0.05f;benchmark_input.iabc_A[1]=3.9221143f;
     benchmark_input.iabc_A[2]=-3.8721143f;
     benchmark_input.eabc_V[0]=0.0f;benchmark_input.eabc_V[1]=70.710678f;
@@ -125,11 +277,12 @@ static void pc_benchmark(void)
     benchmark_input.zcdc_enable=1U;benchmark_input.terminal_enable=1U;
     if(request>=3U){
         VIENNA_pcmCoreStatus=PC_fast_profile_arm((uint16_t)(request-2U));
-        if(VIENNA_pcmCoreStatus!=PC_OK){VIENNA_pcmBenchStatus=4U;return;}
+        if(VIENNA_pcmCoreStatus!=PC_OK){VIENNA_pcmBenchRepeat=0U;VIENNA_pcmBenchStatus=4U;return;}
     }
     begin=CPUTimer_getTimerCount(CPUTIMER0_BASE);
     VIENNA_pcmCoreStatus=pc_run_selected(&benchmark_config,&benchmark_input,&VIENNA_pcmOutput);
     VIENNA_pcmBenchCycles=pc_elapsed(begin);
+    }
     if(VIENNA_pcmBenchCycles>VIENNA_pcmBenchCyclesMax)VIENNA_pcmBenchCyclesMax=VIENNA_pcmBenchCycles;
     VIENNA_pcmBenchCount++;
     VIENNA_pcmOutputSource=3U;
@@ -137,10 +290,11 @@ static void pc_benchmark(void)
         VIENNA_pcmBenchSelectedId=VIENNA_pcmOutput.selected_id;
         VIENNA_pcmBenchHWState=VIENNA_pcmOutput.hw_state;
         VIENNA_pcmBenchStatus=1U;
-    }else VIENNA_pcmBenchStatus=4U;
+    }else{VIENNA_pcmBenchRepeat=0U;VIENNA_pcmBenchStatus=4U;}
 }
 static void pc_fault(uint16_t reason)
 {
+    VIENNA_pcmBenchRepeat=0U;
     VIENNA_pcmFault|=reason;
     VIENNA_HAL_forceOSTPWMTrip(VIENNA_HIGH_FREQ_PWM1_BASE);
     VIENNA_HAL_forceOSTPWMTrip(VIENNA_HIGH_FREQ_PWM2_BASE);
@@ -153,6 +307,20 @@ static void pc_fault(uint16_t reason)
 void VIENNA_PCMFPC_init(void)
 {
     PC_default_config(&pc_config);
+    VIENNA_pcmRuntimeRevision=5U;
+    VIENNA_pcmTerminalGuard.enabled=1U;VIENNA_pcmTerminalGuard.applied=0U;
+    VIENNA_pcmTerminalGuard.block_count=0U;
+    pc_invalidate_prefetch();submitted_valid=0U;submitted_tick=0U;
+    VIENNA_pcmObserverPrefetch.status=0U;VIENNA_pcmObserverPrefetch.sequence=0U;
+    VIENNA_pcmObserverPrefetch.hits=0U;VIENNA_pcmObserverPrefetch.fallbacks=0U;
+    VIENNA_pcmObserverPrefetch.cycles=0U;VIENNA_pcmObserverPrefetch.cycles_max=0U;
+    VIENNA_pcmTiming.revision=2U;
+    VIENNA_pcmTiming.pwm_period_ticks=(uint16_t)VIENNA_PFC3PH_PWM_PERIOD;
+    VIENNA_pcmTiming.tbprd_ticks=(uint16_t)(VIENNA_pcmTiming.pwm_period_ticks>>1);
+    VIENNA_pcmTiming.control_hz=VIENNA_ISR_CONTROL_FREQUENCY_HZ;
+    VIENNA_pcmTiming.sample_us=1000000.0f*VIENNA_FCS_TS_SEC;
+    VIENNA_pcmTiming.first_duration_us=1000000.0f*VIENNA_FCS_DELAY_SEC;
+    VIENNA_pcmTiming.period_cycles=(uint32_t)(VIENNA_CPU_SYS_CLOCK_FREQ_HZ*VIENNA_FCS_TS_SEC+0.5f);
     /* Existing HAL loads PRD=SYSCLK/TIMER0_FREQ; the downcounter includes 0.
      * Pass its inclusive span without changing PRD, prescale or emulation. */
     PC_fast_profile_configure(pc_profile_clock,
@@ -164,7 +332,7 @@ void VIENNA_PCMFPC_init(void)
     pc_config.R_ohm=VIENNA_FCS_R_OHM;
     pc_config.C_half_F=VIENNA_FCS_C_HALF_F;
     pc_config.delta_i_A=VIENNA_PCMFPC_DELTA_I_A;
-    pc_config.root_method=PC_ROOT_BISECTION32;
+    pc_config.root_method=PC_ROOT_PIECEWISE;
     VG_configure(&grid_config,VIENNA_FCS_TS_SEC,VIENNA_PCMFPC_NOMINAL_HZ,VIENNA_PCMFPC_GRID_MIN_V);
     VO_configure(&observer_config,VIENNA_FCS_TS_SEC,VIENNA_PFC_INDUCTOR_VALUE,
                  6.28318530718f*VIENNA_PCMFPC_ESO_HZ);
@@ -174,11 +342,12 @@ void VIENNA_PCMFPC_init(void)
     VIENNA_pcmOutputSource=0U;VIENNA_pcmOutputDetailValid=0U;
     VIENNA_pcmOutputIntegralValid=0U;
     VIENNA_pcmBenchRequest=0U;VIENNA_pcmBenchStatus=0U;
+    VIENNA_pcmBenchRepeat=0U;
     VIENNA_pcmBenchCycles=0U;VIENNA_pcmBenchCyclesMax=0U;VIENNA_pcmBenchCount=0U;
     VIENNA_pcmBenchSelectedId=0U;VIENNA_pcmBenchHWState=0U;
     VIENNA_pcmActualAppliedState=0U;VIENNA_pcmPendingState=0U;
     history_valid=0U;previous_trip=0U;previous_hw=0U;
-    VIENNA_pcmRootMethod=PC_ROOT_BISECTION32;VIENNA_pcmRootMethodActive=PC_ROOT_BISECTION32;VIENNA_pcmInputsValid=0U;
+    VIENNA_pcmRootMethod=PC_ROOT_PIECEWISE;VIENNA_pcmRootMethodActive=PC_ROOT_PIECEWISE;VIENNA_pcmInputsValid=0U;
     VIENNA_pcmInputFaultMask=0U;VIENNA_pcmReferenceSaturation=0U;
     VIENNA_pcmMeasuredDQ_A[0]=0.0f;VIENNA_pcmMeasuredDQ_A[1]=0.0f;
     VIENNA_pcmRingCount=0U;VIENNA_pcmRingOverflow=0U;VIENNA_pcmWaveCount=0U;
@@ -187,6 +356,7 @@ void VIENNA_PCMFPC_init(void)
 }
 void VIENNA_PCMFPC_reset_control(void)
 {
+    pc_invalidate_prefetch();submitted_valid=0U;
     /* A normal stopped controller must still allow the PLL to acquire lock.
      * Do not label an ON gate as OFF before the next ZERO actually occurs. */
     VO_reset(&VIENNA_pcmObserver);history_valid=0U;
@@ -200,6 +370,8 @@ void VIENNA_PCMFPC_sample(uint16_t trip)
     float idq[2],edq[2],delta[2]={0.0f,0.0f};
     uint16_t j,active;
     VIENNA_pcmTick++;
+    submitted_valid=0U;
+    VIENNA_pcmTerminalGuard.applied=0U;
     VIENNA_pcmOutputSource=0U;VIENNA_pcmOutputDetailValid=0U;
     VIENNA_pcmOutputIntegralValid=0U;
     for(j=0U;j<3U;j++){
@@ -223,6 +395,7 @@ void VIENNA_PCMFPC_sample(uint16_t trip)
     if(!pc_finite(VIENNA_pcmInput.low_V) || VIENNA_pcmInput.low_V<=0.0f)VIENNA_pcmInputFaultMask|=128U;
     VIENNA_pcmInputsValid=(VIENNA_pcmInputFaultMask==0U);
     if(!VIENNA_pcmInputsValid){
+        pc_invalidate_prefetch();
         VG_reset(&VIENNA_pcmGrid);history_valid=0U;VO_reset(&VIENNA_pcmObserver);
         if(VIENNA_closeGiLoop==1)pc_fault(VIENNA_PC_CORE);
         return;
@@ -242,12 +415,13 @@ void VIENNA_PCMFPC_sample(uint16_t trip)
         }else VIENNA_pcmFault|=VIENNA_PC_MODE;
     }else if(VIENNA_pcmModeRequest!=VIENNA_pcmModeActive ||
              VIENNA_pcmRootMethod!=VIENNA_pcmRootMethodActive){pc_fault(VIENNA_PC_MODE);}
-    if(trip){history_valid=0U;VO_reset(&VIENNA_pcmObserver);}
+    if(trip){pc_invalidate_prefetch();history_valid=0U;VO_reset(&VIENNA_pcmObserver);}
     previous_trip=(trip!=0U);
     VIENNA_pcmInput.theta_rad=VIENNA_pcmGrid.theta_rad;
     VIENNA_pcmInput.omega_rad_s=VIENNA_pcmGrid.omega_rad_s;
     VIENNA_pcmInput.applied_hw_state=active;
     if(!VIENNA_pcmGrid.locked){
+        pc_invalidate_prefetch();
         if(VIENNA_closeGiLoop==1)pc_fault(VIENNA_PC_GRID);
         return;
     }
@@ -256,6 +430,19 @@ void VIENNA_PCMFPC_sample(uint16_t trip)
     PC_abc_to_dq(VIENNA_pcmInput.eabc_V,VIENNA_pcmInput.theta_rad,edq);
     if(!VIENNA_pcmModeActive && !VIENNA_pcmShadowEnable)return;
     if(history_valid && VIENNA_closeGiLoop==1){
+      if(prefetch_expected){
+        if(!prefetch_valid || prefetch_tick!=VIENNA_pcmTick ||
+           reconstruct_output.sequence!=VIENNA_pcmTick || !reconstruct_output.valid ||
+           prefetch_after!=active || prefetch_mode!=VIENNA_pcmModeActive ||
+           prefetch_root!=VIENNA_pcmRootMethodActive){
+            pc_invalidate_prefetch();VIENNA_pcmObserverPrefetch.status=4U;
+            pc_fault(VIENNA_PC_OBSERVER);return;
+        }
+        delta[0]=reconstruct_output.delta_u_dq_V_s[0];
+        delta[1]=reconstruct_output.delta_u_dq_V_s[1];
+        pc_invalidate_prefetch();VIENNA_pcmObserverPrefetch.status=2U;
+        VIENNA_pcmObserverPrefetch.hits++;
+      }else{
         for(j=0U;j<2U;j++){
             reconstruct_input.idq_start_A[j]=previous_idq[j];
             reconstruct_input.fhat_A_s[j]=previous_fhat[j];
@@ -270,6 +457,8 @@ void VIENNA_PCMFPC_sample(uint16_t trip)
             delta[0]=reconstruct_output.delta_u_dq_V_s[0];
             delta[1]=reconstruct_output.delta_u_dq_V_s[1];
         }else{pc_fault(VIENNA_PC_OBSERVER);return;}
+        VIENNA_pcmObserverPrefetch.status=3U;VIENNA_pcmObserverPrefetch.fallbacks++;
+      }
     }else{
         /* No complete executed interval is known. Initialize; never fabricate
          * deltaU=0 as if it described a real previous control interval. */
@@ -289,11 +478,23 @@ void VIENNA_PCMFPC_sample(uint16_t trip)
 }
 uint16_t VIENNA_PCMFPC_can_start(void)
 {
+    /* This executes BEFORE the existing clear-Trip path, not after it. A
+     * continuous fixture must never coexist with a startup attempt. */
+    if(VIENNA_pcmBenchRepeat){
+        VIENNA_pcmBenchRepeat=0U;VIENNA_pcmBenchStatus=2U;
+        VIENNA_pcmFault|=VIENNA_PC_MODE;return 0U;
+    }
     /* User/bench validation latch defaults OFF, including legacy mode in this
      * experimental target. It is not an assertion that timing was measured. */
     if(!VIENNA_pcmHardwareRelease){VIENNA_pcmFault|=VIENNA_PC_NOT_RELEASED;return 0U;}
     if(!VIENNA_pcmGrid.locked || VIENNA_pcmGrid.faults){VIENNA_pcmFault|=VIENNA_PC_GRID;return 0U;}
     if(VIENNA_pcmModeRequest>2U || VIENNA_pcmRootMethod>PC_ROOT_PIECEWISE || !VIENNA_pcmInputsValid)return 0U;
+    /* This child project now controls only through the guarded engineering
+     * kernel. Mode0 remains stopped/shadow diagnostics; reference32 remains
+     * numeric benchmark1. Original legacy FCS is in the separate main project. */
+    if(VIENNA_pcmModeRequest==VIENNA_PC_OLD_FCS || VIENNA_pcmRootMethod!=PC_ROOT_PIECEWISE){
+        VIENNA_pcmFault|=VIENNA_PC_MODE;return 0U;
+    }
     if(VIENNA_vBusMeas_pu*VIENNA_V_MAX_SENSE_VOLTS>=VIENNA_VBUS_TRIP_LIMIT_VOLTS){
         VIENNA_pcmFault|=VIENNA_PC_OVERVOLTAGE;return 0U;
     }
@@ -315,6 +516,9 @@ uint16_t VIENNA_PCMFPC_select(void)
     if(!VIENNA_pcmGrid.locked || !VIENNA_pcmHardwareRelease || !VIENNA_pcmObserver.valid){
         pc_fault(VIENNA_PC_OBSERVER);return 0U;
     }
+    if(VIENNA_pcmModeActive==VIENNA_PC_OLD_FCS || VIENNA_pcmRootMethodActive!=PC_ROOT_PIECEWISE){
+        VIENNA_pcmCoreStatus=PC_ERR_CONFIG;pc_fault(VIENNA_PC_MODE);return 0U;
+    }
     pc_config.root_method=VIENNA_pcmRootMethodActive;
     pc_config.diagnostic_all_angles=(uint16_t)(pc_config.root_method!=PC_ROOT_PIECEWISE);
     VIENNA_pcmInput.zcdc_enable=(VIENNA_pcmModeActive==VIENNA_PC_TERMINAL_ON);
@@ -328,9 +532,47 @@ uint16_t VIENNA_PCMFPC_select(void)
 }
 void VIENNA_PCMFPC_submitted(uint16_t state,uint32_t elapsed)
 {
+    pc_invalidate_prefetch();submitted_tick=VIENNA_pcmTick;submitted_valid=1U;
     VIENNA_pcmPendingState=state;
     VIENNA_pcmWriteCycles=elapsed;
     if(elapsed>VIENNA_pcmWriteCyclesMax)VIENNA_pcmWriteCyclesMax=elapsed;
+}
+/* Deliberately default FLASH placement: this is after gate writes, outside
+ * the critical write path. The underlying FULL model remains in RAM.
+ * All inputs are known NOW; no future ADC or future gate feedback is used. */
+static void pc_prefetch_observer(void)
+{
+    uint16_t j;uint32_t begin;
+    pc_invalidate_prefetch();
+    if(VIENNA_closeGiLoop!=1 || !history_valid || !submitted_valid || submitted_tick!=VIENNA_pcmTick ||
+       !VIENNA_pcmInputsValid || !VIENNA_pcmGrid.locked || !VIENNA_pcmObserver.valid ||
+       (!VIENNA_pcmModeActive && !VIENNA_pcmShadowEnable) ||
+       (EPWM_getTripZoneFlagStatus(VIENNA_HIGH_FREQ_PWM1_BASE)&EPWM_TZ_FLAG_OST) ||
+       (EPWM_getTripZoneFlagStatus(VIENNA_HIGH_FREQ_PWM2_BASE)&EPWM_TZ_FLAG_OST) ||
+       (EPWM_getTripZoneFlagStatus(VIENNA_HIGH_FREQ_PWM3_BASE)&EPWM_TZ_FLAG_OST))return;
+    begin=CPUTimer_getTimerCount(CPUTIMER0_BASE);
+    for(j=0U;j<2U;j++){
+        reconstruct_input.idq_start_A[j]=previous_idq[j];
+        reconstruct_input.fhat_A_s[j]=previous_fhat[j];
+    }
+    reconstruct_input.up_V=previous_up;reconstruct_input.low_V=previous_low;
+    reconstruct_input.theta_start_rad=previous_theta;reconstruct_input.omega_rad_s=previous_omega;
+    reconstruct_input.gate_before_hw=previous_hw;
+    reconstruct_input.gate_after_hw=VIENNA_pcmPendingState;
+    reconstruct_input.duration_before_sec=VIENNA_FCS_DELAY_SEC;
+    reconstruct_input.duration_after_sec=VIENNA_FCS_TS_SEC-VIENNA_FCS_DELAY_SEC;
+    reconstruct_input.sequence=VIENNA_pcmTick+1U;
+    if(!VO_reconstruct(&pc_config,&reconstruct_input,&reconstruct_output)){
+        VIENNA_pcmObserverPrefetch.status=5U;pc_fault(VIENNA_PC_OBSERVER);return;
+    }
+    prefetch_tick=VIENNA_pcmTick+1U;prefetch_after=VIENNA_pcmPendingState;
+    prefetch_mode=VIENNA_pcmModeActive;prefetch_root=VIENNA_pcmRootMethodActive;
+    VIENNA_pcmObserverPrefetch.sequence=prefetch_tick;
+    VIENNA_pcmObserverPrefetch.cycles=pc_elapsed(begin);
+    if(VIENNA_pcmObserverPrefetch.cycles>VIENNA_pcmObserverPrefetch.cycles_max)
+        VIENNA_pcmObserverPrefetch.cycles_max=VIENNA_pcmObserverPrefetch.cycles;
+    prefetch_valid=1U;prefetch_expected=1U;
+    VIENNA_pcmObserverPrefetch.status=1U;VIENNA_pcmObserverPrefetch.ready=1U;
 }
 void VIENNA_PCMFPC_outer(void)
 {
@@ -368,6 +610,7 @@ void VIENNA_PCMFPC_post(uint32_t start_count)
         VIENNA_pcmAlgorithmCycles=pc_elapsed(begin);
         if(VIENNA_pcmAlgorithmCycles>VIENNA_pcmAlgorithmCyclesMax)VIENNA_pcmAlgorithmCyclesMax=VIENNA_pcmAlgorithmCycles;
     }
+    pc_prefetch_observer();
     if(VIENNA_pcmRecordArm){
         output_valid=(VIENNA_pcmOutputSource==1U || VIENNA_pcmOutputSource==2U) &&
             VIENNA_pcmCoreStatus==PC_OK && VIENNA_pcmOutput.selected_id>=1U && VIENNA_pcmOutput.selected_id<=8U;

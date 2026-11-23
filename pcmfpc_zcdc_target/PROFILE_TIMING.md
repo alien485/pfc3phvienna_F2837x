@@ -1,16 +1,22 @@
-# 当前恢复第十轮：无主功率分段计时
+# 2kHz计时试验：无主功率分段计时
+
+历史2 kHz记录。当前Runtime4/Kernel12/4 kHz步骤见`CCS_RUNTIME4_GUIDE.md`；细分root计时副本现放FLASH，请求4不能代表普通RAM控制耗时。
 
 仅在主功率断开、HardwareRelease/clearTrip/三个closeLoop为0、三相OST、实际/待执行状态0时由用户操作。
-本地已恢复第十轮，必须重新加载当前子工程OUT并初始化确认PC_fast_kernel_revision=10。
-第十轮已测18924cycle作为当前固定请求2基线，第十一轮三次19168未提速，相关实验记录保留。
-观察表66项/PC_fast_profile接口和11/47读钟契约保持，未修改Timer0配置。硬件放行保持0。
-
+本轮为2kHz直接FCS计时试验，内核仍为第十轮。重新加载当前子工程OUT并完成初始化后，
+确认 `PC_fast_kernel_revision=10` 及 `VIENNA_pcmTiming` 的revision1/2000Hz/500us/250us。
+旧第十轮18924cycle、第十一轮19168cycle是50kHz实验；本轮新预测时长需重新测量。
+观察表67项，`PC_fast_profile`接口和11/47读钟契约保持，未修改Timer0配置。硬件放行保持0。
+本轮实际TI构建完成，OUT SHA `32406e84...`，完整指纹及校准12.5秒等说明见 `CONTROL_RATE_2KHZ.md`。
+C编译/链接0错误、0警告；SysConfig有1类Clock Tree建议warning（本次日志出现2次）。2kHz物理仿真6案均触发7A，资格仍为 `NOT_QUALIFIED`。
+2kHz尚无板上新cycle，完整证据见 `validation/CONTROL_RATE_2KHZ_REPORT.md`。
 先按BENCH_TIMING.md加载本工程CPU1的OUT并完成初始化。不要Clean/Rebuild。
 
 ## 请求顺序
 
 1. 写一次VIENNA_pcmBenchRequest=2，保存BenchStatus/Cycles/Count/SelectedId/HWState/Fault。
-   这是未插入分析读钟的快速内核计时，用于和第十轮18924cycle比较；仍仅计算交集角度。
+   这是本轮500us/250us预测时标、未插入分析读钟的快速内核计时；仍仅计算交集角度。
+   不能把新结果直接解释为旧18924cycle基础上的代码提速或退化。
 2. 写一次VIENNA_pcmBenchRequest=3，完成后展开PC_fast_profile并保存所有字段。
    这是分段计时，不能把其BenchCycles当作未插入计时的优化结果。
 3. 若需要拆分求根成本，再写一次VIENNA_pcmBenchRequest=4，保存新的结构体结果。
@@ -22,7 +28,9 @@
 计时判断。两者已经过同输入输出对照，但寄存器分配/栈操作可以不同。因此fine与coarse
 的时间差也包含不同编译路径的影响，不能全部当作读钟开销或直接校正普通路径的根时间。
 请求1保留参考32轮路径及全角度诊断；请求2/3/4均为fast及局部角度诊断。
-5及以上非法。所有请求共用原来的放行/闭环/门极/三相OST守护，均不提交计算出的门极。
+请求5为独立的PLL+两段FULL重构+ESO+快速MPC数值流水线计时，不生成分段profile；6及以上非法。
+所有请求共用放行/闭环/门极/三相OST守护，均不提交计算出的门极。
+如先测了5再测3/4，先保存5的BenchCycles；profile只解释请求3/4。
 
 ## 字段解释
 
@@ -56,14 +64,15 @@ PRD+1=2,000,001；每个区间及全次分析必须短于一个周期，暂停�
 原BenchCycles计时实现保持不变，其回绕公式与profile可能有1cycle差异。
 若实际CPU为200MHz，则us=cycles/200；时钟尚未独立核验时优先保留原始计数。
 
-BenchCyclesMax可能混合请求2/3/4，不能用于不同模式间公平比较。
-Fault32可与数值成功和有效profile同时出现：原20us主体守护在benchmark后继续执行。
+BenchCyclesMax可能混合请求1..5，不能用于不同模式间公平比较。
+Fault32可与数值成功和有效profile同时出现：本轮500us主体守护在benchmark后继续执行。
 不清该故障来争取通过，不开启主功率。算法写前及完整ISR资格仍未通过。
 
 ## 反馈模板
 
 ```text
 PC_fast_kernel_revision =
+VIENNA_pcmTiming（展开）=
 本次请求号 =
 BenchStatus / BenchCycles / BenchCount =
 BenchSelectedId / BenchHWState / Fault =
